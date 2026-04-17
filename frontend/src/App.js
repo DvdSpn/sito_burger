@@ -8,7 +8,6 @@ import MenuSection from "./components/MenuSection";
 import Gallery from "./components/Gallery";
 import Reviews from "./components/Reviews";
 import Contact from "./components/Contact";
-import WhatsAppButton from "./components/WhatsAppButton";
 import CartFab from "./components/CartFab";
 import CartDrawer from "./components/CartDrawer";
 import About from "./pages/About";
@@ -50,11 +49,6 @@ const Home = ({ t, lang, setLang }) => {
       <Contact t={t} onOrder={() => setCartOpen(true)} />
 
       <CartFab onClick={() => setCartOpen(true)} t={t} />
-      <WhatsAppButton
-        message={t("wa.message.generic")}
-        number={RESTAURANT.whatsappNumber}
-        label={t("wa.floating")}
-      />
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}

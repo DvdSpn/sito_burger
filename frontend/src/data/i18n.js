@@ -121,9 +121,13 @@ const dict = {
     "wa.message.item": (name, price) =>
       `Ciao Burger & Grill! Vorrei ordinare: ${name} (€ ${price}).`,
 
+    "mobile.open": "Apri menu",
+    "mobile.close": "Chiudi menu",
+
     "cart.kicker": "Il tuo ordine",
     "cart.title": "Carrello",
     "cart.fab": "Carrello",
+    "cart.fabWith": "Vedi carrello",
     "cart.open": "Apri carrello",
     "cart.close": "Chiudi carrello",
     "cart.empty.title": "Il carrello è vuoto",
@@ -325,9 +329,13 @@ const dict = {
     "wa.message.item": (name, price) =>
       `Hi Burger & Grill! I'd like to order: ${name} (€ ${price}).`,
 
+    "mobile.open": "Open menu",
+    "mobile.close": "Close menu",
+
     "cart.kicker": "Your order",
     "cart.title": "Cart",
     "cart.fab": "Cart",
+    "cart.fabWith": "View cart",
     "cart.open": "Open cart",
     "cart.close": "Close cart",
     "cart.empty.title": "Your cart is empty",
