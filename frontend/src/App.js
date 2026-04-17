@@ -29,9 +29,9 @@ const Home = ({ t, lang, setLang }) => {
     >
       <Hero t={t} lang={lang} setLang={setLang} />
       <ValuesStrip t={t} />
+      <FilterBar activeFilter={filter} setActiveFilter={setFilter} t={t} />
 
       <div id="menu" data-testid="menu-anchor">
-        <FilterBar activeFilter={filter} setActiveFilter={setFilter} t={t} />
         {menuData.map((section, i) => (
           <MenuSection
             key={section.id}
