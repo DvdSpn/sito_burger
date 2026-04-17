@@ -1,0 +1,76 @@
+{
+  "theme": "Dark",
+  "archetype": "Archetype 5 (Jewel & Luxury) + Archetype 1 (Organic & Earthy)",
+  "vibe": "Rustic Tuscan meets Premium Dark Steakhouse. Emotional tone: Warm, appetizing, high-quality, authentic.",
+  "color_palette": {
+    "background": "bg-stone-950",
+    "surface": "bg-stone-900",
+    "surface_border": "border-stone-800",
+    "primary_accent": "bg-amber-600",
+    "primary_accent_hover": "bg-amber-500",
+    "text_primary": "text-stone-50",
+    "text_secondary": "text-stone-400",
+    "text_tertiary": "text-stone-500",
+    "tag_veg": "text-green-500 border-green-900 bg-green-950/30",
+    "tag_spicy": "text-red-500 border-red-900 bg-red-950/30",
+    "tag_beef": "text-amber-500 border-amber-900 bg-amber-950/30"
+  },
+  "typography": {
+    "headings": "Playfair Display",
+    "body": "Manrope",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-stone-50",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-amber-500",
+      "h3": "text-xl sm:text-2xl font-semibold text-stone-100",
+      "body": "text-base text-stone-400 leading-relaxed",
+      "labels": "text-xs uppercase tracking-[0.2em] text-amber-600 font-bold"
+    }
+  },
+  "layout_spacing": {
+    "container": "max-w-7xl mx-auto px-6 lg:px-12",
+    "section_padding": "py-20 lg:py-32",
+    "gap": "gap-8 lg:gap-12"
+  },
+  "components": {
+    "buttons": "Rounded-none or rounded-sm. bg-amber-600 text-stone-950 font-bold px-8 py-4 hover:bg-amber-500 transition-colors uppercase tracking-widest text-sm.",
+    "menu_item": "Flex container with item name and price. Use border-b border-dashed border-stone-700/50 between name and price to mimic classic menus. Title in Playfair, description in Manrope.",
+    "dietary_tags": "Small pill badges text-[10px] uppercase tracking-wider. 1px solid border.",
+    "whatsapp_cta": "Fixed bottom right button with high elevation shadow, or a prominent sticky header button. Use WhatsApp green (#25D366) or match the amber theme."
+  },
+  "sections": [
+    {
+      "name": "Hero",
+      "instructions": "Full viewport height. Background image (hero_burger) with bg-stone-950/70 overlay to ensure text contrast. Align content to bottom-left for a cinematic feel. Massive Playfair Display heading."
+    },
+    {
+      "name": "Menu Filters",
+      "instructions": "Sticky bar below hero. Horizontal scrollable list of categories (Hamburger, Ciabatte, Piadine, Griglia-Barbeque, Contorni) and dietary filter toggles."
+    },
+    {
+      "name": "Menu Grid",
+      "instructions": "CSS Grid (1 col mobile, 2 cols desktop). Sections divided by rustic typography headers. Use image_urls.ciabatta and image_urls.grill_bbq as visual breaks or bento box features between menu categories."
+    },
+    {
+      "name": "Contact & Hours",
+      "instructions": "Darker section (bg-stone-950). Large typography for 'Vieni a trovarci'. Include Address, Phone, Hours."
+    }
+  ],
+  "image_urls": {
+    "hero_burger": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png",
+    "grill_bbq": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/40d1c5a5123d54b18dd143864cfe29ce510d7b40da621c021641d0226cf315cc.png",
+    "ciabatta": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/9aa68f56ad2ffb2fb974a11366b607c9497a01596cee3d8d0373a20bf5ec7eb8.png",
+    "dark_texture_bg": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/eac9f739b27c53d958acd28a79c9d416fb33b57a6ddffde5d07d72cfb2aba357.png",
+    "gourmet_burger_unsplash": "https://images.unsplash.com/photo-1761315413686-8467379d8715?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwyfHxnb3VybWV0JTIwYnVyZ2VyJTIwZGFya3xlbnwwfHx8fDE3NzY0MjEzMDd8MA&ixlib=rb-4.1.0&q=85",
+    "slicing_meat_unsplash": "https://images.unsplash.com/photo-1626323107890-cce0b8c2c641?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxiYXJiZWN1ZSUyMGdyaWxsJTIwZmlyZXxlbnwwfHx8fDE3NzY0MjEzMDd8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "instructions_to_main_agent": [
+    "Install and configure fonts: 'Playfair Display' and 'Manrope'.",
+    "Use Lucide React for icons.",
+    "Set the Tailwind config to use 'stone' colors as the primary grayscale to achieve the warm Tuscan dark theme.",
+    "Do NOT use pure white or pure black. Always tint.",
+    "Apply `dark_texture_bg` as a fixed background layer with low opacity (e.g., 5-10%) to give the whole site a rustic/blackboard feel without hindering readability.",
+    "Create the WhatsApp URL dynamically: `https://wa.me/393663706361?text=Vorrei%20ordinare...`",
+    "Implement dietary filters (vegetariano, piccante, con pollo, con manzo) that actually filter the menu sections or dim non-matching items.",
+    "Ensure all interactive elements have `data-testid` attributes."
+  ]
+}
