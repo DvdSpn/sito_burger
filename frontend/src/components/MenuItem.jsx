@@ -1,5 +1,6 @@
-import { Flame, Leaf, Sparkles } from "lucide-react";
+import { Flame, Leaf, Minus, Plus, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
+import { useCart } from "../context/CartContext";
 
 const TAG_META = {
   veg: {
@@ -42,8 +43,14 @@ function Tag({ type, t }) {
   );
 }
 
-export default function MenuItem({ item, dim, onOrder, t }) {
-  const itemId = item.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+export default function MenuItem({ item, dim, t }) {
+  const { add, inc, dec, getQty } = useCart();
+  const qty = getQty(item.name);
+  const itemId = item.name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+
   return (
     <article
       data-testid={`menu-item-${itemId}`}
@@ -79,14 +86,46 @@ export default function MenuItem({ item, dim, onOrder, t }) {
         {item.tags.map((ty) => (
           <Tag type={ty} key={ty} t={t} />
         ))}
-        <button
-          type="button"
-          onClick={() => onOrder(item)}
-          data-testid={`order-item-${itemId}`}
-          className="ml-auto text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors hover:text-amber-500"
-        >
-          {t("menu.orderItem")}
-        </button>
+
+        <div className="ml-auto">
+          {qty === 0 ? (
+            <button
+              type="button"
+              onClick={() => add(item)}
+              data-testid={`add-to-cart-${itemId}`}
+              className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-amber-600/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
+            >
+              <Plus className="h-3 w-3" /> {t("menu.add")}
+            </button>
+          ) : (
+            <div
+              data-testid={`qty-controls-${itemId}`}
+              className="inline-flex items-center rounded-sm border border-amber-600 bg-amber-600 text-stone-950"
+            >
+              <button
+                type="button"
+                onClick={() => dec(item.name)}
+                aria-label={t("cart.decrease")}
+                data-testid={`dec-${itemId}`}
+                className="grid h-8 w-8 place-items-center transition-colors hover:bg-amber-500"
+              >
+                <Minus className="h-3 w-3" />
+              </button>
+              <span className="min-w-[1.75rem] text-center font-display text-sm font-bold">
+                {qty}
+              </span>
+              <button
+                type="button"
+                onClick={() => inc(item.name)}
+                aria-label={t("cart.increase")}
+                data-testid={`inc-${itemId}`}
+                className="grid h-8 w-8 place-items-center transition-colors hover:bg-amber-500"
+              >
+                <Plus className="h-3 w-3" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );

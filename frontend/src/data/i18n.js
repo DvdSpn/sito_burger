@@ -55,6 +55,7 @@ const dict = {
     "tag.signature": "Signature",
 
     "menu.orderItem": "+ Ordina via WhatsApp",
+    "menu.add": "Aggiungi",
     "menu.disclaimer":
       "Prezzi in € · Coperto non incluso · Disponibile pane senza glutine su richiesta",
 
@@ -108,6 +109,28 @@ const dict = {
       "Ciao Burger & Grill! Vorrei fare un ordine da Camucia.",
     "wa.message.item": (name, price) =>
       `Ciao Burger & Grill! Vorrei ordinare: ${name} (€ ${price}).`,
+
+    "cart.kicker": "Il tuo ordine",
+    "cart.title": "Carrello",
+    "cart.fab": "Carrello",
+    "cart.open": "Apri carrello",
+    "cart.close": "Chiudi carrello",
+    "cart.empty.title": "Il carrello è vuoto",
+    "cart.empty.subtitle":
+      "Sfoglia il menu e aggiungi i tuoi piatti preferiti. L'ordine parte direttamente via WhatsApp.",
+    "cart.total": "Totale",
+    "cart.sendOrder": "Invia ordine WhatsApp",
+    "cart.clear": "Svuota carrello",
+    "cart.remove": "Rimuovi",
+    "cart.increase": "Aumenta quantità",
+    "cart.decrease": "Diminuisci quantità",
+    "cart.itemSingular": "piatto",
+    "cart.itemPlural": "piatti",
+    "cart.perKg": "al kg",
+    "cart.kgNote":
+      "⚠ Alcuni articoli sono al kg: il totale finale sarà calcolato alla pesata.",
+    "cart.disclaimer":
+      "L'ordine verrà inviato via WhatsApp al locale. Ti risponderemo per conferma, tempi di attesa e modalità di ritiro/consumo.",
   },
   en: {
     "nav.hamburger": "Burgers",
@@ -157,6 +180,7 @@ const dict = {
     "tag.signature": "Signature",
 
     "menu.orderItem": "+ Order via WhatsApp",
+    "menu.add": "Add",
     "menu.disclaimer":
       "Prices in € · Cover not included · Gluten-free bread available on request",
 
@@ -209,6 +233,28 @@ const dict = {
     "wa.message.generic": "Hi Burger & Grill! I'd like to place an order from Camucia.",
     "wa.message.item": (name, price) =>
       `Hi Burger & Grill! I'd like to order: ${name} (€ ${price}).`,
+
+    "cart.kicker": "Your order",
+    "cart.title": "Cart",
+    "cart.fab": "Cart",
+    "cart.open": "Open cart",
+    "cart.close": "Close cart",
+    "cart.empty.title": "Your cart is empty",
+    "cart.empty.subtitle":
+      "Browse the menu and add your favourite dishes. Orders are sent directly via WhatsApp.",
+    "cart.total": "Total",
+    "cart.sendOrder": "Send WhatsApp order",
+    "cart.clear": "Clear cart",
+    "cart.remove": "Remove",
+    "cart.increase": "Increase quantity",
+    "cart.decrease": "Decrease quantity",
+    "cart.itemSingular": "item",
+    "cart.itemPlural": "items",
+    "cart.perKg": "per kg",
+    "cart.kgNote":
+      "⚠ Some items are priced per kg: final total is calculated on weigh-in.",
+    "cart.disclaimer":
+      "The order will be sent via WhatsApp to the restaurant. We'll reply with confirmation, waiting time and pickup / dine-in details.",
   },
 };
 

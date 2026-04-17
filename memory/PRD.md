@@ -32,10 +32,18 @@ User requested a non-white restaurant menu website for "Burger & Grill" in Camuc
 - Added empty Gallery section with 6 placeholder slots (user will fill later).
 - Added Reviews carousel with auto-play + prev/next buttons + pagination dots + hover-to-pause. 5 mock reviews (bilingual IT/EN).
 
+## Iteration 3 — Cart (Dec 2025)
+- Added full shopping cart: `CartContext` (useReducer + localStorage persistence) with add/inc/dec/remove/clear.
+- `CartFab` floating button (bottom-left) with live badge showing item count.
+- `CartDrawer` slide-in panel with per-item +/- controls, per-line subtotal, global total, WhatsApp send (formatted multi-line message), clear cart, ESC + backdrop close, body-scroll lock.
+- Menu items show "Aggiungi" button, replaced by inline +/- stepper when qty > 0.
+- Handles "al kg" pricing (Costata di manzo) gracefully — excluded from sum, shown as "al kg" with disclaimer.
+- All cart UI translated IT/EN.
+
 ## Backlog / Next Tasks
-- P1: Replace Gallery placeholders with real photos of the venue and dishes.
-- P1: Replace mock reviews with real ones or pull via Google Places API.
-- P1: Reservation form integration (e.g., TheFork / Google Form).
-- P2: PDF menu export/print stylesheet.
-- P2: Seasonal / daily specials banner.
-- P2: Mobile menu drawer for nav (currently hidden on <lg).
+- P1: Real photos in Gallery.
+- P1: Daily specials banner.
+- P2: Print/PDF menu export.
+- P2: Reservation form (TheFork / Google Form).
+- P2: "Aperto / Chiuso ora" live status widget based on hours.
+- P2: QR-code generator page for tavoli.
