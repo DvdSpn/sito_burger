@@ -1,7 +1,9 @@
 import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { RESTAURANT } from "../data/menu";
 import Logo from "./Logo";
 import LanguageToggle from "./LanguageToggle";
+import OpenClosedBadge from "./OpenClosedBadge";
 
 const HERO_IMG =
   "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png";
@@ -9,7 +11,6 @@ const HERO_IMG =
 export default function Hero({ t, lang, setLang }) {
   const navItems = [
     { id: "hamburger", label: t("nav.hamburger") },
-    { id: "ciabatte", label: t("nav.ciabatte") },
     { id: "griglia", label: t("nav.griglia") },
     { id: "galleria", label: t("nav.galleria") },
     { id: "recensioni", label: t("nav.recensioni") },
@@ -21,7 +22,6 @@ export default function Hero({ t, lang, setLang }) {
       data-testid="hero-section"
       className="relative min-h-[92vh] w-full overflow-hidden grain"
     >
-      {/* background image */}
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
@@ -32,13 +32,12 @@ export default function Hero({ t, lang, setLang }) {
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent" />
       </div>
 
-      {/* top bar */}
-      <div className="relative z-20 flex items-center justify-between px-6 py-5 lg:px-12">
+      <div className="relative z-20 flex flex-wrap items-center justify-between gap-3 px-6 py-5 lg:px-12">
         <a href="#top" data-testid="brand-mark" aria-label="Burger & Grill">
           <Logo size="md" withText />
         </a>
 
-        <nav className="hidden gap-7 lg:flex">
+        <nav className="hidden gap-6 lg:flex">
           {navItems.map((n) => (
             <a
               key={n.id}
@@ -49,6 +48,20 @@ export default function Hero({ t, lang, setLang }) {
               {n.label}
             </a>
           ))}
+          <Link
+            to="/bevande"
+            data-testid="nav-drinks"
+            className="text-xs tracking-mega uppercase text-amber-500 transition-colors hover:text-amber-400"
+          >
+            {t("nav.drinks")}
+          </Link>
+          <Link
+            to="/chi-siamo"
+            data-testid="nav-about"
+            className="text-xs tracking-mega uppercase text-stone-300 transition-colors hover:text-amber-500"
+          >
+            {t("nav.about")}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -63,10 +76,10 @@ export default function Hero({ t, lang, setLang }) {
         </div>
       </div>
 
-      {/* main hero content */}
       <div className="relative z-10 mx-auto flex min-h-[75vh] max-w-7xl flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-24">
         <div className="rise max-w-4xl">
-          <div className="mb-5 flex items-center gap-3">
+          <div className="mb-5 flex flex-wrap items-center gap-3">
+            <OpenClosedBadge t={t} />
             <span className="h-px w-10 bg-amber-500" />
             <span
               data-testid="hero-kicker"
@@ -102,6 +115,13 @@ export default function Hero({ t, lang, setLang }) {
               {t("hero.ctaMenu")}
               <span className="h-px w-6 bg-stone-950 transition-all group-hover:w-10" />
             </a>
+            <Link
+              to="/bevande"
+              data-testid="hero-drinks-btn"
+              className="inline-flex items-center gap-2 rounded-sm border border-stone-700 bg-stone-950/50 px-6 py-4 text-xs font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500"
+            >
+              {t("hero.ctaDrinks")}
+            </Link>
             <a
               href="#contatti"
               data-testid="hero-location-btn"
@@ -112,7 +132,6 @@ export default function Hero({ t, lang, setLang }) {
           </div>
         </div>
 
-        {/* marquee of highlights */}
         <div className="relative mt-16 hidden border-y border-stone-800/70 py-5 md:block">
           <div className="flex justify-between gap-10 text-xs tracking-mega uppercase text-stone-500">
             <span className="text-amber-500">{t("hero.highlight1")}</span>
@@ -124,7 +143,6 @@ export default function Hero({ t, lang, setLang }) {
         </div>
       </div>
 
-      {/* side badge */}
       <div
         data-testid="hero-badge"
         className="absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rotate-90 lg:block"

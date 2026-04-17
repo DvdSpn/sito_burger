@@ -11,69 +11,84 @@ import Contact from "./components/Contact";
 import WhatsAppButton from "./components/WhatsAppButton";
 import CartFab from "./components/CartFab";
 import CartDrawer from "./components/CartDrawer";
+import About from "./pages/About";
+import Drinks from "./pages/Drinks";
 import { CartProvider } from "./context/CartContext";
 import { menuData, RESTAURANT } from "./data/menu";
 import { makeT } from "./data/i18n";
 
-const Home = () => {
+const Home = ({ t, lang, setLang }) => {
   const [filter, setFilter] = useState("all");
-  const [lang, setLang] = useState("it");
   const [cartOpen, setCartOpen] = useState(false);
-  const t = useMemo(() => makeT(lang), [lang]);
 
   return (
-    <CartProvider>
-      <div
-        id="top"
-        data-testid="home-page"
-        lang={lang}
-        className="min-h-screen bg-stone-950 text-stone-50"
-      >
-        <Hero t={t} lang={lang} setLang={setLang} />
-        <ValuesStrip t={t} />
+    <div
+      id="top"
+      data-testid="home-page"
+      lang={lang}
+      className="min-h-screen bg-stone-950 text-stone-50"
+    >
+      <Hero t={t} lang={lang} setLang={setLang} />
+      <ValuesStrip t={t} />
 
-        <div id="menu" data-testid="menu-anchor">
-          <FilterBar activeFilter={filter} setActiveFilter={setFilter} t={t} />
-          {menuData.map((section, i) => (
-            <MenuSection
-              key={section.id}
-              section={section}
-              index={i}
-              filter={filter}
-              t={t}
-            />
-          ))}
-        </div>
-
-        <Gallery t={t} />
-        <Reviews t={t} lang={lang} />
-        <Contact t={t} onOrder={() => setCartOpen(true)} />
-
-        <CartFab onClick={() => setCartOpen(true)} t={t} />
-        <WhatsAppButton
-          message={t("wa.message.generic")}
-          number={RESTAURANT.whatsappNumber}
-          label={t("wa.floating")}
-        />
-        <CartDrawer
-          open={cartOpen}
-          onClose={() => setCartOpen(false)}
-          t={t}
-          lang={lang}
-        />
+      <div id="menu" data-testid="menu-anchor">
+        <FilterBar activeFilter={filter} setActiveFilter={setFilter} t={t} />
+        {menuData.map((section, i) => (
+          <MenuSection
+            key={section.id}
+            section={section}
+            index={i}
+            filter={filter}
+            t={t}
+            lang={lang}
+          />
+        ))}
       </div>
-    </CartProvider>
+
+      <Gallery t={t} />
+      <Reviews t={t} lang={lang} />
+      <Contact t={t} onOrder={() => setCartOpen(true)} />
+
+      <CartFab onClick={() => setCartOpen(true)} t={t} />
+      <WhatsAppButton
+        message={t("wa.message.generic")}
+        number={RESTAURANT.whatsappNumber}
+        label={t("wa.floating")}
+      />
+      <CartDrawer
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+        t={t}
+        lang={lang}
+      />
+    </div>
   );
 };
 
 function App() {
+  const [lang, setLang] = useState("it");
+  const t = useMemo(() => makeT(lang), [lang]);
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home t={t} lang={lang} setLang={setLang} />}
+            />
+            <Route
+              path="/chi-siamo"
+              element={<About t={t} lang={lang} setLang={setLang} />}
+            />
+            <Route
+              path="/bevande"
+              element={<Drinks t={t} lang={lang} setLang={setLang} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }

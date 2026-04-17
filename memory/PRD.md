@@ -40,10 +40,25 @@ User requested a non-white restaurant menu website for "Burger & Grill" in Camuc
 - Handles "al kg" pricing (Costata di manzo) gracefully — excluded from sum, shown as "al kg" with disclaimer.
 - All cart UI translated IT/EN.
 
+## Iteration 4 — Multi-feature expansion (Dec 2025)
+- **Open/Closed live widget** in hero — reads weekly hours config, updates every minute, shows green "Aperto · stiamo servendo · fino alle 23:00" or red "Chiuso · apriamo alle 18:00".
+- **Allergen icons** per menu item with EU 14 allergens subset (G=glutine, L=lattosio, U=uova, S=soia, Sn=senape, Se=sesamo, So=solfiti, N=frutta a guscio, Ce=sedano) + hover tooltip with label in IT/EN.
+- **About page** at `/chi-siamo` — storia, valori, galleria foto placeholders, CTA back-to-menu.
+- **Drinks page** at `/bevande` — dessert, spina, birre in bottiglia, bevande, vini, bar (tutti i prezzi reali forniti dall'utente), con sezione abbinamenti consigliati.
+- **Pickup time slots** in cart — "Prima possibile" + slot ogni 15 min dalla finestra di servizio aperta/prossima; chiude automaticamente se fuori orario.
+- **Service mode toggle** (Asporto / Al tavolo) nel carrello.
+- **Post-send success screen** in cart drawer — spiega che il ristoratore risponderà su WhatsApp per confermare ordine e accordarsi sull'orario; bottone "Chiama ora".
+- **Updated WhatsApp message** includes modalità, orario richiesto e richiesta esplicita di conferma.
+- **Google Places API integration** — backend endpoint `/api/reviews` with 6h cache; frontend auto-fetches and overrides mock reviews when `GOOGLE_PLACES_API_KEY` is set in `.env`. Place ID pre-configured: `ChIJqVxkvt77KxMR52z7K_J8NNU`.
+- Address updated to `Via Lauretana 21, 52044 Camucia – Cortona (AR)`.
+- New **Dessert** menu section.
+
+## Setup required by restaurant owner (to activate real Google Reviews)
+1. Create Google Cloud project → enable **Places API (New)** → create API key with Places API restriction.
+2. Add key to `/app/backend/.env` as `GOOGLE_PLACES_API_KEY=AIza...` and restart backend.
+
 ## Backlog / Next Tasks
-- P1: Real photos in Gallery.
-- P1: Daily specials banner.
-- P2: Print/PDF menu export.
-- P2: Reservation form (TheFork / Google Form).
-- P2: "Aperto / Chiuso ora" live status widget based on hours.
+- P1: Real photos (Gallery + About).
+- P2: Daily specials banner.
+- P2: Reservation form.
 - P2: QR-code generator page for tavoli.

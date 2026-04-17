@@ -1,6 +1,7 @@
 import { Flame, Leaf, Minus, Plus, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useCart } from "../context/CartContext";
+import AllergenIcons from "./AllergenIcons";
 
 const TAG_META = {
   veg: {
@@ -43,7 +44,7 @@ function Tag({ type, t }) {
   );
 }
 
-export default function MenuItem({ item, dim, t }) {
+export default function MenuItem({ item, dim, t, lang }) {
   const { add, inc, dec, getQty } = useCart();
   const qty = getQty(item.name);
   const itemId = item.name
@@ -81,6 +82,15 @@ export default function MenuItem({ item, dim, t }) {
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-400">
         {item.desc}
       </p>
+
+      {item.allergens && item.allergens.length > 0 && (
+        <div className="mt-3 flex items-center gap-2">
+          <span className="text-[9px] font-bold uppercase tracking-mega text-stone-600">
+            {t("menu.contains")}
+          </span>
+          <AllergenIcons allergens={item.allergens} lang={lang} />
+        </div>
+      )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {item.tags.map((ty) => (

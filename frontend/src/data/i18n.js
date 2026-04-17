@@ -16,6 +16,8 @@ const dict = {
     "nav.recensioni": "Recensioni",
     "nav.contatti": "Contatti",
     "nav.menu": "Vai al menu",
+    "nav.drinks": "Bevande",
+    "nav.about": "Chi siamo",
 
     "hero.kicker": "Dal 2010 · Chianina · Fuoco vivo",
     "hero.title1": "Burger",
@@ -23,7 +25,8 @@ const dict = {
     "hero.description":
       "Dal 2010 serviamo la vera Chianina sulla griglia. Pane artigianale, carne a km 0, fuoco vivo. Panini artigianali, tagliate alla brace e la nostra griglia sempre accesa, nel cuore di Camucia.",
     "hero.ctaMenu": "Scopri il menu",
-    "hero.ctaLocation": "Via Lauretana 19/21",
+    "hero.ctaDrinks": "Carta bevande",
+    "hero.ctaLocation": "Via Lauretana 21",
     "hero.highlight1": "★ Chianina 200gr",
     "hero.highlight2": "Pane a lievitazione lenta",
     "hero.highlight3": "Porcini · Tartufo",
@@ -56,6 +59,7 @@ const dict = {
 
     "menu.orderItem": "+ Ordina via WhatsApp",
     "menu.add": "Aggiungi",
+    "menu.contains": "Contiene:",
     "menu.disclaimer":
       "Prezzi in € · Coperto non incluso · Disponibile pane senza glutine su richiesta",
 
@@ -84,8 +88,15 @@ const dict = {
     "reviews.title": "4.7",
     "reviews.subtitle": "su 5",
     "reviews.count": "Basato su oltre 400 recensioni",
+    "reviews.basedOn": (n) => `Basato su ${n}+ recensioni`,
     "reviews.prev": "Recensione precedente",
     "reviews.next": "Recensione successiva",
+
+    "status.openNow": "Aperto · stiamo servendo",
+    "status.opensAt": (hhmm) => `Chiuso · apriamo alle ${hhmm}`,
+    "status.opensTomorrow": (hhmm) => `Chiuso · domani alle ${hhmm}`,
+    "status.until": (hhmm) => `fino alle ${hhmm}`,
+    "status.closed": "Chiuso",
 
     "contact.kicker": "Vieni a trovarci",
     "contact.title1": "La griglia è",
@@ -135,9 +146,71 @@ const dict = {
     "confirm.kicker": "Conferma ordine",
     "confirm.title": "Sicuro di voler inviare l'ordine?",
     "confirm.body":
-      "Riepilogo dei piatti selezionati. Premendo «Invia» si aprirà WhatsApp con il messaggio pronto: controlla prima di premere invio nella chat. Il carrello verrà svuotato.",
+      "Riepilogo dei piatti selezionati. Premendo «Invia» si aprirà WhatsApp con il messaggio pronto: controlla prima di premere invio nella chat. Il ristorante ti risponderà per confermare disponibilità e orario.",
     "confirm.cancel": "Annulla",
     "confirm.send": "Invia su WhatsApp",
+
+    "cart.meta.mode": "Modalità",
+    "cart.meta.takeaway": "Asporto",
+    "cart.meta.dineIn": "Al tavolo",
+    "cart.meta.pickup": "Orario di ritiro",
+    "cart.meta.arrival": "Orario di arrivo",
+    "cart.meta.closed": "Al momento siamo chiusi. Scrivici su WhatsApp: ti risponderemo all'apertura.",
+    "cart.slot.asap": "Prima possibile",
+
+    "cart.sent.kicker": "Ordine inviato",
+    "cart.sent.title": "Invio completato",
+    "cart.sent.heading": "Ordine inviato su WhatsApp!",
+    "cart.sent.body":
+      "Abbiamo aperto WhatsApp con il messaggio pronto. Se non l'hai già fatto, premi «Invia» nella chat per completare l'invio al ristorante.",
+    "cart.sent.step1.title": "Attendi la conferma",
+    "cart.sent.step1.body":
+      "Il ristoratore leggerà il tuo ordine e ti risponderà su WhatsApp per confermare la presa in carico.",
+    "cart.sent.step2.title": "Accordatevi sull'orario",
+    "cart.sent.step2.body":
+      "Nel messaggio abbiamo già indicato l'orario scelto. Il ristoratore ti confermerà l'orario preciso di ritiro/arrivo in base ai tempi di preparazione.",
+    "cart.sent.callBtn": "Chiama ora",
+    "cart.sent.closeBtn": "Ho capito, chiudi",
+
+    "drinks.kicker": "Carta",
+    "drinks.title": "Bevande &",
+    "drinks.titleAccent": "Vini",
+    "drinks.description":
+      "Vini toscani, birre alla spina e artigianali, caffè e distillati. Selezione a km 0 per accompagnare al meglio la tua griglia.",
+    "drinks.pairings": "Abbinamenti consigliati",
+    "drinks.backToMenu": "Torna al menu",
+
+    "about.kicker": "Chi siamo",
+    "about.title": "La nostra",
+    "about.titleAccent": "storia",
+    "about.backToMenu": "Torna al menu",
+    "about.story.kicker": "Dal 2010",
+    "about.story.title": "Tradizione toscana, fuoco americano.",
+    "about.story.p1":
+      "Nasciamo a Camucia nel 2010 con un'idea semplice: portare in tavola la carne della nostra Toscana, lavorata con la passione per gli hamburger d'oltreoceano. La Chianina viene selezionata e macinata fresca ogni giorno.",
+    "about.story.p2":
+      "Siamo una gestione familiare. In cucina un padre e un figlio, in sala una famiglia allargata. Chi entra mangia come a casa, ma con la griglia sempre accesa e un bicchiere di Syrah pronto sul bancone.",
+    "about.story.p3":
+      "Il nostro pane arriva da un forno locale con una lievitazione di 24 ore. Gli ortaggi, i formaggi e il tartufo sono toscani. Perché il miglior burger parte dalla qualità, non dai fuochi d'artificio.",
+    "about.values.kicker": "I nostri valori",
+    "about.values.title": "Quello in cui crediamo.",
+    "about.values.v1.title": "Fuoco vivo, cottura giusta",
+    "about.values.v1.body":
+      "Ogni taglio ha il suo tempo. La Chianina la cuociamo al sangue, il pollo ben cotto, la salsiccia croccante fuori e morbida dentro.",
+    "about.values.v2.title": "Gestione familiare",
+    "about.values.v2.body":
+      "Non siamo una catena. Il proprietario è dietro il bancone, ti saluta per nome se torni. E se hai un'esigenza particolare, basta chiedere.",
+    "about.values.v3.title": "Km 0 dove possibile",
+    "about.values.v3.body":
+      "Chianina certificata, ortaggi toscani, vino locale. Piccole scelte quotidiane che fanno grande la qualità.",
+    "about.photos.kicker": "La nostra galleria",
+    "about.photos.title": "Lo staff, la Chianina, il locale.",
+    "about.photos.description":
+      "Presto qui le foto dei momenti migliori del locale. Se sei passato e hai scattato qualcosa, taggaci su Instagram!",
+    "about.cta.title": "Vieni a trovarci.",
+    "about.cta.body":
+      "Prenota un tavolo o passa per un asporto. La griglia è sempre accesa.",
+    "about.cta.btn": "Vai al menu",
   },
   en: {
     "nav.hamburger": "Burgers",
@@ -148,6 +221,8 @@ const dict = {
     "nav.recensioni": "Reviews",
     "nav.contatti": "Contact",
     "nav.menu": "Browse menu",
+    "nav.drinks": "Drinks",
+    "nav.about": "About",
 
     "hero.kicker": "Since 2010 · Chianina · Live fire",
     "hero.title1": "Burger",
@@ -155,7 +230,8 @@ const dict = {
     "hero.description":
       "Since 2010 we serve authentic Chianina beef on the grill. Artisan bread, km-0 meat, live fire. Gourmet sandwiches, sliced steaks and an ever-burning grill in the heart of Camucia.",
     "hero.ctaMenu": "Explore menu",
-    "hero.ctaLocation": "Via Lauretana 19/21",
+    "hero.ctaDrinks": "Drinks list",
+    "hero.ctaLocation": "Via Lauretana 21",
     "hero.highlight1": "★ Chianina 200g",
     "hero.highlight2": "Slow-risen bread",
     "hero.highlight3": "Porcini · Truffle",
@@ -188,6 +264,7 @@ const dict = {
 
     "menu.orderItem": "+ Order via WhatsApp",
     "menu.add": "Add",
+    "menu.contains": "Contains:",
     "menu.disclaimer":
       "Prices in € · Cover not included · Gluten-free bread available on request",
 
@@ -216,8 +293,15 @@ const dict = {
     "reviews.title": "4.7",
     "reviews.subtitle": "out of 5",
     "reviews.count": "Based on 400+ reviews",
+    "reviews.basedOn": (n) => `Based on ${n}+ reviews`,
     "reviews.prev": "Previous review",
     "reviews.next": "Next review",
+
+    "status.openNow": "Open · now serving",
+    "status.opensAt": (hhmm) => `Closed · opens at ${hhmm}`,
+    "status.opensTomorrow": (hhmm) => `Closed · tomorrow at ${hhmm}`,
+    "status.until": (hhmm) => `until ${hhmm}`,
+    "status.closed": "Closed",
 
     "contact.kicker": "Come visit us",
     "contact.title1": "The grill is",
@@ -266,9 +350,71 @@ const dict = {
     "confirm.kicker": "Order confirmation",
     "confirm.title": "Ready to send your order?",
     "confirm.body":
-      "Here's a summary of your selection. Tapping «Send» opens WhatsApp with a ready-made message: check it before hitting send in the chat. Your cart will be cleared.",
+      "Here's a summary of your selection. Tapping «Send» opens WhatsApp with a ready-made message: check it before hitting send in the chat. The restaurant will reply to confirm availability and timing.",
     "confirm.cancel": "Cancel",
     "confirm.send": "Send to WhatsApp",
+
+    "cart.meta.mode": "Service",
+    "cart.meta.takeaway": "Takeaway",
+    "cart.meta.dineIn": "Dine-in",
+    "cart.meta.pickup": "Pickup time",
+    "cart.meta.arrival": "Arrival time",
+    "cart.meta.closed": "We're currently closed. Send your order on WhatsApp: we'll reply when we open.",
+    "cart.slot.asap": "As soon as possible",
+
+    "cart.sent.kicker": "Order sent",
+    "cart.sent.title": "Done",
+    "cart.sent.heading": "Order sent on WhatsApp!",
+    "cart.sent.body":
+      "We opened WhatsApp with the message ready. If you haven't already, tap «Send» in the chat to complete the delivery to the restaurant.",
+    "cart.sent.step1.title": "Wait for confirmation",
+    "cart.sent.step1.body":
+      "The restaurant will read your order and reply on WhatsApp to confirm it.",
+    "cart.sent.step2.title": "Agree on the timing",
+    "cart.sent.step2.body":
+      "Your chosen time is already in the message. The restaurant will confirm the precise pickup/arrival time based on preparation.",
+    "cart.sent.callBtn": "Call now",
+    "cart.sent.closeBtn": "Got it, close",
+
+    "drinks.kicker": "List",
+    "drinks.title": "Drinks &",
+    "drinks.titleAccent": "Wines",
+    "drinks.description":
+      "Tuscan wines, draught and craft beers, coffee and spirits. A km-0 selection to pair perfectly with your grill.",
+    "drinks.pairings": "Suggested pairings",
+    "drinks.backToMenu": "Back to menu",
+
+    "about.kicker": "About us",
+    "about.title": "Our",
+    "about.titleAccent": "story",
+    "about.backToMenu": "Back to menu",
+    "about.story.kicker": "Since 2010",
+    "about.story.title": "Tuscan tradition, American fire.",
+    "about.story.p1":
+      "We were born in Camucia in 2010 with one idea: bring the beef of our Tuscany to the table, crafted with the passion of American-style burgers. Chianina beef is hand-selected and ground fresh every day.",
+    "about.story.p2":
+      "We're a family-run business. Father and son at the grill, a wide family in the dining room. You eat like at home, but with the grill always on and a glass of Syrah on the counter.",
+    "about.story.p3":
+      "Our bread comes from a local bakery with 24-hour rising. Vegetables, cheese and truffle are Tuscan. Because the best burger starts with quality, not fireworks.",
+    "about.values.kicker": "Our values",
+    "about.values.title": "What we believe in.",
+    "about.values.v1.title": "Live fire, right cook",
+    "about.values.v1.body":
+      "Every cut has its time. We cook Chianina rare, chicken through, sausage crispy outside and soft inside.",
+    "about.values.v2.title": "Family-run",
+    "about.values.v2.body":
+      "We're not a chain. The owner is behind the counter and greets you by name if you come back. Special request? Just ask.",
+    "about.values.v3.title": "Km-0 where possible",
+    "about.values.v3.body":
+      "Certified Chianina, Tuscan vegetables, local wine. Small everyday choices that make great quality.",
+    "about.photos.kicker": "Our gallery",
+    "about.photos.title": "The staff, the beef, the place.",
+    "about.photos.description":
+      "Photos of the best moments coming soon. If you've been here and snapped something, tag us on Instagram!",
+    "about.cta.title": "Come and visit.",
+    "about.cta.body":
+      "Book a table or drop by for takeaway. The grill is always on.",
+    "about.cta.btn": "Browse the menu",
   },
 };
 

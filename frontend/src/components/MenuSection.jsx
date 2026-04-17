@@ -12,7 +12,7 @@ const SECTION_IMAGES = {
   contorni: null,
 };
 
-export default function MenuSection({ section, index, filter, t }) {
+export default function MenuSection({ section, index, filter, t, lang }) {
   const img = SECTION_IMAGES[section.id];
   const isFlipped = index % 2 === 1;
   const title =
@@ -70,6 +70,7 @@ export default function MenuSection({ section, index, filter, t }) {
                   item={item}
                   dim={!matchesFilter(item)}
                   t={t}
+                  lang={lang}
                 />
               ))}
             </div>
