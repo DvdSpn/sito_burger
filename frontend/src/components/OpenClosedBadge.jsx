@@ -13,23 +13,33 @@ export default function OpenClosedBadge({ t, variant = "dark" }) {
 
   const isOpen = status.open;
   const dotClass = isOpen ? "bg-emerald-400" : "bg-red-500";
-  const label = isOpen
-    ? t("status.openNow")
-    : status.nextOpen
-      ? status.sameDay
-        ? t("status.opensAt", status.nextOpen)
-        : t("status.opensTomorrow", status.nextOpen)
-      : t("status.closed");
-  const sub = isOpen && status.closesAt ? t("status.until", status.closesAt) : null;
+
+  let mainLabel = t("status.closed");
+  let subLabel = null;
+
+  if (isOpen) {
+    mainLabel = t("status.openNow");
+    if (status.closesAt) subLabel = t("status.until", status.closesAt);
+  } else if (status.nextOpen) {
+    if (status.sameDay) {
+      mainLabel = t("status.closedNow");
+      subLabel = t("status.reopensToday", status.nextOpen);
+    } else {
+      mainLabel = t("status.closedNow");
+      subLabel = t("status.reopensTomorrow", status.nextOpen);
+    }
+  }
 
   return (
     <div
       data-testid="open-status"
       data-open={isOpen}
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-mega backdrop-blur ${
+      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-mega backdrop-blur ${
         variant === "light"
           ? "border-stone-300 bg-white/80 text-stone-900"
-          : "border-stone-700 bg-stone-950/60 text-stone-100"
+          : isOpen
+            ? "border-emerald-500/40 bg-emerald-500/5 text-emerald-300"
+            : "border-red-700/40 bg-red-950/30 text-red-300"
       }`}
     >
       <span className="relative flex h-2 w-2">
@@ -38,8 +48,10 @@ export default function OpenClosedBadge({ t, variant = "dark" }) {
         )}
         <span className={`relative inline-flex h-2 w-2 rounded-full ${dotClass}`} />
       </span>
-      <span>{label}</span>
-      {sub && <span className="text-amber-500 normal-case">· {sub}</span>}
+      <span>{mainLabel}</span>
+      {subLabel && (
+        <span className="text-amber-500 normal-case">· {subLabel}</span>
+      )}
     </div>
   );
 }

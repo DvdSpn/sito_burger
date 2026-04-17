@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  AlertTriangle,
   CheckCircle2,
   Clock,
   MessageCircle,
@@ -7,12 +8,11 @@ import {
   Plus,
   ShoppingBag,
   Trash2,
-  UtensilsCrossed,
   X,
 } from "lucide-react";
 import { useCart, formatPrice } from "../context/CartContext";
 import { RESTAURANT } from "../data/menu";
-import { getPickupSlots } from "../data/hours";
+import { getPickupPlan } from "../data/hours";
 import Logo from "./Logo";
 import { cn } from "../lib/utils";
 
@@ -20,12 +20,29 @@ export default function CartDrawer({ open, onClose, t, lang }) {
   const { items, inc, dec, remove, clear, count, total, hasKgItems } = useCart();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const [mode, setMode] = useState("asporto"); // asporto | posto
-  const [slotId, setSlotId] = useState("asap");
+  const [slotId, setSlotId] = useState(null);
 
-  const slots = useMemo(() => getPickupSlots(new Date()), [open]);
+  const plan = useMemo(() => getPickupPlan(new Date()), [open]);
 
-  // Reset transient state when drawer closes
+  // auto-select first available slot if none selected
+  useEffect(() => {
+    if (slotId !== null) return;
+    for (const g of plan.groups) {
+      if (g.slots.length > 0) {
+        setSlotId(g.slots[0].id);
+        return;
+      }
+    }
+  }, [plan, slotId]);
+
+  const selectedSlot = useMemo(() => {
+    for (const g of plan.groups) {
+      const s = g.slots.find((x) => x.id === slotId);
+      if (s) return { ...s, group: g };
+    }
+    return null;
+  }, [plan, slotId]);
+
   useEffect(() => {
     if (!open) {
       setConfirmOpen(false);
@@ -33,7 +50,6 @@ export default function CartDrawer({ open, onClose, t, lang }) {
     }
   }, [open]);
 
-  // body scroll lock
   useEffect(() => {
     if (!open) return undefined;
     const prev = document.body.style.overflow;
@@ -43,7 +59,6 @@ export default function CartDrawer({ open, onClose, t, lang }) {
     };
   }, [open]);
 
-  // ESC closes
   useEffect(() => {
     if (!open) return undefined;
     const handler = (e) => {
@@ -56,20 +71,20 @@ export default function CartDrawer({ open, onClose, t, lang }) {
     return () => window.removeEventListener("keydown", handler);
   }, [open, onClose, confirmOpen]);
 
-  const selectedSlot = slots.find((s) => s.id === slotId) || slots[0];
+  const mealLabel = (meal) => (meal === "lunch" ? t("cart.slot.lunch") : t("cart.slot.dinner"));
+  const dayLabel = (offset) => (offset === 0 ? t("cart.slot.today") : t("cart.slot.tomorrow"));
 
-  const slotLabel = (s) => {
-    if (!s) return "";
-    if (s.id === "asap") return t("cart.slot.asap");
-    return s.label;
+  const slotSummaryLabel = () => {
+    if (!selectedSlot) return t("cart.slot.pending");
+    return `${mealLabel(selectedSlot.meal)} · ${dayLabel(selectedSlot.dayOffset)} · ${selectedSlot.label}`;
   };
 
   const buildOrderMessage = () => {
     if (items.length === 0) return "";
     const intro =
       lang === "en"
-        ? "Hi Burger & Grill! I'd like to place this order:"
-        : "Ciao Burger & Grill! Vorrei ordinare:";
+        ? "Hi Burger & Grill! I'd like to place this TAKEAWAY order:"
+        : "Ciao Burger & Grill! Vorrei ordinare (ASPORTO):";
     const lines = items.map((i) => {
       const lineTotal =
         i.priceNum !== null ? ` → € ${formatPrice(i.priceNum * i.qty)}` : "";
@@ -79,22 +94,13 @@ export default function CartDrawer({ open, onClose, t, lang }) {
       lang === "en"
         ? `Total: € ${formatPrice(total)}`
         : `Totale: € ${formatPrice(total)}`;
-    const modeLabel =
-      mode === "asporto"
-        ? lang === "en"
-          ? "Mode: Takeaway"
-          : "Modalità: Asporto"
-        : lang === "en"
-          ? "Mode: Dine-in"
-          : "Modalità: Consumo sul posto";
-    const timeLabel =
-      selectedSlot && selectedSlot.id === "asap"
-        ? lang === "en"
-          ? "Time: As soon as possible"
-          : "Orario: Il prima possibile"
-        : lang === "en"
-          ? `Time: around ${selectedSlot?.label}`
-          : `Orario: verso le ${selectedSlot?.label}`;
+    const pickupLine = selectedSlot
+      ? lang === "en"
+        ? `Pickup: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} around ${selectedSlot.label}`
+        : `Ritiro: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} verso le ${selectedSlot.label}`
+      : lang === "en"
+        ? "Pickup: to be agreed"
+        : "Ritiro: da concordare";
     const note = hasKgItems
       ? lang === "en"
         ? "\n(some items priced per kg — final amount on weigh-in)"
@@ -102,9 +108,9 @@ export default function CartDrawer({ open, onClose, t, lang }) {
       : "";
     const footer =
       lang === "en"
-        ? "\nWaiting for your confirmation on timing and availability — thanks!"
-        : "\nResto in attesa di conferma e dell'orario preciso — grazie!";
-    return `${intro}\n\n${lines.join("\n")}\n\n${modeLabel}\n${timeLabel}\n\n${totalLine}${note}${footer}`;
+        ? "\nPlease confirm the order and pickup time — thank you!"
+        : "\nConfermatemi per favore ordine e orario di ritiro — grazie!";
+    return `${intro}\n\n${lines.join("\n")}\n\n${pickupLine}\n\n${totalLine}${note}${footer}`;
   };
 
   const sendOrder = () => {
@@ -146,7 +152,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
         className={`absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-stone-800 bg-stone-950 shadow-2xl transition-transform duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* header */}
-        <div className="flex items-center justify-between border-b border-stone-800 px-6 py-5">
+        <div className="flex items-center justify-between border-b border-stone-800 px-5 py-4">
           <div className="flex items-center gap-3">
             <Logo size="sm" />
             <div>
@@ -169,14 +175,13 @@ export default function CartDrawer({ open, onClose, t, lang }) {
           </button>
         </div>
 
-        {/* POST-SEND SUCCESS SCREEN */}
         {sent ? (
           <div className="flex flex-1 flex-col overflow-y-auto" data-testid="cart-sent-screen">
-            <div className="flex flex-col items-center justify-center gap-5 px-6 py-12 text-center">
+            <div className="flex flex-col items-center justify-center gap-5 px-5 py-10 text-center">
               <div className="grid h-16 w-16 place-items-center rounded-full border border-emerald-400/40 bg-emerald-500/10">
                 <CheckCircle2 className="h-8 w-8 text-emerald-400" />
               </div>
-              <h3 className="font-display text-3xl font-black leading-tight text-stone-50">
+              <h3 className="font-display text-2xl font-black leading-tight text-stone-50 sm:text-3xl">
                 {t("cart.sent.heading")}
               </h3>
               <p className="max-w-sm text-sm leading-relaxed text-stone-400">
@@ -184,7 +189,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
               </p>
             </div>
 
-            <div className="mx-6 mb-6 rounded-sm border border-amber-700/30 bg-amber-500/5 p-5">
+            <div className="mx-5 mb-5 rounded-sm border border-amber-700/30 bg-amber-500/5 p-4">
               <div className="flex items-start gap-3">
                 <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                 <div>
@@ -209,7 +214,21 @@ export default function CartDrawer({ open, onClose, t, lang }) {
               </div>
             </div>
 
-            <div className="mt-auto border-t border-stone-800 p-6">
+            <div className="mx-5 mb-5 rounded-sm border border-red-900/50 bg-red-950/20 p-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-mega text-red-400">
+                    {t("cart.sent.alert.title")}
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-stone-300">
+                    {t("cart.sent.alert.body")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-auto border-t border-stone-800 p-5">
               <a
                 href={`tel:${RESTAURANT.phoneMobile.replace(/\s/g, "")}`}
                 data-testid="cart-sent-call-btn"
@@ -229,8 +248,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
           </div>
         ) : (
           <>
-            {/* items */}
-            <div data-testid="cart-items" className="flex-1 overflow-y-auto px-6 py-5">
+            <div data-testid="cart-items" className="flex-1 overflow-y-auto px-5 py-4">
               {items.length === 0 ? (
                 <div
                   data-testid="cart-empty"
@@ -246,16 +264,26 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                 </div>
               ) : (
                 <>
-                  <ul className="space-y-5">
+                  {/* Takeaway-only notice */}
+                  <div className="mb-5 rounded-sm border border-amber-700/30 bg-amber-500/5 px-3 py-2">
+                    <p className="text-[10px] uppercase tracking-mega text-amber-500">
+                      {t("cart.takeawayOnly")}
+                    </p>
+                    <p className="mt-0.5 text-[11px] leading-relaxed text-stone-400">
+                      {t("cart.takeawayOnlyNote")}
+                    </p>
+                  </div>
+
+                  <ul className="space-y-4">
                     {items.map((i) => (
                       <li
                         key={i.name}
                         data-testid={`cart-row-${i.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
-                        className="border-b border-stone-800/60 pb-5"
+                        className="border-b border-stone-800/60 pb-4"
                       >
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="min-w-0">
-                            <p className="font-display text-lg font-semibold leading-tight text-stone-50">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <p className="font-display text-base font-semibold leading-tight text-stone-50 sm:text-lg">
                               {i.name}
                             </p>
                             <p className="text-xs text-stone-500">€ {i.price}</p>
@@ -270,7 +298,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <div className="mt-3 flex items-center justify-between">
+                        <div className="mt-2.5 flex items-center justify-between">
                           <div className="inline-flex items-center rounded-sm border border-stone-700 bg-stone-900/60">
                             <button
                               type="button"
@@ -294,7 +322,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <p className="font-display text-lg font-semibold text-amber-500">
+                          <p className="font-display text-base font-semibold text-amber-500 sm:text-lg">
                             {i.priceNum !== null
                               ? `€ ${formatPrice(i.priceNum * i.qty)}`
                               : t("cart.perKg")}
@@ -304,85 +332,67 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                     ))}
                   </ul>
 
-                  {/* Order meta: service mode + pickup time */}
-                  <div className="mt-8 space-y-5">
-                    <div>
-                      <p className="mb-2 text-[11px] font-bold uppercase tracking-mega text-amber-500">
-                        {t("cart.meta.mode")}
-                      </p>
-                      <div className="grid grid-cols-2 gap-2">
-                        {[
-                          { id: "asporto", Icon: ShoppingBag, label: t("cart.meta.takeaway") },
-                          { id: "posto", Icon: UtensilsCrossed, label: t("cart.meta.dineIn") },
-                        ].map((m) => (
-                          <button
-                            key={m.id}
-                            type="button"
-                            onClick={() => setMode(m.id)}
-                            data-testid={`cart-mode-${m.id}`}
-                            className={cn(
-                              "flex items-center justify-center gap-2 rounded-sm border px-3 py-3 text-[10px] font-bold uppercase tracking-mega transition-all",
-                              mode === m.id
-                                ? "border-amber-500 bg-amber-600 text-stone-950"
-                                : "border-stone-700 bg-stone-900/60 text-stone-400 hover:border-amber-700 hover:text-amber-500"
+                  {/* Pickup time groups */}
+                  <div className="mt-6">
+                    <p className="mb-2 text-[11px] font-bold uppercase tracking-mega text-amber-500">
+                      {t("cart.meta.pickup")}
+                    </p>
+                    {plan.groups.length === 0 ? (
+                      <div className="rounded-sm border border-amber-700/30 bg-amber-500/5 p-3 text-[11px] leading-relaxed text-amber-400">
+                        {t("cart.meta.closed")}
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {plan.groups.map((g, gi) => (
+                          <div key={`${g.meal}-${g.dayOffset}`} data-testid={`slot-group-${g.meal}-${g.dayOffset}`}>
+                            <p className="mb-1.5 text-[10px] font-bold uppercase tracking-mega text-stone-500">
+                              {mealLabel(g.meal)} · {dayLabel(g.dayOffset)}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {g.slots.map((s) => (
+                                <button
+                                  key={s.id}
+                                  type="button"
+                                  onClick={() => setSlotId(s.id)}
+                                  data-testid={`cart-slot-${s.id}`}
+                                  className={cn(
+                                    "rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors",
+                                    slotId === s.id
+                                      ? "border-amber-500 bg-amber-600 text-stone-950"
+                                      : "border-stone-700 bg-stone-900/60 text-stone-400 hover:border-amber-700 hover:text-amber-500"
+                                  )}
+                                >
+                                  {s.label}
+                                </button>
+                              ))}
+                            </div>
+                            {gi < plan.groups.length - 1 && (
+                              <div className="mt-3 border-t border-stone-800/60" />
                             )}
-                          >
-                            <m.Icon className="h-3.5 w-3.5" /> {m.label}
-                          </button>
+                          </div>
                         ))}
                       </div>
-                    </div>
-
-                    <div>
-                      <p className="mb-2 text-[11px] font-bold uppercase tracking-mega text-amber-500">
-                        {t(mode === "posto" ? "cart.meta.arrival" : "cart.meta.pickup")}
-                      </p>
-                      {slots.length <= 1 ? (
-                        <div className="rounded-sm border border-amber-700/30 bg-amber-500/5 p-3 text-[11px] leading-relaxed text-amber-400">
-                          {t("cart.meta.closed")}
-                        </div>
-                      ) : (
-                        <div className="flex flex-wrap gap-1.5">
-                          {slots.slice(0, 16).map((s) => (
-                            <button
-                              key={s.id}
-                              type="button"
-                              onClick={() => setSlotId(s.id)}
-                              data-testid={`cart-slot-${s.id}`}
-                              className={cn(
-                                "rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors",
-                                slotId === s.id
-                                  ? "border-amber-500 bg-amber-600 text-stone-950"
-                                  : "border-stone-700 bg-stone-900/60 text-stone-400 hover:border-amber-700 hover:text-amber-500"
-                              )}
-                            >
-                              {slotLabel(s)}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
                 </>
               )}
             </div>
 
-            {/* footer totals */}
             {items.length > 0 && (
-              <div className="border-t border-stone-800 px-6 py-5">
-                <div className="mb-4 flex items-baseline justify-between">
+              <div className="border-t border-stone-800 px-5 py-4">
+                <div className="mb-3 flex items-baseline justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-mega text-stone-500">
                     {t("cart.total")}
                   </span>
                   <span
                     data-testid="cart-total"
-                    className="font-display text-3xl font-bold text-stone-50"
+                    className="font-display text-2xl font-bold text-stone-50 sm:text-3xl"
                   >
                     € {formatPrice(total)}
                   </span>
                 </div>
                 {hasKgItems && (
-                  <p className="mb-3 text-[11px] uppercase tracking-mega text-amber-500/80">
+                  <p className="mb-2 text-[11px] uppercase tracking-mega text-amber-500/80">
                     {t("cart.kgNote")}
                   </p>
                 )}
@@ -390,7 +400,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                   type="button"
                   onClick={askConfirm}
                   data-testid="cart-send-order-btn"
-                  className="w-full rounded-sm bg-[#25D366] px-5 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-emerald-400"
+                  className="w-full rounded-sm bg-[#25D366] px-4 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-emerald-400"
                 >
                   {t("cart.sendOrder")} · {count}{" "}
                   {count === 1 ? t("cart.itemSingular") : t("cart.itemPlural")}
@@ -399,11 +409,11 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                   type="button"
                   onClick={clear}
                   data-testid="cart-clear-btn"
-                  className="mt-3 w-full rounded-sm border border-stone-700 px-5 py-3 text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors hover:border-red-800 hover:text-red-400"
+                  className="mt-2.5 w-full rounded-sm border border-stone-700 px-5 py-2.5 text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors hover:border-red-800 hover:text-red-400"
                 >
                   {t("cart.clear")}
                 </button>
-                <p className="mt-4 text-[10px] leading-relaxed text-stone-600">
+                <p className="mt-3 text-[10px] leading-relaxed text-stone-600">
                   {t("cart.disclaimer")}
                 </p>
               </div>
@@ -412,7 +422,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
         )}
       </aside>
 
-      {/* Confirmation modal */}
+      {/* Confirm modal */}
       <div
         aria-hidden={!confirmOpen}
         className={`absolute inset-0 z-[60] flex items-center justify-center p-4 transition-all ${
@@ -436,7 +446,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
               : "translate-y-4 opacity-0 scale-95"
           }`}
         >
-          <div className="flex items-start gap-4 border-b border-stone-800 p-6">
+          <div className="flex items-start gap-4 border-b border-stone-800 p-5">
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-sm border border-amber-700/40 bg-amber-600/10">
               <CheckCircle2 className="h-6 w-6 text-amber-500" />
             </div>
@@ -444,13 +454,13 @@ export default function CartDrawer({ open, onClose, t, lang }) {
               <p className="text-[10px] font-bold uppercase tracking-mega text-amber-500">
                 {t("confirm.kicker")}
               </p>
-              <p className="mt-1 font-display text-2xl leading-tight text-stone-50">
+              <p className="mt-1 font-display text-xl leading-tight text-stone-50 sm:text-2xl">
                 {t("confirm.title")}
               </p>
             </div>
           </div>
 
-          <div className="max-h-[45vh] overflow-y-auto px-6 py-4">
+          <div className="max-h-[50vh] overflow-y-auto px-5 py-4">
             <ul className="space-y-2">
               {items.map((i) => (
                 <li
@@ -473,20 +483,20 @@ export default function CartDrawer({ open, onClose, t, lang }) {
             </ul>
 
             <div className="mt-4 space-y-1 border-t border-stone-800 pt-3 text-xs">
-              <div className="flex justify-between">
+              <div className="flex justify-between gap-2">
                 <span className="uppercase tracking-mega text-stone-500">
                   {t("cart.meta.mode")}
                 </span>
                 <span className="font-display text-stone-50">
-                  {mode === "asporto" ? t("cart.meta.takeaway") : t("cart.meta.dineIn")}
+                  {t("cart.meta.takeaway")}
                 </span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between gap-2">
                 <span className="uppercase tracking-mega text-stone-500">
-                  {t(mode === "posto" ? "cart.meta.arrival" : "cart.meta.pickup")}
+                  {t("cart.meta.pickup")}
                 </span>
-                <span className="font-display text-stone-50">
-                  {slotLabel(selectedSlot)}
+                <span className="text-right font-display text-stone-50">
+                  {slotSummaryLabel()}
                 </span>
               </div>
             </div>

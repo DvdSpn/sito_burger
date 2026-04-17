@@ -104,7 +104,7 @@ export const RESTAURANT = {
   name: "Burger & Grill",
   tagline: "Camucia · Cortona",
   description:
-    "Dal 2010 serviamo la vera Chianina sulla griglia. Pane artigianale, carne a km 0, fuoco vivo.",
+    "Dal 2016 serviamo la vera Chianina sulla griglia. Pane artigianale, carne a km 0, fuoco vivo.",
   address: "Via Lauretana 21, 52044 Camucia – Cortona (AR)",
   phonePrimary: "+39 0575 613880",
   phoneMobile: "+39 366 3706361",

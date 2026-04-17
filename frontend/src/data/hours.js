@@ -1,22 +1,19 @@
 // Weekly hours for Burger & Grill Camucia
-// Days: 0=Sun, 1=Mon, ... 6=Sat (JS Date.getDay())
-// Each day has optional "lunch" and "dinner" windows in minutes from midnight.
 const minutes = (h, m = 0) => h * 60 + m;
 
-// User-confirmed: Pranzo 12:00-14:00 · Cena 18:00-23:00, every day
 const STANDARD_DAY = {
   lunch: { open: minutes(12), close: minutes(14) },
   dinner: { open: minutes(18), close: minutes(23) },
 };
 
 export const WEEKLY_HOURS = {
-  0: STANDARD_DAY, // Sun
-  1: STANDARD_DAY, // Mon
-  2: STANDARD_DAY, // Tue
-  3: STANDARD_DAY, // Wed
-  4: STANDARD_DAY, // Thu
-  5: STANDARD_DAY, // Fri
-  6: STANDARD_DAY, // Sat
+  0: STANDARD_DAY,
+  1: STANDARD_DAY,
+  2: STANDARD_DAY,
+  3: STANDARD_DAY,
+  4: STANDARD_DAY,
+  5: STANDARD_DAY,
+  6: STANDARD_DAY,
 };
 
 function fmt(totalMin) {
@@ -29,9 +26,8 @@ export function computeOpenStatus(now = new Date()) {
   const day = now.getDay();
   const cur = now.getHours() * 60 + now.getMinutes();
   const today = WEEKLY_HOURS[day];
-  if (!today) return { open: false, nextOpen: null, nextOpenDay: null, current: null };
+  if (!today) return { open: false, nextOpen: null, sameDay: false };
 
-  // Currently open?
   for (const window of [today.lunch, today.dinner]) {
     if (window && cur >= window.open && cur < window.close) {
       return {
@@ -42,52 +38,79 @@ export function computeOpenStatus(now = new Date()) {
     }
   }
 
-  // Find next opening (today or tomorrow)
   if (today.lunch && cur < today.lunch.open) {
     return { open: false, nextOpen: fmt(today.lunch.open), sameDay: true };
   }
   if (today.dinner && cur < today.dinner.open) {
     return { open: false, nextOpen: fmt(today.dinner.open), sameDay: true };
   }
-  // After dinner: next is tomorrow's lunch
   const nextDay = WEEKLY_HOURS[(day + 1) % 7];
   if (nextDay && nextDay.lunch) {
-    return {
-      open: false,
-      nextOpen: fmt(nextDay.lunch.open),
-      sameDay: false,
-    };
+    return { open: false, nextOpen: fmt(nextDay.lunch.open), sameDay: false };
   }
-  return { open: false, nextOpen: null };
+  return { open: false, nextOpen: null, sameDay: false };
 }
 
-// Generate pickup time slots: "Prima possibile" + every 15min from now+20min until end of current service
-export function getPickupSlots(now = new Date()) {
-  const slots = [{ id: "asap", label: "__ASAP__", mins: null }];
-  const status = computeOpenStatus(now);
+/**
+ * Returns pickup groups by service window, with 30-minute slots.
+ * Slots are selectable even when the restaurant is closed (customer plans ahead).
+ * Structure:
+ *  [
+ *    { meal: "lunch", dayOffset: 0, slots: [{ id, label, mins, dayOffset }] },
+ *    { meal: "dinner", dayOffset: 0, slots: [...] },
+ *  ]
+ */
+export function getPickupPlan(now = new Date()) {
   const day = now.getDay();
-  const today = WEEKLY_HOURS[day];
-  if (!today) return slots;
-
   const cur = now.getHours() * 60 + now.getMinutes();
-  // Determine active window (current or next same-day)
-  let window = null;
-  if (status.open) window = status.current;
-  else if (today.dinner && cur < today.dinner.open && cur >= (today.lunch ? today.lunch.close : 0)) {
-    window = today.dinner;
-  } else if (today.lunch && cur < today.lunch.open) {
-    window = today.lunch;
-  } else if (today.dinner && cur < today.dinner.open) {
-    window = today.dinner;
+  const today = WEEKLY_HOURS[day];
+  if (!today) return { groups: [] };
+
+  const buildSlots = (window, meal, dayOffset) => {
+    const slots = [];
+    let start = window.open;
+    if (dayOffset === 0) {
+      // start at least 30 min from now, rounded up to :00 or :30
+      const earliest = cur + 30;
+      start = Math.max(window.open, Math.ceil(earliest / 30) * 30);
+    }
+    for (let m = start; m <= window.close - 10; m += 30) {
+      slots.push({
+        id: `d${dayOffset}-${meal}-${m}`,
+        label: fmt(m),
+        mins: m,
+        meal,
+        dayOffset,
+      });
+    }
+    return { meal, dayOffset, slots };
+  };
+
+  const groups = [];
+  const afterDinner = today.dinner && cur >= today.dinner.close;
+
+  if (!afterDinner) {
+    if (today.lunch && cur < today.lunch.close) {
+      const g = buildSlots(today.lunch, "lunch", 0);
+      if (g.slots.length) groups.push(g);
+    }
+    if (today.dinner) {
+      const g = buildSlots(today.dinner, "dinner", 0);
+      if (g.slots.length) groups.push(g);
+    }
+  } else {
+    const tomorrow = WEEKLY_HOURS[(day + 1) % 7];
+    if (tomorrow) {
+      if (tomorrow.lunch) {
+        const g = buildSlots(tomorrow.lunch, "lunch", 1);
+        if (g.slots.length) groups.push(g);
+      }
+      if (tomorrow.dinner) {
+        const g = buildSlots(tomorrow.dinner, "dinner", 1);
+        if (g.slots.length) groups.push(g);
+      }
+    }
   }
 
-  if (!window) return slots;
-
-  const startFrom = Math.max(cur + 20, window.open);
-  // round up to next 15min
-  const rounded = Math.ceil(startFrom / 15) * 15;
-  for (let m = rounded; m <= window.close - 10; m += 15) {
-    slots.push({ id: `t-${m}`, label: fmt(m), mins: m });
-  }
-  return slots;
+  return { groups };
 }

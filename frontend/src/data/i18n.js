@@ -19,11 +19,11 @@ const dict = {
     "nav.drinks": "Bevande",
     "nav.about": "Chi siamo",
 
-    "hero.kicker": "Dal 2010 · Chianina · Fuoco vivo",
+    "hero.kicker": "Dal 2016 · Chianina · Fuoco vivo",
     "hero.title1": "Burger",
     "hero.title2": "Grill",
     "hero.description":
-      "Dal 2010 serviamo la vera Chianina sulla griglia. Pane artigianale, carne a km 0, fuoco vivo. Panini artigianali, tagliate alla brace e la nostra griglia sempre accesa, nel cuore di Camucia.",
+      "Dal 2016 serviamo la vera Chianina sulla griglia. Pane artigianale, carne a km 0, fuoco vivo. Panini artigianali, tagliate alla brace e la nostra griglia sempre accesa, nel cuore di Camucia.",
     "hero.ctaMenu": "Scopri il menu",
     "hero.ctaDrinks": "Carta bevande",
     "hero.ctaLocation": "Via Lauretana 21",
@@ -93,10 +93,15 @@ const dict = {
     "reviews.next": "Recensione successiva",
 
     "status.openNow": "Aperto · stiamo servendo",
+    "status.closedNow": "Chiuso ora",
+    "status.reopensToday": (hhmm) => `Riapre oggi alle ${hhmm}`,
+    "status.reopensTomorrow": (hhmm) => `Riapre domani alle ${hhmm}`,
     "status.opensAt": (hhmm) => `Chiuso · apriamo alle ${hhmm}`,
     "status.opensTomorrow": (hhmm) => `Chiuso · domani alle ${hhmm}`,
     "status.until": (hhmm) => `fino alle ${hhmm}`,
     "status.closed": "Chiuso",
+
+    "filter.scrollHint": "Scorri per tutte le categorie →",
 
     "contact.kicker": "Vieni a trovarci",
     "contact.title1": "La griglia è",
@@ -155,12 +160,18 @@ const dict = {
     "confirm.send": "Invia su WhatsApp",
 
     "cart.meta.mode": "Modalità",
-    "cart.meta.takeaway": "Asporto",
-    "cart.meta.dineIn": "Al tavolo",
+    "cart.meta.takeaway": "Solo asporto",
     "cart.meta.pickup": "Orario di ritiro",
-    "cart.meta.arrival": "Orario di arrivo",
-    "cart.meta.closed": "Al momento siamo chiusi. Scrivici su WhatsApp: ti risponderemo all'apertura.",
+    "cart.meta.closed": "Al momento non ci sono orari disponibili. Scrivici su WhatsApp: ti risponderemo appena possibile.",
+    "cart.takeawayOnly": "Ordine solo asporto",
+    "cart.takeawayOnlyNote":
+      "Per consumare al tavolo l'ordine viene preso direttamente dal personale al tuo arrivo.",
     "cart.slot.asap": "Prima possibile",
+    "cart.slot.lunch": "Pranzo",
+    "cart.slot.dinner": "Cena",
+    "cart.slot.today": "oggi",
+    "cart.slot.tomorrow": "domani",
+    "cart.slot.pending": "Da concordare",
 
     "cart.sent.kicker": "Ordine inviato",
     "cart.sent.title": "Invio completato",
@@ -172,7 +183,10 @@ const dict = {
       "Il ristoratore leggerà il tuo ordine e ti risponderà su WhatsApp per confermare la presa in carico.",
     "cart.sent.step2.title": "Accordatevi sull'orario",
     "cart.sent.step2.body":
-      "Nel messaggio abbiamo già indicato l'orario scelto. Il ristoratore ti confermerà l'orario preciso di ritiro/arrivo in base ai tempi di preparazione.",
+      "Nel messaggio abbiamo già indicato l'orario scelto. Il ristoratore ti confermerà l'orario preciso di ritiro in base ai tempi di preparazione.",
+    "cart.sent.alert.title": "Attenzione",
+    "cart.sent.alert.body":
+      "Se non ricevi risposta entro pochi minuti, il messaggio potrebbe non essere stato visto: ti consigliamo di chiamare direttamente il locale per essere sicuro che l'ordine venga preso in carico.",
     "cart.sent.callBtn": "Chiama ora",
     "cart.sent.closeBtn": "Ho capito, chiudi",
 
@@ -188,10 +202,10 @@ const dict = {
     "about.title": "La nostra",
     "about.titleAccent": "storia",
     "about.backToMenu": "Torna al menu",
-    "about.story.kicker": "Dal 2010",
+    "about.story.kicker": "Dal 2016",
     "about.story.title": "Tradizione toscana, fuoco americano.",
     "about.story.p1":
-      "Nasciamo a Camucia nel 2010 con un'idea semplice: portare in tavola la carne della nostra Toscana, lavorata con la passione per gli hamburger d'oltreoceano. La Chianina viene selezionata e macinata fresca ogni giorno.",
+      "Nasciamo a Camucia nel 2016 con un'idea semplice: portare in tavola la carne della nostra Toscana, lavorata con la passione per gli hamburger d'oltreoceano. La Chianina viene selezionata e macinata fresca ogni giorno.",
     "about.story.p2":
       "Siamo una gestione familiare. In cucina un padre e un figlio, in sala una famiglia allargata. Chi entra mangia come a casa, ma con la griglia sempre accesa e un bicchiere di Syrah pronto sul bancone.",
     "about.story.p3":
@@ -228,11 +242,11 @@ const dict = {
     "nav.drinks": "Drinks",
     "nav.about": "About",
 
-    "hero.kicker": "Since 2010 · Chianina · Live fire",
+    "hero.kicker": "Since 2016 · Chianina · Live fire",
     "hero.title1": "Burger",
     "hero.title2": "Grill",
     "hero.description":
-      "Since 2010 we serve authentic Chianina beef on the grill. Artisan bread, km-0 meat, live fire. Gourmet sandwiches, sliced steaks and an ever-burning grill in the heart of Camucia.",
+      "Since 2016 we serve authentic Chianina beef on the grill. Artisan bread, km-0 meat, live fire. Gourmet sandwiches, sliced steaks and an ever-burning grill in the heart of Camucia.",
     "hero.ctaMenu": "Explore menu",
     "hero.ctaDrinks": "Drinks list",
     "hero.ctaLocation": "Via Lauretana 21",
@@ -302,10 +316,15 @@ const dict = {
     "reviews.next": "Next review",
 
     "status.openNow": "Open · now serving",
+    "status.closedNow": "Closed now",
+    "status.reopensToday": (hhmm) => `Reopens today at ${hhmm}`,
+    "status.reopensTomorrow": (hhmm) => `Reopens tomorrow at ${hhmm}`,
     "status.opensAt": (hhmm) => `Closed · opens at ${hhmm}`,
     "status.opensTomorrow": (hhmm) => `Closed · tomorrow at ${hhmm}`,
     "status.until": (hhmm) => `until ${hhmm}`,
     "status.closed": "Closed",
+
+    "filter.scrollHint": "Swipe for all categories →",
 
     "contact.kicker": "Come visit us",
     "contact.title1": "The grill is",
@@ -363,12 +382,18 @@ const dict = {
     "confirm.send": "Send to WhatsApp",
 
     "cart.meta.mode": "Service",
-    "cart.meta.takeaway": "Takeaway",
-    "cart.meta.dineIn": "Dine-in",
+    "cart.meta.takeaway": "Takeaway only",
     "cart.meta.pickup": "Pickup time",
-    "cart.meta.arrival": "Arrival time",
-    "cart.meta.closed": "We're currently closed. Send your order on WhatsApp: we'll reply when we open.",
+    "cart.meta.closed": "No time slots available right now. Send us a WhatsApp — we'll reply as soon as possible.",
+    "cart.takeawayOnly": "Takeaway order only",
+    "cart.takeawayOnlyNote":
+      "For dine-in, your order is taken by the staff when you arrive.",
     "cart.slot.asap": "As soon as possible",
+    "cart.slot.lunch": "Lunch",
+    "cart.slot.dinner": "Dinner",
+    "cart.slot.today": "today",
+    "cart.slot.tomorrow": "tomorrow",
+    "cart.slot.pending": "To be agreed",
 
     "cart.sent.kicker": "Order sent",
     "cart.sent.title": "Done",
@@ -380,7 +405,10 @@ const dict = {
       "The restaurant will read your order and reply on WhatsApp to confirm it.",
     "cart.sent.step2.title": "Agree on the timing",
     "cart.sent.step2.body":
-      "Your chosen time is already in the message. The restaurant will confirm the precise pickup/arrival time based on preparation.",
+      "Your chosen time is already in the message. The restaurant will confirm the precise pickup time based on preparation.",
+    "cart.sent.alert.title": "Heads up",
+    "cart.sent.alert.body":
+      "If you don't get a reply within a few minutes, the message might not have been seen: we recommend calling the restaurant directly to make sure your order is taken in.",
     "cart.sent.callBtn": "Call now",
     "cart.sent.closeBtn": "Got it, close",
 
@@ -396,10 +424,10 @@ const dict = {
     "about.title": "Our",
     "about.titleAccent": "story",
     "about.backToMenu": "Back to menu",
-    "about.story.kicker": "Since 2010",
+    "about.story.kicker": "Since 2016",
     "about.story.title": "Tuscan tradition, American fire.",
     "about.story.p1":
-      "We were born in Camucia in 2010 with one idea: bring the beef of our Tuscany to the table, crafted with the passion of American-style burgers. Chianina beef is hand-selected and ground fresh every day.",
+      "We were born in Camucia in 2016 with one idea: bring the beef of our Tuscany to the table, crafted with the passion of American-style burgers. Chianina beef is hand-selected and ground fresh every day.",
     "about.story.p2":
       "We're a family-run business. Father and son at the grill, a wide family in the dining room. You eat like at home, but with the grill always on and a glass of Syrah on the counter.",
     "about.story.p3":
