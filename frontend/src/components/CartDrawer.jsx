@@ -1,11 +1,12 @@
-import { useEffect } from "react";
-import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CheckCircle2, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart, formatPrice } from "../context/CartContext";
 import { RESTAURANT } from "../data/menu";
 import Logo from "./Logo";
 
 export default function CartDrawer({ open, onClose, t, lang }) {
   const { items, inc, dec, remove, clear, count, total, hasKgItems } = useCart();
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   // lock body scroll
   useEffect(() => {
@@ -55,6 +56,14 @@ export default function CartDrawer({ open, onClose, t, lang }) {
     if (!msg) return;
     const url = `https://wa.me/${RESTAURANT.whatsappNumber}?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank", "noopener,noreferrer");
+    setConfirmOpen(false);
+    clear();
+    onClose();
+  };
+
+  const askConfirm = () => {
+    if (items.length === 0) return;
+    setConfirmOpen(true);
   };
 
   return (
@@ -201,7 +210,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
             )}
             <button
               type="button"
-              onClick={sendOrder}
+              onClick={askConfirm}
               data-testid="cart-send-order-btn"
               className="w-full rounded-sm bg-[#25D366] px-5 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-emerald-400"
             >
@@ -222,6 +231,108 @@ export default function CartDrawer({ open, onClose, t, lang }) {
           </div>
         )}
       </aside>
+
+      {/* Confirmation modal */}
+      <div
+        aria-hidden={!confirmOpen}
+        className={`absolute inset-0 z-[60] flex items-center justify-center p-4 transition-all ${
+          confirmOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+        data-testid="confirm-modal"
+      >
+        <div
+          className={`absolute inset-0 bg-stone-950/85 backdrop-blur-md transition-opacity duration-300 ${
+            confirmOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setConfirmOpen(false)}
+          data-testid="confirm-backdrop"
+        />
+        <div
+          role="alertdialog"
+          aria-modal="true"
+          className={`relative w-full max-w-md overflow-hidden rounded-sm border border-amber-700/40 bg-stone-900 shadow-[0_0_80px_-10px_rgba(217,119,6,0.25)] transition-all duration-300 ${
+            confirmOpen
+              ? "translate-y-0 opacity-100 scale-100"
+              : "translate-y-4 opacity-0 scale-95"
+          }`}
+        >
+          <div className="flex items-start gap-4 border-b border-stone-800 p-6">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-sm border border-amber-700/40 bg-amber-600/10">
+              <CheckCircle2 className="h-6 w-6 text-amber-500" />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-mega text-amber-500">
+                {t("confirm.kicker")}
+              </p>
+              <p className="mt-1 font-display text-2xl leading-tight text-stone-50">
+                {t("confirm.title")}
+              </p>
+            </div>
+          </div>
+
+          <div className="max-h-[40vh] overflow-y-auto px-6 py-4">
+            <ul className="space-y-2">
+              {items.map((i) => (
+                <li
+                  key={i.name}
+                  data-testid={`confirm-row-${i.name}`}
+                  className="flex items-baseline justify-between gap-3 text-sm"
+                >
+                  <span className="text-stone-300">
+                    <span className="font-display text-base font-bold text-amber-500">
+                      {i.qty}x
+                    </span>{" "}
+                    {i.name}
+                  </span>
+                  <span className="font-display text-stone-50">
+                    {i.priceNum !== null
+                      ? `€ ${formatPrice(i.priceNum * i.qty)}`
+                      : t("cart.perKg")}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 flex items-baseline justify-between border-t border-stone-800 pt-3">
+              <span className="text-[11px] font-bold uppercase tracking-mega text-stone-500">
+                {t("cart.total")}
+              </span>
+              <span
+                data-testid="confirm-total"
+                className="font-display text-2xl font-bold text-stone-50"
+              >
+                € {formatPrice(total)}
+              </span>
+            </div>
+            {hasKgItems && (
+              <p className="mt-2 text-[10px] uppercase tracking-mega text-amber-500/80">
+                {t("cart.kgNote")}
+              </p>
+            )}
+            <p className="mt-4 text-xs leading-relaxed text-stone-400">
+              {t("confirm.body")}
+            </p>
+          </div>
+
+          <div className="flex gap-3 border-t border-stone-800 bg-stone-950/40 p-4">
+            <button
+              type="button"
+              onClick={() => setConfirmOpen(false)}
+              data-testid="confirm-cancel-btn"
+              className="flex-1 rounded-sm border border-stone-700 px-4 py-3 text-[11px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-stone-500 hover:text-stone-50"
+            >
+              {t("confirm.cancel")}
+            </button>
+            <button
+              type="button"
+              onClick={sendOrder}
+              data-testid="confirm-send-btn"
+              className="flex-[1.4] rounded-sm bg-[#25D366] px-4 py-3 text-[11px] font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-emerald-400"
+            >
+              {t("confirm.send")}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

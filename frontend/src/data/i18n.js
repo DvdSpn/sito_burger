@@ -131,6 +131,13 @@ const dict = {
       "⚠ Alcuni articoli sono al kg: il totale finale sarà calcolato alla pesata.",
     "cart.disclaimer":
       "L'ordine verrà inviato via WhatsApp al locale. Ti risponderemo per conferma, tempi di attesa e modalità di ritiro/consumo.",
+
+    "confirm.kicker": "Conferma ordine",
+    "confirm.title": "Sicuro di voler inviare l'ordine?",
+    "confirm.body":
+      "Riepilogo dei piatti selezionati. Premendo «Invia» si aprirà WhatsApp con il messaggio pronto: controlla prima di premere invio nella chat. Il carrello verrà svuotato.",
+    "confirm.cancel": "Annulla",
+    "confirm.send": "Invia su WhatsApp",
   },
   en: {
     "nav.hamburger": "Burgers",
@@ -255,6 +262,13 @@ const dict = {
       "⚠ Some items are priced per kg: final total is calculated on weigh-in.",
     "cart.disclaimer":
       "The order will be sent via WhatsApp to the restaurant. We'll reply with confirmation, waiting time and pickup / dine-in details.",
+
+    "confirm.kicker": "Order confirmation",
+    "confirm.title": "Ready to send your order?",
+    "confirm.body":
+      "Here's a summary of your selection. Tapping «Send» opens WhatsApp with a ready-made message: check it before hitting send in the chat. Your cart will be cleared.",
+    "confirm.cancel": "Cancel",
+    "confirm.send": "Send to WhatsApp",
   },
 };
 
