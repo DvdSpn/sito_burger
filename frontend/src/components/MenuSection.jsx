@@ -12,9 +12,15 @@ const SECTION_IMAGES = {
   contorni: null,
 };
 
-export default function MenuSection({ section, index, filter, onOrder }) {
+export default function MenuSection({ section, index, filter, onOrder, t }) {
   const img = SECTION_IMAGES[section.id];
   const isFlipped = index % 2 === 1;
+  const title =
+    t(`section.${section.id}.title`) !== `section.${section.id}.title`
+      ? t(`section.${section.id}.title`)
+      : section.title;
+  const subtitle = t(`section.${section.id}.subtitle`);
+  const accent = t(`section.${section.id}.accent`);
 
   const matchesFilter = (item) =>
     filter === "all" ? true : item.tags.includes(filter);
@@ -31,33 +37,31 @@ export default function MenuSection({ section, index, filter, onOrder }) {
             isFlipped ? "lg:[&>*:first-child]:order-2" : ""
           }`}
         >
-          {/* Title column */}
           <header className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
             <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
               · {String(index + 1).padStart(2, "0")} ·
             </p>
             <h2 className="mt-3 font-display text-4xl font-black leading-[0.95] tracking-tight text-stone-50 md:text-5xl lg:text-6xl">
-              {section.title}
+              {title}
             </h2>
             <p className="mt-3 font-hand text-2xl text-amber-500/90">
-              {section.subtitle}
+              {subtitle}
             </p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone-400">
-              {section.accent}
+              {accent}
             </p>
 
             {img && (
               <div className="mt-8 hidden overflow-hidden rounded-sm border border-stone-800 lg:block">
                 <img
                   src={img}
-                  alt={section.title}
+                  alt={title}
                   className="h-64 w-full object-cover grayscale-[0.2] transition-all duration-700 hover:grayscale-0 hover:scale-105"
                 />
               </div>
             )}
           </header>
 
-          {/* Items list */}
           <div className="lg:col-span-8">
             <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-6 backdrop-blur-sm md:p-10">
               {section.items.map((item) => (
@@ -66,12 +70,12 @@ export default function MenuSection({ section, index, filter, onOrder }) {
                   item={item}
                   dim={!matchesFilter(item)}
                   onOrder={onOrder}
+                  t={t}
                 />
               ))}
             </div>
             <p className="mt-4 px-2 text-[11px] uppercase tracking-mega text-stone-600">
-              Prezzi in € · Coperto non incluso · Disponibile pane senza glutine
-              su richiesta
+              {t("menu.disclaimer")}
             </p>
           </div>
         </div>

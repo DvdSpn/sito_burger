@@ -1,7 +1,9 @@
-import { Clock, MapPin, Phone, Instagram, Facebook } from "lucide-react";
+import { Clock, MapPin, Phone, Instagram, Facebook, ExternalLink } from "lucide-react";
 import { RESTAURANT } from "../data/menu";
+import { MAPS_EMBED_SRC, MAPS_LINK } from "../data/i18n";
+import Logo from "./Logo";
 
-export default function Contact({ onOrder }) {
+export default function Contact({ t, onOrder }) {
   return (
     <section
       id="contatti"
@@ -12,19 +14,18 @@ export default function Contact({ onOrder }) {
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
-              Vieni a trovarci
+              {t("contact.kicker")}
             </p>
             <h2 className="mt-4 font-display text-5xl font-black leading-[0.95] tracking-tight text-stone-50 md:text-7xl">
-              La griglia è
+              {t("contact.title1")}
               <br />
               <span className="italic font-medium text-amber-500">
-                sempre accesa
+                {t("contact.title2")}
               </span>
               .
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-stone-400">
-              Nel cuore di Camucia, a pochi passi dai colli di Cortona. Ti
-              aspettiamo a pranzo e a cena, tutti i giorni.
+              {t("contact.description")}
             </p>
 
             <button
@@ -33,7 +34,7 @@ export default function Contact({ onOrder }) {
               data-testid="contact-whatsapp-btn"
               className="mt-8 inline-flex items-center gap-3 rounded-sm bg-amber-600 px-8 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500"
             >
-              Ordina via WhatsApp
+              {t("contact.whatsapp")}
               <span className="text-base">→</span>
             </button>
           </div>
@@ -41,32 +42,30 @@ export default function Contact({ onOrder }) {
           <div className="grid grid-cols-1 gap-0 lg:col-span-7 md:grid-cols-2">
             <InfoCard
               Icon={MapPin}
-              label="Indirizzo"
+              label={t("contact.address")}
               testid="contact-address"
               primary={RESTAURANT.address.split(",")[0]}
               secondary={RESTAURANT.address.split(",").slice(1).join(",").trim()}
-              href={`https://maps.google.com/?q=${encodeURIComponent(
-                RESTAURANT.address
-              )}`}
+              href={MAPS_LINK}
             />
             <InfoCard
               Icon={Phone}
-              label="Telefono"
+              label={t("contact.phone")}
               testid="contact-phone"
               primary={RESTAURANT.phonePrimary}
-              secondary={`Cellulare · ${RESTAURANT.phoneMobile}`}
+              secondary={`${t("contact.phoneExtra")} · ${RESTAURANT.phoneMobile}`}
               href={`tel:${RESTAURANT.phonePrimary.replace(/\s/g, "")}`}
             />
             <InfoCard
               Icon={Clock}
-              label="Orari"
+              label={t("contact.hours")}
               testid="contact-hours"
-              primary={`Pranzo · ${RESTAURANT.hours[0].time}`}
-              secondary={`Cena · ${RESTAURANT.hours[1].time}`}
+              primary={`${t("contact.hoursLunch")} · ${RESTAURANT.hours[0].time}`}
+              secondary={`${t("contact.hoursDinner")} · ${RESTAURANT.hours[1].time}`}
             />
             <InfoCard
               Icon={Instagram}
-              label="Seguici"
+              label={t("contact.social")}
               testid="contact-social"
               primary="Instagram · Facebook"
               secondary="@burgergrillcamucia"
@@ -75,16 +74,55 @@ export default function Contact({ onOrder }) {
           </div>
         </div>
 
-        <footer className="mt-24 flex flex-col items-start justify-between gap-4 border-t border-stone-800/60 pt-8 md:flex-row md:items-center">
-          <p className="font-display text-xl text-stone-50">
-            Burger <span className="italic text-amber-500">&amp;</span> Grill
-            <span className="ml-2 text-xs uppercase tracking-mega text-stone-500">
-              Camucia · Cortona
-            </span>
-          </p>
+        {/* Google Maps embed */}
+        <div className="mt-20">
+          <div className="mb-4 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+                {t("contact.map.title")}
+              </p>
+              <p className="mt-2 font-display text-2xl text-stone-50 md:text-3xl">
+                {RESTAURANT.address}
+              </p>
+            </div>
+            <a
+              href={MAPS_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="map-open-link"
+              className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-stone-700 px-4 py-2 text-[10px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
+            >
+              {t("contact.map.open")} <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+          <div className="overflow-hidden rounded-sm border border-stone-800/80 bg-stone-900">
+            <iframe
+              title="Burger & Grill Camucia — Google Maps"
+              data-testid="google-map-iframe"
+              src={MAPS_EMBED_SRC}
+              className="h-[360px] w-full md:h-[480px]"
+              style={{ border: 0, filter: "grayscale(0.35) contrast(1.05)" }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </div>
+
+        <footer className="mt-24 flex flex-col items-start justify-between gap-6 border-t border-stone-800/60 pt-8 md:flex-row md:items-center">
+          <div className="flex items-center gap-4">
+            <Logo size="md" />
+            <div>
+              <p className="font-display text-xl text-stone-50">
+                Burger <span className="italic text-amber-500">&amp;</span> Grill
+              </p>
+              <p className="text-[10px] uppercase tracking-mega text-stone-500">
+                Camucia · Cortona
+              </p>
+            </div>
+          </div>
           <p className="text-xs text-stone-500">
-            © {new Date().getFullYear()} Burger &amp; Grill. Tutti i diritti
-            riservati.
+            © {new Date().getFullYear()} Burger &amp; Grill. {t("footer.rights")}
           </p>
         </footer>
       </div>

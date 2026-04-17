@@ -1,11 +1,28 @@
 import { useEffect, useRef, useState } from "react";
-import { FILTERS, menuData } from "../data/menu";
+import { menuData } from "../data/menu";
 import { cn } from "../lib/utils";
 
-export default function FilterBar({ activeFilter, setActiveFilter }) {
+export default function FilterBar({ activeFilter, setActiveFilter, t }) {
   const [stuck, setStuck] = useState(false);
   const [activeSection, setActiveSection] = useState("hamburger");
   const sentinelRef = useRef(null);
+
+  const sectionLinks = [
+    { id: "hamburger", label: t("nav.hamburger") },
+    { id: "ciabatte", label: t("nav.ciabatte") },
+    { id: "piadine", label: t("nav.piadine") },
+    { id: "griglia", label: t("nav.griglia") },
+    { id: "contorni", label: t("section.contorni.title") },
+  ];
+
+  const filters = [
+    { id: "all", label: t("filter.all") },
+    { id: "beef", label: t("filter.beef") },
+    { id: "chicken", label: t("filter.chicken") },
+    { id: "pork", label: t("filter.pork") },
+    { id: "veg", label: t("filter.veg") },
+    { id: "spicy", label: t("filter.spicy") },
+  ];
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -18,7 +35,6 @@ export default function FilterBar({ activeFilter, setActiveFilter }) {
     return () => io.disconnect();
   }, []);
 
-  // track active section
   useEffect(() => {
     const handler = () => {
       const ids = menuData.map((m) => m.id);
@@ -49,9 +65,8 @@ export default function FilterBar({ activeFilter, setActiveFilter }) {
         )}
       >
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-12">
-          {/* section links */}
           <div className="-mx-6 flex gap-1 overflow-x-auto px-6 lg:mx-0 lg:px-0">
-            {menuData.map((s) => (
+            {sectionLinks.map((s) => (
               <a
                 key={s.id}
                 href={`#${s.id}`}
@@ -63,17 +78,16 @@ export default function FilterBar({ activeFilter, setActiveFilter }) {
                     : "border-transparent text-stone-400 hover:border-stone-700 hover:text-stone-200"
                 )}
               >
-                {s.title}
+                {s.label}
               </a>
             ))}
           </div>
 
-          {/* dietary filters */}
           <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 lg:mx-0 lg:px-0">
             <span className="hidden whitespace-nowrap text-[10px] uppercase tracking-mega text-stone-500 md:inline">
-              Filtra →
+              {t("filter.label")}
             </span>
-            {FILTERS.map((f) => (
+            {filters.map((f) => (
               <button
                 key={f.id}
                 type="button"

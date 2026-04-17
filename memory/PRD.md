@@ -25,10 +25,17 @@ User requested a non-white restaurant menu website for "Burger & Grill" in Camuc
 - Contact section with address (maps link), phone (tel: link), hours, socials.
 - All interactive elements have data-testid.
 
+## Iteration 2 (Dec 2025)
+- Added official logo (`LOGO_BURGER-NO SFONDO.png`) in header + footer (Logo.jsx).
+- Added Google Maps embedded iframe in Contact (Via Lauretana 19/21) with "Open in Google Maps" link.
+- Added full IT/EN language toggle (i18n.js + LanguageToggle.jsx) covering all UI copy, nav, filters, section titles, reviews, contacts, WhatsApp messages.
+- Added empty Gallery section with 6 placeholder slots (user will fill later).
+- Added Reviews carousel with auto-play + prev/next buttons + pagination dots + hover-to-pause. 5 mock reviews (bilingual IT/EN).
+
 ## Backlog / Next Tasks
-- P1: Add gallery (foto locale / piatti reali).
+- P1: Replace Gallery placeholders with real photos of the venue and dishes.
+- P1: Replace mock reviews with real ones or pull via Google Places API.
 - P1: Reservation form integration (e.g., TheFork / Google Form).
-- P2: Multi-language toggle (IT/EN) — grill section already has English translations.
 - P2: PDF menu export/print stylesheet.
 - P2: Seasonal / daily specials banner.
-- P2: Embed Google Maps iframe in contact section.
+- P2: Mobile menu drawer for nav (currently hidden on <lg).

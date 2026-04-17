@@ -1,36 +1,31 @@
 import { Flame, Leaf, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
 
-const TAG_STYLES = {
+const TAG_META = {
   veg: {
-    label: "Veg",
     className: "border-green-900 bg-green-950/40 text-green-400",
     Icon: Leaf,
   },
   spicy: {
-    label: "Piccante",
     className: "border-red-900 bg-red-950/40 text-red-400",
     Icon: Flame,
   },
   beef: {
-    label: "Manzo",
     className: "border-amber-900 bg-amber-950/40 text-amber-400",
     Icon: null,
   },
   chicken: {
-    label: "Pollo",
     className: "border-stone-700 bg-stone-900 text-stone-300",
     Icon: null,
   },
   pork: {
-    label: "Maiale",
     className: "border-orange-900 bg-orange-950/40 text-orange-400",
     Icon: null,
   },
 };
 
-function Tag({ type }) {
-  const meta = TAG_STYLES[type];
+function Tag({ type, t }) {
+  const meta = TAG_META[type];
   if (!meta) return null;
   const { Icon } = meta;
   return (
@@ -42,15 +37,16 @@ function Tag({ type }) {
       )}
     >
       {Icon ? <Icon className="h-2.5 w-2.5" /> : null}
-      {meta.label}
+      {t(`tag.${type}`)}
     </span>
   );
 }
 
-export default function MenuItem({ item, dim, onOrder }) {
+export default function MenuItem({ item, dim, onOrder, t }) {
+  const itemId = item.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
   return (
     <article
-      data-testid={`menu-item-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+      data-testid={`menu-item-${itemId}`}
       className={cn(
         "group relative border-b border-stone-800/80 py-6 transition-all",
         dim ? "opacity-30" : "opacity-100"
@@ -58,10 +54,10 @@ export default function MenuItem({ item, dim, onOrder }) {
     >
       {item.signature && (
         <span
-          data-testid={`signature-${item.name}`}
+          data-testid={`signature-${itemId}`}
           className="absolute -left-2 top-6 hidden items-center gap-1 rounded-r-sm bg-amber-600 px-2 py-0.5 text-[9px] font-bold uppercase tracking-mega text-stone-950 md:inline-flex"
         >
-          <Sparkles className="h-2.5 w-2.5" /> Signature
+          <Sparkles className="h-2.5 w-2.5" /> {t("tag.signature")}
         </span>
       )}
 
@@ -70,12 +66,7 @@ export default function MenuItem({ item, dim, onOrder }) {
           {item.name}
         </h3>
         <span className="leader hidden md:block" />
-        <span
-          className={cn(
-            "ml-auto shrink-0 font-display text-xl font-semibold md:ml-0 md:text-2xl",
-            "text-amber-500"
-          )}
-        >
+        <span className="ml-auto shrink-0 font-display text-xl font-semibold text-amber-500 md:ml-0 md:text-2xl">
           € {item.price}
         </span>
       </div>
@@ -85,16 +76,16 @@ export default function MenuItem({ item, dim, onOrder }) {
       </p>
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        {item.tags.map((t) => (
-          <Tag type={t} key={t} />
+        {item.tags.map((ty) => (
+          <Tag type={ty} key={ty} t={t} />
         ))}
         <button
           type="button"
           onClick={() => onOrder(item)}
-          data-testid={`order-item-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+          data-testid={`order-item-${itemId}`}
           className="ml-auto text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors hover:text-amber-500"
         >
-          + Ordina via WhatsApp
+          {t("menu.orderItem")}
         </button>
       </div>
     </article>

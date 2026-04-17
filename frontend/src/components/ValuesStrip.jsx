@@ -1,20 +1,21 @@
 import { Beef, UtensilsCrossed, Wheat, Wine } from "lucide-react";
 
-const ITEMS = [
-  { Icon: Beef, label: "Chianina Toscana", sub: "200gr certificata" },
-  { Icon: UtensilsCrossed, label: "Pane artigianale", sub: "Lievitazione 24h" },
-  { Icon: Wheat, label: "Senza glutine", sub: "Pane su richiesta" },
-  { Icon: Wine, label: "Km 0", sub: "Prodotti del territorio" },
-];
+const ICONS = [Beef, UtensilsCrossed, Wheat, Wine];
 
-export default function ValuesStrip() {
+export default function ValuesStrip({ t }) {
+  const items = [1, 2, 3, 4].map((i) => ({
+    Icon: ICONS[i - 1],
+    label: t(`values.${i}.label`),
+    sub: t(`values.${i}.sub`),
+  }));
+
   return (
     <section
       data-testid="values-strip"
       className="relative border-y border-stone-800/60 bg-gradient-to-b from-stone-950 to-stone-900/60"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4">
-        {ITEMS.map(({ Icon, label, sub }, i) => (
+        {items.map(({ Icon, label, sub }, i) => (
           <div
             key={label}
             className={`flex items-center gap-4 border-stone-800/60 p-6 md:p-8 ${
