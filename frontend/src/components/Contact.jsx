@@ -60,8 +60,10 @@ export default function Contact({ t, onOrder }) {
               Icon={Clock}
               label={t("contact.hours")}
               testid="contact-hours"
-              primary={`${t("contact.hoursLunch")} · ${RESTAURANT.hours[0].time}`}
-              secondary={`${t("contact.hoursDinner")} · ${RESTAURANT.hours[1].time}`}
+              lines={[
+                `${t("contact.hoursLunch")} · ${RESTAURANT.hours[0].time}`,
+                `${t("contact.hoursDinner")} · ${RESTAURANT.hours[1].time}`,
+              ]}
             />
             <InfoCard
               Icon={Instagram}
@@ -130,7 +132,7 @@ export default function Contact({ t, onOrder }) {
   );
 }
 
-function InfoCard({ Icon, label, primary, secondary, href, testid, extraIcon: Extra }) {
+function InfoCard({ Icon, label, primary, secondary, lines, href, testid, extraIcon: Extra }) {
   const Inner = (
     <div className="group flex h-full flex-col gap-4 border-b border-stone-800/60 p-6 transition-colors hover:bg-stone-900/40 md:border-l md:border-b-0 md:p-8">
       <div className="flex items-center gap-3">
@@ -141,10 +143,25 @@ function InfoCard({ Icon, label, primary, secondary, href, testid, extraIcon: Ex
         {Extra ? <Extra className="ml-auto h-4 w-4 text-stone-600" /> : null}
       </div>
       <div>
-        <p className="font-display text-2xl leading-tight text-stone-50 transition-colors group-hover:text-amber-400">
-          {primary}
-        </p>
-        <p className="mt-1 text-sm text-stone-400">{secondary}</p>
+        {lines && lines.length > 0 ? (
+          <div className="space-y-1">
+            {lines.map((line, i) => (
+              <p
+                key={i}
+                className="font-display text-xl leading-tight text-stone-50 transition-colors group-hover:text-amber-400 md:text-2xl"
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <>
+            <p className="font-display text-2xl leading-tight text-stone-50 transition-colors group-hover:text-amber-400">
+              {primary}
+            </p>
+            <p className="mt-1 text-sm text-stone-400">{secondary}</p>
+          </>
+        )}
       </div>
     </div>
   );
