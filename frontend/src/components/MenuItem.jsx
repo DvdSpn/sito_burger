@@ -80,7 +80,7 @@ export default function MenuItem({ item, dim, t, lang }) {
       </div>
 
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-400">
-        {item.desc}
+        {lang === "en" && item.descEn ? item.descEn : item.desc}
       </p>
 
       {item.allergens && item.allergens.length > 0 && (

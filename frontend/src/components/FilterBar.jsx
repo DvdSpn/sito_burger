@@ -4,7 +4,7 @@ import { ChevronRight, Wine } from "lucide-react";
 import { menuData } from "../data/menu";
 import { cn } from "../lib/utils";
 
-export default function FilterBar({ activeFilter, setActiveFilter, t }) {
+export default function FilterBar({ activeFilter, setActiveFilter, t, lang }) {
   const [stuck, setStuck] = useState(false);
   const [activeSection, setActiveSection] = useState("hamburger");
   const [showRightFade, setShowRightFade] = useState(true);
@@ -13,7 +13,11 @@ export default function FilterBar({ activeFilter, setActiveFilter, t }) {
   const sentinelRef = useRef(null);
   const scrollerRef = useRef(null);
 
-  const sectionLinks = menuData.map((s) => ({ id: s.id, label: s.title, type: "anchor" }));
+  const sectionLinks = menuData.map((s) => ({
+    id: s.id,
+    label: lang === "en" && s.titleEn ? s.titleEn : s.title,
+    type: "anchor",
+  }));
 
   const filters = [
     { id: "all", label: t("filter.all") },

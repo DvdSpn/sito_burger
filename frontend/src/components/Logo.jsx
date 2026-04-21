@@ -7,7 +7,7 @@ export default function Logo({ className = "", size = "md" }) {
     md: "h-14 w-14",
     lg: "h-20 w-20",
     xl: "h-28 w-28 sm:h-32 sm:w-32",
-    hero: "h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-52 lg:w-52",
+    hero: "h-36 w-36 sm:h-44 sm:w-44 md:h-56 md:w-56 lg:h-64 lg:w-64",
   };
   return (
     <img

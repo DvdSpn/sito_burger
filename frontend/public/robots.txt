@@ -1,0 +1,4 @@
+# Robots file for Burger & Grill Camucia
+User-agent: *
+Allow: /
+Sitemap: https://chianina-burger-bar.preview.emergentagent.com/sitemap.xml

@@ -15,12 +15,10 @@ const SECTION_IMAGES = {
 export default function MenuSection({ section, index, filter, t, lang }) {
   const img = SECTION_IMAGES[section.id];
   const isFlipped = index % 2 === 1;
-  const title =
-    t(`section.${section.id}.title`) !== `section.${section.id}.title`
-      ? t(`section.${section.id}.title`)
-      : section.title;
-  const subtitle = t(`section.${section.id}.subtitle`);
-  const accent = t(`section.${section.id}.accent`);
+  const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
+  const subtitle =
+    lang === "en" && section.subtitleEn ? section.subtitleEn : section.subtitle;
+  const accent = lang === "en" && section.accentEn ? section.accentEn : section.accent;
 
   const matchesFilter = (item) =>
     filter === "all" ? true : item.tags.includes(filter);
