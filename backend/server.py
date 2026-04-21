@@ -68,51 +68,98 @@ _CACHE_TTL = 60 * 60 * 6  # 6 hours
 
 
 async def _fetch_google_reviews(place_id: str, api_key: str) -> ReviewsResponse:
-    """Call Google Places API (New) for a place."""
-    url = f"https://places.googleapis.com/v1/places/{place_id}"
-    headers = {
+    """Call Google Places API (New) for a place, fall back to legacy API on 403."""
+    loop = asyncio.get_event_loop()
+
+    # --- 1) Try Places API (New) ---
+    new_url = f"https://places.googleapis.com/v1/places/{place_id}"
+    new_headers = {
         "X-Goog-Api-Key": api_key,
-        "X-Goog-FieldMask": (
-            "displayName,rating,userRatingCount,reviews"
-        ),
+        "X-Goog-FieldMask": "displayName,rating,userRatingCount,reviews",
         "Content-Type": "application/json",
     }
-    loop = asyncio.get_event_loop()
-    response = await loop.run_in_executor(
+    new_response = await loop.run_in_executor(
         None,
-        lambda: requests.get(url, headers=headers, timeout=10),
+        lambda: requests.get(new_url, headers=new_headers, timeout=10),
     )
-    if response.status_code != 200:
+
+    if new_response.status_code == 200:
+        data = new_response.json()
+        reviews = []
+        for r in data.get("reviews", []) or []:
+            author = r.get("authorAttribution") or {}
+            text_field = r.get("text") or {}
+            text_value = text_field.get("text") if isinstance(text_field, dict) else text_field
+            reviews.append(
+                GoogleReview(
+                    authorAttribution=Author(
+                        displayName=author.get("displayName", "Anonymous"),
+                        photoUri=author.get("photoUri"),
+                        uri=author.get("uri"),
+                    ),
+                    rating=int(r.get("rating") or 0),
+                    relativeTimeDescription=r.get("relativePublishTimeDescription"),
+                    text=text_value,
+                    language=(text_field.get("languageCode") if isinstance(text_field, dict) else None),
+                )
+            )
+        display_name = (data.get("displayName") or {}).get("text")
+        return ReviewsResponse(
+            source="google",
+            rating=data.get("rating"),
+            userRatingCount=data.get("userRatingCount"),
+            displayName=display_name,
+            reviews=reviews,
+        )
+
+    # --- 2) Fall back to legacy Places API ---
+    legacy_url = "https://maps.googleapis.com/maps/api/place/details/json"
+    legacy_params = {
+        "place_id": place_id,
+        "key": api_key,
+        "fields": "name,rating,user_ratings_total,reviews",
+        "reviews_no_translations": "true",
+        "language": "it",
+    }
+    legacy_response = await loop.run_in_executor(
+        None,
+        lambda: requests.get(legacy_url, params=legacy_params, timeout=10),
+    )
+
+    if legacy_response.status_code == 200:
+        payload = legacy_response.json()
+        if payload.get("status") == "OK":
+            result = payload.get("result", {}) or {}
+            reviews = []
+            for r in result.get("reviews", []) or []:
+                reviews.append(
+                    GoogleReview(
+                        authorAttribution=Author(
+                            displayName=r.get("author_name", "Anonymous"),
+                            photoUri=r.get("profile_photo_url"),
+                            uri=r.get("author_url"),
+                        ),
+                        rating=int(r.get("rating") or 0),
+                        relativeTimeDescription=r.get("relative_time_description"),
+                        text=r.get("text"),
+                        language=r.get("language"),
+                    )
+                )
+            return ReviewsResponse(
+                source="google",
+                rating=result.get("rating"),
+                userRatingCount=result.get("user_ratings_total"),
+                displayName=result.get("name"),
+                reviews=reviews,
+            )
         return ReviewsResponse(
             source="fallback",
-            error=f"Google Places API status {response.status_code}: {response.text[:200]}",
+            error=f"Google Places (legacy) status: {payload.get('status')} {payload.get('error_message', '')}",
         )
-    data = response.json()
-    reviews = []
-    for r in data.get("reviews", []) or []:
-        author = r.get("authorAttribution") or {}
-        text_field = r.get("text") or {}
-        text_value = text_field.get("text") if isinstance(text_field, dict) else text_field
-        reviews.append(
-            GoogleReview(
-                authorAttribution=Author(
-                    displayName=author.get("displayName", "Anonymous"),
-                    photoUri=author.get("photoUri"),
-                    uri=author.get("uri"),
-                ),
-                rating=int(r.get("rating") or 0),
-                relativeTimeDescription=r.get("relativePublishTimeDescription"),
-                text=text_value,
-                language=(text_field.get("languageCode") if isinstance(text_field, dict) else None),
-            )
-        )
-    display_name = (data.get("displayName") or {}).get("text")
+
     return ReviewsResponse(
-        source="google",
-        rating=data.get("rating"),
-        userRatingCount=data.get("userRatingCount"),
-        displayName=display_name,
-        reviews=reviews,
+        source="fallback",
+        error=f"Google Places API (new) status {new_response.status_code}: {new_response.text[:200]}",
     )
 
 
