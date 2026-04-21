@@ -63,7 +63,7 @@ export default function MenuItem({ item, dim, t, lang }) {
       {item.signature && (
         <span
           data-testid={`signature-${itemId}`}
-          className="absolute -left-2 top-6 hidden items-center gap-1 rounded-r-sm bg-amber-600 px-2 py-0.5 text-[9px] font-bold uppercase tracking-mega text-stone-950 md:inline-flex"
+          className="mb-2 inline-flex items-center gap-1 rounded-sm bg-amber-600 px-2 py-0.5 text-[9px] font-bold uppercase tracking-mega text-stone-950"
         >
           <Sparkles className="h-2.5 w-2.5" /> {t("tag.signature")}
         </span>
