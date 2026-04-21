@@ -104,7 +104,11 @@ export const menuData = [
     accent: "Per chiudere in bellezza",
     accentEn: "To end on a high note",
     items: [
-      { name: "Dessert della casa", price: "5,00", desc: "Dessert della casa, a rotazione.", descEn: "House dessert, rotating selection.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
+      { name: "Tiramisù", price: "5,00", desc: "Il classico tiramisù della casa: savoiardi, mascarpone, caffè e cacao.", descEn: "Classic house tiramisù: ladyfingers, mascarpone, coffee and cocoa.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
+      { name: "Cheesecake ai frutti di bosco", price: "5,00", desc: "Cheesecake con base di biscotto e coulis di frutti di bosco.", descEn: "Cheesecake with biscuit base and wild-berry coulis.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
+      { name: "Tortino al cioccolato cuore caldo", price: "5,00", desc: "Tortino al cioccolato fondente con cuore caldo che cola.", descEn: "Dark chocolate lava cake with warm molten heart.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"], signature: true },
+      { name: "Tartufo · Bianco, Nero o Pistacchio", price: "5,00", desc: "Tartufo gelato nelle tre varianti: bianco, nero o pistacchio. Variante affogato: + € 1,00 con caffè, + € 2,00 con liquore.", descEn: "Ice-cream truffle in three flavours: white, dark or pistachio. Affogato variant: + € 1.00 with coffee, + € 2.00 with liqueur.", tags: ["veg"], allergens: ["lactose", "eggs", "nuts"] },
+      { name: "Cantucci e vin santo", price: "6,50", desc: "I classici cantucci toscani serviti con vin santo.", descEn: "Classic Tuscan cantucci biscuits served with vin santo dessert wine.", tags: ["veg"], allergens: ["gluten", "eggs", "nuts", "sulphites"], signature: true },
     ],
   },
 ];

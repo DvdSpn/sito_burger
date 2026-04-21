@@ -112,14 +112,14 @@ export default function Contact({ t, onOrder }) {
         </div>
 
         <footer className="mt-24 flex flex-col items-start justify-between gap-6 border-t border-stone-800/60 pt-8 md:flex-row md:items-center">
-          <div className="flex items-center gap-4">
-            <Logo size="md" />
+          <div className="flex items-center gap-5">
+            <Logo size="lg" className="h-24 w-24 md:h-28 md:w-28" />
             <div>
-              <p className="font-display text-xl text-stone-50">
+              <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 Burger <span className="italic text-amber-500">&amp;</span> Grill
               </p>
               <p className="text-[10px] uppercase tracking-mega text-stone-500">
-                Camucia · Cortona
+                Camucia · Cortona · Dal 2016
               </p>
             </div>
           </div>
