@@ -1,14 +1,6 @@
 // Drinks menu (separate page /bevande)
 export const drinksData = [
   {
-    id: "dessert",
-    title: "Dessert",
-    subtitle: "Per chiudere in dolcezza",
-    items: [
-      { name: "Dessert della casa", price: "5,00", desc: "Dessert della casa." },
-    ],
-  },
-  {
     id: "alla-spina",
     title: "Bevande alla spina",
     subtitle: "Dal rubinetto",
