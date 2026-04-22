@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { RESTAURANT } from "../data/menu";
 
-export default function MobileMenu({ open, onClose, t }) {
+export default function MobileMenu({ open, onClose, t, lang }) {
   useEffect(() => {
     if (!open) return undefined;
     const prev = document.body.style.overflow;
@@ -24,7 +24,15 @@ export default function MobileMenu({ open, onClose, t }) {
     return () => window.removeEventListener("keydown", h);
   }, [open, onClose]);
 
-  const items = [];
+  const items = [
+    { id: "menu", label: lang === "en" ? "Menu" : "Menu" },
+    { id: "hamburger", label: t("nav.hamburger") },
+    { id: "ciabatte", label: t("nav.ciabatte") },
+    { id: "piadine", label: lang === "en" ? "Wraps" : "Wrap" },
+    { id: "griglia", label: t("nav.griglia") },
+    { id: "contorni", label: lang === "en" ? "Sides" : "Contorni" },
+    { id: "dessert", label: "Dessert" },
+  ];
 
   const go = (id) => {
     onClose();

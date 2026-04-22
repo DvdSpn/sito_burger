@@ -148,7 +148,7 @@ export default function Hero({ t, lang, setLang }) {
         </div>
       </div>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} t={t} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} t={t} lang={lang} />
     </section>
   );
 }
