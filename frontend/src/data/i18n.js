@@ -56,6 +56,7 @@ const dict = {
     "tag.chicken": "Pollo",
     "tag.pork": "Maiale",
     "tag.signature": "Signature",
+    "tag.new": "Novità",
 
     "menu.orderItem": "+ Ordina via WhatsApp",
     "menu.add": "Aggiungi",
@@ -91,6 +92,7 @@ const dict = {
     "reviews.basedOn": (n) => `Basato su ${n}+ recensioni`,
     "reviews.prev": "Recensione precedente",
     "reviews.next": "Recensione successiva",
+    "reviews.leaveReview": "Lascia una recensione Google",
 
     "status.openNow": "Aperto · stiamo servendo",
     "status.closedNow": "Chiuso ora",
@@ -188,6 +190,7 @@ const dict = {
     "cart.sent.alert.body":
       "Se non ricevi risposta entro pochi minuti, il messaggio potrebbe non essere stato visto: ti consigliamo di chiamare direttamente il locale per essere sicuro che l'ordine venga preso in carico.",
     "cart.sent.callBtn": "Chiama ora",
+    "cart.sent.reviewBtn": "Lascia una recensione Google",
     "cart.sent.closeBtn": "Ho capito, chiudi",
 
     "drinks.kicker": "Carta",
@@ -279,6 +282,7 @@ const dict = {
     "tag.chicken": "Chicken",
     "tag.pork": "Pork",
     "tag.signature": "Signature",
+    "tag.new": "New",
 
     "menu.orderItem": "+ Order via WhatsApp",
     "menu.add": "Add",
@@ -314,6 +318,7 @@ const dict = {
     "reviews.basedOn": (n) => `Based on ${n}+ reviews`,
     "reviews.prev": "Previous review",
     "reviews.next": "Next review",
+    "reviews.leaveReview": "Write a Google review",
 
     "status.openNow": "Open · now serving",
     "status.closedNow": "Closed now",
@@ -410,6 +415,7 @@ const dict = {
     "cart.sent.alert.body":
       "If you don't get a reply within a few minutes, the message might not have been seen: we recommend calling the restaurant directly to make sure your order is taken in.",
     "cart.sent.callBtn": "Call now",
+    "cart.sent.reviewBtn": "Write a Google review",
     "cart.sent.closeBtn": "Got it, close",
 
     "drinks.kicker": "List",

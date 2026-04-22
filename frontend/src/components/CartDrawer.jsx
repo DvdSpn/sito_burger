@@ -230,6 +230,15 @@ export default function CartDrawer({ open, onClose, t, lang }) {
 
             <div className="mt-auto border-t border-stone-800 p-5">
               <a
+                href={RESTAURANT.googleReviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="cart-sent-review-btn"
+                className="mb-3 flex w-full items-center justify-center gap-2 rounded-sm border border-amber-600 bg-amber-600/10 px-4 py-3 text-[11px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:bg-amber-600 hover:text-stone-950"
+              >
+                ⭐ {t("cart.sent.reviewBtn")}
+              </a>
+              <a
                 href={`tel:${RESTAURANT.phoneMobile.replace(/\s/g, "")}`}
                 data-testid="cart-sent-call-btn"
                 className="mb-3 flex w-full items-center justify-center gap-2 rounded-sm border border-stone-700 px-4 py-3 text-[11px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"

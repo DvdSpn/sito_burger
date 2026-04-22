@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, PenLine, Quote, Star } from "lucide-react";
 import { REVIEWS } from "../data/i18n";
+import { RESTAURANT } from "../data/menu";
 import { cn } from "../lib/utils";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -109,6 +110,16 @@ export default function Reviews({ t, lang }) {
             <p className="mt-4 text-sm text-stone-400">
               {t("reviews.basedOn", count)}
             </p>
+
+            <a
+              href={RESTAURANT.googleReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="leave-review-btn"
+              className="mt-6 inline-flex items-center gap-2 rounded-sm bg-amber-600 px-5 py-3 text-[11px] font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-amber-500"
+            >
+              <PenLine className="h-3.5 w-3.5" /> {t("reviews.leaveReview")}
+            </a>
 
             <div className="mt-8 flex items-center gap-3">
               <button
