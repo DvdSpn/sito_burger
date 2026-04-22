@@ -109,7 +109,7 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang }) {
             aria-label="Torna in cima"
             className="flex shrink-0 items-center pl-2 transition-transform hover:-translate-y-0.5 lg:pl-0"
           >
-            <Logo size="md" className="h-20 w-20 md:h-24 md:w-24" />
+            <Logo />
           </button>
 
           <div className="flex min-w-0 flex-1 flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">

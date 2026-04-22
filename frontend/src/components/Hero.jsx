@@ -33,7 +33,7 @@ export default function Hero({ t, lang, setLang }) {
       {/* Top bar */}
       <div className="relative z-20 flex items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6 sm:py-5 lg:px-12">
         <a href="#top" data-testid="brand-mark" aria-label="Burger & Grill" className="shrink-0">
-          <Logo size="hero" />
+          <Logo />
         </a>
 
         <nav className="hidden gap-4 lg:flex">

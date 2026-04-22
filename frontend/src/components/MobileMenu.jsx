@@ -61,7 +61,7 @@ export default function MobileMenu({ open, onClose, t, lang }) {
         className={`absolute right-0 top-0 flex h-full w-full max-w-sm flex-col border-l border-stone-800 bg-stone-950 shadow-2xl transition-transform duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between border-b border-stone-800 px-5 py-4">
-          <Logo size="sm" />
+          <Logo />
           <button
             type="button"
             onClick={onClose}

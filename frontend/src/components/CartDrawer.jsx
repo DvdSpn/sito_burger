@@ -154,7 +154,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
         {/* header */}
         <div className="flex items-center justify-between border-b border-stone-800 px-5 py-4">
           <div className="flex items-center gap-3">
-            <Logo size="sm" />
+          <Logo />
             <div>
               <p className="text-[10px] font-bold uppercase tracking-mega text-amber-500">
                 {sent ? t("cart.sent.kicker") : t("cart.kicker")}

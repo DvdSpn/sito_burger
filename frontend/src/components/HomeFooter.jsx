@@ -14,7 +14,7 @@ export default function HomeFooter({ t }) {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="flex flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-5">
-            <Logo size="lg" className="h-24 w-24 md:h-32 md:w-32" />
+            <Logo />
             <div>
               <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 Burger <span className="italic text-amber-500">&amp;</span> Grill
