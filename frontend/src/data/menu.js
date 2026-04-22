@@ -54,7 +54,6 @@ export const menuData = [
       { name: "Kebab di Pollo", price: "9,00", desc: "Pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa ranch, ketchup, maionese.", descEn: "Chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, ranch sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
       { name: "Pulled Chicken", price: "9,00", desc: "Pulled chicken, bacon, insalata iceberg, zucchine, salsa baconnaise.", descEn: "Pulled chicken, bacon, iceberg lettuce, zucchini, baconnaise sauce.", tags: ["chicken"], allergens: ["gluten", "eggs", "mustard"], isNew: true },
       { name: "Classica", price: "8,50", desc: "Prosciutto crudo, stracchino, rucola, pomodoro.", descEn: "Raw Italian ham, stracchino cheese, rocket, tomato.", tags: ["pork"], allergens: ["gluten", "lactose"] },
-      { name: "Parma", price: "7,50", desc: "Prosciutto cotto, mozzarella, pomodoro.", descEn: "Cooked ham, mozzarella, tomato.", tags: ["pork"], allergens: ["gluten", "lactose"] },
     ],
   },
   {
