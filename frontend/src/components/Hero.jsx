@@ -13,13 +13,7 @@ const HERO_IMG =
 export default function Hero({ t, lang, setLang }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [
-    { id: "hamburger", label: t("nav.hamburger") },
-    { id: "griglia", label: t("nav.griglia") },
-    { id: "galleria", label: t("nav.galleria") },
-    { id: "recensioni", label: t("nav.recensioni") },
-    { id: "contatti", label: t("nav.contatti") },
-  ];
+  const navItems = [];
 
   return (
     <section

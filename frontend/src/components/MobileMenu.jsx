@@ -24,15 +24,7 @@ export default function MobileMenu({ open, onClose, t }) {
     return () => window.removeEventListener("keydown", h);
   }, [open, onClose]);
 
-  const items = [
-    { id: "hamburger", label: t("nav.hamburger") },
-    { id: "ciabatte", label: t("nav.ciabatte") },
-    { id: "piadine", label: t("nav.piadine") },
-    { id: "griglia", label: t("nav.griglia") },
-    { id: "galleria", label: t("nav.galleria") },
-    { id: "recensioni", label: t("nav.recensioni") },
-    { id: "contatti", label: t("nav.contatti") },
-  ];
+  const items = [];
 
   const go = (id) => {
     onClose();
