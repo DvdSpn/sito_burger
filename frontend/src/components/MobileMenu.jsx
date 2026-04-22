@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Wine, Info, X, MessageCircle, Phone } from "lucide-react";
+import { Wine, Info, X, MessageCircle, Phone, ChevronDown, UtensilsCrossed } from "lucide-react";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { RESTAURANT } from "../data/menu";
+import { cn } from "../lib/utils";
 
 export default function MobileMenu({ open, onClose, t, lang }) {
+  const [expanded, setExpanded] = useState(false);
+
   useEffect(() => {
     if (!open) return undefined;
     const prev = document.body.style.overflow;
@@ -16,7 +19,10 @@ export default function MobileMenu({ open, onClose, t, lang }) {
   }, [open]);
 
   useEffect(() => {
-    if (!open) return undefined;
+    if (!open) {
+      setExpanded(false);
+      return undefined;
+    }
     const h = (e) => {
       if (e.key === "Escape") onClose();
     };
@@ -24,8 +30,7 @@ export default function MobileMenu({ open, onClose, t, lang }) {
     return () => window.removeEventListener("keydown", h);
   }, [open, onClose]);
 
-  const items = [
-    { id: "menu", label: lang === "en" ? "Menu" : "Menu" },
+  const categories = [
     { id: "hamburger", label: t("nav.hamburger") },
     { id: "ciabatte", label: t("nav.ciabatte") },
     { id: "piadine", label: lang === "en" ? "Wraps" : "Wrap" },
@@ -34,7 +39,7 @@ export default function MobileMenu({ open, onClose, t, lang }) {
     { id: "dessert", label: "Dessert" },
   ];
 
-  const go = (id) => {
+  const goToId = (id) => {
     onClose();
     setTimeout(() => {
       const el = document.getElementById(id);
@@ -74,19 +79,51 @@ export default function MobileMenu({ open, onClose, t, lang }) {
 
         <nav className="flex-1 overflow-y-auto px-5 pb-5">
           <ul className="divide-y divide-stone-800/60">
-            {items.map((it) => (
-              <li key={it.id}>
-                <button
-                  type="button"
-                  onClick={() => go(it.id)}
-                  data-testid={`mobile-nav-${it.id}`}
-                  className="flex w-full items-center justify-between py-4 text-left font-display text-2xl font-bold text-stone-100 transition-colors hover:text-amber-400"
-                >
-                  <span>{it.label}</span>
-                  <span className="font-hand text-sm text-amber-500">→</span>
-                </button>
-              </li>
-            ))}
+            {/* Menu expandable */}
+            <li>
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                data-testid="mobile-nav-menu"
+                aria-expanded={expanded}
+                className="flex w-full items-center justify-between py-4 text-left font-display text-2xl font-bold text-stone-100 transition-colors hover:text-amber-400"
+              >
+                <span className="flex items-center gap-3">
+                  <UtensilsCrossed className="h-5 w-5 text-amber-500" /> Menu
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "h-5 w-5 text-amber-500 transition-transform",
+                    expanded ? "rotate-180" : "rotate-0"
+                  )}
+                />
+              </button>
+              <div
+                className={cn(
+                  "grid overflow-hidden transition-all duration-300 ease-out",
+                  expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                )}
+              >
+                <div className="min-h-0">
+                  <ul className="mb-3 space-y-1 border-l-2 border-amber-600/40 pl-5">
+                    {categories.map((c) => (
+                      <li key={c.id}>
+                        <button
+                          type="button"
+                          onClick={() => goToId(c.id)}
+                          data-testid={`mobile-nav-${c.id}`}
+                          className="flex w-full items-center justify-between py-2 text-left font-display text-lg text-stone-300 transition-colors hover:text-amber-400"
+                        >
+                          <span>{c.label}</span>
+                          <span className="font-hand text-sm text-amber-500/80">→</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </li>
+
             <li>
               <Link
                 to="/bevande"
