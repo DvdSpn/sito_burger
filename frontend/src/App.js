@@ -5,15 +5,13 @@ import Hero from "./components/Hero";
 import ValuesStrip from "./components/ValuesStrip";
 import FilterBar from "./components/FilterBar";
 import MenuSection from "./components/MenuSection";
-import Gallery from "./components/Gallery";
-import Reviews from "./components/Reviews";
-import Contact from "./components/Contact";
+import HomeFooter from "./components/HomeFooter";
 import CartFab from "./components/CartFab";
 import CartDrawer from "./components/CartDrawer";
 import About from "./pages/About";
 import Drinks from "./pages/Drinks";
 import { CartProvider } from "./context/CartContext";
-import { menuData, RESTAURANT } from "./data/menu";
+import { menuData } from "./data/menu";
 import { makeT } from "./data/i18n";
 
 const Home = ({ t, lang, setLang }) => {
@@ -44,9 +42,7 @@ const Home = ({ t, lang, setLang }) => {
         ))}
       </div>
 
-      <Gallery t={t} />
-      <Reviews t={t} lang={lang} />
-      <Contact t={t} onOrder={() => setCartOpen(true)} />
+      <HomeFooter t={t} />
 
       <CartFab onClick={() => setCartOpen(true)} t={t} />
       <CartDrawer

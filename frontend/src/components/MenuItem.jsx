@@ -60,7 +60,7 @@ export default function MenuItem({ item, dim, t, lang }) {
         dim ? "opacity-30" : "opacity-100"
       )}
     >
-      {(item.signature || item.isNew) && (
+      {(item.signature || item.isNew || item.popular) && (
         <div className="mb-2 flex flex-wrap gap-1.5">
           {item.isNew && (
             <span
@@ -68,6 +68,14 @@ export default function MenuItem({ item, dim, t, lang }) {
               className="inline-flex items-center gap-1 rounded-sm bg-emerald-500 px-2 py-0.5 text-[9px] font-bold uppercase tracking-mega text-stone-950"
             >
               <Sparkles className="h-2.5 w-2.5" /> {t("tag.new")}
+            </span>
+          )}
+          {item.popular && (
+            <span
+              data-testid={`popular-${itemId}`}
+              className="inline-flex items-center gap-1 rounded-sm bg-rose-500 px-2 py-0.5 text-[9px] font-bold uppercase tracking-mega text-stone-950"
+            >
+              <Sparkles className="h-2.5 w-2.5" /> {t("tag.popular")}
             </span>
           )}
           {item.signature && (

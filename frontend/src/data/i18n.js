@@ -57,6 +57,7 @@ const dict = {
     "tag.pork": "Maiale",
     "tag.signature": "Signature",
     "tag.new": "Novità",
+    "tag.popular": "Popular Choice",
 
     "menu.orderItem": "+ Ordina via WhatsApp",
     "menu.add": "Aggiungi",
@@ -283,6 +284,7 @@ const dict = {
     "tag.pork": "Pork",
     "tag.signature": "Signature",
     "tag.new": "New",
+    "tag.popular": "Popular Choice",
 
     "menu.orderItem": "+ Order via WhatsApp",
     "menu.add": "Add",
