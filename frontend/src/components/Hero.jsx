@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Menu } from "lucide-react";
+import { MapPin, Menu, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RESTAURANT } from "../data/menu";
 import Logo from "./Logo";
@@ -36,35 +36,27 @@ export default function Hero({ t, lang, setLang }) {
           <Logo size="hero" />
         </a>
 
-        <nav className="hidden gap-6 lg:flex">
-          {navItems.map((n) => (
-            <a
-              key={n.id}
-              href={`#${n.id}`}
-              data-testid={`nav-${n.id}`}
-              className="text-xs tracking-mega uppercase text-stone-300 transition-colors hover:text-amber-500"
-            >
-              {n.label}
-            </a>
-          ))}
-          <Link
-            to="/bevande"
-            data-testid="nav-drinks"
-            className="text-xs tracking-mega uppercase text-amber-500 transition-colors hover:text-amber-400"
-          >
-            {t("nav.drinks")}
-          </Link>
+        <nav className="hidden gap-4 lg:flex">
           <Link
             to="/chi-siamo"
             data-testid="nav-about"
-            className="text-xs tracking-mega uppercase text-stone-300 transition-colors hover:text-amber-500"
+            className="group inline-flex items-center gap-2 rounded-full border border-amber-500/60 bg-stone-950/60 px-5 py-2.5 text-xs font-bold uppercase tracking-mega text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 hover:shadow-[0_0_24px_-4px_rgba(217,119,6,0.6)]"
           >
+            <Info className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
             {t("nav.about")}
           </Link>
         </nav>
 
         <div className="flex items-center gap-2">
           <LanguageToggle lang={lang} setLang={setLang} />
+          <Link
+            to="/chi-siamo"
+            data-testid="nav-about-mobile"
+            aria-label={t("nav.about")}
+            className="group grid h-11 w-11 place-items-center rounded-full border border-amber-500/60 bg-stone-950/60 text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 hover:shadow-[0_0_20px_-4px_rgba(217,119,6,0.6)] lg:hidden"
+          >
+            <Info className="h-4 w-4 transition-transform group-hover:rotate-12" />
+          </Link>
           <a
             href="#menu"
             data-testid="nav-cta"
