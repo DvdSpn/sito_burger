@@ -50,11 +50,11 @@ export default function MenuSection({ section, index, filter, t, lang }) {
             </p>
 
             {img && (
-              <div className="mt-8 hidden overflow-hidden rounded-sm border border-stone-800 lg:block">
+              <div className="mt-6 overflow-hidden rounded-sm border border-stone-800 lg:mt-8">
                 <img
                   src={img}
                   alt={title}
-                  className="h-64 w-full object-cover grayscale-[0.2] transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                  className="h-48 w-full object-cover grayscale-[0.2] transition-all duration-700 hover:grayscale-0 hover:scale-105 md:h-56 lg:h-64"
                 />
               </div>
             )}
