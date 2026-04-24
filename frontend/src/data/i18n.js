@@ -1,6 +1,5 @@
 // Simple i18n dictionary for IT/EN
-export const LOGO_URL =
-  "https://customer-assets.emergentagent.com/job_chianina-burger-bar/artifacts/fa2imzti_LOGO_BURGER-NO%20SFONDO.png";
+export const LOGO_URL = "/logo-bg.png";
 
 export const MAPS_QUERY = "Via+Lauretana+19%2F21,+52044+Camucia+Cortona+AR";
 export const MAPS_EMBED_SRC = `https://www.google.com/maps?q=${MAPS_QUERY}&z=16&output=embed`;
