@@ -1,44 +1,21 @@
 import MenuItem from "./MenuItem";
 
-// Inline SVG filter that makes near-white pixels transparent (for product shots on white bg)
-const WHITE_REMOVER_SVG = (
-  <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
-    <defs>
-      <filter id="remove-white-bg" colorInterpolationFilters="sRGB">
-        {/* Alpha = 3 - R - G - B  →  white(1,1,1) becomes transparent, dark stays opaque */}
-        <feColorMatrix
-          type="matrix"
-          values="1 0 0 0 0
-                  0 1 0 0 0
-                  0 0 1 0 0
-                  -1 -1 -1 0 3"
-        />
-      </filter>
-    </defs>
-  </svg>
-);
-
 const SECTION_IMAGES = {
-  hamburger: {
-    url: "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png",
-  },
-  ciabatte: {
-    url: "https://customer-assets.emergentagent.com/job_chianina-burger-bar/artifacts/iovn0x56_image.png",
-    // real product photo with a white background → blend whites into the dark theme
-    blendWhite: true,
-  },
-  griglia: {
-    url: "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/40d1c5a5123d54b18dd143864cfe29ce510d7b40da621c021641d0226cf315cc.png",
-  },
-  piadine: {
-    url: "https://images.unsplash.com/photo-1626323107890-cce0b8c2c641?crop=entropy&cs=srgb&fm=jpg&q=80&w=1600",
-  },
+  hamburger:
+    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png",
+  ciabatte:
+    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/9aa68f56ad2ffb2fb974a11366b607c9497a01596cee3d8d0373a20bf5ec7eb8.png",
+  griglia:
+    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/40d1c5a5123d54b18dd143864cfe29ce510d7b40da621c021641d0226cf315cc.png",
+  piadine:
+    "https://images.unsplash.com/photo-1626323107890-cce0b8c2c641?crop=entropy&cs=srgb&fm=jpg&q=80&w=1600",
   contorni: null,
 };
 
 export default function MenuSection({ section, index, filter, t, lang }) {
   const img = SECTION_IMAGES[section.id];
-  const isFlipped = index % 2 === 1;  const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
+  const isFlipped = index % 2 === 1;
+  const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
   const subtitle =
     lang === "en" && section.subtitleEn ? section.subtitleEn : section.subtitle;
   const accent = lang === "en" && section.accentEn ? section.accentEn : section.accent;
@@ -73,27 +50,11 @@ export default function MenuSection({ section, index, filter, t, lang }) {
             </p>
 
             {img && (
-              <div
-                className={`mt-8 hidden overflow-hidden rounded-sm lg:block ${
-                  img.blendWhite
-                    ? ""
-                    : "border border-stone-800"
-                }`}
-              >
-                {img.blendWhite && WHITE_REMOVER_SVG}
+              <div className="mt-8 hidden overflow-hidden rounded-sm border border-stone-800 lg:block">
                 <img
-                  src={img.url}
+                  src={img}
                   alt={title}
-                  className={`h-64 w-full transition-all duration-700 hover:scale-105 ${
-                    img.blendWhite
-                      ? "object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)]"
-                      : "object-cover grayscale-[0.2] hover:grayscale-0"
-                  }`}
-                  style={
-                    img.blendWhite
-                      ? { filter: "url(#remove-white-bg)" }
-                      : undefined
-                  }
+                  className="h-64 w-full object-cover grayscale-[0.2] transition-all duration-700 hover:grayscale-0 hover:scale-105"
                 />
               </div>
             )}
