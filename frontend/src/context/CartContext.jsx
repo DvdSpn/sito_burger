@@ -37,6 +37,7 @@ function reducer(state, action) {
           price: action.item.price,
           priceNum: parsePrice(action.item.price),
           qty: 1,
+          note: "",
         },
       ];
     }
@@ -52,6 +53,10 @@ function reducer(state, action) {
         .filter((i) => i.qty > 0);
     case "REMOVE":
       return state.filter((i) => i.name !== action.name);
+    case "SET_NOTE":
+      return state.map((i) =>
+        i.name === action.name ? { ...i, note: action.note } : i
+      );
     case "CLEAR":
       return [];
     default:
@@ -85,6 +90,10 @@ export function CartProvider({ children }) {
   const inc = useCallback((name) => dispatch({ type: "INC", name }), []);
   const dec = useCallback((name) => dispatch({ type: "DEC", name }), []);
   const remove = useCallback((name) => dispatch({ type: "REMOVE", name }), []);
+  const setNote = useCallback(
+    (name, note) => dispatch({ type: "SET_NOTE", name, note }),
+    []
+  );
   const clear = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
   const count = useMemo(
@@ -115,8 +124,8 @@ export function CartProvider({ children }) {
   );
 
   const value = useMemo(
-    () => ({ items, add, inc, dec, remove, clear, count, total, hasKgItems, getQty }),
-    [items, add, inc, dec, remove, clear, count, total, hasKgItems, getQty]
+    () => ({ items, add, inc, dec, remove, setNote, clear, count, total, hasKgItems, getQty }),
+    [items, add, inc, dec, remove, setNote, clear, count, total, hasKgItems, getQty]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

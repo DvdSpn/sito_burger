@@ -3,11 +3,15 @@ export const drinksData = [
   {
     id: "alla-spina",
     title: "Bevande alla spina",
+    titleEn: "On tap",
     subtitle: "Dal rubinetto",
+    subtitleEn: "From the tap",
     items: [
       {
         name: "Birra alla spina",
+        nameEn: "Draft beer",
         desc: "Raffo · Peroni",
+        descEn: "Raffo · Peroni",
         formats: [
           { size: "20 cl", price: "3,00" },
           { size: "40 cl", price: "5,00" },
@@ -15,7 +19,9 @@ export const drinksData = [
       },
       {
         name: "Coca Cola alla spina",
+        nameEn: "Coca Cola on tap",
         desc: "Coca Cola classica.",
+        descEn: "Classic Coca-Cola.",
         formats: [
           { size: "20 cl", price: "2,50" },
           { size: "40 cl", price: "4,50" },
@@ -23,7 +29,9 @@ export const drinksData = [
       },
       {
         name: "Vino bianco frizzantino",
+        nameEn: "Sparkling white wine",
         desc: "Vino bianco frizzante alla spina.",
+        descEn: "Lightly sparkling white wine on tap.",
         formats: [
           { size: "25 cl", price: "3,00" },
           { size: "50 cl", price: "5,00" },
@@ -34,26 +42,36 @@ export const drinksData = [
   {
     id: "birre-bottiglia",
     title: "Birre in bottiglia",
+    titleEn: "Bottled beers",
     subtitle: "Selezione classica",
+    subtitleEn: "Classic selection",
     items: [
       {
         name: "Birre 33 cl",
+        nameEn: "Bottled beers 33 cl",
         desc: "Peroni · Beck's · Moretti",
+        descEn: "Peroni · Beck's · Moretti",
         price: "3,00",
       },
       {
         name: "Birre Premium 33 cl",
+        nameEn: "Premium beers 33 cl",
         desc: "Ceres · Tennent's · Corona · Bjorne",
+        descEn: "Ceres · Tennent's · Corona · Bjorne",
         price: "5,00",
       },
       {
         name: "Birre 66 cl",
+        nameEn: "Bottled beers 66 cl",
         desc: "Moretti · Peroni · Heineken",
+        descEn: "Moretti · Peroni · Heineken",
         price: "5,00",
       },
       {
         name: "Ichnusa non filtrata 50 cl",
+        nameEn: "Ichnusa unfiltered 50 cl",
         desc: "Birra sarda non filtrata.",
+        descEn: "Unfiltered Sardinian lager.",
         price: "5,00",
       },
     ],
@@ -61,78 +79,104 @@ export const drinksData = [
   {
     id: "birre-artigianali-san-girolamo",
     title: "Birre Artigianali San Girolamo",
+    titleEn: "San Girolamo Craft Beers",
     subtitle: "Birrificio toscano · Selezione del mastro birraio",
+    subtitleEn: "Tuscan brewery · Brewmaster's selection",
     items: [
       {
         name: "Traccia",
+        nameEn: "Traccia",
         style: "Blanche · 4.5% vol.",
+        styleEn: "Blanche · 4.5% ABV",
         image: "/beers/traccia.png",
         formats: [
           { size: "33 cl", price: "6,50" },
           { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra chiara e rinfrescante, aromatizzata con scorza d'arancia, coriandolo e spezie leggere. Leggera, fresca e leggermente velata.",
+        descEn: "Pale, refreshing wheat beer with orange peel, coriander and mild spices. Light, crisp and slightly hazy.",
       },
       {
         name: "Rovina",
+        nameEn: "Rovina",
         style: "Golden Ale · 4.8% vol.",
+        styleEn: "Golden Ale · 4.8% ABV",
         image: "/beers/rovina.png",
         formats: [
           { size: "33 cl", price: "6,50" },
           { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra dorata e equilibrata, con aromi maltati dolci, note floreali e un tocco erbaceo dai luppoli nobili. Pulita e beverina.",
+        descEn: "Balanced golden ale with sweet malt aromas, floral notes and a herbal touch from noble hops. Clean and easy-drinking.",
       },
       {
         name: "Sassaia",
+        nameEn: "Sassaia",
         style: "Brown Ale · 7.0% vol.",
+        styleEn: "Brown Ale · 7.0% ABV",
         image: "/beers/sassaia.png",
         formats: [
           { size: "33 cl", price: "6,50" },
           { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra ambrata corposa, profumata di resina, caramello tostato, frutta matura e malti speciali. Strutturata e resinosa.",
+        descEn: "Full-bodied amber ale with notes of resin, toasted caramel, ripe fruit and specialty malts. Structured and resinous.",
       },
       {
         name: "Cavadenti",
+        nameEn: "Cavadenti",
         style: "Strong Belgian Ale · 7.5% vol.",
+        styleEn: "Strong Belgian Ale · 7.5% ABV",
         image: "/beers/cavadenti.png",
         formats: [
           { size: "33 cl", price: "6,50" },
           { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra forte e complessa, con aromi caldi di frutta candita, spezie, malti caramellati e lieviti belgici. Avvolgente e persistente.",
+        descEn: "Strong, complex ale with warm aromas of candied fruit, spices, caramel malts and Belgian yeast. Rich and lingering.",
       },
     ],
   },
   {
     id: "bevande-varie",
     title: "Bevande analcoliche",
+    titleEn: "Soft drinks",
     subtitle: "Bibite, acqua, energy",
+    subtitleEn: "Sodas, water, energy drinks",
     items: [
       {
         name: "Lattine 33 cl",
+        nameEn: "Cans 33 cl",
         desc: "Coca Cola · Coca Cola Zero · Fanta · Sprite · Lemon Soda",
+        descEn: "Coca-Cola · Coke Zero · Fanta · Sprite · Lemon Soda",
         price: "2,50",
       },
       {
         name: "Bibite in bottiglia 45 cl",
+        nameEn: "Bottled sodas 45 cl",
         desc: "Coca Cola · Coca Cola Zero · Fanta · Estathè",
+        descEn: "Coca-Cola · Coke Zero · Fanta · Iced tea",
         price: "3,00",
       },
       {
         name: "Coca Cola 1 L",
+        nameEn: "Coca-Cola 1 L",
         desc: "Bottiglia da 1 litro.",
+        descEn: "1-litre bottle.",
         price: "4,00",
       },
       {
         name: "Red Bull 25 cl",
+        nameEn: "Red Bull 25 cl",
         desc: "Energy drink.",
+        descEn: "Energy drink.",
         price: "3,50",
       },
       {
         name: "Acqua",
+        nameEn: "Water",
         desc: "Naturale o frizzante.",
+        descEn: "Still or sparkling.",
         formats: [
           { size: "50 cl", price: "1,00" },
           { size: "1 L", price: "1,50" },
@@ -143,11 +187,15 @@ export const drinksData = [
   {
     id: "vini",
     title: "Vini",
+    titleEn: "Wines",
     subtitle: "Della casa e del territorio",
+    subtitleEn: "House wines and local selection",
     items: [
       {
         name: "Syrah di Cortona",
+        nameEn: "Cortona Syrah",
         desc: "Vino rosso strutturato del territorio.",
+        descEn: "Local full-bodied red wine.",
         formats: [
           { size: "25 cl", price: "3,50" },
           { size: "50 cl", price: "6,50" },
@@ -156,7 +204,9 @@ export const drinksData = [
       },
       {
         name: "Sangiovese",
+        nameEn: "Sangiovese",
         desc: "Sangiovese toscano, fresco e tannico.",
+        descEn: "Tuscan Sangiovese, crisp and tannic.",
         formats: [
           { size: "25 cl", price: "3,00" },
           { size: "50 cl", price: "5,50" },
@@ -165,7 +215,9 @@ export const drinksData = [
       },
       {
         name: "Bianco della casa",
+        nameEn: "House white",
         desc: "Vino bianco selezionato dal territorio.",
+        descEn: "Locally sourced white wine.",
         formats: [
           { size: "25 cl", price: "3,00" },
           { size: "50 cl", price: "5,00" },
@@ -174,7 +226,9 @@ export const drinksData = [
       },
       {
         name: "Bottiglia di vino",
+        nameEn: "Bottle of wine",
         desc: "Selezione in bottiglia — chiedi al personale.",
+        descEn: "Bottle selection — please ask the staff.",
         price: "—",
       },
     ],
@@ -182,15 +236,17 @@ export const drinksData = [
   {
     id: "bar",
     title: "Bar",
+    titleEn: "Bar",
     subtitle: "Caffetteria, amari e distillati",
+    subtitleEn: "Coffee, amari and spirits",
     items: [
-      { name: "Espresso", price: "1,00", desc: "Caffè espresso." },
-      { name: "Cappuccino", price: "2,00", desc: "Cappuccino." },
-      { name: "Amari", price: "3,00", desc: "Selezione di amari." },
-      { name: "Grappa bianca", price: "3,50", desc: "Grappa bianca." },
-      { name: "Grappa barricata", price: "4,00", desc: "Grappa invecchiata in barrique." },
-      { name: "Alcolici vari", price: "3,00", desc: "Selezione di alcolici." },
-      { name: "Superalcolici", price: "5,00", desc: "Selezione di superalcolici." },
+      { name: "Espresso", nameEn: "Espresso", price: "1,00", desc: "Caffè espresso.", descEn: "Italian espresso." },
+      { name: "Cappuccino", nameEn: "Cappuccino", price: "2,00", desc: "Cappuccino.", descEn: "Cappuccino." },
+      { name: "Amari", nameEn: "Amari", price: "3,00", desc: "Selezione di amari.", descEn: "Selection of Italian bitters." },
+      { name: "Grappa bianca", nameEn: "Grappa", price: "3,50", desc: "Grappa bianca.", descEn: "Clear grappa." },
+      { name: "Grappa barricata", nameEn: "Aged grappa", price: "4,00", desc: "Grappa invecchiata in barrique.", descEn: "Barrel-aged grappa." },
+      { name: "Alcolici vari", nameEn: "Spirits", price: "3,00", desc: "Selezione di alcolici.", descEn: "Selection of spirits." },
+      { name: "Superalcolici", nameEn: "Premium spirits", price: "5,00", desc: "Selezione di superalcolici.", descEn: "Premium spirits selection." },
     ],
   },
 ];
@@ -199,22 +255,34 @@ export const drinksData = [
 export const pairings = [
   {
     dish: "Tartufo / Tagliata ai porcini",
+    dishEn: "Truffle / Porcini steak",
     wine: "Syrah di Cortona",
+    wineEn: "Cortona Syrah",
     note: "Rosso strutturato, perfetto con tartufo e porcini.",
+    noteEn: "Full-bodied red, perfect with truffle and porcini mushrooms.",
   },
   {
     dish: "Burger di Chianina (Americano, Bismark)",
+    dishEn: "Chianina burger (Americano, Bismark)",
     wine: "Sangiovese",
+    wineEn: "Sangiovese",
     note: "Fresco e tannico, taglia la grassezza del formaggio.",
+    noteEn: "Crisp and tannic — cuts through the cheese richness.",
   },
   {
     dish: "Chicken Cheese / Piadine",
+    dishEn: "Chicken Cheese / Wraps",
     wine: "Bianco frizzantino",
+    wineEn: "Sparkling white",
     note: "Bollicine fresche per pietanze leggere.",
+    noteEn: "Fresh bubbles for lighter dishes.",
   },
   {
     dish: "Grigliata di maiale / Costata",
+    dishEn: "Grilled pork / Ribeye",
     wine: "Sassaia · Brown Ale",
+    wineEn: "Sassaia · Brown Ale",
     note: "Birra artigianale corposa San Girolamo per carni alla brace.",
+    noteEn: "Full-bodied San Girolamo craft beer for grilled meat.",
   },
 ];

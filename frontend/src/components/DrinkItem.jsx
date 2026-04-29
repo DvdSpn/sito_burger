@@ -1,12 +1,20 @@
 /**
  * DrinkItem — single drink row.
- * Supports:
- *  - single price (item.price)
- *  - multi-format prices (item.formats: [{size, price}])
- *  - optional bottle photo (item.image)
- *  - optional style line (item.style — e.g. "Blanche · 4.5% vol.")
+ * Supports IT/EN translation via `lang` prop using nameEn/descEn/styleEn fallbacks.
  */
-export default function DrinkItem({ item }) {
+function pick(item, key, lang) {
+  if (lang === "en") {
+    const enKey = key + "En";
+    if (item[enKey]) return item[enKey];
+  }
+  return item[key];
+}
+
+export default function DrinkItem({ item, lang = "it" }) {
+  const name = pick(item, "name", lang);
+  const desc = pick(item, "desc", lang);
+  const style = pick(item, "style", lang);
+
   const testId = `drink-item-${item.name
     .toLowerCase()
     .replace(/\s+/g, "-")
@@ -20,7 +28,7 @@ export default function DrinkItem({ item }) {
       {item.image && (
         <img
           src={item.image}
-          alt={item.name}
+          alt={name}
           loading="lazy"
           className="h-28 w-auto shrink-0 self-start drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)] md:h-36"
         />
@@ -28,7 +36,7 @@ export default function DrinkItem({ item }) {
       <div className="flex-1">
         <div className="flex items-baseline">
           <h3 className="font-display text-lg font-bold text-stone-50 md:text-xl">
-            {item.name}
+            {name}
           </h3>
           {!item.formats && (
             <>
@@ -39,13 +47,13 @@ export default function DrinkItem({ item }) {
             </>
           )}
         </div>
-        {item.style && (
+        {style && (
           <p className="mt-0.5 text-[11px] font-bold uppercase tracking-mega text-amber-500/80">
-            {item.style}
+            {style}
           </p>
         )}
-        {item.desc && (
-          <p className="mt-1 text-sm text-stone-400">{item.desc}</p>
+        {desc && (
+          <p className="mt-1 text-sm text-stone-400">{desc}</p>
         )}
         {item.formats && (
           <div className="mt-3 flex flex-wrap gap-2">

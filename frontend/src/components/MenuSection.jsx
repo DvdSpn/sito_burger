@@ -13,7 +13,7 @@ const SECTION_IMAGES = {
   contorni: null,
 };
 
-export default function MenuSection({ section, index, filter, t, lang }) {
+export default function MenuSection({ section, index, filter, t, lang, isOpen, onToggle }) {
   const img = SECTION_IMAGES[section.id];
   const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
   const subtitle =
@@ -32,7 +32,8 @@ export default function MenuSection({ section, index, filter, t, lang }) {
       description={accent}
       imageSrc={img}
       testId={`section-${section.id}`}
-      defaultOpen={index === 0}
+      isOpen={isOpen}
+      onToggle={onToggle}
     >
       <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 backdrop-blur-sm md:p-8">
         {section.items.map((item) => (

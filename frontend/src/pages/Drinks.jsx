@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Wine } from "lucide-react";
 import { drinksData, pairings } from "../data/drinks";
@@ -6,7 +7,18 @@ import LanguageToggle from "../components/LanguageToggle";
 import AccordionSection from "../components/AccordionSection";
 import DrinkItem from "../components/DrinkItem";
 
+const tx = (item, key, lang) => {
+  if (lang === "en") {
+    const enKey = key + "En";
+    if (item[enKey]) return item[enKey];
+  }
+  return item[key];
+};
+
 export default function Drinks({ t, lang, setLang }) {
+  // single-active accordion state — null means all closed
+  const [openId, setOpenId] = useState(null);
+
   return (
     <div className="min-h-screen bg-stone-950 text-stone-50">
       {/* top bar */}
@@ -68,12 +80,14 @@ export default function Drinks({ t, lang, setLang }) {
                 data-testid={`pairing-${i}`}
                 className="rounded-sm border border-stone-800 bg-stone-950/50 p-5 transition-colors hover:border-amber-700/40"
               >
-                <p className="font-hand text-lg text-amber-500">{p.wine}</p>
+                <p className="font-hand text-lg text-amber-500">
+                  {tx(p, "wine", lang)}
+                </p>
                 <p className="mt-2 font-display text-base font-semibold text-stone-50">
-                  {p.dish}
+                  {tx(p, "dish", lang)}
                 </p>
                 <p className="mt-2 text-xs leading-relaxed text-stone-400">
-                  {p.note}
+                  {tx(p, "note", lang)}
                 </p>
               </div>
             ))}
@@ -81,21 +95,22 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Drink sections — accordions */}
+      {/* Drink sections — single-active accordions, all closed by default */}
       <div className="mx-auto max-w-5xl">
         {drinksData.map((section, idx) => (
           <AccordionSection
             key={section.id}
             id={section.id}
             index={idx}
-            title={section.title}
-            subtitle={section.subtitle}
+            title={tx(section, "title", lang)}
+            subtitle={tx(section, "subtitle", lang)}
             testId={`drinks-section-${section.id}`}
-            defaultOpen={idx === 0}
+            isOpen={openId === section.id}
+            onToggle={(nextId) => setOpenId(nextId)}
           >
             <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
               {section.items.map((item) => (
-                <DrinkItem key={item.name} item={item} />
+                <DrinkItem key={item.name} item={item} lang={lang} />
               ))}
             </div>
           </AccordionSection>

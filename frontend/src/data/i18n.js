@@ -232,6 +232,16 @@ const dict = {
     "about.cta.body":
       "Prenota un tavolo o passa per un asporto. La griglia è sempre accesa.",
     "about.cta.btn": "Vai al menu",
+
+    "home.drinksCta.kicker": "Da bere",
+    "home.drinksCta.title": "Sfoglia la carta bevande",
+    "home.drinksCta.body":
+      "Vini toscani, birre artigianali San Girolamo, bibite, caffè e distillati. Tutta la nostra selezione per accompagnare al meglio il tuo ordine.",
+    "home.drinksCta.btn": "Vai alla carta bevande",
+
+    "cart.note.label": "Modifiche al panino (max 2)",
+    "cart.note.placeholder": "es. senza maionese, +bacon",
+    "cart.note.helper": "Massimo 2 modifiche per panino. Lascia vuoto se va bene così.",
   },
   en: {
     "nav.hamburger": "Burgers",
@@ -458,6 +468,16 @@ const dict = {
     "about.cta.body":
       "Book a table or drop by for takeaway. The grill is always on.",
     "about.cta.btn": "Browse the menu",
+
+    "home.drinksCta.kicker": "Drinks",
+    "home.drinksCta.title": "Browse the drinks list",
+    "home.drinksCta.body":
+      "Tuscan wines, San Girolamo craft beers, sodas, coffee and spirits. Our full selection to pair with your order.",
+    "home.drinksCta.btn": "Open drinks list",
+
+    "cart.note.label": "Customise (max 2 changes)",
+    "cart.note.placeholder": "e.g. no mayo, +bacon",
+    "cart.note.helper": "Max 2 changes per sandwich. Leave blank if all good.",
   },
 };
 

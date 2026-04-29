@@ -4,6 +4,9 @@ import { cn } from "../lib/utils";
 
 /**
  * AccordionSection — collapsible section with chevron animation.
+ * Two modes:
+ *  - Controlled: parent passes `isOpen` + `onToggle` (single-active behavior).
+ *  - Uncontrolled: manages its own state via `defaultOpen`.
  * Auto-opens when URL hash matches its id (e.g. clicking a category link).
  */
 export default function AccordionSection({
@@ -14,10 +17,22 @@ export default function AccordionSection({
   description,
   children,
   defaultOpen = false,
+  isOpen,
+  onToggle,
   testId,
   imageSrc,
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const controlled = typeof isOpen === "boolean";
+  const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const open = controlled ? isOpen : internalOpen;
+
+  const toggle = () => {
+    if (controlled) {
+      onToggle?.(open ? null : id);
+    } else {
+      setInternalOpen((o) => !o);
+    }
+  };
 
   // Open this section when URL hash matches its id (e.g. nav-link click)
   useEffect(() => {
@@ -26,7 +41,11 @@ export default function AccordionSection({
       if (typeof window === "undefined") return;
       const hash = window.location.hash.replace(/^#/, "");
       if (hash === id) {
-        setOpen(true);
+        if (controlled) {
+          onToggle?.(id);
+        } else {
+          setInternalOpen(true);
+        }
         // Smoothly scroll into view after expand animation begins
         requestAnimationFrame(() => {
           const el = document.getElementById(id);
@@ -37,6 +56,7 @@ export default function AccordionSection({
     checkHash();
     window.addEventListener("hashchange", checkHash);
     return () => window.removeEventListener("hashchange", checkHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
@@ -47,7 +67,7 @@ export default function AccordionSection({
     >
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggle}
         aria-expanded={open}
         data-testid={`${testId || id}-toggle`}
         className={cn(

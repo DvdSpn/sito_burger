@@ -17,7 +17,7 @@ import Logo from "./Logo";
 import { cn } from "../lib/utils";
 
 export default function CartDrawer({ open, onClose, t, lang }) {
-  const { items, inc, dec, remove, clear, count, total, hasKgItems } = useCart();
+  const { items, inc, dec, remove, setNote, clear, count, total, hasKgItems } = useCart();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [slotId, setSlotId] = useState(null);
@@ -81,36 +81,47 @@ export default function CartDrawer({ open, onClose, t, lang }) {
 
   const buildOrderMessage = () => {
     if (items.length === 0) return "";
-    const intro =
-      lang === "en"
-        ? "Hi Burger & Grill! I'd like to place this TAKEAWAY order:"
-        : "Ciao Burger & Grill! Vorrei ordinare (ASPORTO):";
+    const isEn = lang === "en";
+
+    const header = isEn
+      ? "*TAKEAWAY ORDER — Burger & Grill*"
+      : "*ORDINE ASPORTO — Burger & Grill*";
+
     const lines = items.map((i) => {
       const lineTotal =
-        i.priceNum !== null ? ` → € ${formatPrice(i.priceNum * i.qty)}` : "";
-      return `• ${i.qty}x ${i.name} (€ ${i.price})${lineTotal}`;
+        i.priceNum !== null
+          ? ` — € ${formatPrice(i.priceNum * i.qty)}`
+          : ` — ${isEn ? "by weight" : "al kg"}`;
+      const main = `• ${i.qty}× ${i.name}${lineTotal}`;
+      const noteLine = i.note && i.note.trim()
+        ? `\n   ↳ ${i.note.trim()}`
+        : "";
+      return `${main}${noteLine}`;
     });
-    const totalLine =
-      lang === "en"
-        ? `Total: € ${formatPrice(total)}`
-        : `Totale: € ${formatPrice(total)}`;
+
     const pickupLine = selectedSlot
-      ? lang === "en"
-        ? `Pickup: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} around ${selectedSlot.label}`
-        : `Ritiro: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} verso le ${selectedSlot.label}`
-      : lang === "en"
-        ? "Pickup: to be agreed"
-        : "Ritiro: da concordare";
-    const note = hasKgItems
-      ? lang === "en"
-        ? "\n(some items priced per kg — final amount on weigh-in)"
-        : "\n(alcuni articoli al kg — importo finale a pesata)"
+      ? isEn
+        ? `🕒 Pickup: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} · ${selectedSlot.label}`
+        : `🕒 Ritiro: ${mealLabel(selectedSlot.meal)} ${dayLabel(selectedSlot.dayOffset)} · ${selectedSlot.label}`
+      : isEn
+        ? "🕒 Pickup: to be agreed"
+        : "🕒 Ritiro: da concordare";
+
+    const totalLine = isEn
+      ? `💰 Total: € ${formatPrice(total)}`
+      : `💰 Totale: € ${formatPrice(total)}`;
+
+    const kgNote = hasKgItems
+      ? isEn
+        ? "\n_(some items priced per kg — final amount on weigh-in)_"
+        : "\n_(alcuni articoli al kg — importo finale a pesata)_"
       : "";
-    const footer =
-      lang === "en"
-        ? "\nPlease confirm the order and pickup time — thank you!"
-        : "\nConfermatemi per favore ordine e orario di ritiro — grazie!";
-    return `${intro}\n\n${lines.join("\n")}\n\n${pickupLine}\n\n${totalLine}${note}${footer}`;
+
+    const closing = isEn
+      ? "Please confirm — thanks! 🙏"
+      : "Confermate per favore — grazie! 🙏";
+
+    return `${header}\n\n${lines.join("\n")}\n\n${pickupLine}\n${totalLine}${kgNote}\n\n${closing}`;
   };
 
   const sendOrder = () => {
@@ -273,14 +284,17 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                 </div>
               ) : (
                 <>
-                  {/* Takeaway-only notice */}
-                  <div className="mb-5 rounded-sm border border-amber-700/30 bg-amber-500/5 px-3 py-2">
-                    <p className="text-[10px] uppercase tracking-mega text-amber-500">
-                      {t("cart.takeawayOnly")}
-                    </p>
-                    <p className="mt-0.5 text-[11px] leading-relaxed text-stone-400">
-                      {t("cart.takeawayOnlyNote")}
-                    </p>
+                  {/* Takeaway-only notice — prominent badge */}
+                  <div className="mb-5 flex items-start gap-3 rounded-sm border border-amber-600/60 bg-amber-500/10 px-4 py-3">
+                    <ShoppingBag className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-mega text-amber-400">
+                        {t("cart.takeawayOnly")}
+                      </p>
+                      <p className="mt-1 text-[12px] leading-relaxed text-stone-300">
+                        {t("cart.takeawayOnlyNote")}
+                      </p>
+                    </div>
                   </div>
 
                   <ul className="space-y-4">
@@ -335,6 +349,29 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                             {i.priceNum !== null
                               ? `€ ${formatPrice(i.priceNum * i.qty)}`
                               : t("cart.perKg")}
+                          </p>
+                        </div>
+
+                        {/* Per-item modifications input */}
+                        <div className="mt-3">
+                          <label
+                            htmlFor={`note-${i.name}`}
+                            className="block text-[10px] font-bold uppercase tracking-mega text-amber-500/80"
+                          >
+                            {t("cart.note.label")}
+                          </label>
+                          <input
+                            id={`note-${i.name}`}
+                            type="text"
+                            value={i.note || ""}
+                            onChange={(e) => setNote(i.name, e.target.value.slice(0, 80))}
+                            maxLength={80}
+                            placeholder={t("cart.note.placeholder")}
+                            data-testid={`cart-note-${i.name}`}
+                            className="mt-1 block w-full rounded-sm border border-stone-700 bg-stone-900/60 px-3 py-2 text-sm text-stone-100 placeholder:text-stone-500 focus:border-amber-600 focus:outline-none focus:ring-0"
+                          />
+                          <p className="mt-1 text-[10px] leading-relaxed text-stone-500">
+                            {t("cart.note.helper")}
                           </p>
                         </div>
                       </li>
@@ -474,19 +511,26 @@ export default function CartDrawer({ open, onClose, t, lang }) {
               {items.map((i) => (
                 <li
                   key={i.name}
-                  className="flex items-baseline justify-between gap-3 text-sm"
+                  className="text-sm"
                 >
-                  <span className="text-stone-300">
-                    <span className="font-display text-base font-bold text-amber-500">
-                      {i.qty}x
-                    </span>{" "}
-                    {i.name}
-                  </span>
-                  <span className="font-display text-stone-50">
-                    {i.priceNum !== null
-                      ? `€ ${formatPrice(i.priceNum * i.qty)}`
-                      : t("cart.perKg")}
-                  </span>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="text-stone-300">
+                      <span className="font-display text-base font-bold text-amber-500">
+                        {i.qty}x
+                      </span>{" "}
+                      {i.name}
+                    </span>
+                    <span className="font-display text-stone-50">
+                      {i.priceNum !== null
+                        ? `€ ${formatPrice(i.priceNum * i.qty)}`
+                        : t("cart.perKg")}
+                    </span>
+                  </div>
+                  {i.note && i.note.trim() && (
+                    <p className="mt-0.5 pl-1 text-xs italic text-amber-500/80">
+                      ↳ {i.note.trim()}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
