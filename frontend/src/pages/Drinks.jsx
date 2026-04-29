@@ -3,6 +3,8 @@ import { ArrowLeft, Wine } from "lucide-react";
 import { drinksData, pairings } from "../data/drinks";
 import Logo from "../components/Logo";
 import LanguageToggle from "../components/LanguageToggle";
+import AccordionSection from "../components/AccordionSection";
+import DrinkItem from "../components/DrinkItem";
 
 export default function Drinks({ t, lang, setLang }) {
   return (
@@ -79,90 +81,26 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Drink sections */}
-      {drinksData.map((section, idx) => (
-        <section
-          key={section.id}
-          id={section.id}
-          data-testid={`drinks-section-${section.id}`}
-          className="relative border-b border-stone-800/70 py-16 md:py-24"
-        >
-          <div className="mx-auto max-w-5xl px-6 lg:px-12">
-            <div className="mb-10 flex items-baseline justify-between gap-6">
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
-                  · {String(idx + 1).padStart(2, "0")} ·
-                </p>
-                <h2 className="mt-2 font-display text-3xl font-black leading-[0.95] tracking-tight text-stone-50 md:text-5xl">
-                  {section.title}
-                </h2>
-                <p className="mt-2 font-hand text-xl text-amber-500/90">
-                  {section.subtitle}
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-6 md:p-10">
+      {/* Drink sections — accordions */}
+      <div className="mx-auto max-w-5xl">
+        {drinksData.map((section, idx) => (
+          <AccordionSection
+            key={section.id}
+            id={section.id}
+            index={idx}
+            title={section.title}
+            subtitle={section.subtitle}
+            testId={`drinks-section-${section.id}`}
+            defaultOpen={idx === 0}
+          >
+            <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
               {section.items.map((item) => (
-                <article
-                  key={item.name}
-                  data-testid={`drink-item-${item.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
-                  className="flex items-start gap-4 border-b border-stone-800/80 py-5 last:border-b-0 md:gap-6"
-                >
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                      className="h-28 w-auto shrink-0 self-start drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)] md:h-36"
-                    />
-                  )}
-                  <div className="flex-1">
-                    <div className="flex items-baseline">
-                      <h3 className="font-display text-lg font-bold text-stone-50 md:text-xl">
-                        {item.name}
-                      </h3>
-                      {!item.formats && (
-                        <>
-                          <span className="leader hidden md:block" />
-                          <span className="ml-auto shrink-0 font-display text-lg font-semibold text-amber-500 md:ml-0 md:text-xl">
-                            {item.price === "—" ? "—" : `€ ${item.price}`}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                    {item.style && (
-                      <p className="mt-0.5 text-[11px] font-bold uppercase tracking-mega text-amber-500/80">
-                        {item.style}
-                      </p>
-                    )}
-                    {item.desc && (
-                      <p className="mt-1 text-sm text-stone-400">{item.desc}</p>
-                    )}
-                    {item.formats && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {item.formats.map((f) => (
-                          <span
-                            key={f.size}
-                            className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
-                          >
-                            <span className="font-bold uppercase tracking-mega text-stone-300">
-                              {f.size}
-                            </span>
-                            <span className="font-display text-base font-semibold text-amber-500">
-                              € {f.price}
-                            </span>
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </article>
+                <DrinkItem key={item.name} item={item} />
               ))}
             </div>
-          </div>
-        </section>
-      ))}
+          </AccordionSection>
+        ))}
+      </div>
 
       <footer className="py-12 text-center">
         <Link

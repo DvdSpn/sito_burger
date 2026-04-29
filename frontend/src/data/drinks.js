@@ -5,12 +5,30 @@ export const drinksData = [
     title: "Bevande alla spina",
     subtitle: "Dal rubinetto",
     items: [
-      { name: "Birra Raffo / Peroni 20cl", price: "3,00", desc: "Birra alla spina, piccola." },
-      { name: "Birra Raffo / Peroni 40cl", price: "5,00", desc: "Birra alla spina, media." },
-      { name: "Coca Cola 20cl", price: "2,50", desc: "Piccola." },
-      { name: "Coca Cola 40cl", price: "4,50", desc: "Media." },
-      { name: "Vino bianco frizzantino 25cl", price: "3,00", desc: "Vino bianco frizzante alla spina." },
-      { name: "Vino bianco frizzantino 50cl", price: "5,00", desc: "Vino bianco frizzante alla spina." },
+      {
+        name: "Birra alla spina",
+        desc: "Raffo · Peroni",
+        formats: [
+          { size: "20 cl", price: "3,00" },
+          { size: "40 cl", price: "5,00" },
+        ],
+      },
+      {
+        name: "Coca Cola alla spina",
+        desc: "Coca Cola classica.",
+        formats: [
+          { size: "20 cl", price: "2,50" },
+          { size: "40 cl", price: "4,50" },
+        ],
+      },
+      {
+        name: "Vino bianco frizzantino",
+        desc: "Vino bianco frizzante alla spina.",
+        formats: [
+          { size: "25 cl", price: "3,00" },
+          { size: "50 cl", price: "5,00" },
+        ],
+      },
     ],
   },
   {
@@ -18,11 +36,26 @@ export const drinksData = [
     title: "Birre in bottiglia",
     subtitle: "Selezione classica",
     items: [
-      { name: "Peroni / Beck's / Moretti 33cl", price: "3,00", desc: "Lager classica 33cl." },
-      { name: "Ceres / Tennents / Corona / Bjorne 33cl", price: "5,00", desc: "Premium 33cl." },
-      { name: "Moretti 66cl", price: "4,50", desc: "Bottiglia grande 66cl." },
-      { name: "Heineken / Peroni 66cl", price: "5,00", desc: "Bottiglia grande 66cl." },
-      { name: "Ichnusa non filtrata 50cl", price: "5,00", desc: "Birra sarda non filtrata." },
+      {
+        name: "Birre 33 cl",
+        desc: "Peroni · Beck's · Moretti",
+        price: "3,00",
+      },
+      {
+        name: "Birre Premium 33 cl",
+        desc: "Ceres · Tennent's · Corona · Bjorne",
+        price: "5,00",
+      },
+      {
+        name: "Birre 66 cl",
+        desc: "Moretti · Peroni · Heineken",
+        price: "5,00",
+      },
+      {
+        name: "Ichnusa non filtrata 50 cl",
+        desc: "Birra sarda non filtrata.",
+        price: "5,00",
+      },
     ],
   },
   {
@@ -35,8 +68,8 @@ export const drinksData = [
         style: "Blanche · 4.5% vol.",
         image: "/beers/traccia.png",
         formats: [
-          { size: "0,33 cl", price: "6,50" },
-          { size: "0,75 cl", price: "12,00" },
+          { size: "33 cl", price: "6,50" },
+          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra chiara e rinfrescante, aromatizzata con scorza d'arancia, coriandolo e spezie leggere. Leggera, fresca e leggermente velata.",
       },
@@ -45,8 +78,8 @@ export const drinksData = [
         style: "Golden Ale · 4.8% vol.",
         image: "/beers/rovina.png",
         formats: [
-          { size: "0,33 cl", price: "6,50" },
-          { size: "0,75 cl", price: "12,00" },
+          { size: "33 cl", price: "6,50" },
+          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra dorata e equilibrata, con aromi maltati dolci, note floreali e un tocco erbaceo dai luppoli nobili. Pulita e beverina.",
       },
@@ -55,8 +88,8 @@ export const drinksData = [
         style: "Brown Ale · 7.0% vol.",
         image: "/beers/sassaia.png",
         formats: [
-          { size: "0,33 cl", price: "6,50" },
-          { size: "0,75 cl", price: "12,00" },
+          { size: "33 cl", price: "6,50" },
+          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra ambrata corposa, profumata di resina, caramello tostato, frutta matura e malti speciali. Strutturata e resinosa.",
       },
@@ -65,8 +98,8 @@ export const drinksData = [
         style: "Strong Belgian Ale · 7.5% vol.",
         image: "/beers/cavadenti.png",
         formats: [
-          { size: "0,33 cl", price: "6,50" },
-          { size: "0,75 cl", price: "12,00" },
+          { size: "33 cl", price: "6,50" },
+          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra forte e complessa, con aromi caldi di frutta candita, spezie, malti caramellati e lieviti belgici. Avvolgente e persistente.",
       },
@@ -74,15 +107,37 @@ export const drinksData = [
   },
   {
     id: "bevande-varie",
-    title: "Bevande",
-    subtitle: "Analcoliche",
+    title: "Bevande analcoliche",
+    subtitle: "Bibite, acqua, energy",
     items: [
-      { name: "Lattine 33cl", price: "2,50", desc: "Assortimento lattine 33cl." },
-      { name: "Bibite in bottiglia 45cl", price: "3,00", desc: "Bibite in bottiglia 45cl." },
-      { name: "Red Bull 25cl", price: "3,50", desc: "Energy drink." },
-      { name: "Acqua 50cl", price: "1,00", desc: "Naturale o frizzante." },
-      { name: "Acqua 1 lt", price: "1,50", desc: "Naturale o frizzante." },
-      { name: "Estathé brick", price: "1,20", desc: "Tè freddo in brick." },
+      {
+        name: "Lattine 33 cl",
+        desc: "Coca Cola · Coca Cola Zero · Fanta · Sprite · Lemon Soda",
+        price: "2,50",
+      },
+      {
+        name: "Bibite in bottiglia 45 cl",
+        desc: "Coca Cola · Coca Cola Zero · Fanta · Estathè",
+        price: "3,00",
+      },
+      {
+        name: "Coca Cola 1 L",
+        desc: "Bottiglia da 1 litro.",
+        price: "4,00",
+      },
+      {
+        name: "Red Bull 25 cl",
+        desc: "Energy drink.",
+        price: "3,50",
+      },
+      {
+        name: "Acqua",
+        desc: "Naturale o frizzante.",
+        formats: [
+          { size: "50 cl", price: "1,00" },
+          { size: "1 L", price: "1,50" },
+        ],
+      },
     ],
   },
   {
@@ -90,16 +145,38 @@ export const drinksData = [
     title: "Vini",
     subtitle: "Della casa e del territorio",
     items: [
-      { name: "Syrah 25cl", price: "3,50", desc: "Syrah di Cortona, calice." },
-      { name: "Syrah 50cl", price: "6,50", desc: "Syrah di Cortona, mezzo litro." },
-      { name: "Syrah 1 L", price: "11,00", desc: "Syrah di Cortona, litro." },
-      { name: "Sangiovese 25cl", price: "3,00", desc: "Sangiovese, calice." },
-      { name: "Sangiovese 50cl", price: "5,50", desc: "Sangiovese, mezzo litro." },
-      { name: "Sangiovese 1 L", price: "10,00", desc: "Sangiovese, litro." },
-      { name: "Bianco 25cl", price: "3,00", desc: "Vino bianco della casa." },
-      { name: "Bianco 50cl", price: "5,00", desc: "Vino bianco della casa, mezzo litro." },
-      { name: "Bianco 1 L", price: "9,00", desc: "Vino bianco della casa, litro." },
-      { name: "Bottiglia di vino", price: "—", desc: "Selezione in bottiglia — chiedi al personale." },
+      {
+        name: "Syrah di Cortona",
+        desc: "Vino rosso strutturato del territorio.",
+        formats: [
+          { size: "25 cl", price: "3,50" },
+          { size: "50 cl", price: "6,50" },
+          { size: "1 L", price: "11,00" },
+        ],
+      },
+      {
+        name: "Sangiovese",
+        desc: "Sangiovese toscano, fresco e tannico.",
+        formats: [
+          { size: "25 cl", price: "3,00" },
+          { size: "50 cl", price: "5,50" },
+          { size: "1 L", price: "10,00" },
+        ],
+      },
+      {
+        name: "Bianco della casa",
+        desc: "Vino bianco selezionato dal territorio.",
+        formats: [
+          { size: "25 cl", price: "3,00" },
+          { size: "50 cl", price: "5,00" },
+          { size: "1 L", price: "9,00" },
+        ],
+      },
+      {
+        name: "Bottiglia di vino",
+        desc: "Selezione in bottiglia — chiedi al personale.",
+        price: "—",
+      },
     ],
   },
   {
