@@ -12,7 +12,7 @@ export default function About({ t, lang, setLang }) {
       <header className="sticky top-0 z-30 border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
           <Link to="/" data-testid="about-back-home" className="flex items-center gap-3">
-            <Logo />
+            <Logo size="compact" />
             <span className="hidden text-[10px] tracking-mega uppercase text-stone-400 md:inline">
               ← {t("about.backToMenu")}
             </span>

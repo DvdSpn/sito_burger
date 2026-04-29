@@ -16,15 +16,48 @@ export const drinksData = [
   {
     id: "birre-bottiglia",
     title: "Birre in bottiglia",
-    subtitle: "Selezione classica e artigianale",
+    subtitle: "Selezione classica",
     items: [
       { name: "Peroni / Beck's / Moretti 33cl", price: "3,00", desc: "Lager classica 33cl." },
       { name: "Ceres / Tennents / Corona / Bjorne 33cl", price: "5,00", desc: "Premium 33cl." },
       { name: "Moretti 66cl", price: "4,50", desc: "Bottiglia grande 66cl." },
       { name: "Heineken / Peroni 66cl", price: "5,00", desc: "Bottiglia grande 66cl." },
       { name: "Ichnusa non filtrata 50cl", price: "5,00", desc: "Birra sarda non filtrata." },
-      { name: "Artigianale S. Girolamo 33cl", price: "6,50", desc: "Birra artigianale 33cl." },
-      { name: "Artigianale S. Girolamo 75cl", price: "12,00", desc: "Birra artigianale 75cl, formato condivisione." },
+    ],
+  },
+  {
+    id: "birre-artigianali-san-girolamo",
+    title: "Birre Artigianali San Girolamo",
+    subtitle: "Birrificio toscano · Selezione del mastro birraio",
+    items: [
+      {
+        name: "Traccia",
+        style: "Blanche · 4.5% vol.",
+        bottleColor: "#f3e9b8",
+        price: "6,50",
+        desc: "Birra chiara e rinfrescante, aromatizzata con scorza d'arancia, coriandolo e spezie leggere. Leggera, fresca e leggermente velata.",
+      },
+      {
+        name: "Rovina",
+        style: "Golden Ale · 4.8% vol.",
+        bottleColor: "#e0a82e",
+        price: "6,50",
+        desc: "Birra dorata e equilibrata, con aromi maltati dolci, note floreali e un tocco erbaceo dai luppoli nobili. Pulita e beverina.",
+      },
+      {
+        name: "Sassaia",
+        style: "Brown Ale · 7.0% vol.",
+        bottleColor: "#7a3f17",
+        price: "7,00",
+        desc: "Birra ambrata corposa, profumata di resina, caramello tostato, frutta matura e malti speciali. Strutturata e resinosa.",
+      },
+      {
+        name: "Cavadenti",
+        style: "Strong Belgian Ale · 7.5% vol.",
+        bottleColor: "#a83a1a",
+        price: "7,50",
+        desc: "Birra forte e complessa, con aromi caldi di frutta candita, spezie, malti caramellati e lieviti belgici. Avvolgente e persistente.",
+      },
     ],
   },
   {
@@ -92,7 +125,7 @@ export const pairings = [
   },
   {
     dish: "Grigliata di maiale / Costata",
-    wine: "Artigianale S. Girolamo",
-    note: "Birra artigianale corposa per carni alla brace.",
+    wine: "Sassaia · Brown Ale",
+    note: "Birra artigianale corposa San Girolamo per carni alla brace.",
   },
 ];

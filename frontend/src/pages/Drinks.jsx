@@ -3,6 +3,7 @@ import { ArrowLeft, Wine } from "lucide-react";
 import { drinksData, pairings } from "../data/drinks";
 import Logo from "../components/Logo";
 import LanguageToggle from "../components/LanguageToggle";
+import BottleIcon from "../components/BottleIcon";
 
 export default function Drinks({ t, lang, setLang }) {
   return (
@@ -11,7 +12,7 @@ export default function Drinks({ t, lang, setLang }) {
       <header className="sticky top-0 z-30 border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
           <Link to="/" data-testid="drinks-back-home" className="flex items-center gap-3">
-            <Logo />
+            <Logo size="compact" />
             <span className="hidden text-[10px] tracking-mega uppercase text-stone-400 md:inline">
               ← {t("drinks.backToMenu")}
             </span>
@@ -107,20 +108,33 @@ export default function Drinks({ t, lang, setLang }) {
                 <article
                   key={item.name}
                   data-testid={`drink-item-${item.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`}
-                  className="border-b border-stone-800/80 py-5 last:border-b-0"
+                  className="flex items-start gap-4 border-b border-stone-800/80 py-5 last:border-b-0"
                 >
-                  <div className="flex items-baseline">
-                    <h3 className="font-display text-lg font-bold text-stone-50 md:text-xl">
-                      {item.name}
-                    </h3>
-                    <span className="leader hidden md:block" />
-                    <span className="ml-auto shrink-0 font-display text-lg font-semibold text-amber-500 md:ml-0 md:text-xl">
-                      {item.price === "—" ? "—" : `€ ${item.price}`}
-                    </span>
-                  </div>
-                  {item.desc && (
-                    <p className="mt-1 text-sm text-stone-400">{item.desc}</p>
+                  {item.bottleColor && (
+                    <BottleIcon
+                      color={item.bottleColor}
+                      className="h-20 w-8 shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.55)] md:h-24 md:w-10"
+                    />
                   )}
+                  <div className="flex-1">
+                    <div className="flex items-baseline">
+                      <h3 className="font-display text-lg font-bold text-stone-50 md:text-xl">
+                        {item.name}
+                      </h3>
+                      <span className="leader hidden md:block" />
+                      <span className="ml-auto shrink-0 font-display text-lg font-semibold text-amber-500 md:ml-0 md:text-xl">
+                        {item.price === "—" ? "—" : `€ ${item.price}`}
+                      </span>
+                    </div>
+                    {item.style && (
+                      <p className="mt-0.5 text-[11px] font-bold uppercase tracking-mega text-amber-500/80">
+                        {item.style}
+                      </p>
+                    )}
+                    {item.desc && (
+                      <p className="mt-1 text-sm text-stone-400">{item.desc}</p>
+                    )}
+                  </div>
                 </article>
               ))}
             </div>
