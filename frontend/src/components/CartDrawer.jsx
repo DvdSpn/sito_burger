@@ -284,19 +284,6 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                 </div>
               ) : (
                 <>
-                  {/* Takeaway-only notice — prominent badge */}
-                  <div className="mb-5 flex items-start gap-3 rounded-sm border border-amber-600/60 bg-amber-500/10 px-4 py-3">
-                    <ShoppingBag className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-                    <div>
-                      <p className="text-[11px] font-bold uppercase tracking-mega text-amber-400">
-                        {t("cart.takeawayOnly")}
-                      </p>
-                      <p className="mt-1 text-[12px] leading-relaxed text-stone-300">
-                        {t("cart.takeawayOnlyNote")}
-                      </p>
-                    </div>
-                  </div>
-
                   <ul className="space-y-4">
                     {items.map((i) => (
                       <li

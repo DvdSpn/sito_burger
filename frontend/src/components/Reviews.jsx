@@ -160,10 +160,10 @@ export default function Reviews({ t, lang }) {
             </div>
           </div>
 
-          <div className="relative lg:col-span-8">
+          <div className="relative min-w-0 lg:col-span-8">
             <Quote className="absolute -top-4 left-0 h-14 w-14 text-amber-600/20" />
             <div
-              className="relative overflow-hidden"
+              className="relative w-full overflow-hidden"
               data-testid="reviews-carousel"
             >
               <div
@@ -175,7 +175,7 @@ export default function Reviews({ t, lang }) {
                     key={i}
                     data-testid={`review-${i}`}
                     aria-hidden={i !== index}
-                    className="w-full shrink-0 pr-8"
+                    className="w-full min-w-0 shrink-0 grow-0 basis-full"
                   >
                     <div className="flex items-center gap-1 mb-5">
                       {[...Array(5)].map((_, s) => (
@@ -190,7 +190,7 @@ export default function Reviews({ t, lang }) {
                         />
                       ))}
                     </div>
-                    <p className="font-display text-2xl leading-snug text-stone-100 md:text-3xl lg:text-4xl">
+                    <p className="whitespace-pre-line break-words font-display text-base leading-snug text-stone-100 sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl">
                       &ldquo;{lang === "en" ? r.en : r.it}&rdquo;
                     </p>
                     <div className="mt-8 flex items-center gap-4">

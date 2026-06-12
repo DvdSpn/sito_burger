@@ -1,20 +1,24 @@
 import MenuItem from "./MenuItem";
 import AccordionSection from "./AccordionSection";
 
-const SECTION_IMAGES = {
-  hamburger:
-    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png",
-  ciabatte:
-    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/9aa68f56ad2ffb2fb974a11366b607c9497a01596cee3d8d0373a20bf5ec7eb8.png",
-  griglia:
-    "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/40d1c5a5123d54b18dd143864cfe29ce510d7b40da621c021641d0226cf315cc.png",
-  piadine:
-    "https://images.unsplash.com/photo-1626323107890-cce0b8c2c641?crop=entropy&cs=srgb&fm=jpg&q=80&w=1600",
-  contorni: null,
+// Sub-text shown UNDER the items, per category. Empty = nothing displayed.
+const SECTION_DISCLAIMER = {
+  hamburger: {
+    it: "Tutti gli hamburger vengono serviti con patatine. Disponibile senza glutine su richiesta.",
+    en: "All burgers are served with fries. Gluten-free option available on request.",
+  },
+  ciabatte: {
+    it: "Tutte le ciabatte vengono servite con patatine. Disponibile senza glutine su richiesta.",
+    en: "All ciabatta sandwiches are served with fries. Gluten-free option available on request.",
+  },
+  piadine: {
+    it: "Tutti i wrap vengono serviti con patatine.",
+    en: "All wraps are served with fries.",
+  },
+  // griglia / contorni / dessert: no disclaimer
 };
 
 export default function MenuSection({ section, index, filter, t, lang, isOpen, onToggle }) {
-  const img = SECTION_IMAGES[section.id];
   const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
   const subtitle =
     lang === "en" && section.subtitleEn ? section.subtitleEn : section.subtitle;
@@ -23,6 +27,9 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
   const matchesFilter = (item) =>
     filter === "all" ? true : item.tags.includes(filter);
 
+  const disclaimer = SECTION_DISCLAIMER[section.id];
+  const disclaimerText = disclaimer ? disclaimer[lang] || disclaimer.it : null;
+
   return (
     <AccordionSection
       id={section.id}
@@ -30,7 +37,6 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
       title={title}
       subtitle={subtitle}
       description={accent}
-      imageSrc={img}
       testId={`section-${section.id}`}
       isOpen={isOpen}
       onToggle={onToggle}
@@ -46,9 +52,11 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
           />
         ))}
       </div>
-      <p className="mt-4 px-2 text-[11px] uppercase tracking-mega text-stone-600">
-        {t("menu.disclaimer")}
-      </p>
+      {disclaimerText && (
+        <p className="mt-4 rounded-sm border border-amber-600/40 bg-amber-500/5 px-4 py-2.5 text-[11px] font-bold uppercase tracking-mega text-amber-400">
+          {disclaimerText}
+        </p>
+      )}
     </AccordionSection>
   );
 }

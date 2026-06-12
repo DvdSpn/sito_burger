@@ -186,8 +186,8 @@ export const drinksData = [
   },
   {
     id: "vini",
-    title: "Vini",
-    titleEn: "Wines",
+    title: "Vini della casa",
+    titleEn: "House wines",
     subtitle: "Della casa e del territorio",
     subtitleEn: "House wines and local selection",
     items: [

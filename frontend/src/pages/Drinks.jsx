@@ -64,8 +64,30 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Pairings highlight */}
-      <section className="border-b border-stone-800/70 bg-stone-900/30 py-16 md:py-20">
+      {/* Drink sections — single-active accordions, all closed by default */}
+      <div className="mx-auto max-w-5xl">
+        {drinksData.map((section, idx) => (
+          <AccordionSection
+            key={section.id}
+            id={section.id}
+            index={idx}
+            title={tx(section, "title", lang)}
+            subtitle={tx(section, "subtitle", lang)}
+            testId={`drinks-section-${section.id}`}
+            isOpen={openId === section.id}
+            onToggle={(nextId) => setOpenId(nextId)}
+          >
+            <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
+              {section.items.map((item) => (
+                <DrinkItem key={item.name} item={item} lang={lang} />
+              ))}
+            </div>
+          </AccordionSection>
+        ))}
+      </div>
+
+      {/* Pairings highlight — moved to bottom */}
+      <section className="border-t border-stone-800/70 bg-stone-900/30 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           <div className="mb-8 flex items-center gap-3">
             <Wine className="h-4 w-4 text-amber-500" />
@@ -94,28 +116,6 @@ export default function Drinks({ t, lang, setLang }) {
           </div>
         </div>
       </section>
-
-      {/* Drink sections — single-active accordions, all closed by default */}
-      <div className="mx-auto max-w-5xl">
-        {drinksData.map((section, idx) => (
-          <AccordionSection
-            key={section.id}
-            id={section.id}
-            index={idx}
-            title={tx(section, "title", lang)}
-            subtitle={tx(section, "subtitle", lang)}
-            testId={`drinks-section-${section.id}`}
-            isOpen={openId === section.id}
-            onToggle={(nextId) => setOpenId(nextId)}
-          >
-            <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
-              {section.items.map((item) => (
-                <DrinkItem key={item.name} item={item} lang={lang} />
-              ))}
-            </div>
-          </AccordionSection>
-        ))}
-      </div>
 
       <footer className="py-12 text-center">
         <Link

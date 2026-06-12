@@ -63,6 +63,7 @@ const dict = {
     "menu.contains": "Contiene:",
     "menu.disclaimer":
       "Prezzi in € · Coperto non incluso · Disponibile pane senza glutine su richiesta",
+    "menu.coverCharge": "Coperto e servizio · € 1,00 a persona",
 
     "section.hamburger.subtitle": "Dalla Chianina al Classic",
     "section.hamburger.accent":
@@ -300,6 +301,7 @@ const dict = {
     "menu.contains": "Contains:",
     "menu.disclaimer":
       "Prices in € · Cover not included · Gluten-free bread available on request",
+    "menu.coverCharge": "Cover & service · € 1.00 per person",
 
     "section.hamburger.subtitle": "From Chianina to Classic",
     "section.hamburger.accent":

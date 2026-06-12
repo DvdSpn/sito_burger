@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Wine } from "lucide-react";
@@ -21,6 +21,42 @@ const Home = ({ t, lang, setLang }) => {
   // single-active accordion across menu sections — null = all closed
   const [openSectionId, setOpenSectionId] = useState(null);
 
+  // Programmatic open + scroll, used by FilterBar nav clicks. Avoids the
+  // browser's native anchor jump (which lands wrong because the target
+  // section has minimal height before its accordion expands).
+  const openSection = (id) => {
+    if (!menuData.some((s) => s.id === id)) return;
+    setOpenSectionId(id);
+    // Update URL hash without triggering native scroll
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#${id}`);
+    }
+    // Wait for accordion close+open transitions to settle, then scroll
+    window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 550);
+  };
+
+  // Sync URL hash → open the matching accordion + scroll AFTER transition settles
+  useEffect(() => {
+    const ids = menuData.map((s) => s.id);
+
+    const handleHash = () => {
+      const hash = window.location.hash.replace(/^#/, "");
+      if (!ids.includes(hash)) return;
+      setOpenSectionId(hash);
+      window.setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 550);
+    };
+
+    if (window.location.hash) handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <div
       id="top"
@@ -30,7 +66,13 @@ const Home = ({ t, lang, setLang }) => {
     >
       <Hero t={t} lang={lang} setLang={setLang} />
       <ValuesStrip t={t} />
-      <FilterBar activeFilter={filter} setActiveFilter={setFilter} t={t} lang={lang} />
+      <FilterBar
+        activeFilter={filter}
+        setActiveFilter={setFilter}
+        t={t}
+        lang={lang}
+        onSectionClick={openSection}
+      />
 
       <div id="menu" data-testid="menu-anchor">
         {menuData.map((section, i) => (
@@ -45,6 +87,16 @@ const Home = ({ t, lang, setLang }) => {
             onToggle={(nextId) => setOpenSectionId(nextId)}
           />
         ))}
+      </div>
+
+      {/* Coperto & servizio notice */}
+      <div className="border-t border-stone-800/70 bg-stone-950 px-6 py-6 text-center lg:px-12">
+        <p
+          data-testid="cover-charge-notice"
+          className="mx-auto inline-block rounded-sm border border-stone-700 bg-stone-900/60 px-4 py-2 text-[11px] font-bold uppercase tracking-mega text-stone-300"
+        >
+          {t("menu.coverCharge")}
+        </p>
       </div>
 
       {/* CTA → Carta bevande, after the menu sections (after Dessert) */}

@@ -7,7 +7,7 @@ import Logo from "./Logo";
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-export default function FilterBar({ activeFilter, setActiveFilter, t, lang }) {
+export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSectionClick }) {
   const [stuck, setStuck] = useState(false);
   const [activeSection, setActiveSection] = useState("hamburger");
   const [showRightFade, setShowRightFade] = useState(true);
@@ -20,6 +20,13 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang }) {
     id: s.id,
     label: lang === "en" && s.titleEn ? s.titleEn : s.title,
   }));
+
+  const handleSectionClick = (e, id) => {
+    if (onSectionClick) {
+      e.preventDefault();
+      onSectionClick(id);
+    }
+  };
 
   const filters = [
     { id: "all", label: t("filter.all") },
@@ -150,6 +157,7 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang }) {
                   <a
                     key={s.id}
                     href={`#${s.id}`}
+                    onClick={(e) => handleSectionClick(e, s.id)}
                     data-testid={`section-link-${s.id}`}
                     className={cn(
                       "whitespace-nowrap rounded-sm border px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-mega transition-colors",

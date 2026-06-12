@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "../lib/utils";
 
@@ -7,7 +7,8 @@ import { cn } from "../lib/utils";
  * Two modes:
  *  - Controlled: parent passes `isOpen` + `onToggle` (single-active behavior).
  *  - Uncontrolled: manages its own state via `defaultOpen`.
- * Auto-opens when URL hash matches its id (e.g. clicking a category link).
+ * Hash-based opening + scrolling is handled by the parent (so it can wait for
+ * the close/open transition before scrolling to the right position).
  */
 export default function AccordionSection({
   id,
@@ -34,36 +35,11 @@ export default function AccordionSection({
     }
   };
 
-  // Open this section when URL hash matches its id (e.g. nav-link click)
-  useEffect(() => {
-    if (!id) return undefined;
-    const checkHash = () => {
-      if (typeof window === "undefined") return;
-      const hash = window.location.hash.replace(/^#/, "");
-      if (hash === id) {
-        if (controlled) {
-          onToggle?.(id);
-        } else {
-          setInternalOpen(true);
-        }
-        // Smoothly scroll into view after expand animation begins
-        requestAnimationFrame(() => {
-          const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
-    };
-    checkHash();
-    window.addEventListener("hashchange", checkHash);
-    return () => window.removeEventListener("hashchange", checkHash);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
   return (
     <section
       id={id}
       data-testid={testId || `accordion-${id}`}
-      className="border-b border-stone-800/70"
+      className="scroll-mt-24 border-b border-stone-800/70 md:scroll-mt-28"
     >
       <button
         type="button"
