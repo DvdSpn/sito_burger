@@ -22,7 +22,6 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
   const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
   const subtitle =
     lang === "en" && section.subtitleEn ? section.subtitleEn : section.subtitle;
-  const accent = lang === "en" && section.accentEn ? section.accentEn : section.accent;
 
   const matchesFilter = (item) =>
     filter === "all" ? true : item.tags.includes(filter);
@@ -36,7 +35,6 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
       index={index}
       title={title}
       subtitle={subtitle}
-      description={accent}
       testId={`section-${section.id}`}
       isOpen={isOpen}
       onToggle={onToggle}

@@ -1,16 +1,16 @@
 import { Camera } from "lucide-react";
 
-export default function Gallery({ t }) {
-  // 6 placeholder slots (different sizes for visual interest)
-  const slots = [
-    { span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto" },
-    { span: "aspect-[4/5]" },
-    { span: "aspect-[4/5]" },
-    { span: "md:col-span-2 aspect-[16/10]" },
-    { span: "aspect-square" },
-    { span: "aspect-square" },
-  ];
+// Real photos provided by the restaurant. Each slot can be `{ src, alt }` or null (placeholder)
+const SLOTS = [
+  { span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto", src: "/gallery/toscana-ciabatta.jpg", alt: "Ciabatta Toscana" },
+  { span: "aspect-[4/5]" },
+  { span: "aspect-[4/5]" },
+  { span: "md:col-span-2 aspect-[16/10]" },
+  { span: "aspect-square" },
+  { span: "aspect-square" },
+];
 
+export default function Gallery({ t }) {
   return (
     <section
       id="galleria"
@@ -36,22 +36,37 @@ export default function Gallery({ t }) {
         </div>
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-          {slots.map((s, i) => (
+          {SLOTS.map((s, i) => (
             <div
               key={i}
               data-testid={`gallery-slot-${i + 1}`}
-              className={`group relative overflow-hidden rounded-sm border border-dashed border-stone-700/60 bg-stone-900/40 transition-colors hover:border-amber-700/60 hover:bg-stone-900/70 ${s.span}`}
+              className={`group relative overflow-hidden rounded-sm transition-colors ${
+                s.src
+                  ? "border border-stone-800/70 bg-stone-900"
+                  : "border border-dashed border-stone-700/60 bg-stone-900/40 hover:border-amber-700/60 hover:bg-stone-900/70"
+              } ${s.span}`}
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
-                <Camera className="h-6 w-6 text-stone-600 transition-colors group-hover:text-amber-600" />
-                <span className="text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors group-hover:text-amber-500">
-                  {t("gallery.placeholder")}
-                </span>
-                <span className="font-display text-lg text-stone-700">
-                  0{i + 1}
-                </span>
-              </div>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.06),transparent_60%)] opacity-0 transition-opacity group-hover:opacity-100" />
+              {s.src ? (
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
+                    <Camera className="h-6 w-6 text-stone-600 transition-colors group-hover:text-amber-600" />
+                    <span className="text-[10px] font-bold uppercase tracking-mega text-stone-500 transition-colors group-hover:text-amber-500">
+                      {t("gallery.placeholder")}
+                    </span>
+                    <span className="font-display text-lg text-stone-700">
+                      0{i + 1}
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.06),transparent_60%)] opacity-0 transition-opacity group-hover:opacity-100" />
+                </>
+              )}
             </div>
           ))}
         </div>

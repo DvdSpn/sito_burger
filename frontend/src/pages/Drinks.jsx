@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Wine } from "lucide-react";
 import { drinksData, pairings } from "../data/drinks";
@@ -18,6 +18,32 @@ const tx = (item, key, lang) => {
 export default function Drinks({ t, lang, setLang }) {
   // single-active accordion state — null means all closed
   const [openId, setOpenId] = useState(null);
+
+  // Same unified handler as the menu page: close previous, open next, scroll to header
+  const handleToggle = (nextId) => {
+    setOpenId(nextId);
+    if (nextId === null) return;
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#${nextId}`);
+    }
+    window.setTimeout(() => {
+      const el = document.getElementById(nextId);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 580);
+  };
+
+  useEffect(() => {
+    const ids = drinksData.map((s) => s.id);
+    const handleHash = () => {
+      const hash = window.location.hash.replace(/^#/, "");
+      if (!ids.includes(hash)) return;
+      handleToggle(hash);
+    };
+    if (typeof window !== "undefined" && window.location.hash) handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-50">
@@ -75,7 +101,7 @@ export default function Drinks({ t, lang, setLang }) {
             subtitle={tx(section, "subtitle", lang)}
             testId={`drinks-section-${section.id}`}
             isOpen={openId === section.id}
-            onToggle={(nextId) => setOpenId(nextId)}
+            onToggle={handleToggle}
           >
             <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
               {section.items.map((item) => (

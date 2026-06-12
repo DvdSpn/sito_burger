@@ -22,7 +22,7 @@ export const menuData = [
       { name: "Veggye Burger", price: "8,50", desc: "Hamburger vegetariano, maionese al basilico, crema di pomodori secchi, insalata, stracciatella.", descEn: "Vegetarian burger, basil mayonnaise, sun-dried tomato cream, lettuce, stracciatella cheese.", tags: ["veg"], allergens: ["gluten", "sesame", "lactose", "eggs"], isNew: true },
       { name: "Chicken Cheese", price: "8,50", desc: "Burger di pollo 150gr, cheddar, bacon, insalata, pomodoro, salsa burger.", descEn: "Chicken burger 150g, cheddar, bacon, lettuce, tomato, burger sauce.", tags: ["chicken"], allergens: ["gluten", "sesame", "lactose", "eggs", "mustard"] },
       { name: "Chicken", price: "7,00", desc: "Burger di pollo 150gr, insalata, pomodoro, maionese, ketchup.", descEn: "Chicken burger 150g, lettuce, tomato, mayonnaise, ketchup.", tags: ["chicken"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
-      { name: "Hot Dog", price: "4,00", desc: "Wurstel, ketchup, maionese.", descEn: "Frankfurter, ketchup, mayonnaise.", tags: ["pork"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
+      { name: "Hot Dog", price: "4,00", desc: "Wurstel + 2 salse a scelta tra: ketchup, maionese, BBQ, salsa piccante.", descEn: "Frankfurter + 2 sauces of your choice from: ketchup, mayo, BBQ, spicy sauce.", tags: ["pork"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
     ],
   },
   {

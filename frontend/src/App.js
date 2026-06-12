@@ -21,21 +21,27 @@ const Home = ({ t, lang, setLang }) => {
   // single-active accordion across menu sections — null = all closed
   const [openSectionId, setOpenSectionId] = useState(null);
 
-  // Programmatic open + scroll, used by FilterBar nav clicks. Avoids the
-  // browser's native anchor jump (which lands wrong because the target
-  // section has minimal height before its accordion expands).
-  const openSection = (id) => {
-    if (!menuData.some((s) => s.id === id)) return;
-    setOpenSectionId(id);
-    // Update URL hash without triggering native scroll
+  // Unified open-or-close handler. Used by BOTH the FilterBar nav links AND
+  // each accordion's chevron click. Guarantees the new section opens, the old
+  // one closes, and the viewport lands on the new section's header (not at
+  // the bottom of the now-collapsed page).
+  const handleSectionToggle = (nextId) => {
+    setOpenSectionId(nextId);
+
+    if (nextId === null) return; // closing only
+
+    // Update URL hash without triggering the browser's native anchor jump
     if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#${id}`);
+      window.history.replaceState(null, "", `#${nextId}`);
     }
-    // Wait for accordion close+open transitions to settle, then scroll
+
+    // Wait for the previous accordion to close AND the new one to open
+    // (CSS transition is 500ms — use 580ms to be safe), then scroll the
+    // newly opened section's header to the top of the viewport.
     window.setTimeout(() => {
-      const el = document.getElementById(id);
+      const el = document.getElementById(nextId);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 550);
+    }, 580);
   };
 
   // Sync URL hash → open the matching accordion + scroll AFTER transition settles
@@ -45,16 +51,13 @@ const Home = ({ t, lang, setLang }) => {
     const handleHash = () => {
       const hash = window.location.hash.replace(/^#/, "");
       if (!ids.includes(hash)) return;
-      setOpenSectionId(hash);
-      window.setTimeout(() => {
-        const el = document.getElementById(hash);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 550);
+      handleSectionToggle(hash);
     };
 
     if (window.location.hash) handleHash();
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -71,7 +74,7 @@ const Home = ({ t, lang, setLang }) => {
         setActiveFilter={setFilter}
         t={t}
         lang={lang}
-        onSectionClick={openSection}
+        onSectionClick={handleSectionToggle}
       />
 
       <div id="menu" data-testid="menu-anchor">
@@ -84,7 +87,7 @@ const Home = ({ t, lang, setLang }) => {
             t={t}
             lang={lang}
             isOpen={openSectionId === section.id}
-            onToggle={(nextId) => setOpenSectionId(nextId)}
+            onToggle={handleSectionToggle}
           />
         ))}
       </div>
