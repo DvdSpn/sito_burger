@@ -1,8 +1,15 @@
-import { Camera } from "lucide-react";
+import { useState } from "react";
+import { Camera, Maximize2 } from "lucide-react";
+import Lightbox from "./Lightbox";
 
-// Real photos provided by the restaurant. Each slot can be `{ src, alt }` or null (placeholder)
+// Real photos provided by the restaurant. Each slot can be `{ src, alt, caption }` or null (placeholder)
 const SLOTS = [
-  { span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto", src: "/gallery/toscana-ciabatta.jpg", alt: "Ciabatta Toscana" },
+  {
+    span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto",
+    src: "/gallery/toscana-ciabatta.jpg",
+    alt: "Ciabatta Toscana",
+    caption: "Ciabatta Toscana",
+  },
   { span: "aspect-[4/5]" },
   { span: "aspect-[4/5]" },
   { span: "md:col-span-2 aspect-[16/10]" },
@@ -11,6 +18,8 @@ const SLOTS = [
 ];
 
 export default function Gallery({ t }) {
+  const [active, setActive] = useState(null);
+
   return (
     <section
       id="galleria"
@@ -42,17 +51,42 @@ export default function Gallery({ t }) {
               data-testid={`gallery-slot-${i + 1}`}
               className={`group relative overflow-hidden rounded-sm transition-colors ${
                 s.src
-                  ? "border border-stone-800/70 bg-stone-900"
+                  ? "cursor-zoom-in border border-stone-800/70 bg-stone-900"
                   : "border border-dashed border-stone-700/60 bg-stone-900/40 hover:border-amber-700/60 hover:bg-stone-900/70"
               } ${s.span}`}
+              {...(s.src
+                ? {
+                    role: "button",
+                    tabIndex: 0,
+                    onClick: () => setActive(s),
+                    onKeyDown: (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActive(s);
+                      }
+                    },
+                  }
+                : {})}
             >
               {s.src ? (
-                <img
-                  src={s.src}
-                  alt={s.alt}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <>
+                  <img
+                    src={s.src}
+                    alt={s.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Subtle caption — only visible enough to be readable, never invasive */}
+                  {s.caption && (
+                    <span className="pointer-events-none absolute bottom-2 left-2 inline-flex items-center gap-1.5 rounded-sm bg-stone-950/55 px-2 py-1 text-[9px] font-bold uppercase tracking-mega text-stone-100/90 backdrop-blur-sm">
+                      {s.caption}
+                    </span>
+                  )}
+                  {/* Zoom hint on hover */}
+                  <span className="pointer-events-none absolute right-2 top-2 grid h-8 w-8 place-items-center rounded-sm bg-stone-950/60 opacity-0 transition-opacity group-hover:opacity-100">
+                    <Maximize2 className="h-3.5 w-3.5 text-amber-400" />
+                  </span>
+                </>
               ) : (
                 <>
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
@@ -71,6 +105,15 @@ export default function Gallery({ t }) {
           ))}
         </div>
       </div>
+
+      {active && (
+        <Lightbox
+          src={active.src}
+          alt={active.alt}
+          caption={active.caption}
+          onClose={() => setActive(null)}
+        />
+      )}
     </section>
   );
 }

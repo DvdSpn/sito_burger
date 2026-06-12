@@ -68,7 +68,6 @@ const Home = ({ t, lang, setLang }) => {
       className="min-h-screen bg-stone-950 text-stone-50"
     >
       <Hero t={t} lang={lang} setLang={setLang} />
-      <ValuesStrip t={t} />
       <FilterBar
         activeFilter={filter}
         setActiveFilter={setFilter}
@@ -124,6 +123,8 @@ const Home = ({ t, lang, setLang }) => {
           </Link>
         </div>
       </section>
+
+      <ValuesStrip t={t} />
 
       <HomeFooter t={t} />
 

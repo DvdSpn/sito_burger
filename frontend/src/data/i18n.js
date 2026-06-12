@@ -95,7 +95,7 @@ const dict = {
     "reviews.next": "Recensione successiva",
     "reviews.leaveReview": "Lascia una recensione Google",
 
-    "status.openNow": "Aperto · stiamo servendo",
+    "status.openNow": "Aperto ora",
     "status.closedNow": "Chiuso ora",
     "status.reopensToday": (hhmm) => `Riapre oggi alle ${hhmm}`,
     "status.reopensTomorrow": (hhmm) => `Riapre domani alle ${hhmm}`,
@@ -333,7 +333,7 @@ const dict = {
     "reviews.next": "Next review",
     "reviews.leaveReview": "Write a Google review",
 
-    "status.openNow": "Open · now serving",
+    "status.openNow": "Open now",
     "status.closedNow": "Closed now",
     "status.reopensToday": (hhmm) => `Reopens today at ${hhmm}`,
     "status.reopensTomorrow": (hhmm) => `Reopens tomorrow at ${hhmm}`,
