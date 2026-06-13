@@ -53,7 +53,6 @@ export const menuData = [
       { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, ketchup.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, ketchup.", tags: ["chicken"], allergens: ["gluten", "lactose"], popular: true },
       { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa ranch, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, ranch sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
       { name: "Crunchy Chicken", price: "11,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
-      { name: "Classica", price: "8,50", desc: "Piadina arrotolata con prosciutto crudo, stracchino, rucola, pomodoro.", descEn: "Rolled piadina with raw Italian ham, stracchino cheese, rocket, tomato.", tags: ["pork"], allergens: ["gluten", "lactose"] },
     ],
   },
   {
