@@ -6,7 +6,7 @@ import Logo from "../components/Logo";
 import LanguageToggle from "../components/LanguageToggle";
 import AccordionSection from "../components/AccordionSection";
 import DrinkItem from "../components/DrinkItem";
-import FeaturedWines from "../components/FeaturedWines";
+import FeaturedWinesCarousel from "../components/FeaturedWinesCarousel";
 
 const tx = (item, key, lang) => {
   if (lang === "en") {
@@ -91,9 +91,6 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Featured wines showcase — new "in primo piano" section */}
-      <FeaturedWines lang={lang} />
-
       {/* Drink sections — single-active accordions, all closed by default */}
       <div className="mx-auto max-w-5xl">
         {drinksData.map((section, idx) => (
@@ -107,11 +104,15 @@ export default function Drinks({ t, lang, setLang }) {
             isOpen={openId === section.id}
             onToggle={handleToggle}
           >
-            <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
-              {section.items.map((item) => (
-                <DrinkItem key={item.name} item={item} lang={lang} />
-              ))}
-            </div>
+            {section.render === "featuredWines" ? (
+              <FeaturedWinesCarousel lang={lang} />
+            ) : (
+              <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
+                {section.items.map((item) => (
+                  <DrinkItem key={item.name} item={item} lang={lang} />
+                ))}
+              </div>
+            )}
           </AccordionSection>
         ))}
       </div>

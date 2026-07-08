@@ -185,6 +185,16 @@ export const drinksData = [
     ],
   },
   {
+    id: "vini-bottiglia",
+    title: "Vini in bottiglia",
+    titleEn: "Bottled wines",
+    subtitle: "Selezione in primo piano · Etichette",
+    subtitleEn: "Featured selection · Labels",
+    // Special renderer: displays the featured wines carousel instead of a plain list
+    render: "featuredWines",
+    items: [],
+  },
+  {
     id: "vini",
     title: "Vini della casa",
     titleEn: "House wines",
