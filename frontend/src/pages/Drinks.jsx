@@ -6,6 +6,7 @@ import Logo from "../components/Logo";
 import LanguageToggle from "../components/LanguageToggle";
 import AccordionSection from "../components/AccordionSection";
 import DrinkItem from "../components/DrinkItem";
+import FeaturedWines from "../components/FeaturedWines";
 
 const tx = (item, key, lang) => {
   if (lang === "en") {
@@ -89,6 +90,9 @@ export default function Drinks({ t, lang, setLang }) {
           </p>
         </div>
       </section>
+
+      {/* Featured wines showcase — new "in primo piano" section */}
+      <FeaturedWines t={t} lang={lang} />
 
       {/* Drink sections — single-active accordions, all closed by default */}
       <div className="mx-auto max-w-5xl">
