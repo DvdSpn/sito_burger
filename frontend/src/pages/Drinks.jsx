@@ -92,7 +92,7 @@ export default function Drinks({ t, lang, setLang }) {
       </section>
 
       {/* Featured wines showcase — new "in primo piano" section */}
-      <FeaturedWines t={t} lang={lang} />
+      <FeaturedWines lang={lang} />
 
       {/* Drink sections — single-active accordions, all closed by default */}
       <div className="mx-auto max-w-5xl">

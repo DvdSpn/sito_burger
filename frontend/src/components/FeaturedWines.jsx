@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Wine } from "lucide-react";
 import { featuredWines } from "../data/featuredWines";
+import WineModal from "./WineModal";
 
 /**
  * FeaturedWines — horizontally scrollable showcase of bottle photos.
  * Displayed as an "in primo piano" strip at the top of the drinks page.
- * Prices/descriptions will be filled in later — for now: image + label only.
+ * Clicking a card opens the WineModal with full description + price.
  */
-export default function FeaturedWines({ t, lang }) {
+export default function FeaturedWines({ lang }) {
+  const [selected, setSelected] = useState(null);
+
   return (
     <section
       id="vini-primo-piano"
@@ -33,6 +37,11 @@ export default function FeaturedWines({ t, lang }) {
                 {lang === "en" ? "wine selection" : "in bottiglia"}
               </span>
             </h2>
+            <p className="mt-3 text-[11px] font-bold uppercase tracking-mega text-stone-500">
+              {lang === "en"
+                ? "Tap a bottle to view details"
+                : "Tocca una bottiglia per i dettagli"}
+            </p>
           </div>
         </div>
 
@@ -42,10 +51,12 @@ export default function FeaturedWines({ t, lang }) {
           style={{ scrollbarWidth: "thin" }}
         >
           {featuredWines.map((w) => (
-            <article
+            <button
+              type="button"
               key={w.id}
               data-testid={`featured-wine-${w.id}`}
-              className="group relative flex w-[220px] shrink-0 snap-start flex-col items-center rounded-sm border border-stone-800/60 bg-stone-950/60 p-5 pt-8 transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] md:w-[260px] md:p-6 md:pt-10"
+              onClick={() => setSelected(w)}
+              className="group relative flex w-[220px] shrink-0 snap-start flex-col items-center rounded-sm border border-stone-800/60 bg-stone-950/60 p-5 pt-8 text-left transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] focus:outline-none focus:ring-2 focus:ring-amber-600/60 md:w-[260px] md:p-6 md:pt-10"
             >
               <div className="relative flex h-56 w-full items-end justify-center md:h-72">
                 <img
@@ -66,10 +77,14 @@ export default function FeaturedWines({ t, lang }) {
                   {w.region}
                 </p>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </div>
+
+      {selected && (
+        <WineModal wine={selected} lang={lang} onClose={() => setSelected(null)} />
+      )}
     </section>
   );
 }
