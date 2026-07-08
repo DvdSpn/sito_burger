@@ -11,6 +11,7 @@ export const menuData = [
     subtitleEn: "From Chianina to Classic",
     accent: "Carne selezionata, pane artigianale, cottura alla griglia",
     accentEn: "Selected meat, artisan bread, grilled to perfection",
+    layout: "swipe",
     items: [
       { name: "Tartufato", price: "15,00", desc: "Chianina 200gr, lamelle di tartufo, fonduta di pecorino, insalata, pomodoro, salsa maionese.", descEn: "Chianina beef 200g, shaved truffle, pecorino cheese fondue, lettuce, tomato, mayonnaise.", tags: ["beef"], allergens: ["gluten", "sesame", "lactose", "eggs"], signature: true },
       { name: "Boscaiolo", price: "13,50", desc: "Chianina 200gr, porcini, insalata, pomodoro, salsa boscaiola.", descEn: "Chianina beef 200g, porcini mushrooms, lettuce, tomato, boscaiola mushroom sauce.", tags: ["beef"], allergens: ["gluten", "sesame", "eggs"] },
@@ -33,6 +34,7 @@ export const menuData = [
     subtitleEn: "Crunchy sandwiches from the oven",
     accent: "Pane toscano a lievitazione lenta",
     accentEn: "Tuscan slow-risen bread",
+    layout: "swipe",
     items: [
       { name: "Toscana", price: "13,00", desc: "Tagliata di manzo, porcini, fonduta di pecorino, lamelle di tartufo.", descEn: "Sliced beef, porcini mushrooms, pecorino fondue, shaved truffle.", tags: ["beef"], allergens: ["gluten", "lactose"], signature: true },
       { name: "Gustosa", price: "12,00", desc: "Tagliata di manzo, rucola, salsa di grana e salsa tartara.", descEn: "Sliced beef, rocket, parmesan sauce and tartar sauce.", tags: ["beef"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
@@ -49,6 +51,7 @@ export const menuData = [
     subtitleEn: "Soft wraps, packed with flavour",
     accent: "Piadine arrotolate, street food italiano",
     accentEn: "Rolled piadine, Italian street food",
+    layout: "swipe",
     items: [
       { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, ketchup.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, ketchup.", tags: ["chicken"], allergens: ["gluten", "lactose"], popular: true },
       { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa ranch, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, ranch sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },

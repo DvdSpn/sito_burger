@@ -29,6 +29,8 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
   const disclaimer = SECTION_DISCLAIMER[section.id];
   const disclaimerText = disclaimer ? disclaimer[lang] || disclaimer.it : null;
 
+  const isSwipe = section.layout === "swipe";
+
   return (
     <AccordionSection
       id={section.id}
@@ -39,17 +41,42 @@ export default function MenuSection({ section, index, filter, t, lang, isOpen, o
       isOpen={isOpen}
       onToggle={onToggle}
     >
-      <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 backdrop-blur-sm md:p-8">
-        {section.items.map((item) => (
-          <MenuItem
-            key={item.name}
-            item={item}
-            dim={!matchesFilter(item)}
-            t={t}
-            lang={lang}
-          />
-        ))}
-      </div>
+      {isSwipe ? (
+        <>
+          <div
+            className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 md:-mx-8 md:px-8"
+            style={{ scrollbarWidth: "thin" }}
+          >
+            {section.items.map((item) => (
+              <MenuItem
+                key={item.name}
+                item={item}
+                dim={!matchesFilter(item)}
+                t={t}
+                lang={lang}
+                variant="card"
+              />
+            ))}
+          </div>
+          <p className="mt-3 px-1 text-[10px] font-bold uppercase tracking-mega text-stone-500">
+            {lang === "en"
+              ? "Swipe to browse the whole menu"
+              : "Scorri per sfogliare tutto il menu"}
+          </p>
+        </>
+      ) : (
+        <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 backdrop-blur-sm md:p-8">
+          {section.items.map((item) => (
+            <MenuItem
+              key={item.name}
+              item={item}
+              dim={!matchesFilter(item)}
+              t={t}
+              lang={lang}
+            />
+          ))}
+        </div>
+      )}
       {disclaimerText && (
         <p className="mt-4 rounded-sm border border-amber-600/40 bg-amber-500/5 px-4 py-2.5 text-[11px] font-bold uppercase tracking-mega text-amber-400">
           {disclaimerText}

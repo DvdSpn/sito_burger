@@ -106,6 +106,27 @@ export default function Drinks({ t, lang, setLang }) {
           >
             {section.render === "featuredWines" ? (
               <FeaturedWinesCarousel lang={lang} />
+            ) : section.layout === "swipe" ? (
+              <>
+                <div
+                  className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 md:-mx-8 md:px-8"
+                  style={{ scrollbarWidth: "thin" }}
+                >
+                  {section.items.map((item) => (
+                    <DrinkItem
+                      key={item.name}
+                      item={item}
+                      lang={lang}
+                      variant="card"
+                    />
+                  ))}
+                </div>
+                <p className="mt-3 px-1 text-[10px] font-bold uppercase tracking-mega text-stone-500">
+                  {lang === "en"
+                    ? "Swipe to browse"
+                    : "Scorri per sfogliare"}
+                </p>
+              </>
             ) : (
               <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
                 {section.items.map((item) => (

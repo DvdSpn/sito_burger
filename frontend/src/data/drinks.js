@@ -82,6 +82,7 @@ export const drinksData = [
     titleEn: "San Girolamo Craft Beers",
     subtitle: "Birrificio toscano · Selezione del mastro birraio",
     subtitleEn: "Tuscan brewery · Brewmaster's selection",
+    layout: "swipe",
     items: [
       {
         name: "Traccia",
@@ -200,6 +201,7 @@ export const drinksData = [
     titleEn: "House wines",
     subtitle: "Della casa e del territorio",
     subtitleEn: "House wines and local selection",
+    layout: "swipe",
     items: [
       {
         name: "Syrah di Cortona",
