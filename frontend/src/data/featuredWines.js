@@ -10,6 +10,7 @@ export const featuredWines = [
     grape: "Cabernet Sauvignon, Merlot, Sangiovese",
     image: "/wines/assiolo-bolgheri.png",
     producer: "Tenuta Campo al Pero",
+    price: "24,00",
     description:
       "Bolgheri Rosso DOC di Tenuta Campo al Pero: un taglio bordolese affinato in barrique che unisce Cabernet Sauvignon, Merlot e Sangiovese. Rosso rubino intenso, al naso rilascia note di frutti rossi maturi, spezie dolci e una lieve tostatura. In bocca è morbido, avvolgente e ben strutturato, con tannini eleganti e un finale persistente.",
     descriptionEn:
@@ -23,6 +24,7 @@ export const featuredWines = [
     grape: "Sangiovese Grosso 100%",
     image: "/wines/rosso-montalcino.png",
     producer: "Famiglia Cotarella (Piandibugnano)",
+    price: "23,50",
     description:
       "Rosso di Montalcino DOC 100% Sangiovese Grosso: vinificato in acciaio e affinato in botte grande per esaltare il frutto. Rosso rubino brillante, profuma di ciliegia, viola e una nota balsamica. Al palato è fresco e succoso, con tannini fitti ma vellutati; il naturale “fratello minore” del Brunello, pronto da bere.",
     descriptionEn:
@@ -36,6 +38,7 @@ export const featuredWines = [
     grape: "Sangiovese, Merlot",
     image: "/wines/governo-toscano.png",
     producer: "Castellani",
+    price: "10,00",
     description:
       "Toscana IGT prodotto con l'antico metodo del “Governo all'uso Toscano”: dopo la fermentazione si aggiungono uve appassite che riavviano una seconda fermentazione, donando morbidezza e complessità. Rubino profondo, sprigiona confettura di ciliegia, prugna e cacao; il sorso è avvolgente, rotondo e leggermente vellutato.",
     descriptionEn:
@@ -49,6 +52,7 @@ export const featuredWines = [
     grape: "Sangiovese, Merlot, Syrah",
     image: "/wines/santa-cristina.png",
     producer: "Marchesi Antinori",
+    price: "15,00",
     description:
       "Il rosso di casa Antinori: un Sangiovese in blend con Merlot e Syrah, affinato per pochi mesi in botte. Rosso rubino vivace, al naso ciliegia, prugna e delicate note speziate; al palato è fresco, morbido, immediato, con tannini equilibrati. Il classico rosso quotidiano toscano, facile e piacevole.",
     descriptionEn:
@@ -62,6 +66,7 @@ export const featuredWines = [
     grape: "Syrah 100%",
     image: "/wines/achelo.png",
     producer: "Tenuta Argentiera",
+    price: "21,50",
     description:
       "Syrah in purezza della Costa Toscana firmato Argentiera. Rosso rubino intenso con riflessi violacei; il bouquet è ricco di mora, pepe nero, viola e delicate note speziate. In bocca è caldo, elegante, con tannini setosi e un finale lungo e minerale. Un Syrah mediterraneo dal grande equilibrio.",
     descriptionEn:
@@ -75,6 +80,7 @@ export const featuredWines = [
     grape: "Ciliegiolo 100%",
     image: "/wines/canapone-maremma.png",
     producer: "Santa Lucia",
+    price: "17,50",
     description:
       "Ciliegiolo in purezza selezione “Canapone” della Maremma Toscana. Rubino brillante, esalta al naso ciliegia matura, ribes, spezie dolci e un tocco floreale. Al palato è morbido, fruttato, con acidità viva e tannini fini; un vino toscano dalla beva golosa, perfetto compagno delle carni alla brace.",
     descriptionEn:
@@ -88,6 +94,7 @@ export const featuredWines = [
     grape: "Sangiovese, Canaiolo",
     image: "/wines/chianti-corte-bigio.png",
     producer: "Corte al Bigio",
+    price: "9,50",
     description:
       "Chianti DOCG di Corte al Bigio a base Sangiovese con piccolo saldo di Canaiolo. Rosso rubino luminoso, sprigiona sentori di ciliegia, viola mammola, iris e una lieve speziatura. In bocca è asciutto, sapido, con tannini incisivi ma equilibrati; il volto autentico del Chianti tradizionale.",
     descriptionEn:
@@ -101,6 +108,7 @@ export const featuredWines = [
     grape: "Sangiovese 90%, altri vitigni autoctoni 10%",
     image: "/wines/dievole-chianti-classico.png",
     producer: "Dievole",
+    price: "21,00",
     description:
       "Chianti Classico DOCG di Dievole, un Sangiovese in prevalenza dalla storica tenuta di Vagliagli. Rosso rubino profondo, al naso mostra amarena, prugna, tabacco e una nota terrosa; al palato è pieno, con tannini fini e sapido finale minerale. Sintesi elegante di frutto e terroir chiantigiano.",
     descriptionEn:
@@ -114,6 +122,7 @@ export const featuredWines = [
     grape: "Sangiovese 100%",
     image: "/wines/falorni-sangiovese.png",
     producer: "Cantine Falorni · Antica Macelleria Falorni",
+    price: "12,50",
     description:
       "Sangiovese Toscana IGT firmato dall'Antica Macelleria Falorni di Greve in Chianti. Rosso rubino intenso, sprigiona note di ciliegia, prugna, viola e leggere spezie dolci. Al palato è morbido e piacevolmente fruttato, con tannini vellutati e finale asciutto: il compagno ideale delle carni alla griglia e dei salumi toscani.",
     descriptionEn:
@@ -127,6 +136,7 @@ export const featuredWines = [
     grape: "Negroamaro 100%",
     image: "/wines/negroamaro-puglia.png",
     producer: "Paolo Leo · Varietali",
+    price: "11,50",
     description:
       "Negroamaro in purezza della linea Varietali di Paolo Leo. Colore rosso rubino intenso con riflessi violacei; al naso è ricco di mora, prugna matura, tabacco e una nota mediterranea di macchia. In bocca è caldo, morbido, avvolgente, con tannini rotondi e finale leggermente amaricante tipico del vitigno.",
     descriptionEn:
@@ -140,6 +150,7 @@ export const featuredWines = [
     grape: "Primitivo 100%",
     image: "/wines/primitivo-puglia.png",
     producer: "Paolo Leo · Varietali",
+    price: "12,00",
     description:
       "Primitivo in purezza della linea Varietali di Paolo Leo. Rubino profondo, quasi impenetrabile; il naso è generoso di confettura di prugne, ciliegia sotto spirito, cacao e spezie dolci. Al palato è pieno, morbido, caldo e alcolico, con tannini rotondi e un finale lungo e goloso.",
     descriptionEn:
