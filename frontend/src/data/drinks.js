@@ -6,6 +6,7 @@ export const drinksData = [
     titleEn: "On tap",
     subtitle: "Dal rubinetto",
     subtitleEn: "From the tap",
+    layout: "swipe",
     items: [
       {
         name: "Birra alla spina",
@@ -45,6 +46,7 @@ export const drinksData = [
     titleEn: "Bottled beers",
     subtitle: "Selezione classica",
     subtitleEn: "Classic selection",
+    layout: "swipe",
     items: [
       {
         name: "Birre 33 cl",
@@ -144,6 +146,7 @@ export const drinksData = [
     titleEn: "Soft drinks",
     subtitle: "Bibite, acqua, energy",
     subtitleEn: "Sodas, water, energy drinks",
+    layout: "swipe",
     items: [
       {
         name: "Lattine 33 cl",
@@ -236,13 +239,6 @@ export const drinksData = [
           { size: "1 L", price: "9,00" },
         ],
       },
-      {
-        name: "Bottiglia di vino",
-        nameEn: "Bottle of wine",
-        desc: "Selezione in bottiglia — chiedi al personale.",
-        descEn: "Bottle selection — please ask the staff.",
-        price: "—",
-      },
     ],
   },
   {
@@ -251,6 +247,7 @@ export const drinksData = [
     titleEn: "Bar",
     subtitle: "Caffetteria, amari e distillati",
     subtitleEn: "Coffee, amari and spirits",
+    layout: "swipe",
     items: [
       { name: "Espresso", nameEn: "Espresso", price: "1,00", desc: "Caffè espresso.", descEn: "Italian espresso." },
       { name: "Cappuccino", nameEn: "Cappuccino", price: "2,00", desc: "Cappuccino.", descEn: "Cappuccino." },

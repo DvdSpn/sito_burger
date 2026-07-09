@@ -22,7 +22,8 @@ export default function WineModal({ wine, lang = "it", onClose }) {
   if (!wine) return null;
 
   const desc = lang === "en" && wine.descriptionEn ? wine.descriptionEn : wine.description;
-  const notAvailableLabel = lang === "en" ? "Price on request" : "Prezzo su richiesta";
+  const hasPricing =
+    (wine.formats && wine.formats.length > 0) || (wine.price && wine.price !== "—");
 
   return (
     <div
@@ -114,34 +115,32 @@ export default function WineModal({ wine, lang = "it", onClose }) {
             </>
           )}
 
-          {/* Price / formats — will be filled in later */}
-          <div className="mt-8 border-t border-stone-800 pt-6">
-            {wine.formats && wine.formats.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {wine.formats.map((f) => (
-                  <span
-                    key={f.size}
-                    className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
-                  >
-                    <span className="font-bold uppercase tracking-mega text-stone-300">
-                      {f.size}
+          {/* Price / formats — only shown if defined */}
+          {hasPricing && (
+            <div className="mt-8 border-t border-stone-800 pt-6">
+              {wine.formats && wine.formats.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {wine.formats.map((f) => (
+                    <span
+                      key={f.size}
+                      className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
+                    >
+                      <span className="font-bold uppercase tracking-mega text-stone-300">
+                        {f.size}
+                      </span>
+                      <span className="font-display text-base font-semibold text-amber-500">
+                        € {f.price}
+                      </span>
                     </span>
-                    <span className="font-display text-base font-semibold text-amber-500">
-                      € {f.price}
-                    </span>
-                  </span>
-                ))}
-              </div>
-            ) : wine.price ? (
-              <p className="font-display text-2xl font-semibold text-amber-500">
-                € {wine.price}
-              </p>
-            ) : (
-              <p className="text-[11px] font-bold uppercase tracking-mega text-stone-500">
-                {notAvailableLabel}
-              </p>
-            )}
-          </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="font-display text-2xl font-semibold text-amber-500">
+                  € {wine.price}
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

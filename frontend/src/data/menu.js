@@ -66,6 +66,7 @@ export const menuData = [
     subtitleEn: "Meat on the embers",
     accent: "Il cuore della tradizione toscana",
     accentEn: "The heart of Tuscan tradition",
+    layout: "swipe",
     items: [
       { name: "Tagliata rosmarino e pepe", price: "17,00", desc: "Tagliata di manzo rosmarino e pepe.", descEn: "Sliced beef with rosemary and pepper.", tags: ["beef"], allergens: [], popular: true },
       { name: "Tagliata rucola, pomodoro e grana", price: "18,00", desc: "Tagliata di manzo con rucola, pomodoro e grana.", descEn: "Sliced beef with rocket, tomato and parmesan.", tags: ["beef"], allergens: ["lactose"] },
@@ -82,6 +83,7 @@ export const menuData = [
     subtitleEn: "Sides",
     accent: "Per accompagnare al meglio",
     accentEn: "The perfect pairing",
+    layout: "swipe",
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
       { name: "Patatine classiche", price: "3,50", desc: "Patatine fritte classiche.", descEn: "Classic French fries.", tags: ["veg"], allergens: [] },
@@ -96,6 +98,7 @@ export const menuData = [
     subtitleEn: "The sweet finale",
     accent: "Per chiudere in bellezza",
     accentEn: "To end on a high note",
+    layout: "swipe",
     items: [
       { name: "Tiramisù", price: "5,00", desc: "Il tiramisù artigianale della casa: crema al mascarpone, caffè e cacao.", descEn: "House artisan tiramisù: mascarpone cream, coffee and cocoa.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"], popular: true },
       { name: "Cheesecake ai frutti di bosco", price: "5,00", desc: "Cheesecake con base di biscotto e coulis di frutti di bosco.", descEn: "Cheesecake with biscuit base and wild-berry coulis.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },

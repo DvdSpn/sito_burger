@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Wine } from "lucide-react";
+import { Wine, Star } from "lucide-react";
 import Hero from "./components/Hero";
 import ValuesStrip from "./components/ValuesStrip";
 import FilterBar from "./components/FilterBar";
@@ -12,52 +12,33 @@ import CartDrawer from "./components/CartDrawer";
 import About from "./pages/About";
 import Drinks from "./pages/Drinks";
 import { CartProvider } from "./context/CartContext";
-import { menuData } from "./data/menu";
+import { menuData, RESTAURANT } from "./data/menu";
 import { makeT } from "./data/i18n";
 
 const Home = ({ t, lang, setLang }) => {
   const [filter, setFilter] = useState("all");
   const [cartOpen, setCartOpen] = useState(false);
-  // single-active accordion across menu sections — null = all closed
-  const [openSectionId, setOpenSectionId] = useState(null);
 
-  // Unified open-or-close handler. Used by BOTH the FilterBar nav links AND
-  // each accordion's chevron click. Guarantees the new section opens, the old
-  // one closes, and the viewport lands on the new section's header (not at
-  // the bottom of the now-collapsed page).
-  const handleSectionToggle = (nextId) => {
-    setOpenSectionId(nextId);
-
-    if (nextId === null) return; // closing only
-
-    // Update URL hash without triggering the browser's native anchor jump
+  // FilterBar nav / hash → scroll to the section header (no accordion anymore)
+  const scrollToSection = (id) => {
+    if (!menuData.some((s) => s.id === id)) return;
     if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#${nextId}`);
+      window.history.replaceState(null, "", `#${id}`);
     }
-
-    // Wait for the previous accordion to close AND the new one to open
-    // (CSS transition is 500ms — use 580ms to be safe), then scroll the
-    // newly opened section's header to the top of the viewport.
-    window.setTimeout(() => {
-      const el = document.getElementById(nextId);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 580);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Sync URL hash → open the matching accordion + scroll AFTER transition settles
   useEffect(() => {
     const ids = menuData.map((s) => s.id);
-
     const handleHash = () => {
       const hash = window.location.hash.replace(/^#/, "");
       if (!ids.includes(hash)) return;
-      handleSectionToggle(hash);
+      scrollToSection(hash);
     };
-
     if (window.location.hash) handleHash();
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -73,7 +54,7 @@ const Home = ({ t, lang, setLang }) => {
         setActiveFilter={setFilter}
         t={t}
         lang={lang}
-        onSectionClick={handleSectionToggle}
+        onSectionClick={scrollToSection}
       />
 
       <div id="menu" data-testid="menu-anchor">
@@ -85,8 +66,6 @@ const Home = ({ t, lang, setLang }) => {
             filter={filter}
             t={t}
             lang={lang}
-            isOpen={openSectionId === section.id}
-            onToggle={handleSectionToggle}
           />
         ))}
       </div>
@@ -100,6 +79,33 @@ const Home = ({ t, lang, setLang }) => {
           {t("menu.coverCharge")}
         </p>
       </div>
+
+      {/* CTA → Google review */}
+      <section className="border-t border-stone-800/70 bg-stone-950 py-14 md:py-16">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 text-center lg:px-12">
+          <div className="flex gap-1">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <Star key={i} className="h-5 w-5 fill-amber-500 text-amber-500" />
+            ))}
+          </div>
+          <h2 className="font-display text-2xl font-black leading-[1] tracking-tight text-stone-50 md:text-4xl">
+            {t("home.reviewCta.title")}
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed text-stone-400">
+            {t("home.reviewCta.body")}
+          </p>
+          <a
+            href={RESTAURANT.googleReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="home-google-review-cta"
+            className="mt-2 inline-flex items-center gap-2 rounded-sm border border-stone-600 bg-stone-900 px-6 py-3 text-xs font-bold uppercase tracking-mega text-stone-100 transition-all hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
+          >
+            <Star className="h-4 w-4" />
+            {t("home.reviewCta.btn")}
+          </a>
+        </div>
+      </section>
 
       {/* CTA → Carta bevande, after the menu sections (after Dessert) */}
       <section className="border-t border-stone-800/70 bg-gradient-to-b from-stone-950 via-stone-900/40 to-stone-950 py-16 md:py-20">

@@ -6,9 +6,6 @@ import Lightbox from "./Lightbox";
 const SLOTS = [
   {
     span: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto",
-    src: "/gallery/toscana-ciabatta.jpg",
-    alt: "Ciabatta Toscana",
-    caption: "Ciabatta Toscana",
   },
   { span: "aspect-[4/5]" },
   { span: "aspect-[4/5]" },

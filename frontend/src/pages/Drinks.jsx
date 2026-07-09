@@ -85,9 +85,6 @@ export default function Drinks({ t, lang, setLang }) {
               {t("drinks.titleAccent")}
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-stone-400 md:text-lg">
-            {t("drinks.description")}
-          </p>
         </div>
       </section>
 

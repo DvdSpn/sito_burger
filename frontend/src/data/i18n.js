@@ -240,6 +240,11 @@ const dict = {
       "Vini toscani, birre artigianali San Girolamo, bibite, caffè e distillati. Tutta la nostra selezione per accompagnare al meglio il tuo ordine.",
     "home.drinksCta.btn": "Vai alla carta bevande",
 
+    "home.reviewCta.title": "Ti è piaciuto?",
+    "home.reviewCta.body":
+      "Lascia una recensione su Google, ci aiuti a farci conoscere e a migliorare ogni giorno.",
+    "home.reviewCta.btn": "Lascia una recensione su Google",
+
     "cart.note.label": "Modifiche al panino (max 2)",
     "cart.note.placeholder": "es. senza maionese, +bacon",
     "cart.note.helper": "Massimo 2 modifiche per panino. Lascia vuoto se va bene così.",
@@ -476,6 +481,11 @@ const dict = {
     "home.drinksCta.body":
       "Tuscan wines, San Girolamo craft beers, sodas, coffee and spirits. Our full selection to pair with your order.",
     "home.drinksCta.btn": "Open drinks list",
+
+    "home.reviewCta.title": "Did you enjoy it?",
+    "home.reviewCta.body":
+      "Leave a Google review — you help us grow and improve every single day.",
+    "home.reviewCta.btn": "Leave a Google review",
 
     "cart.note.label": "Customise (max 2 changes)",
     "cart.note.placeholder": "e.g. no mayo, +bacon",
