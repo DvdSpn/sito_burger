@@ -74,12 +74,6 @@ export default function MenuSection({ section, index, filter, t, lang }) {
         ))}
       </div>
 
-      <p className="mt-3 px-1 text-[10px] font-bold uppercase tracking-mega text-stone-500">
-        {lang === "en"
-          ? "Swipe to browse the whole selection"
-          : "Scorri per sfogliare tutta la selezione"}
-      </p>
-
       {disclaimerText && (
         <p className="mt-4 rounded-sm border border-amber-600/40 bg-amber-500/5 px-4 py-2.5 text-[11px] font-bold uppercase tracking-mega text-amber-400">
           {disclaimerText}

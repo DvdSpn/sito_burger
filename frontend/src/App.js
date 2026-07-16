@@ -80,7 +80,30 @@ const Home = ({ t, lang, setLang }) => {
         </p>
       </div>
 
-      {/* CTA → Google review */}
+      {/* CTA → Carta bevande, after the menu sections (after Dessert) */}
+      <section className="border-t border-stone-800/70 bg-gradient-to-b from-stone-950 via-stone-900/40 to-stone-950 py-16 md:py-20">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-6 text-center lg:px-12">
+          <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+            {t("home.drinksCta.kicker")}
+          </p>
+          <h2 className="font-display text-3xl font-black leading-[1] tracking-tight text-stone-50 md:text-5xl">
+            {t("home.drinksCta.title")}
+          </h2>
+          <p className="max-w-xl text-sm leading-relaxed text-stone-400 md:text-base">
+            {t("home.drinksCta.body")}
+          </p>
+          <Link
+            to="/bevande"
+            data-testid="home-drinks-cta"
+            className="mt-2 inline-flex items-center gap-2 rounded-sm border border-amber-600 bg-amber-600 px-7 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 hover:shadow-[0_0_36px_-6px_rgba(217,119,6,0.6)]"
+          >
+            <Wine className="h-4 w-4" />
+            {t("home.drinksCta.btn")}
+          </Link>
+        </div>
+      </section>
+
+      {/* CTA → Google review — after drinks CTA */}
       <section className="border-t border-stone-800/70 bg-stone-950 py-14 md:py-16">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 text-center lg:px-12">
           <div className="flex gap-1">
@@ -104,29 +127,6 @@ const Home = ({ t, lang, setLang }) => {
             <Star className="h-4 w-4" />
             {t("home.reviewCta.btn")}
           </a>
-        </div>
-      </section>
-
-      {/* CTA → Carta bevande, after the menu sections (after Dessert) */}
-      <section className="border-t border-stone-800/70 bg-gradient-to-b from-stone-950 via-stone-900/40 to-stone-950 py-16 md:py-20">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-6 text-center lg:px-12">
-          <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
-            {t("home.drinksCta.kicker")}
-          </p>
-          <h2 className="font-display text-3xl font-black leading-[1] tracking-tight text-stone-50 md:text-5xl">
-            {t("home.drinksCta.title")}
-          </h2>
-          <p className="max-w-xl text-sm leading-relaxed text-stone-400 md:text-base">
-            {t("home.drinksCta.body")}
-          </p>
-          <Link
-            to="/bevande"
-            data-testid="home-drinks-cta"
-            className="mt-2 inline-flex items-center gap-2 rounded-sm border border-amber-600 bg-amber-600 px-7 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 hover:shadow-[0_0_36px_-6px_rgba(217,119,6,0.6)]"
-          >
-            <Wine className="h-4 w-4" />
-            {t("home.drinksCta.btn")}
-          </Link>
         </div>
       </section>
 

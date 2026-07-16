@@ -42,16 +42,15 @@ export default function FeaturedWinesCarousel({ lang }) {
               <p className="mt-1 text-[10px] uppercase tracking-mega text-stone-500">
                 {w.region}
               </p>
+              {w.price && (
+                <p className="mt-3 font-display text-lg font-semibold text-amber-500">
+                  € {w.price}
+                </p>
+              )}
             </div>
           </button>
         ))}
       </div>
-
-      <p className="mt-3 px-1 text-[10px] font-bold uppercase tracking-mega text-stone-500">
-        {lang === "en"
-          ? "Swipe to browse · tap a bottle for details"
-          : "Scorri per sfogliare · tocca una bottiglia per i dettagli"}
-      </p>
 
       {selected && (
         <WineModal wine={selected} lang={lang} onClose={() => setSelected(null)} />
