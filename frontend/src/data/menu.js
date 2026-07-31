@@ -54,7 +54,7 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, ketchup.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, ketchup.", tags: ["chicken"], allergens: ["gluten", "lactose"], popular: true },
-      { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa ranch, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, ranch sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
+      { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa yogurt, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, yogurt sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
       { name: "Crunchy Chicken", price: "11,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
     ],
   },
@@ -69,10 +69,10 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Tagliata rosmarino e pepe", price: "17,00", desc: "Tagliata di manzo rosmarino e pepe.", descEn: "Sliced beef with rosemary and pepper.", tags: ["beef"], allergens: [], popular: true },
-      { name: "Tagliata rucola, pomodoro e grana", price: "18,00", desc: "Tagliata di manzo con rucola, pomodoro e grana.", descEn: "Sliced beef with rocket, tomato and parmesan.", tags: ["beef"], allergens: ["lactose"] },
+      { name: "Tagliata rucola, pomodorini e grana", price: "18,00", desc: "Tagliata di manzo con rucola, pomodorini e grana.", descEn: "Sliced beef with rocket, cherry tomatoes and parmesan.", tags: ["beef"], allergens: ["lactose"] },
       { name: "Bistecca", price: "38,00 / kg", desc: "Bistecca di manzo alla brace.", descEn: "Grilled beef steak.", tags: ["beef"], allergens: [], signature: true },
-      { name: "Tagliata di pollo", price: "15,00", desc: "Petto di pollo alla griglia.", descEn: "Grilled chicken breast.", tags: ["chicken"], allergens: [] },
-      { name: "Agnello Scottadito", price: "16,00", desc: "Costine di agnello alla griglia, accompagnate con rosti di patate e salsa.", descEn: "Grilled lamb ribs, served with potato rosti and sauce.", tags: ["beef"], allergens: [], isNew: true },
+      { name: "Tagliata di pollo", price: "15,00", desc: "Petto di pollo alla griglia con ingredienti di stagione.", descEn: "Grilled chicken breast with seasonal ingredients.", tags: ["chicken"], allergens: [] },
+      { name: "Agnello Scottadito", price: "18,00", desc: "Costine di agnello alla griglia, accompagnate con rosti di patate e salsa.", descEn: "Grilled lamb ribs, served with potato rosti and sauce.", tags: ["beef"], allergens: [], isNew: true },
     ],
   },
   {
