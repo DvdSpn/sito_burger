@@ -23,7 +23,7 @@ export const menuData = [
       { name: "Veggye Burger", price: "11,00", desc: "Hamburger vegetariano, maionese al basilico, crema di pomodori secchi, insalata, stracciatella.", descEn: "Vegetarian burger, basil mayonnaise, sun-dried tomato cream, lettuce, stracciatella cheese.", tags: ["veg"], allergens: ["gluten", "sesame", "lactose", "eggs"], isNew: true },
       { name: "Chicken Cheese", price: "10,00", desc: "Burger di pollo 150gr, cheddar, bacon, insalata, pomodoro, salsa burger.", descEn: "Chicken burger 150g, cheddar, bacon, lettuce, tomato, burger sauce.", tags: ["chicken"], allergens: ["gluten", "sesame", "lactose", "eggs", "mustard"] },
       { name: "Chicken", price: "8,50", desc: "Burger di pollo 150gr, insalata, pomodoro, maionese, ketchup.", descEn: "Chicken burger 150g, lettuce, tomato, mayonnaise, ketchup.", tags: ["chicken"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
-      { name: "Hot Dog", price: "6,00", desc: "Wurstel + 2 salse a scelta tra: ketchup, maionese, BBQ, salsa piccante.", descEn: "Frankfurter + 2 sauces of your choice from: ketchup, mayo, BBQ, spicy sauce.", tags: ["pork"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
+      { name: "Hot Dog", price: "6,00", desc: "Wurstel + 2 salse a scelta tra: ketchup, maionese, BBQ, salsa piccante, senape.", descEn: "Frankfurter + 2 sauces of your choice from: ketchup, mayo, BBQ, spicy sauce, mustard.", tags: ["pork"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
     ],
   },
   {
@@ -37,7 +37,7 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Toscana", price: "13,00", desc: "Tagliata di manzo, porcini, fonduta di pecorino, lamelle di tartufo.", descEn: "Sliced beef, porcini mushrooms, pecorino fondue, shaved truffle.", tags: ["beef"], allergens: ["gluten", "lactose"], signature: true },
-      { name: "Gustosa", price: "12,00", desc: "Tagliata di manzo, rucola, salsa di grana e salsa tartara.", descEn: "Sliced beef, rocket, parmesan sauce and tartar sauce.", tags: ["beef"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
+      { name: "Gustosa", price: "12,00", desc: "Tagliata di manzo, rucola, scaglie di grana e salsa tartara.", descEn: "Sliced beef, rocket, parmesan flakes and tartar sauce.", tags: ["beef"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
       { name: "Pulled Pork", price: "12,50", desc: "Pulled pork, rosti di patate, cipolla croccante, salsa chipotle.", descEn: "Pulled pork, potato rosti, crispy onion, chipotle sauce.", tags: ["pork", "spicy"], allergens: ["gluten", "mustard"], isNew: true },
       { name: "Sfiziosa", price: "11,50", desc: "Tagliata di pollo, verdurine grigliate, Philadelphia, glassa al balsamico di Modena.", descEn: "Sliced chicken, grilled baby vegetables, Philadelphia, Modena balsamic glaze.", tags: ["chicken"], allergens: ["gluten", "lactose", "sulphites"] },
       { name: "Vegetariana", price: "12,00", desc: "Verdure grigliate, mozzarella, pomodoro, frittatina, salsa rosa.", descEn: "Grilled vegetables, mozzarella, tomato, omelette, cocktail sauce.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
@@ -53,7 +53,7 @@ export const menuData = [
     accentEn: "Rolled piadine, Italian street food",
     layout: "swipe",
     items: [
-      { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, ketchup.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, ketchup.", tags: ["chicken"], allergens: ["gluten", "lactose"], popular: true },
+      { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, salsa baconaise.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, baconaise sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
       { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa yogurt, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, yogurt sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
       { name: "Crunchy Chicken", price: "11,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
     ],
@@ -87,7 +87,7 @@ export const menuData = [
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
       { name: "Patatine classiche", price: "3,50", desc: "Patatine fritte classiche.", descEn: "Classic French fries.", tags: ["veg"], allergens: [] },
-      { name: "Verdure grigliate", price: "5,00", desc: "Selezione di verdure grigliate.", descEn: "Selection of grilled vegetables.", tags: ["veg"], allergens: [] },
+      { name: "Verdure grigliate", price: "5,00", desc: "Zucchine grigliate, melanzane grigliate e peperoni grigliati.", descEn: "Grilled courgettes, grilled aubergines and grilled peppers.", tags: ["veg"], allergens: [] },
     ],
   },
   {
@@ -100,7 +100,7 @@ export const menuData = [
     accentEn: "To end on a high note",
     layout: "swipe",
     items: [
-      { name: "Tiramisù", price: "5,00", desc: "Il tiramisù artigianale della casa: crema al mascarpone, caffè e cacao.", descEn: "House artisan tiramisù: mascarpone cream, coffee and cocoa.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"], popular: true },
+      { name: "Tiramisù", price: "5,00", desc: "Il tiramisù artigianale della casa: pavesini, crema al mascarpone, caffè e cacao.", descEn: "House artisan tiramisù: pavesini biscuits, mascarpone cream, coffee and cocoa.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"], popular: true },
       { name: "Cheesecake ai frutti di bosco", price: "5,00", desc: "Cheesecake con base di biscotto e coulis di frutti di bosco.", descEn: "Cheesecake with biscuit base and wild-berry coulis.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
       { name: "Tortino al cioccolato cuore caldo", price: "5,00", desc: "Tortino al cioccolato fondente con cuore caldo che cola.", descEn: "Dark chocolate lava cake with warm molten heart.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
       { name: "Tartufo · Bianco, Nero o Pistacchio", price: "5,00", desc: "Tartufo gelato nelle tre varianti: bianco, nero o pistacchio. Variante affogato: + € 1,00 con caffè, + € 2,00 con liquore.", descEn: "Ice-cream truffle in three flavours: white, dark or pistachio. Affogato variant: + € 1.00 with coffee, + € 2.00 with liqueur.", tags: ["veg"], allergens: ["lactose", "eggs", "nuts"] },

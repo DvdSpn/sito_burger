@@ -62,8 +62,8 @@ export const drinksData = [
         desc: "Raffo · Peroni",
         descEn: "Raffo · Peroni",
         formats: [
-          { size: "20 cl", price: "3,50" },
-          { size: "40 cl", price: "4,50" },
+          { size: "20 cl", price: "3,00" },
+          { size: "40 cl", price: "5,00" },
         ],
       },
       {
@@ -115,7 +115,7 @@ export const drinksData = [
         nameEn: "Bottled beers 66 cl",
         desc: "Moretti · Peroni · Heineken",
         descEn: "Moretti · Peroni · Heineken",
-        price: "4,50",
+        price: "5,00",
       },
       {
         name: "Ichnusa non filtrata 50 cl",
