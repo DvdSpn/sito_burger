@@ -1,6 +1,8 @@
-import { Beef, UtensilsCrossed, Wheat, Wine } from "lucide-react";
+import { Beef, Croissant, MapPin, WheatOff } from "lucide-react";
 
-const ICONS = [Beef, UtensilsCrossed, Wheat, Wine];
+// Order matches values.1..4 → Chianina, Pane, Senza glutine, Km 0
+// Coherent food-place iconography: meat · bread · gluten-free · location
+const ICONS = [Beef, Croissant, WheatOff, MapPin];
 
 export default function ValuesStrip({ t }) {
   const items = [1, 2, 3, 4].map((i) => ({

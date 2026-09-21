@@ -13,6 +13,7 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
   const [showRightFade, setShowRightFade] = useState(true);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [hintVisible, setHintVisible] = useState(true);
+  const [collapsed, setCollapsed] = useState(false); // mobile: hide filters row on scroll down
   const sentinelRef = useRef(null);
   const scrollerRef = useRef(null);
 
@@ -67,6 +68,31 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  // Scroll direction detection → collapse the filter chip row on mobile
+  // when the user scrolls down, expand again when scrolling up / at top.
+  useEffect(() => {
+    let lastY = typeof window !== "undefined" ? window.scrollY : 0;
+    let ticking = false;
+    const handler = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y < 80) {
+          setCollapsed(false);
+        } else if (y > lastY + 6) {
+          setCollapsed(true);
+        } else if (y < lastY - 6) {
+          setCollapsed(false);
+        }
+        lastY = y;
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
   const updateFades = () => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -103,12 +129,18 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
       <div ref={sentinelRef} aria-hidden className="h-px w-full" />
       <div
         data-testid="filter-bar"
+        data-collapsed={collapsed ? "true" : "false"}
         className={cn(
           "sticky top-0 z-30 border-b border-stone-800/70 backdrop-blur-xl transition-colors",
           stuck ? "bg-stone-950/95" : "bg-stone-950/60"
         )}
       >
-        <div className="mx-auto flex max-w-7xl items-stretch gap-3 py-2 lg:items-center lg:px-12 lg:py-3">
+        <div
+          className={cn(
+            "mx-auto flex max-w-7xl items-stretch gap-3 transition-[padding] duration-300 lg:items-center lg:px-12 lg:py-3",
+            collapsed ? "py-1" : "py-2"
+          )}
+        >
           <button
             type="button"
             onClick={scrollToTop}
@@ -116,7 +148,7 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
             aria-label="Torna in cima"
             className="flex shrink-0 items-center pl-2 transition-transform hover:-translate-y-0.5 lg:pl-0"
           >
-            <Logo size="compact" />
+            <Logo size={collapsed ? "tiny" : "compact"} />
           </button>
 
           <div className="flex min-w-0 flex-1 flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
@@ -179,7 +211,14 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
               </div>
             </div>
 
-            <div className="scrollbar-none flex items-center gap-1.5 overflow-x-auto pr-4 pb-1 lg:overflow-visible lg:pr-0 lg:pb-0">
+            <div
+              className={cn(
+                "scrollbar-none flex items-center gap-1.5 overflow-x-auto pr-4 pb-1 transition-all duration-300 ease-out lg:overflow-visible lg:opacity-100 lg:max-h-none lg:translate-y-0 lg:pr-0 lg:pb-0",
+                collapsed
+                  ? "pointer-events-none max-h-0 -translate-y-1 opacity-0 lg:pointer-events-auto"
+                  : "max-h-16 translate-y-0 opacity-100"
+              )}
+            >
               <span className="hidden whitespace-nowrap text-[10px] uppercase tracking-mega text-stone-500 lg:inline">
                 {t("filter.label")}
               </span>

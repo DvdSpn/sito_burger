@@ -245,7 +245,7 @@ export default function CartDrawer({ open, onClose, t, lang }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="cart-sent-review-btn"
-                className="mb-3 flex w-full items-center justify-center gap-2 rounded-sm border border-amber-600 bg-amber-600/10 px-4 py-3 text-[11px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:bg-amber-600 hover:text-stone-950"
+                className="mb-3 flex w-full items-center justify-center gap-2 rounded-sm border border-amber-600 bg-amber-600/10 px-4 py-3 text-center text-[11px] font-bold uppercase tracking-mega text-amber-500 text-balance transition-colors hover:bg-amber-600 hover:text-stone-950"
               >
                 ⭐ {t("cart.sent.reviewBtn")}
               </a>

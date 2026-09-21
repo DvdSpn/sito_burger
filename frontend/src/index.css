@@ -52,14 +52,45 @@ body {
 .font-display {
     font-family: "Playfair Display", serif;
     font-feature-settings: "liga", "dlig";
+    /* Force lining + tabular figures so "0" doesn't look like "o"
+       and prices align vertically (15,00 · 30,00 · 12,50 …) */
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum", "tnum", "liga", "dlig";
 }
 
 .font-hand {
     font-family: "Caveat", cursive;
 }
 
+/* Any element with wide tracking (labels, mega-caps like KM 0, 200GR, 24H,
+   hours, prices in serif etc.) uses lining figures too. */
+.tracking-mega,
+.tracking-widest {
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum", "tnum";
+}
+
 .tracking-mega {
     letter-spacing: 0.28em;
+}
+
+/* --- Mobile fine-tuning ---
+   Wide tracking makes short labels ("VIA LAURETANA 21",
+   "LASCIA UNA RECENSIONE SU GOOGLE", "CAMUCIA · CORTONA · DAL 2016",
+   "ORDINE SOLO ASPORTO") orphan a single word on its own line.
+   Loosen the spacing under 640px while keeping the desktop look. */
+@media (max-width: 639px) {
+    .tracking-mega {
+        letter-spacing: 0.14em;
+    }
+    .tracking-widest {
+        letter-spacing: 0.075em;
+    }
+}
+
+/* Prevent an orphan word by rebalancing multi-line short labels */
+.text-balance {
+    text-wrap: balance;
 }
 
 /* Dashed leader line between name and price */

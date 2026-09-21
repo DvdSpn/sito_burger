@@ -52,8 +52,16 @@ export default function MenuItem({ item, dim, t, lang, variant = "row" }) {
     .replace(/\s+/g, "-")
     .replace(/[^a-z0-9-]/g, "");
 
-  const badges = (item.signature || item.isNew || item.popular) && (
-    <div className="mb-2 flex flex-wrap gap-1.5">
+  const hasBadges = item.signature || item.isNew || item.popular;
+
+  // Always render the badge row so cards with/without a Signature/New/Popular
+  // pill line up their title, price and description at the same baseline
+  // inside the swipe carousel.
+  const badges = (
+    <div
+      aria-hidden={!hasBadges}
+      className="mb-2 flex min-h-[1.25rem] flex-wrap gap-1.5"
+    >
       {item.isNew && (
         <span
           data-testid={`new-${itemId}`}

@@ -23,10 +23,10 @@ export default function CartFab({ onClick, t }) {
         )}
       </span>
       <span className="flex flex-col items-start leading-tight">
-        <span className="text-[11px] font-bold uppercase tracking-mega text-stone-50">
+        <span className="whitespace-nowrap text-[11px] font-bold uppercase tracking-mega text-stone-50">
           {count > 0 ? t("cart.fabWith") : t("cart.fab")}
         </span>
-        <span className="text-[8.5px] font-bold uppercase tracking-[0.18em] text-amber-400/80">
+        <span className="whitespace-nowrap text-[8.5px] font-bold uppercase tracking-widest text-amber-400/80">
           {t("cart.takeawayOnly")}
         </span>
       </span>

@@ -128,7 +128,7 @@ export default function Hero({ t, lang, setLang }) {
               <a
                 href="#contatti"
                 data-testid="hero-location-btn"
-                className="inline-flex items-center justify-center gap-2 rounded-sm border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
               >
                 <MapPin className="h-3.5 w-3.5" /> {t("hero.ctaLocation")}
               </a>

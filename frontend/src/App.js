@@ -122,7 +122,7 @@ const Home = ({ t, lang, setLang }) => {
             target="_blank"
             rel="noopener noreferrer"
             data-testid="home-google-review-cta"
-            className="mt-2 inline-flex items-center gap-2 rounded-sm border border-stone-600 bg-stone-900 px-6 py-3 text-xs font-bold uppercase tracking-mega text-stone-100 transition-all hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
+            className="mt-2 inline-flex items-center gap-2 rounded-sm border border-stone-600 bg-stone-900 px-6 py-3 text-center text-xs font-bold uppercase tracking-mega text-stone-100 text-balance transition-all hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
           >
             <Star className="h-4 w-4" />
             {t("home.reviewCta.btn")}

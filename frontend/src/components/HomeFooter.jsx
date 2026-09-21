@@ -19,7 +19,7 @@ export default function HomeFooter({ t }) {
               <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 Burger <span className="italic text-amber-500">&amp;</span> Grill
               </p>
-              <p className="mt-1 text-[10px] uppercase tracking-mega text-stone-500">
+              <p className="mt-1 whitespace-nowrap text-[10px] uppercase tracking-mega text-stone-500">
                 Camucia · Cortona · Dal 2016
               </p>
               <div className="mt-3">
