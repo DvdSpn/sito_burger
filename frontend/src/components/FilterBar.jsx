@@ -4,6 +4,7 @@ import { Wine } from "lucide-react";
 import { menuData } from "../data/menu";
 import { cn } from "../lib/utils";
 import Logo from "./Logo";
+import Chip from "./brand/Chip";
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -111,12 +112,6 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
     };
   }, []);
 
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return undefined;
-    return undefined;
-  }, []);
-
   return (
     <>
       <div ref={sentinelRef} aria-hidden className="h-px w-full" />
@@ -124,7 +119,7 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
         data-testid="filter-bar"
         data-collapsed={collapsed ? "true" : "false"}
         className={cn(
-          "sticky top-0 z-30 border-b border-stone-800/70 backdrop-blur-xl transition-colors",
+          "sticky top-0 z-bar border-b border-stone-800/70 backdrop-blur-xl transition-colors",
           stuck ? "bg-stone-950/95" : "bg-stone-950/60"
         )}
       >
@@ -139,14 +134,14 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
             type="button"
             onClick={scrollToTop}
             data-testid="sticky-logo-btn"
-            aria-label="Torna in cima"
-            className="flex shrink-0 items-center pl-2 transition-transform hover:-translate-y-0.5 lg:pl-0"
+            aria-label={t("nav.backToTop")}
+            className="flex min-h-[44px] min-w-[44px] shrink-0 items-center pl-2 transition-transform hover:-translate-y-0.5 lg:pl-0"
           >
             <Logo size={collapsed ? "tiny" : "compact"} />
           </button>
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <nav aria-label="Categorie del menu" className="relative">
+            <nav aria-label={t("nav.categories")} className="relative">
               <div
                 aria-hidden
                 className={cn(
@@ -202,27 +197,22 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
                   : "max-h-16 translate-y-0 opacity-100"
               )}
               role="group"
-              aria-label={t("filter.label")}
+              aria-label={t("filter.groupLabel")}
+              onFocus={() => setCollapsed(false)}
             >
-              <span className="hidden whitespace-nowrap text-xs uppercase tracking-mega text-stone-400 lg:inline">
+              <span aria-hidden="true" className="hidden whitespace-nowrap text-xs uppercase tracking-mega text-stone-400 lg:inline">
                 {t("filter.label")}
               </span>
               {filters.map((f) => (
-                <button
+                <Chip
                   key={f.id}
-                  type="button"
                   data-testid={`filter-${f.id}`}
-                  aria-pressed={activeFilter === f.id ? "true" : "false"}
+                  selected={activeFilter === f.id}
                   onClick={() => setActiveFilter(f.id)}
-                  className={cn(
-                    "min-h-[44px] whitespace-nowrap rounded-full border px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
-                    activeFilter === f.id
-                      ? "border-amber-500 bg-amber-600 text-stone-950"
-                      : "border-stone-500 bg-stone-900/60 text-stone-300 hover:border-amber-500 hover:text-amber-500"
-                  )}
+                  className="px-3"
                 >
                   {f.label}
-                </button>
+                </Chip>
               ))}
             </div>
           </div>

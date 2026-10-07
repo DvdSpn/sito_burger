@@ -2,6 +2,7 @@ import { Clock, MapPin, Phone, Instagram, Facebook, ExternalLink } from "lucide-
 import { RESTAURANT } from "../data/menu";
 import { MAPS_EMBED_SRC, MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
+import Button from "./brand/Button";
 
 export default function Contact({ t }) {
   const waUrl = `https://wa.me/${RESTAURANT.whatsappNumber}?text=${encodeURIComponent(t("wa.message.generic"))}`;
@@ -14,7 +15,7 @@ export default function Contact({ t }) {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+            <p className="text-xs font-bold uppercase tracking-mega text-amber-500">
               {t("contact.kicker")}
             </p>
             <h2 className="mt-4 font-display text-5xl font-black leading-[0.95] tracking-tight text-stone-50 md:text-7xl">
@@ -29,16 +30,19 @@ export default function Contact({ t }) {
               {t("contact.description")}
             </p>
 
-            <a
+            <Button
+              as="a"
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              variant="whatsapp"
+              size="lg"
               data-testid="contact-whatsapp-btn"
-              className="mt-8 inline-flex items-center gap-3 rounded-none bg-amber-600 px-8 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500"
+              className="mt-8 gap-3"
             >
               {t("contact.whatsapp")}
               <span className="text-base" aria-hidden="true">→</span>
-            </a>
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 gap-0 lg:col-span-7 md:grid-cols-2">
@@ -80,9 +84,9 @@ export default function Contact({ t }) {
 
         {/* Google Maps embed */}
         <div className="mt-20">
-          <div className="mb-4 flex items-end justify-between gap-4">
+          <div className="mb-4 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+              <p className="text-xs font-bold uppercase tracking-mega text-amber-500">
                 {t("contact.map.title")}
               </p>
               <p className="mt-2 font-display text-2xl text-stone-50 md:text-3xl">
@@ -94,9 +98,9 @@ export default function Contact({ t }) {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="map-open-link"
-              className="inline-flex shrink-0 items-center gap-2 rounded-none border border-stone-700 px-4 py-2 text-[10px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
+              className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-none border border-stone-500 px-4 py-2 text-xs font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
             >
-              {t("contact.map.open")} <ExternalLink className="h-3 w-3" />
+              {t("contact.map.open")} <ExternalLink className="h-3 w-3" aria-hidden="true" />
             </a>
           </div>
           <div className="overflow-hidden rounded-none border border-stone-800/80 bg-stone-900">
@@ -120,12 +124,12 @@ export default function Contact({ t }) {
               <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 Burger <span className="italic text-amber-500">&amp;</span> Grill
               </p>
-              <p className="text-[10px] uppercase tracking-mega text-stone-500">
+              <p className="text-xs uppercase tracking-mega text-stone-400">
                 Camucia · Cortona · Dal 2016
               </p>
             </div>
           </div>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-stone-400">
             © {new Date().getFullYear()} Burger &amp; Grill. {t("footer.rights")}
           </p>
         </footer>
@@ -138,11 +142,11 @@ function InfoCard({ Icon, label, primary, secondary, lines, href, testid, extraI
   const Inner = (
     <div className="group flex h-full flex-col gap-4 border-b border-stone-800/60 p-6 transition-colors hover:bg-stone-900/40 md:border-l md:border-b-0 md:p-8">
       <div className="flex items-center gap-3">
-        <Icon className="h-4 w-4 text-amber-500" />
-        <span className="text-[10px] font-bold uppercase tracking-mega text-stone-500">
+        <Icon className="h-4 w-4 text-amber-500" aria-hidden="true" />
+        <span className="text-xs font-bold uppercase tracking-mega text-stone-400">
           {label}
         </span>
-        {Extra ? <Extra className="ml-auto h-4 w-4 text-stone-600" /> : null}
+        {Extra ? <Extra className="ml-auto h-4 w-4 text-stone-400" aria-hidden="true" /> : null}
       </div>
       <div>
         {lines && lines.length > 0 ? (
@@ -169,11 +173,11 @@ function InfoCard({ Icon, label, primary, secondary, lines, href, testid, extraI
   );
 
   if (href) {
+    const external = href.startsWith("http");
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         data-testid={testid}
       >
         {Inner}

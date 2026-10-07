@@ -1,30 +1,31 @@
 import { useState } from "react";
 import { MapPin, Menu, Info } from "lucide-react";
 import { Link } from "react-router-dom";
-import { RESTAURANT } from "../data/menu";
 import { MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
 import LanguageToggle from "./LanguageToggle";
 import OpenClosedBadge from "./OpenClosedBadge";
 import MobileMenu from "./MobileMenu";
+import Button from "./brand/Button";
 
-const HERO_IMG =
-  "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png";
+// Self-hosted (was on the Emergent CDN, which disappears with the account).
+const HERO_IMG = "/images/hero-burger.jpg";
 
 export default function Hero({ t, lang, setLang }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [];
-
   return (
-    <section
+    <header
       data-testid="hero-section"
       className="relative min-h-[88vh] w-full overflow-hidden grain md:min-h-[92vh]"
     >
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
-          alt="Chianina burger alla griglia"
+          alt=""
+          width="1280"
+          height="896"
+          fetchPriority="high"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/80 to-stone-950/40" />
@@ -38,20 +39,22 @@ export default function Hero({ t, lang, setLang }) {
         </a>
 
         <div className="flex items-center gap-2">
-          <Link
+          <Button
+            as={Link}
             to="/chi-siamo"
+            variant="secondary"
+            icon={Info}
             data-testid="nav-about"
-            className="hidden items-center gap-2 rounded-full border border-amber-500/60 bg-stone-950/60 px-5 py-2.5 text-xs font-bold uppercase tracking-mega text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 lg:inline-flex"
+            className="hidden backdrop-blur lg:inline-flex"
           >
-            <Info className="h-3.5 w-3.5" aria-hidden="true" />
             {t("nav.about")}
-          </Link>
+          </Button>
           <LanguageToggle lang={lang} setLang={setLang} />
           <Link
             to="/chi-siamo"
             data-testid="nav-about-mobile"
             aria-label={t("nav.about")}
-            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-full border border-amber-500/60 bg-stone-950/60 text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 lg:hidden"
+            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-none border border-stone-500 bg-stone-950/60 text-amber-400 backdrop-blur transition-colors hover:border-amber-500 hover:text-amber-300 lg:hidden"
           >
             <Info className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -72,10 +75,10 @@ export default function Hero({ t, lang, setLang }) {
         <div className="rise max-w-4xl">
           <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
             <OpenClosedBadge t={t} />
-            <span className="hidden h-px w-10 bg-amber-500 md:inline-block" />
+            <span aria-hidden="true" className="hidden h-px w-10 bg-amber-500 md:inline-block" />
             <span
               data-testid="hero-kicker"
-              className="text-[10px] font-bold uppercase tracking-mega text-amber-500 sm:text-[11px]"
+              className="text-xs font-bold uppercase tracking-mega text-amber-500"
             >
               {t("hero.kicker")}
             </span>
@@ -100,39 +103,48 @@ export default function Hero({ t, lang, setLang }) {
 
           {/* CTA block — mobile full-width primary, secondaries side-by-side */}
           <div className="mt-8 space-y-2 md:mt-10 md:flex md:flex-wrap md:items-center md:gap-4 md:space-y-0">
-            <a
+            <Button
+              as="a"
               href="#menu"
+              size="lg"
               data-testid="hero-menu-btn"
-              className="group flex w-full items-center justify-center gap-3 rounded-none bg-amber-600 px-6 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 md:inline-flex md:w-auto md:px-8"
+              className="group flex w-full gap-3 md:inline-flex md:w-auto"
             >
               {t("hero.ctaMenu")}
-              <span className="h-px w-6 bg-stone-950 transition-all group-hover:w-10" />
-            </a>
+              <span aria-hidden="true" className="h-px w-6 bg-stone-950 transition-all group-hover:w-10" />
+            </Button>
             <div className="grid grid-cols-2 gap-2 md:flex md:gap-4">
-              <Link
+              <Button
+                as={Link}
                 to="/bevande"
+                variant="secondary"
+                size="lg"
                 data-testid="hero-drinks-btn"
-                className="inline-flex items-center justify-center gap-2 rounded-none border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
+                className="px-4 backdrop-blur md:px-6"
               >
                 {t("hero.ctaDrinks")}
-              </Link>
-              <a
+              </Button>
+              <Button
+                as="a"
                 href={MAPS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                variant="secondary"
+                size="lg"
+                icon={MapPin}
                 data-testid="hero-location-btn"
-                aria-label={lang === "en" ? "Directions to Via Lauretana 21" : "Indicazioni per Via Lauretana 21"}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none border border-stone-500 bg-stone-950/60 px-4 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
+                aria-label={t("hero.ctaDirectionsLabel")}
+                className="whitespace-nowrap px-4 backdrop-blur md:px-6"
               >
-                <MapPin className="h-3.5 w-3.5" /> {t("hero.ctaDirections")}
-              </a>
+                {t("hero.ctaDirections")}
+              </Button>
             </div>
           </div>
         </div>
 
         {/* Highlights marquee — hidden on mobile */}
         <div className="relative mt-16 hidden border-y border-stone-800/70 py-5 md:block">
-          <div className="flex justify-between gap-10 text-xs tracking-mega uppercase text-stone-500">
+          <div className="flex justify-between gap-10 text-xs uppercase tracking-mega text-stone-400">
             <span className="text-amber-500">{t("hero.highlight1")}</span>
             <span>{t("hero.highlight2")}</span>
             <span>{t("hero.highlight3")}</span>
@@ -143,6 +155,6 @@ export default function Hero({ t, lang, setLang }) {
       </div>
 
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} t={t} lang={lang} setLang={setLang} />
-    </section>
+    </header>
   );
 }

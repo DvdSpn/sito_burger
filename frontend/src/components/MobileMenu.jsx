@@ -1,12 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Wine, Info, X, MessageCircle, Phone } from "lucide-react";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import LanguageToggle from "./LanguageToggle";
+import Button from "./brand/Button";
+import useDialogFocus from "../hooks/useDialogFocus";
 import { RESTAURANT, menuData } from "../data/menu";
 
 export default function MobileMenu({ open, onClose, t, lang, setLang }) {
+  const rootRef = useRef(null);
+  const closeBtnRef = useRef(null);
+
+  // Focus goes into the panel on open, stays there, and returns to the
+  // hamburger button on close. When closed the whole panel is `inert`.
+  useDialogFocus(open, rootRef, closeBtnRef);
+
   useEffect(() => {
     if (!open) return undefined;
     const prev = document.body.style.overflow;
@@ -25,7 +34,7 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
     return () => window.removeEventListener("keydown", h);
   }, [open, onClose]);
 
-  // Build category labels from menuData so the IT/EN wording is managed in one place.
+  // Category labels come from menuData so the IT/EN wording lives in one place.
   const categories = menuData.map((s) => ({
     id: s.id,
     label: lang === "en" && s.titleEn ? s.titleEn : s.title,
@@ -41,23 +50,24 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
 
   return (
     <div
-      aria-hidden={!open}
+      ref={rootRef}
+      inert={open ? undefined : true}
       data-testid="mobile-menu"
-      className={`fixed inset-0 z-50 lg:hidden ${
+      className={`fixed inset-0 z-panel lg:hidden ${
         open ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
       <div
         onClick={onClose}
+        aria-hidden="true"
         className={`absolute inset-0 bg-stone-950/85 backdrop-blur-md transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-0"
         }`}
       />
-      <aside
+      <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-menu-title"
-        inert={open ? undefined : ""}
         className={`absolute right-0 top-0 flex h-full w-full max-w-sm flex-col border-l border-stone-800 bg-stone-950 shadow-2xl transition-transform duration-500 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
@@ -65,11 +75,12 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
         <div className="flex items-center justify-between border-b border-stone-800 px-5 py-4">
           <div className="flex items-center gap-3">
             <Logo size="compact" />
-            <span id="mobile-menu-title" className="sr-only">
-              {t("cart.title")}
-            </span>
+            <h2 id="mobile-menu-title" className="sr-only">
+              {t("mobile.title")}
+            </h2>
           </div>
           <button
+            ref={closeBtnRef}
             type="button"
             onClick={onClose}
             data-testid="mobile-menu-close"
@@ -85,7 +96,7 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
           {setLang && <LanguageToggle lang={lang} setLang={setLang} />}
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-5 pb-5" aria-label="Menu">
+        <nav className="flex-1 overflow-y-auto px-5 pb-5" aria-label={t("mobile.title")}>
           <ul className="divide-y divide-stone-800/60">
             {categories.map((c) => (
               <li key={c.id}>
@@ -96,7 +107,7 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
                   className="flex min-h-[44px] w-full items-center justify-between py-3 text-left font-display text-xl text-stone-100 transition-colors hover:text-amber-400"
                 >
                   <span>{c.label}</span>
-                  <span aria-hidden="true" className="font-hand text-sm text-amber-500/80">→</span>
+                  <span aria-hidden="true" className="font-hand text-sm text-amber-500">→</span>
                 </button>
               </li>
             ))}
@@ -130,24 +141,30 @@ export default function MobileMenu({ open, onClose, t, lang, setLang }) {
         </nav>
 
         <div className="space-y-2 border-t border-stone-800 px-5 py-4">
-          <a
+          <Button
+            as="a"
+            variant="secondary"
+            icon={Phone}
             href={`tel:${RESTAURANT.phoneMobile.replace(/\s/g, "")}`}
             data-testid="mobile-call-btn"
-            className="flex min-h-[44px] items-center justify-center gap-2 rounded-none border border-stone-500 bg-stone-900/70 px-4 py-3 text-xs font-bold uppercase tracking-mega text-stone-200"
+            block
           >
-            <Phone className="h-3.5 w-3.5" aria-hidden="true" /> {RESTAURANT.phoneMobile}
-          </a>
-          <a
+            {RESTAURANT.phoneMobile}
+          </Button>
+          <Button
+            as="a"
+            variant="whatsapp"
+            icon={MessageCircle}
             href={`https://wa.me/${RESTAURANT.whatsappNumber}?text=${encodeURIComponent(t("wa.message.generic"))}`}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="mobile-wa-btn"
-            className="flex min-h-[44px] items-center justify-center gap-2 rounded-none bg-[#25D366] px-4 py-3 text-xs font-bold uppercase tracking-mega text-stone-950"
+            block
           >
-            <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" /> WhatsApp
-          </a>
+            WhatsApp
+          </Button>
         </div>
-      </aside>
+      </div>
     </div>
   );
 }

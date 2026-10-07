@@ -33,7 +33,7 @@ export default function ValuesStrip({ t }) {
               <p className="font-display text-base font-bold text-stone-50 md:text-lg">
                 {label}
               </p>
-              <p className="text-[11px] uppercase tracking-mega text-stone-500">
+              <p className="text-xs uppercase tracking-mega text-stone-400">
                 {sub}
               </p>
             </div>

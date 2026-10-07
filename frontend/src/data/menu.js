@@ -109,15 +109,6 @@ export const menuData = [
   },
 ];
 
-export const FILTERS = [
-  { id: "all", label: "Tutto" },
-  { id: "beef", label: "Manzo" },
-  { id: "chicken", label: "Pollo" },
-  { id: "pork", label: "Maiale" },
-  { id: "veg", label: "Vegetariano" },
-  { id: "spicy", label: "Piccante" },
-];
-
 export const RESTAURANT = {
   name: "Burger & Grill",
   tagline: "Camucia · Cortona",

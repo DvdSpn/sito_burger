@@ -3,6 +3,7 @@ import { Flame, Leaf, Minus, Plus, Sparkles } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useCart } from "../context/CartContext";
 import AllergenIcons from "./AllergenIcons";
+import Badge from "./brand/Badge";
 
 const TAG_META = {
   veg: {
@@ -71,36 +72,22 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
 
   const displayName = lang === "en" && item.nameEn ? item.nameEn : item.name;
 
-  const hasBadges = item.signature || item.isNew || item.popular;
-
   const badges = (
-    <div
-      aria-hidden={!hasBadges}
-      className="mb-2 flex min-h-[1.5rem] flex-wrap gap-1.5"
-    >
+    <div className="mb-2 flex min-h-[1.5rem] flex-wrap gap-1.5">
       {item.isNew && (
-        <span
-          data-testid={`new-${itemId}`}
-          className="inline-flex items-center gap-1 rounded-none bg-stone-200 px-2 py-0.5 text-xs font-bold uppercase tracking-mega text-stone-950"
-        >
-          <Sparkles className="h-2.5 w-2.5" aria-hidden="true" /> {t("tag.new")}
-        </span>
+        <Badge variant="new" icon={Sparkles} data-testid={`new-${itemId}`}>
+          {t("tag.new")}
+        </Badge>
       )}
       {item.popular && (
-        <span
-          data-testid={`popular-${itemId}`}
-          className="inline-flex items-center gap-1 rounded-none border border-amber-500 px-2 py-0.5 text-xs font-bold uppercase tracking-mega text-amber-400"
-        >
-          <Sparkles className="h-2.5 w-2.5" aria-hidden="true" /> {t("tag.popular")}
-        </span>
+        <Badge variant="popular" icon={Sparkles} data-testid={`popular-${itemId}`}>
+          {t("tag.popular")}
+        </Badge>
       )}
       {item.signature && (
-        <span
-          data-testid={`signature-${itemId}`}
-          className="inline-flex items-center gap-1 rounded-none bg-amber-600 px-2 py-0.5 text-xs font-bold uppercase tracking-mega text-stone-950"
-        >
-          <Sparkles className="h-2.5 w-2.5" aria-hidden="true" /> {t("tag.signature")}
-        </span>
+        <Badge variant="signature" icon={Sparkles} data-testid={`signature-${itemId}`}>
+          {t("tag.signature")}
+        </Badge>
       )}
     </div>
   );
@@ -130,6 +117,7 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
         type="button"
         onClick={() => add(item)}
         data-testid={`add-to-cart-${itemId}`}
+        aria-label={`${t("menu.add")}: ${displayName}`}
         className="inline-flex min-h-[44px] items-center gap-2 rounded-none border border-amber-700/40 bg-amber-600/10 px-3 py-2 text-xs font-bold uppercase tracking-mega text-amber-400 transition-colors hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
       >
         <Plus className="h-3 w-3" aria-hidden="true" /> {t("menu.add")}
@@ -142,7 +130,7 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
         <button
           type="button"
           onClick={() => dec(item.name)}
-          aria-label={t("cart.decrease")}
+          aria-label={`${t("cart.decrease")}: ${displayName}`}
           data-testid={`dec-${itemId}`}
           className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center transition-colors hover:bg-amber-500"
         >
@@ -155,7 +143,7 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
           type="button"
           ref={incBtnRef}
           onClick={() => inc(item.name)}
-          aria-label={t("cart.increase")}
+          aria-label={`${t("cart.increase")}: ${displayName}`}
           data-testid={`inc-${itemId}`}
           className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center transition-colors hover:bg-amber-500"
         >

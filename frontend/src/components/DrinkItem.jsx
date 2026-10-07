@@ -44,7 +44,7 @@ export default function DrinkItem({ item, lang = "it", variant = "row" }) {
             {name}
           </h3>
           {style && (
-            <p className="mt-1 text-[10px] font-bold uppercase tracking-mega text-amber-500/80">
+            <p className="mt-1 text-xs font-bold uppercase tracking-mega text-amber-400">
               {style}
             </p>
           )}
@@ -107,7 +107,7 @@ export default function DrinkItem({ item, lang = "it", variant = "row" }) {
           )}
         </div>
         {style && (
-          <p className="mt-0.5 text-[11px] font-bold uppercase tracking-mega text-amber-500/80">
+          <p className="mt-0.5 text-xs font-bold uppercase tracking-mega text-amber-400">
             {style}
           </p>
         )}

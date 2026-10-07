@@ -45,6 +45,7 @@ export default function AccordionSection({
         type="button"
         onClick={toggle}
         aria-expanded={open}
+        id={`${id}-toggle`}
         aria-controls={`${id}-panel`}
         data-testid={`${testId || id}-toggle`}
         className={cn(
@@ -53,7 +54,7 @@ export default function AccordionSection({
         )}
       >
         {typeof index === "number" && (
-          <span aria-hidden="true" className="hidden shrink-0 font-display text-3xl font-black text-amber-500/40 md:block md:text-4xl">
+          <span aria-hidden="true" className="hidden shrink-0 font-display text-3xl font-black text-amber-500/60 md:block md:text-4xl">
             {String(index + 1).padStart(2, "0")}
           </span>
         )}
@@ -79,8 +80,8 @@ export default function AccordionSection({
       <div
         id={`${id}-panel`}
         role="region"
-        aria-labelledby={`${testId || id}-toggle`}
-        inert={open ? undefined : ""}
+        aria-labelledby={`${id}-toggle`}
+        inert={open ? undefined : true}
         className={cn(
           "grid transition-all duration-500 ease-in-out",
           open

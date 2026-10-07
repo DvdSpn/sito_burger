@@ -35,7 +35,7 @@ export default function MenuSection({ section, index, filter, t, lang }) {
         {typeof index === "number" && (
           <span
             aria-hidden="true"
-            className="hidden shrink-0 font-display text-3xl font-black text-amber-500/40 md:block md:text-4xl"
+            className="hidden shrink-0 font-display text-3xl font-black text-amber-500/60 md:block md:text-4xl"
           >
             {String(index + 1).padStart(2, "0")}
           </span>

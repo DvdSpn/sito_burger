@@ -22,9 +22,34 @@ function fmt(totalMin) {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
+// The restaurant runs on Italian time: a visitor whose device is set to another
+// time zone must still see the real open/closed status and pickup slots.
+const RESTAURANT_TZ = "Europe/Rome";
+const WEEKDAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+export function restaurantClock(now = new Date()) {
+  try {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: RESTAURANT_TZ,
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(now);
+    const get = (type) => (parts.find((p) => p.type === type) || {}).value;
+    const day = WEEKDAY_INDEX[get("weekday")];
+    const hour = Number(get("hour"));
+    const minute = Number(get("minute"));
+    if (day === undefined || Number.isNaN(hour) || Number.isNaN(minute)) throw new Error("tz");
+    return { day, minutes: hour * 60 + minute };
+  } catch (e) {
+    // Very old browsers without time-zone support: fall back to device time.
+    return { day: now.getDay(), minutes: now.getHours() * 60 + now.getMinutes() };
+  }
+}
+
 export function computeOpenStatus(now = new Date()) {
-  const day = now.getDay();
-  const cur = now.getHours() * 60 + now.getMinutes();
+  const { day, minutes: cur } = restaurantClock(now);
   const today = WEEKLY_HOURS[day];
   if (!today) return { open: false, nextOpen: null, sameDay: false };
 
@@ -61,8 +86,7 @@ export function computeOpenStatus(now = new Date()) {
  *  ]
  */
 export function getPickupPlan(now = new Date()) {
-  const day = now.getDay();
-  const cur = now.getHours() * 60 + now.getMinutes();
+  const { day, minutes: cur } = restaurantClock(now);
   const today = WEEKLY_HOURS[day];
   if (!today) return { groups: [] };
 
@@ -98,7 +122,11 @@ export function getPickupPlan(now = new Date()) {
       const g = buildSlots(today.dinner, "dinner", 0);
       if (g.slots.length) groups.push(g);
     }
-  } else {
+  }
+
+  // No slot left today (after dinner, or late evening when the last slot is
+  // already less than 30 minutes away): offer tomorrow's slots instead.
+  if (groups.length === 0) {
     const tomorrow = WEEKLY_HOURS[(day + 1) % 7];
     if (tomorrow) {
       if (tomorrow.lunch) {

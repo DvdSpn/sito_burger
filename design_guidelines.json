@@ -1,76 +1,127 @@
 {
-  "theme": "Dark",
-  "archetype": "Archetype 5 (Jewel & Luxury) + Archetype 1 (Organic & Earthy)",
-  "vibe": "Rustic Tuscan meets Premium Dark Steakhouse. Emotional tone: Warm, appetizing, high-quality, authentic.",
-  "color_palette": {
-    "background": "bg-stone-950",
-    "surface": "bg-stone-900",
-    "surface_border": "border-stone-800",
-    "primary_accent": "bg-amber-600",
-    "primary_accent_hover": "bg-amber-500",
-    "text_primary": "text-stone-50",
-    "text_secondary": "text-stone-400",
-    "text_tertiary": "text-stone-500",
-    "tag_veg": "text-green-500 border-green-900 bg-green-950/30",
-    "tag_spicy": "text-red-500 border-red-900 bg-red-950/30",
-    "tag_beef": "text-amber-500 border-amber-900 bg-amber-950/30"
+  "name": "Burger & Grill Camucia — design system",
+  "status": "Descrive il sistema realmente in uso nel codice (frontend/). Se cambi un valore qui, cambialo anche in tailwind.config.js o nel componente indicato.",
+  "theme": "Scuro, caldo: steakhouse toscana. Fondo stone-950, accenti ambra, niente bianco o nero puri.",
+  "tokens": {
+    "source": "frontend/tailwind.config.js → theme.extend.colors.brand e theme.extend.zIndex",
+    "colors": {
+      "brand-bg": {
+        "value": "#0c0a09",
+        "use": "Fondo di pagina e pannelli; testo sopra i pulsanti ambra e WhatsApp."
+      },
+      "brand-surface": {
+        "value": "#1c1917",
+        "use": "Finestre di dialogo, campi, chip non selezionati."
+      },
+      "brand-line": {
+        "value": "#292524",
+        "use": "Divisori e bordi decorativi delle card."
+      },
+      "brand-line-strong": {
+        "value": "#78716c",
+        "use": "Bordi di campi, chip e pulsanti secondari: è il bordo minimo per un controllo (4,1:1 sul fondo)."
+      },
+      "brand-ink": {
+        "value": "#fafaf9",
+        "use": "Titoli e nomi dei piatti."
+      },
+      "brand-accent": {
+        "value": "#d97706",
+        "use": "Pulsante principale, filtro attivo, badge Specialità. Solo come fondo, mai come testo piccolo."
+      },
+      "brand-accent-strong": {
+        "value": "#f59e0b",
+        "use": "Prezzi, sopratitoli, hover del pulsante principale."
+      },
+      "brand-whatsapp": {
+        "value": "#25d366",
+        "use": "Solo per le azioni che aprono WhatsApp."
+      }
+    },
+    "text_on_dark": {
+      "primary": "text-stone-50 / text-stone-100",
+      "secondary": "text-stone-300",
+      "minimum": "text-stone-400 (7,6:1). Non usare stone-500 o più scuro per il testo.",
+      "accent": "text-amber-400 o text-amber-500. Non usare amber-600/700 per il testo."
+    },
+    "z_index": {
+      "z-bar": "30 — testate e barra filtri fisse",
+      "z-fab": "40 — pulsante carrello flottante",
+      "z-panel": "50 — carrello e menu mobile",
+      "z-modal": "60 — conferma ordine, scheda vino, galleria a tutto schermo",
+      "z-skip": "70 — link 'Salta al menu'"
+    },
+    "radius": "Angoli vivi (rounded-none) per pulsanti, card e pannelli. rounded-full solo per chip, pulsante carrello e indicatori."
   },
   "typography": {
-    "headings": "Playfair Display",
-    "body": "Manrope",
-    "hierarchy": {
-      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-stone-50",
-      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-amber-500",
-      "h3": "text-xl sm:text-2xl font-semibold text-stone-100",
-      "body": "text-base text-stone-400 leading-relaxed",
-      "labels": "text-xs uppercase tracking-[0.2em] text-amber-600 font-bold"
-    }
-  },
-  "layout_spacing": {
-    "container": "max-w-7xl mx-auto px-6 lg:px-12",
-    "section_padding": "py-20 lg:py-32",
-    "gap": "gap-8 lg:gap-12"
+    "fonts": {
+      "display": "Playfair Display (classe .font-display) — titoli, nomi dei piatti, prezzi",
+      "body": "Manrope — tutto il resto",
+      "hand": "Caveat (classe .font-hand) — solo piccoli accenti decorativi"
+    },
+    "floor": "Nessun testo sotto i 12 px (text-xs). Niente text-[10px] o text-[11px].",
+    "labels": "Maiuscoletto: text-xs font-bold uppercase tracking-mega (0,16em; 0,1em sotto i 640 px).",
+    "numbers": "Cifre allineate e tabellari (già impostate in index.css)."
   },
   "components": {
-    "buttons": "Rounded-none or rounded-sm. bg-amber-600 text-stone-950 font-bold px-8 py-4 hover:bg-amber-500 transition-colors uppercase tracking-widest text-sm.",
-    "menu_item": "Flex container with item name and price. Use border-b border-dashed border-stone-700/50 between name and price to mimic classic menus. Title in Playfair, description in Manrope.",
-    "dietary_tags": "Small pill badges text-[10px] uppercase tracking-wider. 1px solid border.",
-    "whatsapp_cta": "Fixed bottom right button with high elevation shadow, or a prominent sticky header button. Use WhatsApp green (#25D366) or match the amber theme."
-  },
-  "sections": [
-    {
-      "name": "Hero",
-      "instructions": "Full viewport height. Background image (hero_burger) with bg-stone-950/70 overlay to ensure text contrast. Align content to bottom-left for a cinematic feel. Massive Playfair Display heading."
+    "Button": {
+      "file": "frontend/src/components/brand/Button.jsx",
+      "variants": {
+        "primary": "L'azione principale della schermata. Una sola per schermata.",
+        "secondary": "Azioni di supporto (Chiama, Bevande, Indicazioni).",
+        "whatsapp": "Solo ciò che apre WhatsApp.",
+        "ghost": "Azioni testuali (Cambia, Lascia una recensione).",
+        "danger": "Azioni distruttive (Svuota carrello)."
+      },
+      "sizes": {
+        "sm": "36 px, solo dove c'è poco spazio e non su touch",
+        "md": "44 px, predefinita",
+        "lg": "56 px, inviti all'azione principali"
+      },
+      "props": "variant, size, as ('button' | 'a' | Link di react-router), icon (icona lucide), block (larghezza piena), className. Le altre proprietà (href, to, target, data-testid…) passano all'elemento."
     },
-    {
-      "name": "Menu Filters",
-      "instructions": "Sticky bar below hero. Horizontal scrollable list of categories (Hamburger, Ciabatte, Piadine, Griglia-Barbeque, Contorni) and dietary filter toggles."
+    "Chip": {
+      "file": "frontend/src/components/brand/Chip.jsx",
+      "use": "Interruttori: filtri del menu e orari di ritiro. Sempre alti 44 px, stato esposto con aria-pressed."
     },
-    {
-      "name": "Menu Grid",
-      "instructions": "CSS Grid (1 col mobile, 2 cols desktop). Sections divided by rustic typography headers. Use image_urls.ciabatta and image_urls.grill_bbq as visual breaks or bento box features between menu categories."
+    "Badge": {
+      "file": "frontend/src/components/brand/Badge.jsx",
+      "variants": {
+        "signature": "Specialità",
+        "popular": "Più scelto",
+        "new": "Novità"
+      },
+      "rule": "Il testo viene da i18n.js (chiavi tag.new, tag.popular, tag.signature). Usarli con parsimonia: se tutto è in evidenza, niente lo è."
     },
-    {
-      "name": "Contact & Hours",
-      "instructions": "Darker section (bg-stone-950). Large typography for 'Vieni a trovarci'. Include Address, Phone, Hours."
+    "dialogs": {
+      "hook": "frontend/src/hooks/useDialogFocus.js",
+      "rule": "Ogni pannello o finestra (carrello, menu mobile, scheda vino, galleria, conferma ordine) usa useDialogFocus: il fuoco entra all'apertura, resta dentro con Tab e torna al pulsante di partenza alla chiusura. Da chiuso il pannello ha l'attributo inert={true}. Esc chiude sempre."
     }
-  ],
-  "image_urls": {
-    "hero_burger": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/c92f0f3deb1438cdc80044cd4ceee5570438a7888b3d3f8b5ce4181e0fb2f506.png",
-    "grill_bbq": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/40d1c5a5123d54b18dd143864cfe29ce510d7b40da621c021641d0226cf315cc.png",
-    "ciabatta": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/9aa68f56ad2ffb2fb974a11366b607c9497a01596cee3d8d0373a20bf5ec7eb8.png",
-    "dark_texture_bg": "https://static.prod-images.emergentagent.com/jobs/c6339d23-1435-4b4c-bea3-59cbda5562c5/images/eac9f739b27c53d958acd28a79c9d416fb33b57a6ddffde5d07d72cfb2aba357.png",
-    "gourmet_burger_unsplash": "https://images.unsplash.com/photo-1761315413686-8467379d8715?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwyfHxnb3VybWV0JTIwYnVyZ2VyJTIwZGFya3xlbnwwfHx8fDE3NzY0MjEzMDd8MA&ixlib=rb-4.1.0&q=85",
-    "slicing_meat_unsplash": "https://images.unsplash.com/photo-1626323107890-cce0b8c2c641?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxiYXJiZWN1ZSUyMGdyaWxsJTIwZmlyZXxlbnwwfHx8fDE3NzY0MjEzMDd8MA&ixlib=rb-4.1.0&q=85"
   },
-  "instructions_to_main_agent": [
-    "Install and configure fonts: 'Playfair Display' and 'Manrope'.",
-    "Use Lucide React for icons.",
-    "Set the Tailwind config to use 'stone' colors as the primary grayscale to achieve the warm Tuscan dark theme.",
-    "Do NOT use pure white or pure black. Always tint.",
-    "Apply `dark_texture_bg` as a fixed background layer with low opacity (e.g., 5-10%) to give the whole site a rustic/blackboard feel without hindering readability.",
-    "Create the WhatsApp URL dynamically: `https://wa.me/393663706361?text=Vorrei%20ordinare...`",
-    "Implement dietary filters (vegetariano, piccante, con pollo, con manzo) that actually filter the menu sections or dim non-matching items.",
-    "Ensure all interactive elements have `data-testid` attributes."
-  ]
+  "accessibility": {
+    "target": "WCAG 2.1 AA",
+    "touch_targets": "Minimo 44×44 px per ogni controllo.",
+    "focus": "Contorno ambra globale su :focus-visible (index.css). Non rimuoverlo con outline-none.",
+    "motion": "Con 'riduci movimento' attivo animazioni e transizioni sono azzerate (index.css). Le nuove animazioni non devono trasportare informazione.",
+    "names": "I pulsanti con sola icona hanno aria-label che include il nome del piatto (es. 'Aggiungi: Chianina Classico'). Le icone decorative hanno aria-hidden.",
+    "language": "L'attributo lang di <html> e il titolo della pagina seguono la lingua scelta."
+  },
+  "content": {
+    "source": "Tutti i testi dell'interfaccia stanno in frontend/src/data/i18n.js, in italiano e in inglese con le stesse chiavi. Nessun testo scritto a mano dentro i componenti.",
+    "voice": "Diretta, calda, concreta. Si dà del tu. Niente punti esclamativi a raffica.",
+    "terms": {
+      "Ritiro": "il momento in cui il cliente passa a prendere l'ordine (orario di ritiro)",
+      "Asporto": "il tipo di servizio ('Solo asporto'): non c'è consegna a domicilio",
+      "Carrello": "l'elenco dei piatti scelti, finché il messaggio WhatsApp non è stato inviato",
+      "Specialità": "il badge dei piatti della casa"
+    },
+    "hours": "Orari e stato aperto/chiuso sono calcolati sull'ora italiana (Europe/Rome) in frontend/src/data/hours.js, qualunque sia il fuso del dispositivo."
+  },
+  "images": {
+    "rule": "Le immagini del sito stanno in frontend/public (images/, gallery/, wines/, beers/), non su CDN esterne.",
+    "hero": "/images/hero-burger.jpg (1280×896)",
+    "social": "/images/og-image.jpg (1200×630)",
+    "logo": "/images/logo.png; icone in /favicon.ico, /logo192.png, /logo512.png"
+  },
+  "testing": "Ogni elemento interattivo ha un data-testid stabile: non rinominarli senza aggiornare i test."
 }

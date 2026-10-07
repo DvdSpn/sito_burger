@@ -55,9 +55,8 @@ export default function Drinks({ t, lang, setLang }) {
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-50">
-      <main id="contenuto">
       {/* top bar */}
-      <header className="sticky top-0 z-30 border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
+      <header className="sticky top-0 z-bar border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
           <Link to="/#menu" data-testid="drinks-back-home" className="flex min-h-[44px] items-center gap-3">
             <Logo size="compact" />
@@ -71,6 +70,7 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </header>
 
+      <main id="contenuto">
       {/* Hero (lower) */}
       <section className="relative overflow-hidden border-b border-stone-800/70 py-12 md:py-20">
         <div className="absolute inset-0 opacity-20">
@@ -106,6 +106,9 @@ export default function Drinks({ t, lang, setLang }) {
               <FeaturedWinesCarousel lang={lang} />
             ) : section.layout === "swipe" ? (
               <div
+                tabIndex={0}
+                role="group"
+                aria-label={tx(section, "title", lang)}
                 className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 md:-mx-8 md:px-8"
                 style={{ scrollbarWidth: "thin" }}
               >
@@ -133,10 +136,10 @@ export default function Drinks({ t, lang, setLang }) {
       <section className="border-t border-stone-800/70 bg-stone-900/30 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           <div className="mb-8 flex items-center gap-3">
-            <Wine className="h-4 w-4 text-amber-500" />
-            <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+            <Wine className="h-4 w-4 text-amber-500" aria-hidden="true" />
+            <h2 className="text-xs font-bold uppercase tracking-mega text-amber-500">
               {t("drinks.pairings")}
-            </p>
+            </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {pairings.map((p, i) => (
@@ -151,7 +154,7 @@ export default function Drinks({ t, lang, setLang }) {
                 <p className="mt-2 font-display text-base font-semibold text-stone-50">
                   {tx(p, "dish", lang)}
                 </p>
-                <p className="mt-2 text-xs leading-relaxed text-stone-400">
+                <p className="mt-2 text-sm leading-relaxed text-stone-300">
                   {tx(p, "note", lang)}
                 </p>
               </div>
@@ -160,8 +163,8 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      <footer className="py-12 text-center">
-      </footer>
+      {/* breathing room so the last section is not covered */}
+      <div aria-hidden="true" className="h-12" />
       </main>
     </div>
   );

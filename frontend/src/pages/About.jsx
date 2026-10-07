@@ -13,7 +13,7 @@ export default function About({ t, lang, setLang }) {
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-50">
-      <header className="sticky top-0 z-30 border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
+      <header className="sticky top-0 z-bar border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
           <Link to="/#menu" data-testid="about-back-home" className="flex min-h-[44px] items-center gap-3">
             <Logo size="compact" />

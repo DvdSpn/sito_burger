@@ -4,7 +4,7 @@ export default function LanguageToggle({ lang, setLang }) {
   return (
     <div
       role="group"
-      aria-label="Language"
+      aria-label="Lingua / Language"
       data-testid="lang-toggle"
       className="inline-flex items-center overflow-hidden rounded-none border border-stone-500 bg-stone-950/60 backdrop-blur"
     >
@@ -13,9 +13,10 @@ export default function LanguageToggle({ lang, setLang }) {
         onClick={() => setLang("it")}
         data-testid="lang-it"
         aria-pressed={lang === "it" ? "true" : "false"}
-        aria-label="Italiano"
+        aria-label="IT, Italiano"
+        lang="it"
         className={cn(
-          "min-h-[44px] px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
+          "min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
           lang === "it"
             ? "bg-amber-600 text-stone-950"
             : "text-stone-300 hover:text-amber-400"
@@ -28,9 +29,10 @@ export default function LanguageToggle({ lang, setLang }) {
         onClick={() => setLang("en")}
         data-testid="lang-en"
         aria-pressed={lang === "en" ? "true" : "false"}
-        aria-label="English"
+        aria-label="EN, English"
+        lang="en"
         className={cn(
-          "min-h-[44px] px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
+          "min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
           lang === "en"
             ? "bg-amber-600 text-stone-950"
             : "text-stone-300 hover:text-amber-400"
