@@ -25,7 +25,7 @@ export default function DrinkItem({ item, lang = "it", variant = "row" }) {
     return (
       <article
         data-testid={testId}
-        className="flex w-[240px] shrink-0 snap-start flex-col items-center rounded-sm border border-stone-800/60 bg-stone-950/60 p-5 pt-6 text-center transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] md:w-[280px] md:p-6 md:pt-8"
+        className="flex w-[240px] shrink-0 snap-start flex-col items-center rounded-none border border-stone-800/60 bg-stone-950/60 p-5 pt-6 text-center transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] md:w-[280px] md:p-6 md:pt-8"
       >
         {item.image && (
           <div className="relative flex h-52 w-full items-end justify-center md:h-64">
@@ -58,7 +58,7 @@ export default function DrinkItem({ item, lang = "it", variant = "row" }) {
               {item.formats.map((f) => (
                 <span
                   key={f.size}
-                  className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
+                  className="inline-flex items-center gap-2 rounded-none border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
                 >
                   <span className="font-bold uppercase tracking-mega text-stone-300">
                     {f.size}
@@ -119,7 +119,7 @@ export default function DrinkItem({ item, lang = "it", variant = "row" }) {
             {item.formats.map((f) => (
               <span
                 key={f.size}
-                className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
+                className="inline-flex items-center gap-2 rounded-none border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
               >
                 <span className="font-bold uppercase tracking-mega text-stone-300">
                   {f.size}

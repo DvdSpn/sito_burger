@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Clock, MapPin, Phone, ExternalLink } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { RESTAURANT } from "../data/menu";
@@ -19,7 +19,7 @@ export default function HomeFooter({ t }) {
               <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 Burger <span className="italic text-amber-500">&amp;</span> Grill
               </p>
-              <p className="mt-1 whitespace-nowrap text-[10px] uppercase tracking-mega text-stone-500">
+              <p className="mt-1 whitespace-nowrap text-xs uppercase tracking-mega text-stone-400">
                 Camucia · Cortona · Dal 2016
               </p>
               <div className="mt-3">
@@ -34,23 +34,29 @@ export default function HomeFooter({ t }) {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="footer-address"
-              className="flex items-center gap-2 text-stone-300 transition-colors hover:text-amber-500"
+              className="flex min-h-[44px] items-center gap-2 py-2 text-stone-300 transition-colors hover:text-amber-500"
             >
-              <MapPin className="h-4 w-4 text-amber-500" />
+              <MapPin className="h-4 w-4 text-amber-500" aria-hidden="true" />
               <span>{RESTAURANT.address}</span>
             </a>
             <a
               href={`tel:${RESTAURANT.phonePrimary.replace(/\s/g, "")}`}
               data-testid="footer-phone"
-              className="flex items-center gap-2 text-stone-300 transition-colors hover:text-amber-500"
+              className="flex min-h-[44px] items-center gap-2 py-2 text-stone-300 transition-colors hover:text-amber-500"
             >
-              <Phone className="h-4 w-4 text-amber-500" />
-              <span>
-                {RESTAURANT.phonePrimary} · {RESTAURANT.phoneMobile}
-              </span>
+              <Phone className="h-4 w-4 text-amber-500" aria-hidden="true" />
+              <span>{RESTAURANT.phonePrimary}</span>
+            </a>
+            <a
+              href={`tel:${RESTAURANT.phoneMobile.replace(/\s/g, "")}`}
+              data-testid="footer-phone-mobile"
+              className="flex min-h-[44px] items-center gap-2 py-2 text-stone-300 transition-colors hover:text-amber-500"
+            >
+              <Phone className="h-4 w-4 text-amber-500" aria-hidden="true" />
+              <span>{RESTAURANT.phoneMobile}</span>
             </a>
             <div className="flex items-center gap-2 text-stone-300">
-              <Clock className="h-4 w-4 text-amber-500" />
+              <Clock className="h-4 w-4 text-amber-500" aria-hidden="true" />
               <span>
                 {t("contact.hoursLunch")} {RESTAURANT.hours[0].time} ·{" "}
                 {t("contact.hoursDinner")} {RESTAURANT.hours[1].time}
@@ -64,19 +70,19 @@ export default function HomeFooter({ t }) {
             <Link
               to="/chi-siamo"
               data-testid="footer-about-link"
-              className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:text-amber-500"
+              className="inline-flex min-h-[44px] items-center gap-1 py-2 text-xs font-bold uppercase tracking-mega text-stone-300 transition-colors hover:text-amber-500"
             >
-              {t("nav.about")} <ExternalLink className="h-3 w-3" />
+              {t("nav.about")}
             </Link>
             <Link
               to="/bevande"
               data-testid="footer-drinks-link"
-              className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:text-amber-400"
+              className="inline-flex min-h-[44px] items-center gap-1 py-2 text-xs font-bold uppercase tracking-mega text-amber-500 transition-colors hover:text-amber-400"
             >
-              {t("nav.drinks")} <ExternalLink className="h-3 w-3" />
+              {t("nav.drinks")}
             </Link>
           </div>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-stone-400">
             © {new Date().getFullYear()} Burger &amp; Grill. {t("footer.rights")}
           </p>
         </div>

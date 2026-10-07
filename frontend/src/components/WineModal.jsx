@@ -46,7 +46,7 @@ export default function WineModal({ wine, lang = "it", onClose }) {
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-sm border border-stone-800 bg-stone-950 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] md:flex-row"
+        className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-none border border-stone-800 bg-stone-950 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] md:flex-row"
       >
         {/* Bottle photo */}
         <div className="relative flex shrink-0 items-center justify-center overflow-hidden bg-gradient-to-b from-stone-900/40 via-stone-950 to-stone-950 px-8 py-10 md:w-[42%] md:px-12 md:py-14">
@@ -123,7 +123,7 @@ export default function WineModal({ wine, lang = "it", onClose }) {
                   {wine.formats.map((f) => (
                     <span
                       key={f.size}
-                      className="inline-flex items-center gap-2 rounded-sm border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
+                      className="inline-flex items-center gap-2 rounded-none border border-amber-700/40 bg-stone-950/50 px-3 py-1.5 text-xs"
                     >
                       <span className="font-bold uppercase tracking-mega text-stone-300">
                         {f.size}

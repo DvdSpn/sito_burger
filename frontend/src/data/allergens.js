@@ -2,7 +2,7 @@
 // Standard EU 14 allergens, only what's applicable
 export const ALLERGENS = {
   gluten: { it: "Glutine", en: "Gluten", symbol: "G" },
-  lactose: { it: "Lattosio", en: "Lactose", symbol: "L" },
+  lactose: { it: "Latte", en: "Milk", symbol: "L" },
   eggs: { it: "Uova", en: "Eggs", symbol: "U" },
   soy: { it: "Soia", en: "Soy", symbol: "S" },
   mustard: { it: "Senape", en: "Mustard", symbol: "Sn" },

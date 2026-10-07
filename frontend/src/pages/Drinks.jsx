@@ -17,20 +17,27 @@ const tx = (item, key, lang) => {
 };
 
 export default function Drinks({ t, lang, setLang }) {
-  // single-active accordion state — null means all closed
-  const [openId, setOpenId] = useState(null);
+  // Multi-open accordion state — first section open by default
+  const [openIds, setOpenIds] = useState(() => new Set([drinksData[0].id]));
 
-  // Same unified handler as the menu page: close previous, open next, scroll to header
+  useEffect(() => {
+    document.title = t("page.title.drinks");
+  }, [t]);
+
   const handleToggle = (nextId) => {
-    setOpenId(nextId);
-    if (nextId === null) return;
+    setOpenIds((prev) => {
+      const copy = new Set(prev);
+      if (copy.has(nextId)) copy.delete(nextId);
+      else copy.add(nextId);
+      return copy;
+    });
     if (typeof window !== "undefined") {
       window.history.replaceState(null, "", `#${nextId}`);
     }
     window.setTimeout(() => {
       const el = document.getElementById(nextId);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 580);
+    }, 480);
   };
 
   useEffect(() => {
@@ -38,7 +45,7 @@ export default function Drinks({ t, lang, setLang }) {
     const handleHash = () => {
       const hash = window.location.hash.replace(/^#/, "");
       if (!ids.includes(hash)) return;
-      handleToggle(hash);
+      setOpenIds((prev) => new Set([...prev, hash]));
     };
     if (typeof window !== "undefined" && window.location.hash) handleHash();
     window.addEventListener("hashchange", handleHash);
@@ -48,12 +55,13 @@ export default function Drinks({ t, lang, setLang }) {
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-50">
+      <main id="contenuto">
       {/* top bar */}
       <header className="sticky top-0 z-30 border-b border-stone-800/70 bg-stone-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
-          <Link to="/" data-testid="drinks-back-home" className="flex items-center gap-3">
+          <Link to="/#menu" data-testid="drinks-back-home" className="flex min-h-[44px] items-center gap-3">
             <Logo size="compact" />
-            <span className="hidden text-[10px] tracking-mega uppercase text-stone-400 md:inline">
+            <span className="hidden text-xs tracking-mega uppercase text-stone-300 md:inline">
               ← {t("drinks.backToMenu")}
             </span>
           </Link>
@@ -63,20 +71,13 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-stone-800/70 py-20 md:py-28">
+      {/* Hero (lower) */}
+      <section className="relative overflow-hidden border-b border-stone-800/70 py-12 md:py-20">
         <div className="absolute inset-0 opacity-20">
           <div className="h-full w-full bg-[radial-gradient(ellipse_at_top,rgba(217,119,6,0.3),transparent_60%)]" />
         </div>
         <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-          <Link
-            to="/"
-            data-testid="drinks-back-link"
-            className="mb-8 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:text-amber-400"
-          >
-            <ArrowLeft className="h-3 w-3" /> {t("drinks.backToMenu")}
-          </Link>
-          <p className="text-[11px] font-bold uppercase tracking-mega text-amber-500">
+          <p className="text-xs font-bold uppercase tracking-mega text-amber-500">
             {t("drinks.kicker")}
           </p>
           <h1 className="mt-3 font-display text-5xl font-black leading-[0.95] tracking-tight text-stone-50 md:text-7xl lg:text-[7rem]">
@@ -88,7 +89,7 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Drink sections — single-active accordions, all closed by default */}
+      {/* Drink sections — multi-open, first open on arrival */}
       <div className="mx-auto max-w-5xl">
         {drinksData.map((section, idx) => (
           <AccordionSection
@@ -98,7 +99,7 @@ export default function Drinks({ t, lang, setLang }) {
             title={tx(section, "title", lang)}
             subtitle={tx(section, "subtitle", lang)}
             testId={`drinks-section-${section.id}`}
-            isOpen={openId === section.id}
+            isOpen={openIds.has(section.id)}
             onToggle={handleToggle}
           >
             {section.render === "featuredWines" ? (
@@ -118,7 +119,7 @@ export default function Drinks({ t, lang, setLang }) {
                 ))}
               </div>
             ) : (
-              <div className="rounded-sm border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
+              <div className="rounded-none border border-stone-800/70 bg-stone-900/30 p-4 md:p-8">
                 {section.items.map((item) => (
                   <DrinkItem key={item.name} item={item} lang={lang} />
                 ))}
@@ -142,7 +143,7 @@ export default function Drinks({ t, lang, setLang }) {
               <div
                 key={i}
                 data-testid={`pairing-${i}`}
-                className="rounded-sm border border-stone-800 bg-stone-950/50 p-5 transition-colors hover:border-amber-700/40"
+                className="rounded-none border border-stone-800 bg-stone-950/50 p-5 transition-colors hover:border-amber-700/40"
               >
                 <p className="font-hand text-lg text-amber-500">
                   {tx(p, "wine", lang)}
@@ -160,14 +161,8 @@ export default function Drinks({ t, lang, setLang }) {
       </section>
 
       <footer className="py-12 text-center">
-        <Link
-          to="/"
-          data-testid="drinks-footer-back"
-          className="inline-flex items-center gap-2 rounded-sm border border-stone-700 px-6 py-3 text-[11px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
-        >
-          <ArrowLeft className="h-3 w-3" /> {t("drinks.backToMenu")}
-        </Link>
       </footer>
+      </main>
     </div>
   );
 }

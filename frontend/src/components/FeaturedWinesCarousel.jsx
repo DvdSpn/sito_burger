@@ -22,7 +22,7 @@ export default function FeaturedWinesCarousel({ lang }) {
             key={w.id}
             data-testid={`featured-wine-${w.id}`}
             onClick={() => setSelected(w)}
-            className="group relative flex w-[200px] shrink-0 snap-start flex-col items-center rounded-sm border border-stone-800/60 bg-stone-950/60 p-4 pt-6 text-left transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] focus:outline-none focus:ring-2 focus:ring-amber-600/60 md:w-[240px] md:p-5 md:pt-8"
+            className="group relative flex w-[200px] shrink-0 snap-start flex-col items-center rounded-none border border-stone-800/60 bg-stone-950/60 p-4 pt-6 text-left transition-all hover:-translate-y-1 hover:border-amber-700/60 hover:shadow-[0_20px_50px_-15px_rgba(217,119,6,0.35)] focus:outline-none focus:ring-2 focus:ring-amber-600/60 md:w-[240px] md:p-5 md:pt-8"
           >
             <div className="relative flex h-52 w-full items-end justify-center md:h-64">
               <img

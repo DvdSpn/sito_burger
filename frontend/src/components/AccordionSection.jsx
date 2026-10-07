@@ -45,14 +45,15 @@ export default function AccordionSection({
         type="button"
         onClick={toggle}
         aria-expanded={open}
+        aria-controls={`${id}-panel`}
         data-testid={`${testId || id}-toggle`}
         className={cn(
-          "group flex w-full items-center gap-4 px-6 py-6 text-left transition-colors lg:px-12 lg:py-8",
+          "group flex min-h-[44px] w-full items-center gap-4 px-6 py-6 text-left transition-colors lg:px-12 lg:py-8",
           "hover:bg-stone-900/40"
         )}
       >
         {typeof index === "number" && (
-          <span className="hidden shrink-0 font-display text-3xl font-black text-amber-500/40 md:block md:text-4xl">
+          <span aria-hidden="true" className="hidden shrink-0 font-display text-3xl font-black text-amber-500/40 md:block md:text-4xl">
             {String(index + 1).padStart(2, "0")}
           </span>
         )}
@@ -67,6 +68,7 @@ export default function AccordionSection({
           )}
         </div>
         <ChevronDown
+          aria-hidden="true"
           className={cn(
             "h-6 w-6 shrink-0 text-amber-500 transition-transform duration-300 md:h-7 md:w-7",
             open && "rotate-180"
@@ -75,6 +77,10 @@ export default function AccordionSection({
       </button>
 
       <div
+        id={`${id}-panel`}
+        role="region"
+        aria-labelledby={`${testId || id}-toggle`}
+        inert={open ? undefined : ""}
         className={cn(
           "grid transition-all duration-500 ease-in-out",
           open
@@ -90,7 +96,7 @@ export default function AccordionSection({
               </p>
             )}
             {imageSrc && (
-              <div className="mb-6 overflow-hidden rounded-sm border border-stone-800">
+              <div className="mb-6 overflow-hidden rounded-none border border-stone-800">
                 <img
                   src={imageSrc}
                   alt={title}

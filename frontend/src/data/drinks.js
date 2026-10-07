@@ -52,8 +52,8 @@ export const drinksData = [
     id: "alla-spina",
     title: "Bevande alla spina",
     titleEn: "On tap",
-    subtitle: "Dal rubinetto",
-    subtitleEn: "From the tap",
+    subtitle: "Birra, Coca-Cola e vino",
+    subtitleEn: "Beer, Coca-Cola and wine",
     layout: "swipe",
     items: [
       {
@@ -263,32 +263,32 @@ export const drinksData = [
 // Pairing suggestions for hero callout
 export const pairings = [
   {
-    dish: "Tartufo / Tagliata ai porcini",
-    dishEn: "Truffle / Porcini steak",
+    dish: "Tartufato, Boscaiolo, ciabatta Toscana",
+    dishEn: "Tartufato, Boscaiolo, Toscana ciabatta",
     wine: "Syrah di Cortona",
     wineEn: "Cortona Syrah",
     note: "Rosso strutturato, perfetto con tartufo e porcini.",
     noteEn: "Full-bodied red, perfect with truffle and porcini mushrooms.",
   },
   {
-    dish: "Burger di Chianina (Americano, Bismark)",
-    dishEn: "Chianina burger (Americano, Bismark)",
+    dish: "Burger di manzo (Americano, Nevada)",
+    dishEn: "Beef burgers (Americano, Nevada)",
     wine: "Sangiovese",
     wineEn: "Sangiovese",
     note: "Fresco e tannico, taglia la grassezza del formaggio.",
     noteEn: "Crisp and tannic — cuts through the cheese richness.",
   },
   {
-    dish: "Chicken Cheese / Piadine",
-    dishEn: "Chicken Cheese / Wraps",
+    dish: "Chicken Cheese, Wrap",
+    dishEn: "Chicken Cheese, Wraps",
     wine: "Bianco frizzantino",
     wineEn: "Sparkling white",
     note: "Bollicine fresche per pietanze leggere.",
     noteEn: "Fresh bubbles for lighter dishes.",
   },
   {
-    dish: "Grigliata di maiale / Costata",
-    dishEn: "Grilled pork / Ribeye",
+    dish: "Bistecca, Tagliata rosmarino e pepe",
+    dishEn: "Bistecca, rosemary and pepper tagliata",
     wine: "Sassaia · Brown Ale",
     wineEn: "Sassaia · Brown Ale",
     note: "Birra artigianale corposa San Girolamo per carni alla brace.",

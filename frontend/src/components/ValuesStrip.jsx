@@ -26,7 +26,7 @@ export default function ValuesStrip({ t }) {
               i < 2 ? "border-b md:border-b-0" : ""
             }`}
           >
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-sm border border-amber-700/40 bg-stone-950">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-none border border-amber-700/40 bg-stone-950">
               <Icon className="h-5 w-5 text-amber-500" />
             </div>
             <div>

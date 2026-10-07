@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Wine } from "lucide-react";
+import { Wine } from "lucide-react";
 import { menuData } from "../data/menu";
 import { cn } from "../lib/utils";
 import Logo from "./Logo";
@@ -12,7 +12,6 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
   const [activeSection, setActiveSection] = useState("hamburger");
   const [showRightFade, setShowRightFade] = useState(true);
   const [showLeftFade, setShowLeftFade] = useState(false);
-  const [hintVisible, setHintVisible] = useState(true);
   const [collapsed, setCollapsed] = useState(false); // mobile: hide filters row on scroll down
   const sentinelRef = useRef(null);
   const scrollerRef = useRef(null);
@@ -113,15 +112,9 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setHintVisible(false), 5000);
     const el = scrollerRef.current;
-    if (!el) return () => clearTimeout(timer);
-    const onScroll = () => setHintVisible(false);
-    el.addEventListener("scroll", onScroll, { once: true, passive: true });
-    return () => {
-      clearTimeout(timer);
-      el.removeEventListener("scroll", onScroll);
-    };
+    if (!el) return undefined;
+    return undefined;
   }, []);
 
   return (
@@ -137,10 +130,11 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
       >
         <div
           className={cn(
-            "mx-auto flex max-w-7xl items-stretch gap-3 transition-[padding] duration-300 lg:items-center lg:px-12 lg:py-3",
+            "mx-auto flex max-w-7xl flex-col items-stretch gap-2 transition-[padding] duration-300 lg:items-stretch lg:px-12 lg:py-3",
             collapsed ? "py-1" : "py-2"
           )}
         >
+          <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={scrollToTop}
@@ -151,38 +145,26 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
             <Logo size={collapsed ? "tiny" : "compact"} />
           </button>
 
-          <div className="flex min-w-0 flex-1 flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center justify-between pr-4 lg:hidden">
-              <span className="text-[10px] uppercase tracking-mega text-amber-500/80">
-                {t("filter.scrollHint")}
-              </span>
-              <ChevronRight
-                className={cn(
-                  "h-3 w-3 text-amber-500 transition-opacity",
-                  hintVisible ? "animate-pulse opacity-100" : "opacity-0"
-                )}
-              />
-            </div>
-
-            <div className="relative">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <nav aria-label="Categorie del menu" className="relative">
               <div
                 aria-hidden
                 className={cn(
-                  "pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-stone-950 to-transparent transition-opacity lg:hidden",
+                  "pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-stone-950 to-transparent transition-opacity",
                   showLeftFade ? "opacity-100" : "opacity-0"
                 )}
               />
               <div
                 aria-hidden
                 className={cn(
-                  "pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-stone-950 to-transparent transition-opacity lg:hidden",
+                  "pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-stone-950 to-transparent transition-opacity",
                   showRightFade ? "opacity-100" : "opacity-0"
                 )}
               />
               <div
                 ref={scrollerRef}
                 data-testid="section-scroller"
-                className="scrollbar-none flex gap-1 overflow-x-auto pr-4 lg:overflow-visible lg:pr-0"
+                className="scrollbar-none flex gap-1 overflow-x-auto pr-4 lg:pr-0"
                 style={{ scrollbarWidth: "none" }}
               >
                 {sectionLinks.map((s) => (
@@ -191,11 +173,12 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
                     href={`#${s.id}`}
                     onClick={(e) => handleSectionClick(e, s.id)}
                     data-testid={`section-link-${s.id}`}
+                    aria-current={activeSection === s.id ? "true" : undefined}
                     className={cn(
-                      "whitespace-nowrap rounded-sm border px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-mega transition-colors",
+                      "min-h-[44px] whitespace-nowrap rounded-none border px-3.5 py-2 text-xs font-bold uppercase tracking-mega transition-colors",
                       activeSection === s.id
                         ? "border-amber-600 bg-amber-600/10 text-amber-500"
-                        : "border-transparent text-stone-400 hover:border-stone-700 hover:text-stone-200"
+                        : "border-transparent text-stone-400 hover:border-stone-500 hover:text-stone-200"
                     )}
                   >
                     {s.label}
@@ -204,22 +187,24 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
                 <Link
                   to="/bevande"
                   data-testid="section-link-bevande"
-                  className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-sm border border-amber-700/60 bg-amber-600/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-mega text-amber-500 transition-colors hover:bg-amber-600 hover:text-stone-950"
+                  className="inline-flex min-h-[44px] shrink-0 items-center gap-1 whitespace-nowrap rounded-none border border-amber-700/60 bg-amber-600/10 px-3.5 py-2 text-xs font-bold uppercase tracking-mega text-amber-500 transition-colors hover:bg-amber-600 hover:text-stone-950"
                 >
-                  <Wine className="h-3 w-3" /> {t("nav.drinks")}
+                  <Wine className="h-3 w-3" aria-hidden="true" /> {t("nav.drinks")}
                 </Link>
               </div>
-            </div>
+            </nav>
 
             <div
               className={cn(
-                "scrollbar-none flex items-center gap-1.5 overflow-x-auto pr-4 pb-1 transition-all duration-300 ease-out lg:overflow-visible lg:opacity-100 lg:max-h-none lg:translate-y-0 lg:pr-0 lg:pb-0",
+                "scrollbar-none flex items-center gap-1.5 overflow-x-auto pr-4 pb-1 transition-all duration-300 ease-out lg:overflow-x-auto",
                 collapsed
-                  ? "pointer-events-none max-h-0 -translate-y-1 opacity-0 lg:pointer-events-auto"
+                  ? "pointer-events-none max-h-0 -translate-y-1 opacity-0"
                   : "max-h-16 translate-y-0 opacity-100"
               )}
+              role="group"
+              aria-label={t("filter.label")}
             >
-              <span className="hidden whitespace-nowrap text-[10px] uppercase tracking-mega text-stone-500 lg:inline">
+              <span className="hidden whitespace-nowrap text-xs uppercase tracking-mega text-stone-400 lg:inline">
                 {t("filter.label")}
               </span>
               {filters.map((f) => (
@@ -227,18 +212,20 @@ export default function FilterBar({ activeFilter, setActiveFilter, t, lang, onSe
                   key={f.id}
                   type="button"
                   data-testid={`filter-${f.id}`}
+                  aria-pressed={activeFilter === f.id ? "true" : "false"}
                   onClick={() => setActiveFilter(f.id)}
                   className={cn(
-                    "whitespace-nowrap rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors",
+                    "min-h-[44px] whitespace-nowrap rounded-full border px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors",
                     activeFilter === f.id
                       ? "border-amber-500 bg-amber-600 text-stone-950"
-                      : "border-stone-700 bg-stone-900/60 text-stone-400 hover:border-amber-700 hover:text-amber-500"
+                      : "border-stone-500 bg-stone-900/60 text-stone-300 hover:border-amber-500 hover:text-amber-500"
                   )}
                 >
                   {f.label}
                 </button>
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>

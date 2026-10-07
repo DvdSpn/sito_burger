@@ -3,7 +3,8 @@ import { RESTAURANT } from "../data/menu";
 import { MAPS_EMBED_SRC, MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
 
-export default function Contact({ t, onOrder }) {
+export default function Contact({ t }) {
+  const waUrl = `https://wa.me/${RESTAURANT.whatsappNumber}?text=${encodeURIComponent(t("wa.message.generic"))}`;
   return (
     <section
       id="contatti"
@@ -28,15 +29,16 @@ export default function Contact({ t, onOrder }) {
               {t("contact.description")}
             </p>
 
-            <button
-              type="button"
-              onClick={() => onOrder()}
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid="contact-whatsapp-btn"
-              className="mt-8 inline-flex items-center gap-3 rounded-sm bg-amber-600 px-8 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500"
+              className="mt-8 inline-flex items-center gap-3 rounded-none bg-amber-600 px-8 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500"
             >
               {t("contact.whatsapp")}
-              <span className="text-base">→</span>
-            </button>
+              <span className="text-base" aria-hidden="true">→</span>
+            </a>
           </div>
 
           <div className="grid grid-cols-1 gap-0 lg:col-span-7 md:grid-cols-2">
@@ -92,12 +94,12 @@ export default function Contact({ t, onOrder }) {
               target="_blank"
               rel="noopener noreferrer"
               data-testid="map-open-link"
-              className="inline-flex shrink-0 items-center gap-2 rounded-sm border border-stone-700 px-4 py-2 text-[10px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
+              className="inline-flex shrink-0 items-center gap-2 rounded-none border border-stone-700 px-4 py-2 text-[10px] font-bold uppercase tracking-mega text-stone-300 transition-colors hover:border-amber-600 hover:text-amber-500"
             >
               {t("contact.map.open")} <ExternalLink className="h-3 w-3" />
             </a>
           </div>
-          <div className="overflow-hidden rounded-sm border border-stone-800/80 bg-stone-900">
+          <div className="overflow-hidden rounded-none border border-stone-800/80 bg-stone-900">
             <iframe
               title="Burger & Grill Camucia — Google Maps"
               data-testid="google-map-iframe"

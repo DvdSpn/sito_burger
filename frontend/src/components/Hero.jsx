@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MapPin, Menu, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RESTAURANT } from "../data/menu";
+import { MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
 import LanguageToggle from "./LanguageToggle";
 import OpenClosedBadge from "./OpenClosedBadge";
@@ -36,42 +37,32 @@ export default function Hero({ t, lang, setLang }) {
           <Logo />
         </a>
 
-        <nav className="hidden gap-4 lg:flex">
+        <div className="flex items-center gap-2">
           <Link
             to="/chi-siamo"
             data-testid="nav-about"
-            className="group inline-flex items-center gap-2 rounded-full border border-amber-500/60 bg-stone-950/60 px-5 py-2.5 text-xs font-bold uppercase tracking-mega text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 hover:shadow-[0_0_24px_-4px_rgba(217,119,6,0.6)]"
+            className="hidden items-center gap-2 rounded-full border border-amber-500/60 bg-stone-950/60 px-5 py-2.5 text-xs font-bold uppercase tracking-mega text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 lg:inline-flex"
           >
-            <Info className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
+            <Info className="h-3.5 w-3.5" aria-hidden="true" />
             {t("nav.about")}
           </Link>
-        </nav>
-
-        <div className="flex items-center gap-2">
           <LanguageToggle lang={lang} setLang={setLang} />
           <Link
             to="/chi-siamo"
             data-testid="nav-about-mobile"
             aria-label={t("nav.about")}
-            className="group grid h-11 w-11 place-items-center rounded-full border border-amber-500/60 bg-stone-950/60 text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 hover:shadow-[0_0_20px_-4px_rgba(217,119,6,0.6)] lg:hidden"
+            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-full border border-amber-500/60 bg-stone-950/60 text-amber-400 backdrop-blur transition-all hover:border-amber-500 hover:bg-amber-500 hover:text-stone-950 lg:hidden"
           >
-            <Info className="h-4 w-4 transition-transform group-hover:rotate-12" />
+            <Info className="h-4 w-4" aria-hidden="true" />
           </Link>
-          <a
-            href="#menu"
-            data-testid="nav-cta"
-            className="hidden rounded-sm border border-amber-600 bg-amber-600/90 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-stone-950 transition-colors hover:bg-amber-500 lg:inline-block"
-          >
-            {t("nav.menu")}
-          </a>
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
             data-testid="mobile-menu-open"
             aria-label={t("mobile.open")}
-            className="grid h-11 w-11 place-items-center rounded-sm border border-stone-700 bg-stone-950/60 text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 lg:hidden"
+            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-none border border-stone-500 bg-stone-950/60 text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 lg:hidden"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -112,7 +103,7 @@ export default function Hero({ t, lang, setLang }) {
             <a
               href="#menu"
               data-testid="hero-menu-btn"
-              className="group flex w-full items-center justify-center gap-3 rounded-sm bg-amber-600 px-6 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 md:inline-flex md:w-auto md:px-8"
+              className="group flex w-full items-center justify-center gap-3 rounded-none bg-amber-600 px-6 py-4 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 md:inline-flex md:w-auto md:px-8"
             >
               {t("hero.ctaMenu")}
               <span className="h-px w-6 bg-stone-950 transition-all group-hover:w-10" />
@@ -121,16 +112,19 @@ export default function Hero({ t, lang, setLang }) {
               <Link
                 to="/bevande"
                 data-testid="hero-drinks-btn"
-                className="inline-flex items-center justify-center gap-2 rounded-sm border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
+                className="inline-flex items-center justify-center gap-2 rounded-none border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
               >
                 {t("hero.ctaDrinks")}
               </Link>
               <a
-                href="#contatti"
+                href={MAPS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-testid="hero-location-btn"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm border border-stone-700 bg-stone-950/60 px-4 py-3.5 text-[11px] font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
+                aria-label={lang === "en" ? "Directions to Via Lauretana 21" : "Indicazioni per Via Lauretana 21"}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none border border-stone-500 bg-stone-950/60 px-4 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-200 backdrop-blur transition-colors hover:border-amber-600 hover:text-amber-500 md:px-6 md:py-4"
               >
-                <MapPin className="h-3.5 w-3.5" /> {t("hero.ctaLocation")}
+                <MapPin className="h-3.5 w-3.5" /> {t("hero.ctaDirections")}
               </a>
             </div>
           </div>
@@ -148,7 +142,7 @@ export default function Hero({ t, lang, setLang }) {
         </div>
       </div>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} t={t} lang={lang} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} t={t} lang={lang} setLang={setLang} />
     </section>
   );
 }

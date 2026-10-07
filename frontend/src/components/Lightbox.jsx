@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 /**
  * Lightbox — full-screen image viewer. Closes on click outside, ESC, or X.
  */
-export default function Lightbox({ src, alt, caption, onClose }) {
+export default function Lightbox({ src, alt, caption, onClose, t }) {
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
@@ -16,6 +16,8 @@ export default function Lightbox({ src, alt, caption, onClose }) {
       document.body.style.overflow = "";
     };
   }, [onClose]);
+
+  const closeLabel = (t && t("lightbox.close")) || "Close";
 
   return (
     <div
@@ -29,7 +31,7 @@ export default function Lightbox({ src, alt, caption, onClose }) {
       <button
         type="button"
         onClick={onClose}
-        aria-label="Chiudi"
+        aria-label={closeLabel}
         data-testid="lightbox-close"
         className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full border border-stone-700 bg-stone-900/80 text-stone-200 transition-colors hover:border-amber-600 hover:text-amber-500 md:right-8 md:top-8"
       >
@@ -43,10 +45,10 @@ export default function Lightbox({ src, alt, caption, onClose }) {
         <img
           src={src}
           alt={alt}
-          className="max-h-[88vh] w-auto max-w-full rounded-sm object-contain shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]"
+          className="max-h-[88vh] w-auto max-w-full rounded-none object-contain shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]"
         />
         {caption && (
-          <figcaption className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-sm border border-amber-600/40 bg-stone-950/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-mega text-amber-400 backdrop-blur">
+          <figcaption className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-none border border-amber-600/40 bg-stone-950/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-mega text-amber-400 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
             {caption}
           </figcaption>
