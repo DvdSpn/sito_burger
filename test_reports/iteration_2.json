@@ -1,0 +1,61 @@
+{
+  "summary": "Frontend-only review of Burger & Grill Camucia overhaul. Tested at 390/1024/1280/1440 viewports. All functional items from the review request pass except for 2 minor items (zip 404 not a true 404 - SPA fallback; a React console warning for empty-string `inert` attribute).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/reviews", "issue": "Returns source='fallback' with error 'REQUEST_DENIED - billing not enabled'. Known/expected per request. Frontend handles correctly."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "App.js / MobileMenu / AccordionSection", "issue": "React console warning: 'Received an empty string for a boolean attribute `inert`'. The `inert` attribute is being passed as '' instead of true/undefined. Not a functional bug but should be fixed by writing `inert={closed ? true : undefined}` or similar.", "selector": "[inert='']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_items": [
+    "ZIP file no longer in /app/frontend/public — remote URL returns SPA HTML fallback (no real zip served), but note it is NOT HTTP 404; cf-cache-status: DYNAMIC, content-type text/html.",
+    "Hero 'Indicazioni/Directions' is <a href='https://www.google.com/maps?q=Via+Lauretana+19%2F21...' target='_blank'",
+    "Contact WhatsApp btn on /chi-siamo: <a href='https://wa.me/393663706361?text=Ciao%20Burger%20%26%20Grill!...' target='_blank' (data-testid contact-whatsapp-btn)",
+    "FilterBar @1024/1280/1440: 7 categories row 1 (HAMBURGER/CIABATTE/WRAP/GRIGLIA/CONTORNI/DESSERT/BEVANDE), 6 filters + 'Filtra:' label row 2, PICCANTE fully inside viewport, scrollWidth===clientWidth (no overflow)",
+    "Reviews on /chi-siamo: title + 'LEGGI LE RECENSIONI SU GOOGLE' CTA (data-testid reviews-read-google-btn) linking to Google Maps place_id, target=_blank. No fake 4.7 rating, no reviews-stars/carousel rendered when fallback.",
+    "menu.js Agnello Scottadito has tags:[]; after clicking filter-beef, [data-testid=menu-item-agnello-scottadito] not visible",
+    "Allergens render as plain text 'Glutine · Sesamo · Latte · Uova' (not pills/tooltips); IT uses 'Latte', EN uses 'Milk'",
+    "Drinks pairings updated: 'Tartufato, Boscaiolo' / 'Americano, Nevada' / 'Chicken Cheese, Wrap' / 'Bistecca, Tagliata rosmarino e pepe'. No 'Bismark' anywhere.",
+    "Lang toggle: clicking EN -> document.documentElement.lang='en' and localStorage['bg-lang']='en'; persists after reload; aria-pressed='true' on active, 'false' on other",
+    "document.title changes per route: Home IT 'Burger & Grill Camucia · Hamburger di Chianina e griglia a Cortona'; EN variant; /bevande 'Bevande e vini · Burger & Grill Camucia'; /chi-siamo 'Chi siamo · Burger & Grill Camucia'",
+    "Skip-to-menu link [data-testid=skip-to-menu] present with href='#menu' as first focusable element",
+    "Cart drawer: role='dialog' aria-modal='true' aria-labelledby='cart-drawer-title' on inner <aside>; compact Logo in header",
+    "Cart empty: [data-testid=cart-empty-browse-btn] visible with 'Vai al menu' (IT)",
+    "Cart with items: [data-testid=cart-pickup-line] shows 'Ritiro: Pranzo, oggi, 12:00 · Cambia' above the main button",
+    "Send button: text 'RIVEDI L\u2019ORDINE · € 15,00' with real total (data-testid cart-send-order-btn)",
+    "Confirm modal title 'Controlla il tuo ordine', buttons MODIFICA / APRI WHATSAPP",
+    "Sent screen: kicker 'Ultimo passo', title 'Completa su WhatsApp', heading 'Hai premuto Invia?'. 'HO INVIATO L\u2019ORDINE' clears cart+closes; 'TORNA AL CARRELLO' returns to cart items intact; X button closes without clearing (badge still shows 1)",
+    "Note counter '13/80' visible with aria-describedby wiring (data-testid cart-note-counter-Tartufato)",
+    "MenuItem Add: moves focus so [data-testid=inc-tartufato] renders; sr-only aria-live region announces 'Tartufato aggiunto. 1 piatto nell\u2019ordine.'",
+    "Mobile (390px): sections use flex flex-col (vertical card list), not horizontal swipe",
+    "Drinks: first accordion (Bevande analcoliche) aria-expanded=true on arrival; opening a second does not close the first (multi-open verified)",
+    "Gallery: section not rendered on home or /chi-siamo (PHOTOS empty, no 'Foto in arrivo' placeholder text)",
+    "OpenClosedBadge: no animate-ping in HTML, single-line text 'CHIUSO · RIAPRE ALLE 12:00'",
+    "CartFab: no animate-pulse/wa-pulse-once initially; after Add 'wa-pulse-once' class appears and disappears after ~1.5s",
+    "HomeFooter: [data-testid=footer-phone] -> tel:+390575613880 and [data-testid=footer-phone-mobile] -> tel:+393663706361; no ExternalLink icons on footer 'Chi siamo'/'Bevande' links"
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "LOW: Fix React warning about `inert` empty string — pass `inert={isHidden ? true : undefined}` or `{...(isHidden && {inert: ''})}` to suppress the console warning in MobileMenu / AccordionSection (and anywhere else inert is used).",
+    "OPTIONAL: Make /burger-grill-source.zip return a real 404 (currently returns 200 HTML via CRA SPA fallback). Not a security risk since the actual zip was removed, but the request specifically asks for 404. In production (hosted static build served by Nginx/CDN) this will naturally return 404 — in CRA dev-server it serves index.html for unknown paths.",
+    "DEFER (documented in request): Full focus-trap/restore via Radix Dialog in CartDrawer is NOT applied this round. Current drawer uses role=dialog aria-modal + aria-labelledby but no focus trap. Flag as 'defer / documented'."
+  ],
+  "critical_code_review_comments": [
+    "Reviews.jsx keeps dead code for carousel/stars that is only reached when source==='google'. Since billing is disabled this path is unreachable; consider gating by Feature flag or removing unused branches to reduce surface.",
+    "AccordionSection and MobileMenu using `inert` with React — React treats empty-string booleans as false; current implementation triggers a dev warning. Low-risk but noisy.",
+    "App returns the ZIP path via SPA fallback as HTML 200 — relying on prod CDN for a real 404. If someone deploys the dev build or a mis-configured server, same path could leak. Explicit 404 route or Nginx block would be safer."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not in scope)", "frontend": "~98% (26/26 functional items pass; 1 console warning; 1 minor zip 404 note)"},
+  "test_credentials": "none required",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All functional review items for this iteration pass. Only outstanding items: (1) React `inert` empty-string warning (console-only), (2) burger-grill-source.zip returns SPA 200 HTML instead of true 404 (zip is physically removed), (3) CartDrawer focus-trap deferred per request. Backend /api/reviews fallback is working as intended with billing disabled on Places key."
+}
