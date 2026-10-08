@@ -69,13 +69,12 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} aggiunto. ${n} ${n === 1 ? "piatto" : "piatti"} nell'ordine.`,
     "menu.contains": "Allergeni:",
+    "menu.withFries": "patatine incluse",
     "menu.swipe": (n) => `Scorri · ${n} piatti →`,
     "menu.allergyNotice":
       "Allergie o intolleranze? Chiedi al personale prima di ordinare.",
     "menu.coverCharge": "Coperto e servizio · € 1,00 a persona",
-    "menu.notice.burger": "Tutti gli hamburger sono serviti con patatine. Pane senza glutine su richiesta.",
-    "menu.notice.ciabatte": "Tutte le ciabatte sono servite con patatine. Pane senza glutine su richiesta.",
-    "menu.notice.wraps": "Tutti i wrap sono serviti con patatine.",
+    "menu.notice.glutenFree": "Pane senza glutine su richiesta.",
 
     "reviews.kicker": "Dicono di noi",
     "reviews.subtitle": "su 5",
@@ -285,13 +284,12 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} added. ${n} ${n === 1 ? "item" : "items"} in your order.`,
     "menu.contains": "Allergens:",
+    "menu.withFries": "fries included",
     "menu.swipe": (n) => `Swipe · ${n} dishes →`,
     "menu.allergyNotice":
       "Allergies or intolerances? Please ask our staff before ordering.",
     "menu.coverCharge": "Cover & service · €1.00 per person",
-    "menu.notice.burger": "All burgers come with fries. Gluten-free bun on request.",
-    "menu.notice.ciabatte": "All ciabatta sandwiches come with fries. Gluten-free bread on request.",
-    "menu.notice.wraps": "All wraps come with fries.",
+    "menu.notice.glutenFree": "Gluten-free bread on request.",
 
     "reviews.kicker": "People say",
     "reviews.subtitle": "out of 5",

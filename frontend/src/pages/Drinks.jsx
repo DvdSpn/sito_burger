@@ -16,25 +16,22 @@ const tx = (item, key, lang) => {
 };
 
 export default function Drinks({ t, lang, setLang }) {
-  // Multi-open accordion state — first section open by default
-  const [openIds, setOpenIds] = useState(() => new Set([drinksData[0].id]));
+  // One section open at a time — opening another closes the previous one.
+  // First section open on arrival.
+  const [openId, setOpenId] = useState(drinksData[0].id);
 
   useEffect(() => {
     document.title = t("page.title.drinks");
   }, [t]);
 
   const handleToggle = (id) => {
-    const opening = !openIds.has(id);
-    setOpenIds((prev) => {
-      const copy = new Set(prev);
-      if (copy.has(id)) copy.delete(id);
-      else copy.add(id);
-      return copy;
-    });
+    const opening = openId !== id;
+    setOpenId(opening ? id : null);
     if (!opening) return;
     if (typeof window !== "undefined") {
       window.history.replaceState(null, "", `#${id}`);
     }
+    // Wait for the previous section to collapse, then bring this one to the top
     window.setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -46,7 +43,7 @@ export default function Drinks({ t, lang, setLang }) {
     const handleHash = () => {
       const hash = window.location.hash.replace(/^#/, "");
       if (!ids.includes(hash)) return;
-      setOpenIds((prev) => new Set([...prev, hash]));
+      setOpenId(hash);
     };
     if (typeof window !== "undefined" && window.location.hash) handleHash();
     window.addEventListener("hashchange", handleHash);
@@ -90,7 +87,7 @@ export default function Drinks({ t, lang, setLang }) {
         </div>
       </section>
 
-      {/* Drink sections — multi-open, first open on arrival */}
+      {/* Drink sections — one open at a time, first open on arrival */}
       <div className="mx-auto max-w-5xl">
         {drinksData.map((section, idx) => (
           <AccordionSection
@@ -100,7 +97,7 @@ export default function Drinks({ t, lang, setLang }) {
             title={tx(section, "title", lang)}
             subtitle={tx(section, "subtitle", lang)}
             testId={`drinks-section-${section.id}`}
-            isOpen={openIds.has(section.id)}
+            isOpen={openId === section.id}
             onToggle={handleToggle}
           >
             {section.render === "featuredWines" ? (
