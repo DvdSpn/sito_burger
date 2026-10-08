@@ -7,7 +7,6 @@ import OpenClosedBadge from "./OpenClosedBadge";
 import MobileMenu from "./MobileMenu";
 import Button from "./brand/Button";
 
-// Self-hosted (was on the Emergent CDN, which disappears with the account).
 const HERO_IMG = "/images/hero-burger.jpg";
 
 export default function Hero({ t, lang, setLang }) {
