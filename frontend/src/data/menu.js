@@ -121,8 +121,4 @@ export const RESTAURANT = {
   googlePlaceId: "ChIJqVxkvt77KxMR52z7K_J8NNU",
   googleReviewUrl:
     "https://search.google.com/local/writereview?placeid=ChIJqVxkvt77KxMR52z7K_J8NNU",
-  hours: [
-    { day: "Pranzo", time: "12:00 – 14:00" },
-    { day: "Cena", time: "18:00 – 23:00" },
-  ],
 };

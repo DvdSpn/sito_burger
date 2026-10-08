@@ -5,7 +5,8 @@ import { cn } from "../lib/utils";
 /**
  * AccordionSection — collapsible section with chevron animation.
  * Two modes:
- *  - Controlled: parent passes `isOpen` + `onToggle` (single-active behavior).
+ *  - Controlled: parent passes `isOpen` + `onToggle(id)` and decides what
+ *    opens or closes.
  *  - Uncontrolled: manages its own state via `defaultOpen`.
  * Hash-based opening + scrolling is handled by the parent (so it can wait for
  * the close/open transition before scrolling to the right position).
@@ -29,7 +30,7 @@ export default function AccordionSection({
 
   const toggle = () => {
     if (controlled) {
-      onToggle?.(open ? null : id);
+      onToggle?.(id);
     } else {
       setInternalOpen((o) => !o);
     }

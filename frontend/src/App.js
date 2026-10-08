@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { Wine, Star } from "lucide-react";
 import Hero from "./components/Hero";
 import ValuesStrip from "./components/ValuesStrip";
-import FilterBar from "./components/FilterBar";
 import MenuSection from "./components/MenuSection";
 import HomeFooter from "./components/HomeFooter";
 import CartFab from "./components/CartFab";
@@ -18,22 +17,23 @@ import { makeT } from "./data/i18n";
 
 const LANG_STORAGE_KEY = "bg-lang";
 
+// A new page opens at its top, not at the scroll position of the page you
+// came from. Links that carry a #section (e.g. back to /#menu) are left to
+// the page's own hash handling.
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+};
+
 const Home = ({ t, lang, setLang }) => {
-  const [filter, setFilter] = useState("all");
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
     document.title = t("page.title.home");
   }, [t]);
-
-  const scrollToSection = (id) => {
-    if (!menuData.some((s) => s.id === id)) return;
-    if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#${id}`);
-    }
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   useEffect(() => {
     const ids = [...menuData.map((s) => s.id), "menu"];
@@ -47,13 +47,6 @@ const Home = ({ t, lang, setLang }) => {
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
   }, []);
-
-  const visibleSections = menuData.filter((section) => {
-    if (filter === "all") return true;
-    return section.items.some((it) => it.tags && it.tags.includes(filter));
-  });
-
-  const nothingMatches = filter !== "all" && visibleSections.length === 0;
 
   return (
     <div
@@ -70,40 +63,16 @@ const Home = ({ t, lang, setLang }) => {
       </a>
       <Hero t={t} lang={lang} setLang={setLang} />
       <main id="contenuto">
-        <FilterBar
-          activeFilter={filter}
-          setActiveFilter={setFilter}
-          t={t}
-          lang={lang}
-          onSectionClick={scrollToSection}
-        />
-
         <div id="menu" data-testid="menu-anchor">
-          {nothingMatches ? (
-            <div className="border-b border-stone-800/70 px-6 py-20 text-center lg:px-12">
-              <p className="font-display text-2xl text-stone-50 md:text-3xl">
-                {t("filter.empty")}
-              </p>
-              <Button
-                onClick={() => setFilter("all")}
-                data-testid="filter-reset-all"
-                className="mt-6"
-              >
-                {t("filter.resetAll")}
-              </Button>
-            </div>
-          ) : (
-            visibleSections.map((section) => (
-              <MenuSection
-                key={section.id}
-                section={section}
-                index={menuData.indexOf(section)}
-                filter={filter}
-                t={t}
-                lang={lang}
-              />
-            ))
-          )}
+          {menuData.map((section, index) => (
+            <MenuSection
+              key={section.id}
+              section={section}
+              index={index}
+              t={t}
+              lang={lang}
+            />
+          ))}
         </div>
 
         {/* Allergy notice (replaces per-icon tooltips) */}
@@ -227,6 +196,7 @@ function App() {
     <div className="App">
       <CartProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route
               path="/"

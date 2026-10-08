@@ -18,9 +18,13 @@ export default function OpenClosedBadge({ t, variant = "dark" }) {
   if (isOpen && status.closesAt) {
     label = t("status.openNow", status.closesAt);
   } else if (!isOpen && status.nextOpen) {
-    label = status.sameDay
-      ? t("status.closedToday", status.nextOpen)
-      : t("status.closedTomorrow", status.nextOpen);
+    if (status.sameDay) {
+      label = t("status.closedToday", status.nextOpen);
+    } else if (status.dayOffset === 1) {
+      label = t("status.closedTomorrow", status.nextOpen);
+    } else {
+      label = t("status.closedOn", t(`day.${status.nextDay}`), status.nextOpen);
+    }
   }
 
   return (

@@ -5,6 +5,8 @@ import { useCart } from "../context/CartContext";
 import AllergenIcons from "./AllergenIcons";
 import Badge from "./brand/Badge";
 
+// Only dietary info is shown on the dish; meat type (beef, chicken, pork)
+// stays in the data but has no pill.
 const TAG_META = {
   veg: {
     className: "border-green-900 bg-green-950/40 text-green-300",
@@ -13,18 +15,6 @@ const TAG_META = {
   spicy: {
     className: "border-red-900 bg-red-950/40 text-red-300",
     Icon: Flame,
-  },
-  beef: {
-    className: "border-amber-900 bg-amber-950/40 text-amber-300",
-    Icon: null,
-  },
-  chicken: {
-    className: "border-stone-500 bg-stone-900 text-stone-200",
-    Icon: null,
-  },
-  pork: {
-    className: "border-orange-900 bg-orange-950/40 text-orange-300",
-    Icon: null,
   },
 };
 
@@ -46,7 +36,7 @@ function Tag({ type, t }) {
   );
 }
 
-export default function MenuItem({ item, t, lang, variant = "row" }) {
+export default function MenuItem({ item, t, lang, variant = "row", className = "" }) {
   const { add, inc, dec, getQty, count: totalCount } = useCart();
   const qty = getQty(item.name);
   const incBtnRef = useRef(null);
@@ -72,6 +62,8 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
 
   const displayName = lang === "en" && item.nameEn ? item.nameEn : item.name;
 
+  // The badge slot is always reserved so titles line up across the cards
+  // of a row (swipe row on mobile, grid from md).
   const badges = (
     <div className="mb-2 flex min-h-[1.5rem] flex-wrap gap-1.5">
       {item.isNew && (
@@ -93,19 +85,19 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
   );
 
   const priceEl = (
-    <span className="shrink-0 font-display text-xl font-semibold text-amber-500 md:text-2xl">
+    <span className="shrink-0 whitespace-nowrap font-display text-xl font-semibold tabular-nums text-amber-500 md:text-2xl">
       € {item.price}
     </span>
   );
 
   const descriptionEl = (
-    <p className="mt-2 text-sm leading-relaxed text-stone-300">
+    <p className="mt-1.5 text-sm leading-relaxed text-stone-300 md:mt-2">
       {lang === "en" && item.descEn ? item.descEn : item.desc}
     </p>
   );
 
   const allergensEl = item.allergens && item.allergens.length > 0 && (
-    <p className="mt-3 text-xs text-stone-300">
+    <p className="mt-2 text-xs text-stone-300 md:mt-3">
       <span className="font-bold text-stone-200">{t("menu.contains")}</span>{" "}
       <AllergenIcons allergens={item.allergens} lang={lang} />
     </p>
@@ -162,7 +154,10 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
     return (
       <article
         data-testid={`menu-item-${itemId}`}
-        className="flex flex-col rounded-none border border-stone-800/70 bg-stone-950/60 p-5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] transition-all hover:-translate-y-1 hover:border-amber-700/60 md:p-6"
+        className={cn(
+          "relative flex flex-col rounded-none border border-stone-800/70 bg-stone-950/60 p-5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] transition-all md:p-6 md:hover:-translate-y-1 md:hover:border-amber-700/60",
+          className
+        )}
       >
         {badges}
         <h3 className="font-display text-xl font-bold leading-tight text-stone-50 md:text-2xl">
@@ -171,7 +166,7 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
         <div className="mt-1">{priceEl}</div>
         {descriptionEl}
         {allergensEl}
-        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 md:pt-4">
           {item.tags && item.tags.map((ty) => (
             <Tag type={ty} key={ty} t={t} />
           ))}
