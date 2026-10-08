@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useCart, formatPrice } from "../context/CartContext";
 import { RESTAURANT } from "../data/menu";
-import { getPickupPlan } from "../data/hours";
+import { getPickupPlan, weekdayForOffset } from "../data/hours";
 import useDialogFocus from "../hooks/useDialogFocus";
 import Logo from "./Logo";
 import Button from "./brand/Button";
@@ -126,7 +126,11 @@ export default function CartDrawer({ open, onClose, t, lang }) {
   }, [sent]);
 
   const mealLabel = (meal) => (meal === "lunch" ? t("cart.slot.lunch") : t("cart.slot.dinner"));
-  const dayLabel = (offset) => (offset === 0 ? t("cart.slot.today") : t("cart.slot.tomorrow"));
+  const dayLabel = (offset) => {
+    if (offset === 0) return t("cart.slot.today");
+    if (offset === 1) return t("cart.slot.tomorrow");
+    return t(`day.${weekdayForOffset(offset)}`);
+  };
 
   const slotSummaryLabel = () => {
     if (!selectedSlot) return t("cart.slot.pending");

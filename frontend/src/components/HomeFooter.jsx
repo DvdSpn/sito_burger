@@ -3,6 +3,7 @@ import { Clock, MapPin, Phone } from "lucide-react";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { RESTAURANT } from "../data/menu";
+import { hoursLines } from "../data/hours";
 import { MAPS_LINK } from "../data/i18n";
 
 export default function HomeFooter({ t }) {
@@ -55,12 +56,13 @@ export default function HomeFooter({ t }) {
               <Phone className="h-4 w-4 text-amber-500" aria-hidden="true" />
               <span>{RESTAURANT.phoneMobile}</span>
             </a>
-            <div className="flex items-center gap-2 text-stone-300">
-              <Clock className="h-4 w-4 text-amber-500" aria-hidden="true" />
-              <span>
-                {t("contact.hoursLunch")} {RESTAURANT.hours[0].time} ·{" "}
-                {t("contact.hoursDinner")} {RESTAURANT.hours[1].time}
-              </span>
+            <div className="flex items-start gap-2 text-stone-300">
+              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
+              <div className="flex flex-col">
+                {hoursLines(t).map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
