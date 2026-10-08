@@ -36,10 +36,10 @@ export default function FeaturedWinesCarousel({ lang }) {
               <h3 className="font-display text-base font-bold text-stone-50 md:text-lg">
                 {w.name}
               </h3>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-mega text-amber-500/80">
+              <p className="mt-1 text-xs font-bold uppercase tracking-mega text-amber-400">
                 {w.appellation}
               </p>
-              <p className="mt-1 text-[10px] uppercase tracking-mega text-stone-500">
+              <p className="mt-1 text-xs uppercase tracking-mega text-stone-400">
                 {w.region}
               </p>
               {w.price && (

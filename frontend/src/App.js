@@ -9,6 +9,7 @@ import MenuSection from "./components/MenuSection";
 import HomeFooter from "./components/HomeFooter";
 import CartFab from "./components/CartFab";
 import CartDrawer from "./components/CartDrawer";
+import Button from "./components/brand/Button";
 import About from "./pages/About";
 import Drinks from "./pages/Drinks";
 import { CartProvider } from "./context/CartContext";
@@ -63,7 +64,7 @@ const Home = ({ t, lang, setLang }) => {
       <a
         href="#menu"
         data-testid="skip-to-menu"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-none focus:bg-amber-500 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-stone-950"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-skip focus:rounded-none focus:bg-amber-500 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-stone-950"
       >
         {t("nav.skipToMenu")}
       </a>
@@ -83,14 +84,13 @@ const Home = ({ t, lang, setLang }) => {
               <p className="font-display text-2xl text-stone-50 md:text-3xl">
                 {t("filter.empty")}
               </p>
-              <button
-                type="button"
+              <Button
                 onClick={() => setFilter("all")}
                 data-testid="filter-reset-all"
-                className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-none bg-amber-600 px-6 py-3 text-xs font-bold uppercase tracking-mega text-stone-950 transition-colors hover:bg-amber-500"
+                className="mt-6"
               >
                 {t("filter.resetAll")}
-              </button>
+              </Button>
             </div>
           ) : (
             visibleSections.map((section) => (
@@ -138,14 +138,16 @@ const Home = ({ t, lang, setLang }) => {
             <p className="max-w-xl text-sm leading-relaxed text-stone-400 md:text-base">
               {t("home.drinksCta.body")}
             </p>
-            <Link
+            <Button
+              as={Link}
               to="/bevande"
+              size="lg"
+              icon={Wine}
               data-testid="home-drinks-cta"
-              className="mt-2 inline-flex min-h-[44px] items-center gap-2 rounded-none border border-amber-600 bg-amber-600 px-7 py-3.5 text-xs font-bold uppercase tracking-mega text-stone-950 transition-all hover:bg-amber-500 hover:shadow-[0_0_36px_-6px_rgba(217,119,6,0.6)]"
+              className="mt-2"
             >
-              <Wine className="h-4 w-4" aria-hidden="true" />
               {t("home.drinksCta.btn")}
-            </Link>
+            </Button>
           </div>
         </section>
 
@@ -163,16 +165,18 @@ const Home = ({ t, lang, setLang }) => {
             <p className="max-w-md text-sm leading-relaxed text-stone-400">
               {t("home.reviewCta.body")}
             </p>
-            <a
+            <Button
+              as="a"
               href={RESTAURANT.googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
+              variant="secondary"
+              icon={Star}
               data-testid="home-google-review-cta"
-              className="mt-2 inline-flex min-h-[44px] items-center gap-2 rounded-none border border-stone-500 bg-stone-900 px-6 py-3 text-center text-xs font-bold uppercase tracking-mega text-stone-100 text-balance transition-all hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
+              className="mt-2 text-balance"
             >
-              <Star className="h-4 w-4" aria-hidden="true" />
               {t("home.reviewCta.btn")}
-            </a>
+            </Button>
           </div>
         </section>
 

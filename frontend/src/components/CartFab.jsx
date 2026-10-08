@@ -23,12 +23,11 @@ export default function CartFab({ onClick, t }) {
       type="button"
       onClick={onClick}
       data-testid="cart-fab"
-      aria-label={t("cart.ariaLabel", count)}
-      className={`fixed bottom-4 right-4 z-40 inline-flex min-h-[44px] items-center gap-2.5 rounded-full border border-amber-500/60 bg-stone-900/95 px-4 py-2.5 shadow-2xl backdrop-blur transition-transform hover:-translate-y-0.5 hover:border-amber-500 md:bottom-8 md:right-8 md:px-5 md:py-3 ${
-        pulse ? "wa-pulse-once" : ""
+      className={`fixed bottom-4 right-4 z-fab inline-flex min-h-[44px] items-center gap-2.5 rounded-full border border-amber-500/60 bg-stone-900/95 px-4 py-2.5 shadow-2xl backdrop-blur transition-transform hover:-translate-y-0.5 hover:border-amber-500 md:bottom-8 md:right-8 md:px-5 md:py-3 ${
+        pulse ? "pulse-ring" : ""
       }`}
     >
-      <span className="relative grid h-5 w-5 place-items-center">
+      <span className={`relative grid h-5 w-5 place-items-center ${count > 0 ? "mr-2" : ""}`}>
         <ShoppingBag className="h-5 w-5 text-amber-500" aria-hidden="true" />
         {count > 0 && (
           <span

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, PenLine, Quote, Star } from "lucide-react";
 import { RESTAURANT } from "../data/menu";
 import { cn } from "../lib/utils";
+import Button from "./brand/Button";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const GOOGLE_MAPS_PLACE_URL =
@@ -65,23 +66,23 @@ export default function Reviews({ t, lang }) {
             {t("reviews.kicker")}
           </p>
           <h2 className="font-display text-3xl font-black leading-[1] tracking-tight text-stone-50 md:text-5xl">
-            {lang === "en" ? "What people say about us" : "Cosa dicono di noi"}
+            {t("reviews.title")}
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-stone-400">
-            {lang === "en"
-              ? "Our reviews are on Google Maps — read them with one tap."
-              : "Le nostre recensioni sono su Google Maps — leggile con un tocco."}
+          <p className="max-w-md text-sm leading-relaxed text-stone-300">
+            {t("reviews.fallbackBody")}
           </p>
-          <a
+          <Button
+            as="a"
             href={GOOGLE_MAPS_PLACE_URL}
             target="_blank"
             rel="noopener noreferrer"
+            variant="secondary"
+            icon={Star}
             data-testid="reviews-read-google-btn"
-            className="mt-2 inline-flex min-h-[44px] items-center gap-2 rounded-none border border-stone-500 bg-stone-900 px-6 py-3 text-center text-xs font-bold uppercase tracking-mega text-stone-100 transition-all hover:border-amber-500 hover:bg-amber-600 hover:text-stone-950"
+            className="mt-2"
           >
-            <Star className="h-4 w-4" aria-hidden="true" />
             {t("reviews.readOnGoogle")}
-          </a>
+          </Button>
         </div>
       </section>
     );
@@ -173,7 +174,7 @@ export default function Reviews({ t, lang }) {
                   <button
                     key={i}
                     type="button"
-                    aria-label={`${lang === "en" ? "Review" : "Recensione"} ${i + 1}`}
+                    aria-label={t("reviews.dot", i + 1)}
                     data-testid={`reviews-dot-${i}`}
                     onClick={() => setIndex(i)}
                     className={cn(

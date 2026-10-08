@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { X, MapPin, Wine as WineIcon, Grape } from "lucide-react";
+import useDialogFocus from "../hooks/useDialogFocus";
+import { makeT } from "../data/i18n";
 
 /**
  * WineModal — full-screen detail view for a single bottle.
@@ -7,6 +9,12 @@ import { X, MapPin, Wine as WineIcon, Grape } from "lucide-react";
  * grape / description / price on the right. Closes on ESC, click outside, X.
  */
 export default function WineModal({ wine, lang = "it", onClose }) {
+  const t = useMemo(() => makeT(lang), [lang]);
+  const rootRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  // Focus moves into the sheet, stays there, and returns to the bottle card on close.
+  useDialogFocus(Boolean(wine), rootRef, closeBtnRef);
+
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
@@ -27,21 +35,23 @@ export default function WineModal({ wine, lang = "it", onClose }) {
 
   return (
     <div
+      ref={rootRef}
       role="dialog"
       aria-modal="true"
-      aria-label={wine.name}
+      aria-labelledby="wine-modal-title"
       data-testid="wine-modal"
       onClick={onClose}
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-stone-950/95 px-4 py-6 backdrop-blur-md md:px-12 md:py-10"
+      className="fixed inset-0 z-modal flex items-center justify-center bg-stone-950/95 px-4 py-6 backdrop-blur-md md:px-12 md:py-10"
     >
       <button
+        ref={closeBtnRef}
         type="button"
         onClick={onClose}
-        aria-label={lang === "en" ? "Close" : "Chiudi"}
+        aria-label={t("wine.close")}
         data-testid="wine-modal-close"
-        className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-stone-700 bg-stone-900/80 text-stone-200 transition-colors hover:border-amber-600 hover:text-amber-500 md:right-8 md:top-8"
+        className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-stone-500 bg-stone-900/80 text-stone-200 transition-colors hover:border-amber-600 hover:text-amber-500 md:right-8 md:top-8"
       >
-        <X className="h-5 w-5" />
+        <X className="h-5 w-5" aria-hidden="true" />
       </button>
 
       <div
@@ -59,24 +69,29 @@ export default function WineModal({ wine, lang = "it", onClose }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-8 md:px-10 md:py-12">
-          <p className="text-[10px] font-bold uppercase tracking-mega text-amber-500">
+        <div
+          tabIndex={0}
+          role="group"
+          aria-labelledby="wine-modal-title"
+          className="flex-1 overflow-y-auto px-6 py-8 md:px-10 md:py-12"
+        >
+          <p className="text-xs font-bold uppercase tracking-mega text-amber-500">
             · {wine.region} ·
           </p>
-          <h2 className="mt-2 font-display text-3xl font-black leading-[1] tracking-tight text-stone-50 md:text-4xl">
+          <h2 id="wine-modal-title" className="mt-2 font-display text-3xl font-black leading-[1] tracking-tight text-stone-50 md:text-4xl">
             {wine.name}
           </h2>
-          <p className="mt-2 text-[11px] font-bold uppercase tracking-mega text-amber-500/90">
+          <p className="mt-2 text-xs font-bold uppercase tracking-mega text-amber-400">
             {wine.appellation}
           </p>
 
           <div className="mt-6 flex flex-col gap-3 text-sm">
             {wine.producer && (
               <div className="flex items-start gap-3">
-                <WineIcon className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                <WineIcon className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-mega text-stone-500">
-                    {lang === "en" ? "Producer" : "Produttore"}
+                  <p className="text-xs font-bold uppercase tracking-mega text-stone-400">
+                    {t("wine.producer")}
                   </p>
                   <p className="text-stone-200">{wine.producer}</p>
                 </div>
@@ -84,10 +99,10 @@ export default function WineModal({ wine, lang = "it", onClose }) {
             )}
             {wine.grape && (
               <div className="flex items-start gap-3">
-                <Grape className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                <Grape className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-mega text-stone-500">
-                    {lang === "en" ? "Grape variety" : "Vitigno"}
+                  <p className="text-xs font-bold uppercase tracking-mega text-stone-400">
+                    {t("wine.grape")}
                   </p>
                   <p className="text-stone-200">{wine.grape}</p>
                 </div>
@@ -95,10 +110,10 @@ export default function WineModal({ wine, lang = "it", onClose }) {
             )}
             {wine.region && (
               <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-mega text-stone-500">
-                    {lang === "en" ? "Region" : "Regione"}
+                  <p className="text-xs font-bold uppercase tracking-mega text-stone-400">
+                    {t("wine.region")}
                   </p>
                   <p className="text-stone-200">{wine.region}</p>
                 </div>

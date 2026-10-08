@@ -7,13 +7,21 @@ export const MAPS_LINK = `https://www.google.com/maps?q=${MAPS_QUERY}`;
 
 const dict = {
   it: {
-    "nav.hamburger": "Hamburger",
-    "nav.ciabatte": "Ciabatte",
-    "nav.griglia": "Griglia",
-    "nav.menu": "Vai al menu",
     "nav.drinks": "Bevande",
     "nav.about": "Chi siamo",
     "nav.skipToMenu": "Salta al menu",
+    "nav.backToTop": "Torna in cima",
+    "nav.categories": "Categorie del menu",
+    "filter.groupLabel": "Filtra i piatti",
+    "hero.ctaDirectionsLabel": "Indicazioni per Via Lauretana 21",
+    "mobile.title": "Menu",
+    "wine.producer": "Produttore",
+    "wine.grape": "Vitigno",
+    "wine.region": "Regione",
+    "wine.close": "Chiudi",
+    "reviews.title": "Cosa dicono di noi",
+    "reviews.fallbackBody": "Le nostre recensioni sono su Google Maps: leggile con un tocco.",
+    "reviews.dot": (n) => `Recensione ${n}`,
 
     "hero.kicker": "Camucia · Cortona · dal 2016",
     "hero.title1": "Burger",
@@ -67,7 +75,6 @@ const dict = {
     "menu.notice.burger": "Tutti gli hamburger sono serviti con patatine. Pane senza glutine su richiesta.",
     "menu.notice.ciabatte": "Tutte le ciabatte sono servite con patatine. Pane senza glutine su richiesta.",
     "menu.notice.wraps": "Tutti i wrap sono serviti con patatine.",
-    "menu.byWeight": "Articoli al kg: il totale finale si calcola alla pesata.",
 
     "reviews.kicker": "Dicono di noi",
     "reviews.subtitle": "su 5",
@@ -108,9 +115,7 @@ const dict = {
     "cart.kicker": "Il tuo ordine",
     "cart.title": "Carrello",
     "cart.fab": (n) => (n > 0 ? `Il tuo ordine (${n})` : "Il tuo ordine"),
-    "cart.open": "Apri carrello",
     "cart.close": "Chiudi carrello",
-    "cart.ariaLabel": (n) => `Il tuo ordine, ${n} ${n === 1 ? "piatto" : "piatti"}`,
     "cart.empty.title": "Il tuo ordine è vuoto",
     "cart.empty.subtitle":
       "Aggiungi i piatti dal menu, poi invia l'ordine su WhatsApp.",
@@ -121,8 +126,6 @@ const dict = {
     "cart.remove": "Rimuovi",
     "cart.increase": "Aumenta quantità",
     "cart.decrease": "Diminuisci quantità",
-    "cart.itemSingular": "piatto",
-    "cart.itemPlural": "piatti",
     "cart.perKg": "al kg",
     "cart.kgNote":
       "Gli articoli a peso non sono nel totale: te lo confermiamo su WhatsApp.",
@@ -130,7 +133,7 @@ const dict = {
       "Ti rispondiamo su WhatsApp per confermare ordine e orario di ritiro.",
 
     "cart.pickup.line": (meal, day, time) =>
-      `Ritiro: ${meal}, ${day}, ${time} · Cambia`,
+      `Ritiro: ${meal}, ${day}, ${time}`,
     "cart.pickup.change": "Cambia",
 
     "confirm.kicker": "Conferma ordine",
@@ -201,21 +204,27 @@ const dict = {
     "home.reviewCta.btn": "Scrivi una recensione",
 
     "lightbox.close": "Chiudi",
-    "lang.it": "Italiano",
-    "lang.en": "English",
 
     "page.title.home": "Burger & Grill Camucia · Hamburger di Chianina e griglia a Cortona",
     "page.title.drinks": "Bevande e vini · Burger & Grill Camucia",
     "page.title.about": "Chi siamo · Burger & Grill Camucia",
   },
   en: {
-    "nav.hamburger": "Burgers",
-    "nav.ciabatte": "Sandwiches",
-    "nav.griglia": "Grill",
-    "nav.menu": "Browse menu",
     "nav.drinks": "Drinks",
     "nav.about": "About",
     "nav.skipToMenu": "Skip to menu",
+    "nav.backToTop": "Back to top",
+    "nav.categories": "Menu categories",
+    "filter.groupLabel": "Filter dishes",
+    "hero.ctaDirectionsLabel": "Directions to Via Lauretana 21",
+    "mobile.title": "Menu",
+    "wine.producer": "Producer",
+    "wine.grape": "Grape variety",
+    "wine.region": "Region",
+    "wine.close": "Close",
+    "reviews.title": "What people say about us",
+    "reviews.fallbackBody": "Our reviews are on Google Maps: read them with one tap.",
+    "reviews.dot": (n) => `Review ${n}`,
 
     "hero.kicker": "Camucia · Cortona · since 2016",
     "hero.title1": "Burger",
@@ -269,7 +278,6 @@ const dict = {
     "menu.notice.burger": "All burgers come with fries. Gluten-free bun on request.",
     "menu.notice.ciabatte": "All ciabatta sandwiches come with fries. Gluten-free bread on request.",
     "menu.notice.wraps": "All wraps come with fries.",
-    "menu.byWeight": "Items priced by weight: the final total is calculated on weigh-in.",
 
     "reviews.kicker": "People say",
     "reviews.subtitle": "out of 5",
@@ -311,9 +319,7 @@ const dict = {
     "cart.kicker": "Your order",
     "cart.title": "Cart",
     "cart.fab": (n) => (n > 0 ? `Your order (${n})` : "Your order"),
-    "cart.open": "Open cart",
     "cart.close": "Close cart",
-    "cart.ariaLabel": (n) => `Your order, ${n} ${n === 1 ? "item" : "items"}`,
     "cart.empty.title": "Your order is empty",
     "cart.empty.subtitle":
       "Add dishes from the menu, then send your order on WhatsApp.",
@@ -324,8 +330,6 @@ const dict = {
     "cart.remove": "Remove",
     "cart.increase": "Increase quantity",
     "cart.decrease": "Decrease quantity",
-    "cart.itemSingular": "item",
-    "cart.itemPlural": "items",
     "cart.perKg": "per kg",
     "cart.kgNote":
       "Items priced by weight aren't in the total: we'll confirm it on WhatsApp.",
@@ -333,7 +337,7 @@ const dict = {
       "We'll reply on WhatsApp to confirm your order and pickup time.",
 
     "cart.pickup.line": (meal, day, time) =>
-      `Pickup: ${meal}, ${day}, ${time} · Change`,
+      `Pickup: ${meal}, ${day}, ${time}`,
     "cart.pickup.change": "Change",
 
     "confirm.kicker": "Order confirmation",
@@ -404,8 +408,6 @@ const dict = {
     "home.reviewCta.btn": "Write a review",
 
     "lightbox.close": "Close",
-    "lang.it": "Italiano",
-    "lang.en": "English",
 
     "page.title.home": "Burger & Grill Camucia · Chianina burgers and grill in Cortona",
     "page.title.drinks": "Drinks and wines · Burger & Grill Camucia",
