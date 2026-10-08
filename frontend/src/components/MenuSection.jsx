@@ -1,13 +1,11 @@
-import { Utensils } from "lucide-react";
+import { WheatOff } from "lucide-react";
 import MenuItem from "./MenuItem";
 
-// Sections whose dishes come with fries: the notice sits under the title and
-// every dish card says it too.
-const DISCLAIMER_KEY = {
-  hamburger: "menu.notice.burger",
-  ciabatte: "menu.notice.ciabatte",
-  piadine: "menu.notice.wraps",
-};
+// Dishes in these sections come with fries: each card says so.
+const WITH_FRIES = new Set(["hamburger", "ciabatte", "piadine"]);
+
+// Gluten-free note shown under the section title.
+const GLUTEN_FREE_SECTIONS = new Set(["hamburger", "ciabatte"]);
 
 /**
  * MenuSection — food category on the home page.
@@ -22,7 +20,6 @@ export default function MenuSection({ section, index, t, lang }) {
   const visibleItems = section.items;
   if (visibleItems.length === 0) return null;
 
-  const disclaimerKey = DISCLAIMER_KEY[section.id];
 
   return (
     <section
@@ -59,13 +56,13 @@ export default function MenuSection({ section, index, t, lang }) {
         )}
       </div>
 
-      {disclaimerKey && (
+      {GLUTEN_FREE_SECTIONS.has(section.id) && (
         <p
           data-testid={`notice-${section.id}`}
           className="mb-4 flex items-center gap-2 rounded-none border border-amber-600/40 bg-amber-500/5 px-4 py-2.5 text-sm text-amber-200"
         >
-          <Utensils className="h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
-          {t(disclaimerKey)}
+          <WheatOff className="h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
+          {t("menu.notice.glutenFree")}
         </p>
       )}
 
@@ -82,7 +79,7 @@ export default function MenuSection({ section, index, t, lang }) {
             t={t}
             lang={lang}
             variant="card"
-            withFries={Boolean(disclaimerKey)}
+            withFries={WITH_FRIES.has(section.id)}
             className="w-[82%] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none"
           />
         ))}
