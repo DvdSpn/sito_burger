@@ -1,5 +1,6 @@
 import { Clock, MapPin, Phone, Instagram, Facebook, ExternalLink } from "lucide-react";
 import { RESTAURANT } from "../data/menu";
+import { hoursLines } from "../data/hours";
 import { MAPS_EMBED_SRC, MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
 import Button from "./brand/Button";
@@ -66,10 +67,7 @@ export default function Contact({ t }) {
               Icon={Clock}
               label={t("contact.hours")}
               testid="contact-hours"
-              lines={[
-                `${t("contact.hoursLunch")} · ${RESTAURANT.hours[0].time}`,
-                `${t("contact.hoursDinner")} · ${RESTAURANT.hours[1].time}`,
-              ]}
+              lines={hoursLines(t)}
             />
             <InfoCard
               Icon={Instagram}
