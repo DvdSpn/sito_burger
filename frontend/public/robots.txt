@@ -1,4 +1,0 @@
-# Robots file for Burger & Grill Camucia
-User-agent: *
-Allow: /
-Sitemap: https://www.burgergrillcamucia.it/sitemap.xml
