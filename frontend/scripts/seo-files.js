@@ -1,5 +1,5 @@
-// Writes public/sitemap.xml and public/robots.txt from site.config.js,
-// so the domain lives in one place. Runs before every build.
+// Writes public/robots.txt (and public/sitemap.xml once a domain is set)
+// from site.config.js, so the domain lives in one place. Runs before every build.
 const fs = require("fs");
 const path = require("path");
 const { siteUrl } = require("../site.config");
@@ -24,13 +24,24 @@ ${pages
 </urlset>
 `;
 
+const publicDir = path.join(__dirname, "..", "public");
+const sitemapPath = path.join(publicDir, "sitemap.xml");
+
+// A sitemap needs absolute URLs: only write it once there is a domain.
+if (siteUrl) {
+  fs.writeFileSync(sitemapPath, sitemap);
+} else if (fs.existsSync(sitemapPath)) {
+  fs.unlinkSync(sitemapPath);
+}
+
 const robots = `# Robots file for Burger & Grill Camucia
 User-agent: *
 Allow: /
-Sitemap: ${siteUrl}/sitemap.xml
-`;
-
-const publicDir = path.join(__dirname, "..", "public");
-fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemap);
+${siteUrl ? `Sitemap: ${siteUrl}/sitemap.xml\n` : ""}`;
 fs.writeFileSync(path.join(publicDir, "robots.txt"), robots);
-console.log(`[seo-files] sitemap.xml and robots.txt written for ${siteUrl}`);
+
+console.log(
+  siteUrl
+    ? `[seo-files] sitemap.xml and robots.txt written for ${siteUrl}`
+    : "[seo-files] no domain set in site.config.js: robots.txt only, no sitemap.xml"
+);

@@ -12,7 +12,7 @@ Sito del ristorante Burger & Grill (Camucia). Testi, commit e messaggi all'utent
 
 - Dati statici in `frontend/src/data/`: `menu.js` (piatti + `RESTAURANT` con contatti e WhatsApp), `drinks.js`, `featuredWines.js`, `hours.js`, `i18n.js` (testi IT/EN, chiavi `t("...")`).
 - Pagine: home in `src/App.js`, `/bevande` in `src/pages/Drinks.jsx`, `/chi-siamo` in `src/pages/About.jsx`.
-- Il dominio pubblico sta solo in `frontend/site.config.js`; `public/index.html` lo legge come `%REACT_APP_SITE_URL%`, e `scripts/seo-files.js` rigenera `public/sitemap.xml` e `public/robots.txt` a ogni build (non modificarli a mano).
+- Il dominio pubblico sta solo in `frontend/site.config.js` (per ora vuoto: il sito non ha ancora un dominio). `public/index.html` lo legge come `%REACT_APP_SITE_URL%`; `scripts/seo-files.js` genera a ogni build `public/robots.txt` e, solo se c'è un dominio, `public/sitemap.xml` (file generati, non versionati).
 
 ## Convenzioni di design
 

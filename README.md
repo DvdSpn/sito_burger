@@ -12,7 +12,7 @@ backend/
   server.py           API FastAPI (proxy recensioni Google)
   requirements.txt
 frontend/
-  site.config.js      dominio pubblico del sito (canonical, Open Graph, sitemap)
+  site.config.js      dominio pubblico del sito (vuoto finché non c'è un dominio)
   scripts/seo-files.js  genera sitemap.xml e robots.txt prima della build
   src/
     App.js            home, routing (/, /bevande, /chi-siamo)
@@ -66,4 +66,4 @@ In produzione: `gunicorn server:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0
 | Vini in bottiglia | `frontend/src/data/featuredWines.js` |
 | Orari | `frontend/src/data/hours.js` |
 | Testi IT/EN | `frontend/src/data/i18n.js` |
-| Dominio del sito | `frontend/site.config.js` |
+| Dominio del sito (quando ci sarà) | `frontend/site.config.js` |
