@@ -46,7 +46,7 @@ function Tag({ type, t }) {
   );
 }
 
-export default function MenuItem({ item, t, lang, variant = "row" }) {
+export default function MenuItem({ item, t, lang, variant = "row", className = "" }) {
   const { add, inc, dec, getQty, count: totalCount } = useCart();
   const qty = getQty(item.name);
   const incBtnRef = useRef(null);
@@ -72,17 +72,10 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
 
   const displayName = lang === "en" && item.nameEn ? item.nameEn : item.name;
 
-  const hasBadges = item.isNew || item.popular || item.signature;
-
-  // Mobile: only takes space when there is a badge. From md the slot is
-  // always reserved so titles line up across cards in the same grid row.
+  // The badge slot is always reserved so titles line up across the cards
+  // of a row (swipe row on mobile, grid from md).
   const badges = (
-    <div
-      className={cn(
-        "flex-wrap gap-1.5 md:mb-2 md:flex md:min-h-[1.5rem]",
-        hasBadges ? "mb-2 flex" : "hidden"
-      )}
-    >
+    <div className="mb-2 flex min-h-[1.5rem] flex-wrap gap-1.5">
       {item.isNew && (
         <Badge variant="new" icon={Sparkles} data-testid={`new-${itemId}`}>
           {t("tag.new")}
@@ -102,7 +95,7 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
   );
 
   const priceEl = (
-    <span className="shrink-0 whitespace-nowrap font-display text-lg font-semibold tabular-nums text-amber-500 md:text-2xl">
+    <span className="shrink-0 whitespace-nowrap font-display text-xl font-semibold tabular-nums text-amber-500 md:text-2xl">
       € {item.price}
     </span>
   );
@@ -171,16 +164,16 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
     return (
       <article
         data-testid={`menu-item-${itemId}`}
-        className="flex flex-col border-b border-stone-800/70 py-5 last:border-b-0 md:rounded-none md:border md:border-stone-800/70 md:bg-stone-950/60 md:p-6 md:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] md:transition-all md:last:border-b md:hover:-translate-y-1 md:hover:border-amber-700/60"
+        className={cn(
+          "relative flex flex-col rounded-none border border-stone-800/70 bg-stone-950/60 p-5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] transition-all md:p-6 md:hover:-translate-y-1 md:hover:border-amber-700/60",
+          className
+        )}
       >
         {badges}
-        {/* Mobile: name and price on one line · ≥md: stacked */}
-        <div className="flex items-baseline justify-between gap-3 md:block">
-          <h3 className="min-w-0 font-display text-lg font-bold leading-tight text-stone-50 md:text-2xl">
-            {displayName}
-          </h3>
-          <div className="md:mt-1">{priceEl}</div>
-        </div>
+        <h3 className="font-display text-xl font-bold leading-tight text-stone-50 md:text-2xl">
+          {displayName}
+        </h3>
+        <div className="mt-1">{priceEl}</div>
         {descriptionEl}
         {allergensEl}
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 md:pt-4">

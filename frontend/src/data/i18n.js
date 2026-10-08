@@ -69,6 +69,7 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} aggiunto. ${n} ${n === 1 ? "piatto" : "piatti"} nell'ordine.`,
     "menu.contains": "Allergeni:",
+    "menu.swipe": (n) => `Scorri · ${n} piatti →`,
     "menu.allergyNotice":
       "Allergie o intolleranze? Chiedi al personale prima di ordinare.",
     "menu.coverCharge": "Coperto e servizio · € 1,00 a persona",
@@ -272,6 +273,7 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} added. ${n} ${n === 1 ? "item" : "items"} in your order.`,
     "menu.contains": "Allergens:",
+    "menu.swipe": (n) => `Swipe · ${n} dishes →`,
     "menu.allergyNotice":
       "Allergies or intolerances? Please ask our staff before ordering.",
     "menu.coverCharge": "Cover & service · €1.00 per person",
