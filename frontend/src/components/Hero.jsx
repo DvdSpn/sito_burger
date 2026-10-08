@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { MapPin, Menu, Info } from "lucide-react";
+import { Menu, Info } from "lucide-react";
 import { Link } from "react-router-dom";
-import { MAPS_LINK } from "../data/i18n";
 import Logo from "./Logo";
 import LanguageToggle from "./LanguageToggle";
 import OpenClosedBadge from "./OpenClosedBadge";
@@ -101,45 +100,6 @@ export default function Hero({ t, lang, setLang }) {
             {t("hero.description")}
           </p>
 
-          {/* CTA block — mobile full-width primary, secondaries side-by-side */}
-          <div className="mt-6 space-y-2 md:mt-10 md:flex md:flex-wrap md:items-center md:gap-4 md:space-y-0">
-            <Button
-              as="a"
-              href="#menu"
-              size="lg"
-              data-testid="hero-menu-btn"
-              className="group flex w-full gap-3 md:inline-flex md:w-auto"
-            >
-              {t("hero.ctaMenu")}
-              <span aria-hidden="true" className="h-px w-6 bg-stone-950 transition-all group-hover:w-10" />
-            </Button>
-            <div className="grid grid-cols-2 gap-2 md:flex md:gap-4">
-              <Button
-                as={Link}
-                to="/bevande"
-                variant="secondary"
-                size="lg"
-                data-testid="hero-drinks-btn"
-                className="px-4 backdrop-blur md:px-6"
-              >
-                {t("hero.ctaDrinks")}
-              </Button>
-              <Button
-                as="a"
-                href={MAPS_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="secondary"
-                size="lg"
-                icon={MapPin}
-                data-testid="hero-location-btn"
-                aria-label={t("hero.ctaDirectionsLabel")}
-                className="whitespace-nowrap px-4 backdrop-blur md:px-6"
-              >
-                {t("hero.ctaDirections")}
-              </Button>
-            </div>
-          </div>
         </div>
 
         {/* Highlights marquee — hidden on mobile */}

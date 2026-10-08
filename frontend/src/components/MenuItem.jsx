@@ -5,6 +5,8 @@ import { useCart } from "../context/CartContext";
 import AllergenIcons from "./AllergenIcons";
 import Badge from "./brand/Badge";
 
+// Only dietary info is shown on the dish; meat type (beef, chicken, pork)
+// stays in the data but has no pill.
 const TAG_META = {
   veg: {
     className: "border-green-900 bg-green-950/40 text-green-300",
@@ -13,18 +15,6 @@ const TAG_META = {
   spicy: {
     className: "border-red-900 bg-red-950/40 text-red-300",
     Icon: Flame,
-  },
-  beef: {
-    className: "border-amber-900 bg-amber-950/40 text-amber-300",
-    Icon: null,
-  },
-  chicken: {
-    className: "border-stone-500 bg-stone-900 text-stone-200",
-    Icon: null,
-  },
-  pork: {
-    className: "border-orange-900 bg-orange-950/40 text-orange-300",
-    Icon: null,
   },
 };
 

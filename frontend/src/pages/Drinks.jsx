@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Wine } from "lucide-react";
-import { drinksData, pairings } from "../data/drinks";
+import { drinksData } from "../data/drinks";
 import Logo from "../components/Logo";
 import LanguageToggle from "../components/LanguageToggle";
 import AccordionSection from "../components/AccordionSection";
@@ -24,18 +23,20 @@ export default function Drinks({ t, lang, setLang }) {
     document.title = t("page.title.drinks");
   }, [t]);
 
-  const handleToggle = (nextId) => {
+  const handleToggle = (id) => {
+    const opening = !openIds.has(id);
     setOpenIds((prev) => {
       const copy = new Set(prev);
-      if (copy.has(nextId)) copy.delete(nextId);
-      else copy.add(nextId);
+      if (copy.has(id)) copy.delete(id);
+      else copy.add(id);
       return copy;
     });
+    if (!opening) return;
     if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", `#${nextId}`);
+      window.history.replaceState(null, "", `#${id}`);
     }
     window.setTimeout(() => {
-      const el = document.getElementById(nextId);
+      const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 480);
   };
@@ -131,37 +132,6 @@ export default function Drinks({ t, lang, setLang }) {
           </AccordionSection>
         ))}
       </div>
-
-      {/* Pairings highlight — moved to bottom */}
-      <section className="border-t border-stone-800/70 bg-stone-900/30 py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="mb-8 flex items-center gap-3">
-            <Wine className="h-4 w-4 text-amber-500" aria-hidden="true" />
-            <h2 className="text-xs font-bold uppercase tracking-mega text-amber-500">
-              {t("drinks.pairings")}
-            </h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {pairings.map((p, i) => (
-              <div
-                key={i}
-                data-testid={`pairing-${i}`}
-                className="rounded-none border border-stone-800 bg-stone-950/50 p-5 transition-colors hover:border-amber-700/40"
-              >
-                <p className="font-hand text-lg text-amber-500">
-                  {tx(p, "wine", lang)}
-                </p>
-                <p className="mt-2 font-display text-base font-semibold text-stone-50">
-                  {tx(p, "dish", lang)}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-stone-300">
-                  {tx(p, "note", lang)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* breathing room so the last section is not covered */}
       <div aria-hidden="true" className="h-12" />

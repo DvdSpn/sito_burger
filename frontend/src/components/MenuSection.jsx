@@ -10,17 +10,13 @@ const DISCLAIMER_KEY = {
  * MenuSection — food category on the home page.
  * On mobile (< md) the dishes are one horizontal swipe row of cards; from md
  * and up a 2-col grid, from xl a 3-col grid.
- * Dishes that don't match the active filter are hidden (not dimmed).
  */
-export default function MenuSection({ section, index, filter, t, lang }) {
+export default function MenuSection({ section, index, t, lang }) {
   const title = lang === "en" && section.titleEn ? section.titleEn : section.title;
   const subtitle =
     lang === "en" && section.subtitleEn ? section.subtitleEn : section.subtitle;
 
-  const matchesFilter = (item) =>
-    filter === "all" ? true : item.tags && item.tags.includes(filter);
-
-  const visibleItems = section.items.filter(matchesFilter);
+  const visibleItems = section.items;
   if (visibleItems.length === 0) return null;
 
   const disclaimerKey = DISCLAIMER_KEY[section.id];
