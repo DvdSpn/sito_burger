@@ -86,7 +86,6 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
-      { name: "Patatine classiche", price: "3,50", desc: "Patatine fritte classiche.", descEn: "Classic French fries.", tags: ["veg"], allergens: [] },
       { name: "Verdure grigliate", price: "5,00", desc: "Zucchine grigliate, melanzane grigliate e peperoni grigliati.", descEn: "Grilled courgettes, grilled aubergines and grilled peppers.", tags: ["veg"], allergens: [] },
     ],
   },

@@ -142,7 +142,6 @@ export const drinksData = [
         image: "/beers/traccia.png",
         formats: [
           { size: "33 cl", price: "6,50" },
-          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra chiara e rinfrescante, aromatizzata con scorza d'arancia, coriandolo e spezie leggere. Leggera, fresca e leggermente velata.",
         descEn: "Pale, refreshing wheat beer with orange peel, coriander and mild spices. Light, crisp and slightly hazy.",
@@ -155,7 +154,6 @@ export const drinksData = [
         image: "/beers/rovina.png",
         formats: [
           { size: "33 cl", price: "6,50" },
-          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra dorata e equilibrata, con aromi maltati dolci, note floreali e un tocco erbaceo dai luppoli nobili. Pulita e beverina.",
         descEn: "Balanced golden ale with sweet malt aromas, floral notes and a herbal touch from noble hops. Clean and easy-drinking.",
@@ -168,7 +166,6 @@ export const drinksData = [
         image: "/beers/sassaia.png",
         formats: [
           { size: "33 cl", price: "6,50" },
-          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra ambrata corposa, profumata di resina, caramello tostato, frutta matura e malti speciali. Strutturata e resinosa.",
         descEn: "Full-bodied amber ale with notes of resin, toasted caramel, ripe fruit and specialty malts. Structured and resinous.",
@@ -181,7 +178,6 @@ export const drinksData = [
         image: "/beers/cavadenti.png",
         formats: [
           { size: "33 cl", price: "6,50" },
-          { size: "75 cl", price: "12,00" },
         ],
         desc: "Birra forte e complessa, con aromi caldi di frutta candita, spezie, malti caramellati e lieviti belgici. Avvolgente e persistente.",
         descEn: "Strong, complex ale with warm aromas of candied fruit, spices, caramel malts and Belgian yeast. Rich and lingering.",

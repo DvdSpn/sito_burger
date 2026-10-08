@@ -36,7 +36,7 @@ function Tag({ type, t }) {
   );
 }
 
-export default function MenuItem({ item, t, lang, variant = "row", className = "" }) {
+export default function MenuItem({ item, t, lang, variant = "row", className = "", withFries = false }) {
   const { add, inc, dec, getQty, count: totalCount } = useCart();
   const qty = getQty(item.name);
   const incBtnRef = useRef(null);
@@ -163,7 +163,17 @@ export default function MenuItem({ item, t, lang, variant = "row", className = "
         <h3 className="font-display text-xl font-bold leading-tight text-stone-50 md:text-2xl">
           {displayName}
         </h3>
-        <div className="mt-1">{priceEl}</div>
+        <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          {priceEl}
+          {withFries && (
+            <span
+              data-testid={`with-fries-${itemId}`}
+              className="text-xs font-bold uppercase tracking-widest text-amber-400/90"
+            >
+              + {t("menu.withFries")}
+            </span>
+          )}
+        </div>
         {descriptionEl}
         {allergensEl}
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 md:pt-4">
