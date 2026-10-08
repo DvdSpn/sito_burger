@@ -3,7 +3,7 @@ import { cn } from "../lib/utils";
 
 // Hero / Footer / MobileMenu: huge and highly visible
 const SIZE_DEFAULT =
-  "h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 xl:h-64 xl:w-64";
+  "h-24 w-24 sm:h-36 sm:w-36 md:h-48 md:w-48 lg:h-56 lg:w-56 xl:h-64 xl:w-64";
 
 // Sticky nav / compact headers: still prominent but doesn't eat the viewport
 const SIZE_COMPACT = "h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20";

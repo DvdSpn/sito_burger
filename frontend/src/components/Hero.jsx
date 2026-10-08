@@ -17,7 +17,7 @@ export default function Hero({ t, lang, setLang }) {
   return (
     <header
       data-testid="hero-section"
-      className="relative min-h-[88vh] w-full overflow-hidden grain md:min-h-[92vh]"
+      className="relative w-full overflow-hidden grain md:min-h-[92vh]"
     >
       <div className="absolute inset-0">
         <img
@@ -71,7 +71,7 @@ export default function Hero({ t, lang, setLang }) {
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-end px-4 pb-10 sm:px-6 sm:pb-16 lg:px-12 lg:pb-24">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col justify-end px-4 pb-8 pt-10 sm:px-6 sm:pb-16 md:min-h-[70vh] md:pt-0 lg:px-12 lg:pb-24">
         <div className="rise max-w-4xl">
           <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
             <OpenClosedBadge t={t} />
@@ -96,13 +96,13 @@ export default function Hero({ t, lang, setLang }) {
 
           <p
             data-testid="hero-sub"
-            className="mt-6 max-w-xl text-sm leading-relaxed text-stone-300 sm:text-base md:mt-8 md:text-lg"
+            className="mt-4 max-w-xl text-sm leading-relaxed text-stone-300 sm:text-base md:mt-8 md:text-lg"
           >
             {t("hero.description")}
           </p>
 
           {/* CTA block — mobile full-width primary, secondaries side-by-side */}
-          <div className="mt-8 space-y-2 md:mt-10 md:flex md:flex-wrap md:items-center md:gap-4 md:space-y-0">
+          <div className="mt-6 space-y-2 md:mt-10 md:flex md:flex-wrap md:items-center md:gap-4 md:space-y-0">
             <Button
               as="a"
               href="#menu"

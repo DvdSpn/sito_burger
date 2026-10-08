@@ -72,8 +72,17 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
 
   const displayName = lang === "en" && item.nameEn ? item.nameEn : item.name;
 
+  const hasBadges = item.isNew || item.popular || item.signature;
+
+  // Mobile: only takes space when there is a badge. From md the slot is
+  // always reserved so titles line up across cards in the same grid row.
   const badges = (
-    <div className="mb-2 flex min-h-[1.5rem] flex-wrap gap-1.5">
+    <div
+      className={cn(
+        "flex-wrap gap-1.5 md:mb-2 md:flex md:min-h-[1.5rem]",
+        hasBadges ? "mb-2 flex" : "hidden"
+      )}
+    >
       {item.isNew && (
         <Badge variant="new" icon={Sparkles} data-testid={`new-${itemId}`}>
           {t("tag.new")}
@@ -93,19 +102,19 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
   );
 
   const priceEl = (
-    <span className="shrink-0 font-display text-xl font-semibold text-amber-500 md:text-2xl">
+    <span className="shrink-0 whitespace-nowrap font-display text-lg font-semibold tabular-nums text-amber-500 md:text-2xl">
       € {item.price}
     </span>
   );
 
   const descriptionEl = (
-    <p className="mt-2 text-sm leading-relaxed text-stone-300">
+    <p className="mt-1.5 text-sm leading-relaxed text-stone-300 md:mt-2">
       {lang === "en" && item.descEn ? item.descEn : item.desc}
     </p>
   );
 
   const allergensEl = item.allergens && item.allergens.length > 0 && (
-    <p className="mt-3 text-xs text-stone-300">
+    <p className="mt-2 text-xs text-stone-300 md:mt-3">
       <span className="font-bold text-stone-200">{t("menu.contains")}</span>{" "}
       <AllergenIcons allergens={item.allergens} lang={lang} />
     </p>
@@ -162,16 +171,19 @@ export default function MenuItem({ item, t, lang, variant = "row" }) {
     return (
       <article
         data-testid={`menu-item-${itemId}`}
-        className="flex flex-col rounded-none border border-stone-800/70 bg-stone-950/60 p-5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] transition-all hover:-translate-y-1 hover:border-amber-700/60 md:p-6"
+        className="flex flex-col border-b border-stone-800/70 py-5 last:border-b-0 md:rounded-none md:border md:border-stone-800/70 md:bg-stone-950/60 md:p-6 md:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.9)] md:transition-all md:last:border-b md:hover:-translate-y-1 md:hover:border-amber-700/60"
       >
         {badges}
-        <h3 className="font-display text-xl font-bold leading-tight text-stone-50 md:text-2xl">
-          {displayName}
-        </h3>
-        <div className="mt-1">{priceEl}</div>
+        {/* Mobile: name and price on one line · ≥md: stacked */}
+        <div className="flex items-baseline justify-between gap-3 md:block">
+          <h3 className="min-w-0 font-display text-lg font-bold leading-tight text-stone-50 md:text-2xl">
+            {displayName}
+          </h3>
+          <div className="md:mt-1">{priceEl}</div>
+        </div>
         {descriptionEl}
         {allergensEl}
-        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 md:pt-4">
           {item.tags && item.tags.map((ty) => (
             <Tag type={ty} key={ty} t={t} />
           ))}

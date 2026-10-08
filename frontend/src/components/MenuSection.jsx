@@ -29,9 +29,9 @@ export default function MenuSection({ section, index, filter, t, lang }) {
     <section
       id={section.id}
       data-testid={`section-${section.id}`}
-      className="scroll-mt-24 border-b border-stone-800/70 px-6 py-10 lg:px-12 lg:py-14 md:scroll-mt-28"
+      className="scroll-mt-24 border-b border-stone-800/70 px-4 py-8 sm:px-6 md:scroll-mt-28 md:py-10 lg:px-12 lg:py-14"
     >
-      <div className="mb-6 flex items-center gap-4">
+      <div className="mb-2 flex items-center gap-4 md:mb-6">
         {typeof index === "number" && (
           <span
             aria-hidden="true"
@@ -52,8 +52,8 @@ export default function MenuSection({ section, index, filter, t, lang }) {
         </div>
       </div>
 
-      {/* Mobile: vertical compact rows · ≥md: 2 cols · ≥xl: 3 cols */}
-      <div className="flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+      {/* Mobile: compact rows split by hairlines · ≥md: 2-col cards · ≥xl: 3 cols */}
+      <div className="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3">
         {visibleItems.map((item) => (
           <MenuItem
             key={item.name}
