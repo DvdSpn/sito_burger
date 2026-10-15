@@ -28,6 +28,8 @@ export default function Reviews({ t, lang }) {
   const total = reviews.length;
 
   useEffect(() => {
+    // No backend configured (static hosting only): keep the "read on Google" view
+    if (!BACKEND_URL) return undefined;
     let cancelled = false;
     (async () => {
       try {
