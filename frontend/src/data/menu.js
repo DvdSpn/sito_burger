@@ -20,7 +20,7 @@ export const menuData = [
       { name: "Nevada", price: "9,00", desc: "Hamburger 170 g, cheddar, cipolla di Tropea, cetrioli marinati, insalata, pomodoro, salsa BBQ.", descEn: "Burger 170 g, cheddar, Tropea red onion, pickled cucumbers, lettuce, tomato, BBQ sauce.", tags: ["beef"], allergens: ["gluten", "sesame", "lactose", "mustard"] },
       { name: "Cheeseburger", price: "7,00", desc: "Hamburger 140 g, fontina, bacon, insalata, pomodoro, ketchup, maionese.", descEn: "Burger 140 g, fontina cheese, bacon, lettuce, tomato, ketchup, mayonnaise.", tags: ["beef"], allergens: ["gluten", "sesame", "lactose", "eggs", "mustard"] },
       { name: "Classic Burger", price: "6,00", desc: "Hamburger 140 g, insalata, pomodoro, maionese, ketchup.", descEn: "Burger 140 g, lettuce, tomato, mayonnaise, ketchup.", tags: ["beef"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
-      { name: "Veggye Burger", price: "9,00", desc: "Hamburger vegetariano, maionese al basilico, crema di pomodori secchi, insalata, stracciatella.", descEn: "Vegetarian burger, basil mayonnaise, sun-dried tomato cream, lettuce, stracciatella cheese.", tags: ["veg"], allergens: ["gluten", "sesame", "lactose", "eggs"], isNew: true },
+      { name: "Veggie Burger", price: "9,00", desc: "Hamburger vegetariano, verdure grigliate, Philadelphia, insalata, pomodoro.", descEn: "Vegetarian burger, grilled vegetables, Philadelphia, lettuce, tomato.", tags: ["veg"], allergens: ["gluten", "sesame", "lactose", "eggs"], isNew: true },
       { name: "Chicken Cheese", price: "8,00", desc: "Burger di pollo 150 g, cheddar, bacon, insalata, pomodoro, salsa burger.", descEn: "Chicken burger 150 g, cheddar, bacon, lettuce, tomato, burger sauce.", tags: ["chicken"], allergens: ["gluten", "sesame", "lactose", "eggs", "mustard"] },
       { name: "Chicken", price: "7,00", desc: "Burger di pollo 150 g, insalata, pomodoro, maionese, ketchup.", descEn: "Chicken burger 150 g, lettuce, tomato, mayonnaise, ketchup.", tags: ["chicken"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
       { name: "Hot Dog", price: "4,50", desc: "Wurstel + 2 salse a scelta tra: ketchup, maionese, BBQ, salsa piccante, senape.", descEn: "Frankfurter + 2 sauces of your choice from: ketchup, mayo, BBQ, spicy sauce, mustard.", tags: ["pork"], allergens: ["gluten", "sesame", "eggs", "mustard"] },
@@ -40,7 +40,7 @@ export const menuData = [
       { name: "Gustosa", price: "11,00", desc: "Tagliata di manzo, rucola, scaglie di grana e salsa tartara.", descEn: "Sliced beef, rocket, parmesan flakes and tartar sauce.", tags: ["beef"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
       { name: "Pulled Pork", price: "10,00", desc: "Pulled pork, rosti di patate, cipolla croccante, salsa chipotle.", descEn: "Pulled pork, potato rosti, crispy onion, chipotle sauce.", tags: ["pork", "spicy"], allergens: ["gluten", "mustard"], isNew: true },
       { name: "Sfiziosa", price: "9,50", desc: "Tagliata di pollo, verdurine grigliate, Philadelphia, glassa al balsamico di Modena.", descEn: "Sliced chicken, grilled baby vegetables, Philadelphia, Modena balsamic glaze.", tags: ["chicken"], allergens: ["gluten", "lactose", "sulphites"] },
-      { name: "Vegetariana", price: "12,00", desc: "Verdure grigliate, mozzarella, pomodoro, frittatina, salsa rosa.", descEn: "Grilled vegetables, mozzarella, tomato, omelette, cocktail sauce.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
+      { name: "Vegetariana", price: "9,00", desc: "Verdure grigliate, mozzarella, pomodoro, frittatina, salsa rosa.", descEn: "Grilled vegetables, mozzarella, tomato, omelette, cocktail sauce.", tags: ["veg"], allergens: ["gluten", "lactose", "eggs"] },
     ],
   },
   {
@@ -53,9 +53,10 @@ export const menuData = [
     accentEn: "Rolled piadine, Italian street food",
     layout: "swipe",
     items: [
-      { name: "Chicken Wrap", price: "10,00", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, salsa baconaise.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, baconaise sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
-      { name: "Kebab di Pollo", price: "11,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa yogurt, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, yogurt sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
-      { name: "Crunchy Chicken", price: "11,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
+      { name: "Chicken Wrap", price: "8,50", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, salsa baconaise.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, baconaise sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
+      { name: "Kebab di Pollo", price: "9,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa yogurt, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, yogurt sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
+      { name: "Crunchy Chicken", price: "9,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
+      { name: "Beef Wrap", price: "10,00", desc: "Piadina arrotolata con manzo.", descEn: "Rolled piadina with beef.", tags: ["beef"], allergens: ["gluten"] },
     ],
   },
   {
