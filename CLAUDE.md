@@ -14,6 +14,10 @@ Sito del ristorante Burger & Grill (Camucia). Testi, commit e messaggi all'utent
 - Pagine: home in `src/App.js`, `/bevande` in `src/pages/Drinks.jsx`, `/chi-siamo` in `src/pages/About.jsx`.
 - Il dominio pubblico sta solo in `frontend/site.config.js` (per ora vuoto: il sito non ha ancora un dominio). `public/index.html` lo legge come `%REACT_APP_SITE_URL%`; `scripts/seo-files.js` genera a ogni build `public/robots.txt` e, solo se c'è un dominio, `public/sitemap.xml` (file generati, non versionati).
 
+## Pubblicazione
+
+- Cloudflare Workers con asset statici: `wrangler.jsonc` nella radice esegue la build in `frontend/` e pubblica `frontend/build` (`not_found_handling: single-page-application`). Il campo `name` deve coincidere con il nome del Worker su Cloudflare. Prova locale: `npx wrangler deploy --dry-run`.
+
 ## Convenzioni di design
 
 - Mobile first: le classi senza prefisso sono per il telefono, `md:` e oltre per tablet e desktop.
