@@ -37,7 +37,21 @@ yarn start        # http://localhost:3000
 yarn build        # cartella frontend/build/ pronta da pubblicare
 ```
 
-`frontend/build/` è un sito statico: si carica su qualsiasi hosting (Netlify, Vercel, Cloudflare Pages, GitHub Pages, Apache/Nginx). Il sito usa percorsi come `/bevande`, quindi l'hosting deve rimandare a `index.html` ogni percorso che non è un file (su Netlify: `/* /index.html 200` in `_redirects`).
+`frontend/build/` è un sito statico: si carica su qualsiasi hosting. Il sito usa percorsi come `/bevande`, quindi l'hosting deve rimandare a `index.html` ogni percorso che non è un file.
+
+### Pubblicazione su Cloudflare Pages (gratis)
+
+1. Su [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, e scegli il repo `sito_burger`.
+2. Impostazioni di build:
+   - **Production branch**: `main`
+   - **Framework preset**: `Create React App`
+   - **Root directory**: `frontend`
+   - **Build command**: `yarn build`
+   - **Build output directory**: `build`
+3. **Save and Deploy**. Il sito va online su un indirizzo tipo `nome-progetto.pages.dev`, e si ripubblica da solo a ogni modifica su `main`.
+4. Scrivi quell'indirizzo in `frontend/site.config.js` (es. `https://nome-progetto.pages.dev`), così canonical, anteprime social e sitemap usano l'indirizzo giusto.
+
+La versione di Node.js è fissata in `frontend/.nvmrc`. Cloudflare Pages manda già a `index.html` i percorsi come `/bevande`: non serve altra configurazione.
 
 Variabili d'ambiente (file `frontend/.env`, non versionato):
 
