@@ -39,24 +39,14 @@ yarn build        # cartella frontend/build/ pronta da pubblicare
 
 `frontend/build/` è un sito statico: si carica su qualsiasi hosting. Il sito usa percorsi come `/bevande`, quindi l'hosting deve rimandare a `index.html` ogni percorso che non è un file.
 
-### Pubblicazione su Cloudflare Pages (gratis)
+### Pubblicazione su Cloudflare (gratis)
 
-1. Su [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, e scegli il repo `sito_burger`.
-2. Impostazioni di build:
-   - **Production branch**: `main`
-   - **Framework preset**: `Create React App`
-   - **Root directory**: `frontend`
-   - **Build command**: `yarn build`
-   - **Build output directory**: `build`
-3. **Save and Deploy**. Il sito va online su un indirizzo tipo `nome-progetto.pages.dev`, e si ripubblica da solo a ogni modifica su `main`.
-4. Scrivi quell'indirizzo in `frontend/site.config.js` (es. `https://nome-progetto.pages.dev`), così canonical, anteprime social e sitemap usano l'indirizzo giusto.
+Il file `wrangler.jsonc` nella radice del repo dice a Cloudflare come costruire e pubblicare il sito: esegue la build in `frontend/` e pubblica `frontend/build`, mandando a `index.html` i percorsi come `/bevande`.
 
-La versione di Node.js è fissata in `frontend/.nvmrc`. Cloudflare Pages manda già a `index.html` i percorsi come `/bevande`: non serve altra configurazione.
-
-Variabili d'ambiente (file `frontend/.env`, non versionato):
-
-- `REACT_APP_BACKEND_URL` — indirizzo del backend per le recensioni Google. Senza, la sezione recensioni mostra solo il pulsante per leggerle su Google.
-- `REACT_APP_SITE_URL` — facoltativo, sovrascrive il dominio di `site.config.js`.
+1. Su [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → importa il repo `sito_burger` da GitHub.
+2. Lascia **Root directory** vuota (`/`), **Build command** vuoto e **Deploy command** `npx wrangler deploy`.
+3. Il campo `name` in `wrangler.jsonc` deve essere uguale al nome del Worker su Cloudflare (ora `sito-burger`). Se è diverso, Cloudflare apre da sé una pull request per correggerlo.
+4. Il sito va online su `nome-worker.<account>.workers.dev` e si ripubblica da solo a ogni modifica su `main`. Scrivi quell'indirizzo in `frontend/site.config.js`.
 
 ## Backend (recensioni Google)
 

@@ -1,0 +1,14 @@
+// Cloudflare Workers: deploys the static site in frontend/build.
+// "name" must match the Worker name in the Cloudflare dashboard.
+{
+  "name": "sito-burger",
+  "compatibility_date": "2026-09-01",
+  "build": {
+    "command": "cd frontend && npx --yes yarn@1.22.22 install --frozen-lockfile && npx --yes yarn@1.22.22 build"
+  },
+  "assets": {
+    "directory": "./frontend/build",
+    // /bevande, /chi-siamo… are served by index.html (client-side routing)
+    "not_found_handling": "single-page-application"
+  }
+}
