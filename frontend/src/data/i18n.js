@@ -69,7 +69,6 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} aggiunto. ${n} ${n === 1 ? "piatto" : "piatti"} nell'ordine.`,
     "menu.contains": "Allergeni:",
-    "menu.withFries": "patatine incluse",
     "menu.swipe": (n) => `Scorri · ${n} piatti →`,
     "menu.allergyNotice":
       "Allergie o intolleranze? Chiedi al personale prima di ordinare.",
@@ -284,7 +283,6 @@ const dict = {
     "menu.added": (name, n) =>
       `${name} added. ${n} ${n === 1 ? "item" : "items"} in your order.`,
     "menu.contains": "Allergens:",
-    "menu.withFries": "fries included",
     "menu.swipe": (n) => `Swipe · ${n} dishes →`,
     "menu.allergyNotice":
       "Allergies or intolerances? Please ask our staff before ordering.",

@@ -56,7 +56,6 @@ export const menuData = [
       { name: "Chicken Wrap", price: "8,50", desc: "Piadina arrotolata con tagliata di pollo, cheddar, bacon, salsa baconaise.", descEn: "Rolled piadina with sliced chicken, cheddar, bacon, baconaise sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs", "mustard"], popular: true },
       { name: "Kebab di Pollo", price: "9,00", desc: "Piadina arrotolata con pollo, insalata, pomodoro, cipolla di Tropea, patatine, salsa piccante, salsa yogurt, ketchup, maionese.", descEn: "Rolled piadina with chicken, lettuce, tomato, Tropea onion, fries, spicy sauce, yogurt sauce, ketchup, mayonnaise.", tags: ["chicken", "spicy"], allergens: ["gluten", "lactose", "eggs", "mustard"] },
       { name: "Crunchy Chicken", price: "9,00", desc: "Piadina arrotolata con stick di pollo fritti, insalata, pomodoro, salsa yogurt.", descEn: "Rolled piadina with crispy chicken sticks, lettuce, tomato, yogurt sauce.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
-      { name: "Beef Wrap", price: "10,00", desc: "Piadina arrotolata con manzo.", descEn: "Rolled piadina with beef.", tags: ["beef"], allergens: ["gluten"] },
     ],
   },
   {
@@ -87,6 +86,8 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
+      { name: "Poke Crispy Cheddar", price: "9,00", desc: "Pepite di pollo, patatine fritte con buccia, cheddar fuso, bacon.", descEn: "Chicken nuggets, skin-on fries, melted cheddar, bacon.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
+      { name: "Poke Polpette BBQ", price: "10,00", desc: "Polpette, patate con buccia, provola affumicata, salsa BBQ, cipolla croccante.", descEn: "Meatballs, skin-on potatoes, smoked provola, BBQ sauce, crispy onion.", tags: [], allergens: ["gluten", "lactose", "eggs", "mustard"], isNew: true },
       { name: "Verdure grigliate", price: "5,00", desc: "Zucchine grigliate, melanzane grigliate e peperoni grigliati.", descEn: "Grilled courgettes, grilled aubergines and grilled peppers.", tags: ["veg"], allergens: [] },
     ],
   },
