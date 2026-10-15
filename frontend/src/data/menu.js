@@ -87,7 +87,7 @@ export const menuData = [
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
       { name: "Poke Crispy Cheddar", price: "9,00", desc: "Pepite di pollo, patatine fritte con buccia, cheddar fuso, bacon.", descEn: "Chicken nuggets, skin-on fries, melted cheddar, bacon.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
-      { name: "Poke Polpette BBQ", price: "10,00", desc: "Polpette, patate con buccia, provola affumicata, salsa BBQ, cipolla croccante.", descEn: "Meatballs, skin-on potatoes, smoked provola, BBQ sauce, crispy onion.", tags: [], allergens: ["gluten", "lactose", "eggs", "mustard"], isNew: true },
+      { name: "Poke Burger Grill", price: "10,00", desc: "Polpette, patate con buccia, provola affumicata, salsa BBQ, cipolla croccante.", descEn: "Meatballs, skin-on potatoes, smoked provola, BBQ sauce, crispy onion.", tags: [], allergens: ["gluten", "lactose", "eggs", "mustard"], isNew: true },
       { name: "Verdure grigliate", price: "5,00", desc: "Zucchine grigliate, melanzane grigliate e peperoni grigliati.", descEn: "Grilled courgettes, grilled aubergines and grilled peppers.", tags: ["veg"], allergens: [] },
     ],
   },
