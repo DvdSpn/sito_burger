@@ -4,6 +4,20 @@
 
 export const menuData = [
   {
+    id: "starters",
+    title: "Starters",
+    titleEn: "Starters",
+    subtitle: "Per iniziare",
+    subtitleEn: "To get started",
+    accent: "Da dividere o da gustare da soli",
+    accentEn: "To share or to enjoy on your own",
+    layout: "swipe",
+    items: [
+      { name: "Poke Crispy Cheddar", price: "9,00", desc: "Pepite di pollo, patatine fritte con buccia, cheddar fuso, bacon.", descEn: "Chicken nuggets, skin-on fries, melted cheddar, bacon.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
+      { name: "Poke Burger Grill", price: "10,00", desc: "Polpette, patate con buccia, provola affumicata, salsa BBQ, cipolla croccante.", descEn: "Meatballs, skin-on potatoes, smoked provola, BBQ sauce, crispy onion.", tags: [], allergens: ["gluten", "lactose", "eggs", "mustard"], isNew: true },
+    ],
+  },
+  {
     id: "hamburger",
     title: "Hamburger",
     titleEn: "Burgers",
@@ -86,9 +100,8 @@ export const menuData = [
     layout: "swipe",
     items: [
       { name: "Patatine rustiche", price: "4,00", desc: "Patatine rustiche con la buccia.", descEn: "Rustic potato wedges with skin.", tags: ["veg"], allergens: [] },
-      { name: "Poke Crispy Cheddar", price: "9,00", desc: "Pepite di pollo, patatine fritte con buccia, cheddar fuso, bacon.", descEn: "Chicken nuggets, skin-on fries, melted cheddar, bacon.", tags: ["chicken"], allergens: ["gluten", "lactose", "eggs"], isNew: true },
-      { name: "Poke Burger Grill", price: "10,00", desc: "Polpette, patate con buccia, provola affumicata, salsa BBQ, cipolla croccante.", descEn: "Meatballs, skin-on potatoes, smoked provola, BBQ sauce, crispy onion.", tags: [], allergens: ["gluten", "lactose", "eggs", "mustard"], isNew: true },
       { name: "Verdure grigliate", price: "5,00", desc: "Zucchine grigliate, melanzane grigliate e peperoni grigliati.", descEn: "Grilled courgettes, grilled aubergines and grilled peppers.", tags: ["veg"], allergens: [] },
+      { name: "Insalata mista", price: "5,00", desc: "Insalata mista di stagione.", descEn: "Seasonal mixed salad.", tags: ["veg"], allergens: [] },
     ],
   },
   {
