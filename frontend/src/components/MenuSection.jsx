@@ -2,7 +2,8 @@ import { WheatOff } from "lucide-react";
 import MenuItem from "./MenuItem";
 
 // Dishes in these sections come with fries: each card says so.
-const WITH_FRIES = new Set(["hamburger", "ciabatte", "piadine"]);
+// Burgers and ciabatte are served on their own (no fries).
+const WITH_FRIES = new Set(["piadine"]);
 
 // Gluten-free note shown under the section title.
 const GLUTEN_FREE_SECTIONS = new Set(["hamburger", "ciabatte"]);
