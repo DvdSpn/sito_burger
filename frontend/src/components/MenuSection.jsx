@@ -2,7 +2,7 @@ import { WheatOff } from "lucide-react";
 import MenuItem from "./MenuItem";
 
 // Gluten-free note shown under the section title.
-const GLUTEN_FREE_SECTIONS = new Set(["hamburger", "ciabatte"]);
+const GLUTEN_FREE_SECTIONS = new Set(["hamburger", "hamburger-vari", "ciabatte"]);
 
 /**
  * MenuSection — food category on the home page.
