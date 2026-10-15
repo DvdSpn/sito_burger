@@ -62,6 +62,25 @@ function useScrollScrub(trackRef, videoRef) {
       }
     };
 
+    // Load the whole file into memory and play it from a blob URL: seeking
+    // is then instant and works even where the host does not answer HTTP
+    // range requests. If that fails, the <source> elements stay in charge.
+    let blobUrl = "";
+    let cancelled = false;
+    const source = [...video.querySelectorAll("source")].find((el) =>
+      video.canPlayType(el.type)
+    );
+    if (source && window.fetch && window.URL) {
+      fetch(source.src)
+        .then((res) => (res.ok ? res.blob() : Promise.reject(res.status)))
+        .then((blob) => {
+          if (cancelled) return;
+          blobUrl = URL.createObjectURL(blob);
+          video.src = blobUrl;
+        })
+        .catch(() => {});
+    }
+
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     window.addEventListener("touchstart", unlock, { once: true, passive: true });
@@ -74,6 +93,8 @@ function useScrollScrub(trackRef, videoRef) {
       window.removeEventListener("touchstart", unlock);
       video.removeEventListener("loadedmetadata", schedule);
       if (frame) window.cancelAnimationFrame(frame);
+      cancelled = true;
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
     };
   }, [trackRef, videoRef]);
 }
