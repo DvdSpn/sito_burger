@@ -1,9 +1,6 @@
 import { WheatOff } from "lucide-react";
 import MenuItem from "./MenuItem";
 
-// Dishes in these sections come with fries: each card says so.
-const WITH_FRIES = new Set(["hamburger", "ciabatte", "piadine"]);
-
 // Gluten-free note shown under the section title.
 const GLUTEN_FREE_SECTIONS = new Set(["hamburger", "ciabatte"]);
 
@@ -79,7 +76,6 @@ export default function MenuSection({ section, index, t, lang }) {
             t={t}
             lang={lang}
             variant="card"
-            withFries={WITH_FRIES.has(section.id)}
             className="w-[82%] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none"
           />
         ))}
