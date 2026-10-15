@@ -104,10 +104,10 @@ export const drinksData = [
         price: "3,50",
       },
       {
-        name: "Birre Premium 33 cl",
-        nameEn: "Premium beers 33 cl",
-        desc: "Ceres · Tennent's · Corona · Bjorne",
-        descEn: "Ceres · Tennent's · Corona · Bjorne",
+        name: "Birre Premium",
+        nameEn: "Premium beers",
+        desc: "Ceres · Tennent's · Corona · Bjorne (33 cl) · Ichnusa non filtrata (0,5 l)",
+        descEn: "Ceres · Tennent's · Corona · Bjorne (33 cl) · Ichnusa unfiltered (0.5 l)",
         price: "4,50",
       },
       {
@@ -116,13 +116,6 @@ export const drinksData = [
         desc: "Moretti · Peroni · Heineken",
         descEn: "Moretti · Peroni · Heineken",
         price: "5,00",
-      },
-      {
-        name: "Ichnusa non filtrata 50 cl",
-        nameEn: "Ichnusa unfiltered 50 cl",
-        desc: "Birra sarda non filtrata.",
-        descEn: "Unfiltered Sardinian lager.",
-        price: "4,50",
       },
     ],
   },
