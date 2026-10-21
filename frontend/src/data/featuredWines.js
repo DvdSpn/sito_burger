@@ -8,7 +8,7 @@ export const featuredWines = [
     appellation: "Bolgheri Rosso DOC",
     region: "Toscana",
     grape: "Cabernet Sauvignon, Merlot, Sangiovese",
-    image: "/wines/assiolo-bolgheri.png",
+    image: "/wines/assiolo-bolgheri.webp",
     producer: "Tenuta Campo al Pero",
     price: "24,00",
     description:
@@ -22,7 +22,7 @@ export const featuredWines = [
     appellation: "Montalcino DOC",
     region: "Toscana",
     grape: "Sangiovese Grosso 100%",
-    image: "/wines/rosso-montalcino.png",
+    image: "/wines/rosso-montalcino.webp",
     producer: "Famiglia Cotarella (Piandibugnano)",
     price: "23,50",
     description:
@@ -36,7 +36,7 @@ export const featuredWines = [
     appellation: "all'uso Toscano · IGT",
     region: "Toscana",
     grape: "Sangiovese, Merlot",
-    image: "/wines/governo-toscano.png",
+    image: "/wines/governo-toscano.webp",
     producer: "Castellani",
     price: "10,00",
     description:
@@ -50,7 +50,7 @@ export const featuredWines = [
     appellation: "Toscana IGT",
     region: "Toscana",
     grape: "Sangiovese, Merlot, Syrah",
-    image: "/wines/santa-cristina.png",
+    image: "/wines/santa-cristina.webp",
     producer: "Marchesi Antinori",
     price: "15,00",
     description:
@@ -64,7 +64,7 @@ export const featuredWines = [
     appellation: "Costa Toscana IGT",
     region: "Toscana",
     grape: "Syrah 100%",
-    image: "/wines/achelo.png",
+    image: "/wines/achelo.webp",
     producer: "Tenuta Argentiera",
     price: "21,50",
     description:
@@ -78,7 +78,7 @@ export const featuredWines = [
     appellation: "Selezione · Maremma Toscana DOC",
     region: "Toscana",
     grape: "Ciliegiolo 100%",
-    image: "/wines/canapone-maremma.png",
+    image: "/wines/canapone-maremma.webp",
     producer: "Santa Lucia",
     price: "17,50",
     description:
@@ -92,7 +92,7 @@ export const featuredWines = [
     appellation: "Corte al Bigio · DOCG",
     region: "Toscana",
     grape: "Sangiovese, Canaiolo",
-    image: "/wines/chianti-corte-bigio.png",
+    image: "/wines/chianti-corte-bigio.webp",
     producer: "Corte al Bigio",
     price: "9,50",
     description:
@@ -106,7 +106,7 @@ export const featuredWines = [
     appellation: "Chianti Classico DOCG",
     region: "Toscana",
     grape: "Sangiovese 90%, altri vitigni autoctoni 10%",
-    image: "/wines/dievole-chianti-classico.png",
+    image: "/wines/dievole-chianti-classico.webp",
     producer: "Dievole",
     price: "21,00",
     description:
@@ -120,7 +120,7 @@ export const featuredWines = [
     appellation: "Sangiovese · Toscana IGT",
     region: "Toscana",
     grape: "Sangiovese 100%",
-    image: "/wines/falorni-sangiovese.png",
+    image: "/wines/falorni-sangiovese.webp",
     producer: "Cantine Falorni · Antica Macelleria Falorni",
     price: "12,50",
     description:
@@ -134,7 +134,7 @@ export const featuredWines = [
     appellation: "Puglia IGT",
     region: "Puglia",
     grape: "Negroamaro 100%",
-    image: "/wines/negroamaro-puglia.png",
+    image: "/wines/negroamaro-puglia.webp",
     producer: "Paolo Leo · Varietali",
     price: "11,50",
     description:
@@ -148,7 +148,7 @@ export const featuredWines = [
     appellation: "Puglia IGT",
     region: "Puglia",
     grape: "Primitivo 100%",
-    image: "/wines/primitivo-puglia.png",
+    image: "/wines/primitivo-puglia.webp",
     producer: "Paolo Leo · Varietali",
     price: "12,00",
     description:
