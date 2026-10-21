@@ -7,14 +7,14 @@ export const featuredWines = [
     name: "Assiolo",
     appellation: "Bolgheri Rosso DOC",
     region: "Toscana",
-    grape: "Cabernet Sauvignon, Merlot, Sangiovese",
-    image: "/wines/assiolo-bolgheri.png",
-    producer: "Tenuta Campo al Pero",
+    grape: "Cabernet Sauvignon, Merlot, Cabernet Franc",
+    image: "/wines/assiolo-bolgheri.webp",
+    producer: "Azienda Agricola Campo al Noce",
     price: "24,00",
     description:
-      "Bolgheri Rosso DOC di Tenuta Campo al Pero: un taglio bordolese affinato in barrique che unisce Cabernet Sauvignon, Merlot e Sangiovese. Rosso rubino intenso, al naso rilascia note di frutti rossi maturi, spezie dolci e una lieve tostatura. In bocca è morbido, avvolgente e ben strutturato, con tannini eleganti e un finale persistente.",
+      "Bolgheri Rosso DOC dell'Azienda Agricola Campo al Noce, che prende il nome dall'assiolo, il piccolo gufo disegnato in etichetta. Taglio di Cabernet Sauvignon, Merlot e Cabernet Franc vinificato solo in acciaio per conservare tutta la fragranza delle uve. Rosso rubino brillante, al naso è intenso ed elegante, con lampone e frutti rossi maturi; in bocca è elegante, con tannini morbidi ben bilanciati dalla freschezza.",
     descriptionEn:
-      "Bolgheri Rosso DOC from Tenuta Campo al Pero: a Bordeaux-style blend of Cabernet Sauvignon, Merlot and Sangiovese aged in barrique. Deep ruby colour, with aromas of ripe red fruit, sweet spices and light toast. Smooth, enveloping and well-structured on the palate, with elegant tannins and a long finish.",
+      "Bolgheri Rosso DOC by Azienda Agricola Campo al Noce, named after the assiolo, the little scops owl drawn on the label. A blend of Cabernet Sauvignon, Merlot and Cabernet Franc fermented in steel only, to keep all the fragrance of the grapes. Bright ruby red, with an intense yet elegant nose of raspberry and ripe red berries; elegant on the palate, with soft tannins well balanced by freshness.",
   },
   {
     id: "rosso-montalcino",
@@ -22,13 +22,13 @@ export const featuredWines = [
     appellation: "Montalcino DOC",
     region: "Toscana",
     grape: "Sangiovese Grosso 100%",
-    image: "/wines/rosso-montalcino.png",
-    producer: "Famiglia Cotarella (Piandibugnano)",
+    image: "/wines/rosso-montalcino.webp",
+    producer: "Famiglia Falorni",
     price: "23,50",
     description:
-      "Rosso di Montalcino DOC 100% Sangiovese Grosso: vinificato in acciaio e affinato in botte grande per esaltare il frutto. Rosso rubino brillante, profuma di ciliegia, viola e una nota balsamica. Al palato è fresco e succoso, con tannini fitti ma vellutati; il naturale “fratello minore” del Brunello, pronto da bere.",
+      "Rosso di Montalcino DOC della Famiglia Falorni, da uve Sangiovese Grosso coltivate sulle colline di Montalcino: il “fratello minore” del Brunello, pronto da bere. Di colore rosso vigoroso, ha un profumo intenso con sentori di frutta rossa e spezie; al palato è armonioso, con tannini piacevoli. Perfetto con carni rosse e selvaggina in umido.",
     descriptionEn:
-      "Rosso di Montalcino DOC, 100% Sangiovese Grosso: vinified in steel and aged in large casks to enhance the fruit. Bright ruby red, with cherry, violet and a hint of balsamic. Fresh and juicy on the palate, with dense yet velvety tannins — the little brother of Brunello, ready to drink now.",
+      "Rosso di Montalcino DOC by the Falorni family, made from Sangiovese Grosso grown on the hills of Montalcino — the little brother of Brunello, ready to drink now. A vigorous red colour and an intense nose of red fruit and spice; harmonious on the palate, with pleasant tannins. Perfect with red meat and stewed game.",
   },
   {
     id: "governo-toscano",
@@ -36,13 +36,13 @@ export const featuredWines = [
     appellation: "all'uso Toscano · IGT",
     region: "Toscana",
     grape: "Sangiovese, Merlot",
-    image: "/wines/governo-toscano.png",
-    producer: "Castellani",
+    image: "/wines/governo-toscano.webp",
+    producer: "Barbanera",
     price: "10,00",
     description:
-      "Toscana IGT prodotto con l'antico metodo del “Governo all'uso Toscano”: dopo la fermentazione si aggiungono uve appassite che riavviano una seconda fermentazione, donando morbidezza e complessità. Rubino profondo, sprigiona confettura di ciliegia, prugna e cacao; il sorso è avvolgente, rotondo e leggermente vellutato.",
+      "Toscana IGT di Barbanera prodotto con l'antico metodo del “Governo all'uso Toscano”: dopo la fermentazione si aggiungono uve appassite che riavviano una seconda fermentazione, donando morbidezza e complessità. Rosso intenso, quasi impenetrabile, profuma di ciliegia, amarena, frutti rossi molto maturi e spezie; il sorso è pieno ma morbido, in equilibrio tra rotondità e freschezza.",
     descriptionEn:
-      "Toscana IGT made with the ancient “Governo all'uso Toscano” method: after fermentation dried grapes are added to trigger a second fermentation, adding softness and complexity. Deep ruby, with cherry jam, plum and cocoa aromas; the palate is enveloping, round and slightly velvety.",
+      "Toscana IGT by Barbanera made with the ancient “Governo all'uso Toscano” method: after fermentation dried grapes are added to trigger a second fermentation, adding softness and complexity. Deep, almost impenetrable red, with cherry, sour cherry, very ripe red fruit and spice; full yet soft on the palate, balancing roundness and freshness.",
   },
   {
     id: "santa-cristina",
@@ -50,7 +50,7 @@ export const featuredWines = [
     appellation: "Toscana IGT",
     region: "Toscana",
     grape: "Sangiovese, Merlot, Syrah",
-    image: "/wines/santa-cristina.png",
+    image: "/wines/santa-cristina.webp",
     producer: "Marchesi Antinori",
     price: "15,00",
     description:
@@ -61,16 +61,16 @@ export const featuredWines = [
   {
     id: "achelo",
     name: "Achelo",
-    appellation: "Costa Toscana IGT",
+    appellation: "Cortona DOC",
     region: "Toscana",
     grape: "Syrah 100%",
-    image: "/wines/achelo.png",
-    producer: "Tenuta Argentiera",
+    image: "/wines/achelo.webp",
+    producer: "La Braccesca · Marchesi Antinori",
     price: "21,50",
     description:
-      "Syrah in purezza della Costa Toscana firmato Argentiera. Rosso rubino intenso con riflessi violacei; il bouquet è ricco di mora, pepe nero, viola e delicate note speziate. In bocca è caldo, elegante, con tannini setosi e un finale lungo e minerale. Un Syrah mediterraneo dal grande equilibrio.",
+      "Syrah in purezza di Cortona, dalla tenuta La Braccesca dei Marchesi Antinori; affina in parte in barrique di secondo e terzo passaggio e in parte in acciaio. Rosso rubino intenso con riflessi violacei; al naso mora, prugna e ciliegia matura, con viola, liquirizia e pepe nero. In bocca è morbido e fresco, con tannini setosi e un finale lungo e sapido.",
     descriptionEn:
-      "Pure Syrah from Costa Toscana by Argentiera. Deep ruby with violet highlights; a bouquet rich in blackberry, black pepper, violet and delicate spice. Warm and elegant on the palate with silky tannins and a long, mineral finish. A well-balanced Mediterranean Syrah.",
+      "Pure Syrah from Cortona, made at the La Braccesca estate of Marchesi Antinori; aged partly in second- and third-use barriques and partly in steel. Deep ruby with violet highlights; blackberry, plum and ripe cherry on the nose, with violet, liquorice and black pepper. Soft and fresh on the palate, with silky tannins and a long, savoury finish.",
   },
   {
     id: "canapone-maremma",
@@ -78,7 +78,7 @@ export const featuredWines = [
     appellation: "Selezione · Maremma Toscana DOC",
     region: "Toscana",
     grape: "Ciliegiolo 100%",
-    image: "/wines/canapone-maremma.png",
+    image: "/wines/canapone-maremma.webp",
     producer: "Santa Lucia",
     price: "17,50",
     description:
@@ -92,7 +92,7 @@ export const featuredWines = [
     appellation: "Corte al Bigio · DOCG",
     region: "Toscana",
     grape: "Sangiovese, Canaiolo",
-    image: "/wines/chianti-corte-bigio.png",
+    image: "/wines/chianti-corte-bigio.webp",
     producer: "Corte al Bigio",
     price: "9,50",
     description:
@@ -106,7 +106,7 @@ export const featuredWines = [
     appellation: "Chianti Classico DOCG",
     region: "Toscana",
     grape: "Sangiovese 90%, altri vitigni autoctoni 10%",
-    image: "/wines/dievole-chianti-classico.png",
+    image: "/wines/dievole-chianti-classico.webp",
     producer: "Dievole",
     price: "21,00",
     description:
@@ -120,7 +120,7 @@ export const featuredWines = [
     appellation: "Sangiovese · Toscana IGT",
     region: "Toscana",
     grape: "Sangiovese 100%",
-    image: "/wines/falorni-sangiovese.png",
+    image: "/wines/falorni-sangiovese.webp",
     producer: "Cantine Falorni · Antica Macelleria Falorni",
     price: "12,50",
     description:
@@ -134,7 +134,7 @@ export const featuredWines = [
     appellation: "Puglia IGT",
     region: "Puglia",
     grape: "Negroamaro 100%",
-    image: "/wines/negroamaro-puglia.png",
+    image: "/wines/negroamaro-puglia.webp",
     producer: "Paolo Leo · Varietali",
     price: "11,50",
     description:
@@ -148,7 +148,7 @@ export const featuredWines = [
     appellation: "Puglia IGT",
     region: "Puglia",
     grape: "Primitivo 100%",
-    image: "/wines/primitivo-puglia.png",
+    image: "/wines/primitivo-puglia.webp",
     producer: "Paolo Leo · Varietali",
     price: "12,00",
     description:
