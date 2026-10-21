@@ -1,7 +1,6 @@
 // Public address of the site, e.g. "https://www.example.it" (no trailing slash).
-// Empty until the site has its own domain: canonical / Open Graph / schema.org
-// links in public/index.html then fall back to relative paths and no
-// sitemap.xml is generated. Set it here or via REACT_APP_SITE_URL.
+// For now the free Cloudflare address; replace it when the site gets its own
+// domain. Set it here or via REACT_APP_SITE_URL.
 module.exports = {
-  siteUrl: (process.env.REACT_APP_SITE_URL || "").replace(/\/+$/, ""),
+  siteUrl: (process.env.REACT_APP_SITE_URL || "https://sito-burger.2006spinosadavide.workers.dev").replace(/\/+$/, ""),
 };
