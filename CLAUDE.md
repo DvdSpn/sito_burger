@@ -25,4 +25,3 @@ Sito del ristorante Burger & Grill (Camucia). Testi, commit e messaggi all'utent
 - Carta bevande: tendine (`AccordionSection`) con una sola sezione aperta alla volta.
 - Tema scuro unico (stone + amber), font Playfair Display / Manrope / Caveat.
 - Tap target di almeno 44px; verificare a 375px che la pagina non scorra di lato.
-- Hero: il panino che si scompone è una sequenza di 104 immagini WebP (`public/hero-frames/`) disegnate su un `<canvas>` da `src/hooks/useBurgerSequence.js`, non un `<video>`: sui telefoni il seek di un video fermo non ridisegna in modo affidabile. In cima alla pagina il panino si apre e chiude da solo; scorrendo segue lo scroll (pista `260svh` con palco sticky).
